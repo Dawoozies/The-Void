@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Hornet_JumpLand_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 4c0a43f7f41f9cf46aa32a32c6831119, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.048276544, y: -0.39224622}
+      radius: 0.32412952
+  - frame: 1
+    circles:
+    - center: {x: -0.10258734, y: -0.16896757}
+      radius: 0.16723108
+    - center: {x: -0.054310918, y: -0.5069028}
+      radius: 0.31809485
+  - frame: 2
+    circles:
+    - center: {x: -0.054310918, y: 0.06638022}
+      radius: 0.16723108
+    - center: {x: 0.00000011920929, y: -0.41638443}
+      radius: 0.26378375
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []

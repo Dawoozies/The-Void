@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Hornet_Jump_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: a429606e9d9be594eae2417eeb314448, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.054310918, y: 0.24138245}
+      radius: 0.16723096
+    - center: {x: 0.19914055, y: -0.30172774}
+      radius: 0.22757652
+  - frame: 1
+    circles:
+    - center: {x: -0.06034553, y: 0.27155516}
+      radius: 0.16723096
+    - center: {x: 0.21120971, y: -0.28362414}
+      radius: 0.22757652
+  - frame: 2
+    circles:
+    - center: {x: -0.036207378, y: 0.24741694}
+      radius: 0.16723096
+    - center: {x: 0.18707156, y: -0.28965864}
+      radius: 0.1974037
+  - frame: 3
+    circles:
+    - center: {x: -0.042241752, y: 0.18707141}
+      radius: 0.16119641
+    - center: {x: 0.19914055, y: -0.24138221}
+      radius: 0.28188744
+  - frame: 4
+    circles:
+    - center: {x: -0.048276365, y: 0.15689857}
+      radius: 0.16119629
+    - center: {x: 0.24741697, y: -0.20517501}
+      radius: 0.2818876
+  - frame: 5
+    circles:
+    - center: {x: -0.06034553, y: 0.1689677}
+      radius: 0.16119629
+    - center: {x: 0.22327888, y: -0.12672564}
+      radius: 0.33016413
+  - frame: 6
+    circles:
+    - center: {x: -0.06034553, y: 0.1689677}
+      radius: 0.16119629
+    - center: {x: 0.2534516, y: -0.13276026}
+      radius: 0.33016413
+  - frame: 7
+    circles:
+    - center: {x: -0.06034553, y: 0.1689677}
+      radius: 0.16119629
+    - center: {x: 0.24741697, y: -0.13276026}
+      radius: 0.33016413
+  - frame: 8
+    circles:
+    - center: {x: -0.04224199, y: 0.14482947}
+      radius: 0.16119629
+    - center: {x: 0.2413826, y: -0.15086398}
+      radius: 0.33016413
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []
+  - frame: 3
+    circles: []
+  - frame: 4
+    circles: []
+  - frame: 5
+    circles: []
+  - frame: 6
+    circles: []
+  - frame: 7
+    circles: []
+  - frame: 8
+    circles: []
