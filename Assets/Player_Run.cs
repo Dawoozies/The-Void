@@ -33,6 +33,7 @@ public class Player_Run : StateMachineBehaviour
             if (Mathf.Abs(BasicInput.ins.InputLHorizontal) > 0f)
             {
                 rb.AddForce(new Vector2(BasicInput.ins.InputLHorizontal * speedMultiplier, 0f), ForceMode2D.Impulse);
+                Debug.Log(rb.velocity);
             }
         }
     }

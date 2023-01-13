@@ -14,7 +14,7 @@ public class HornetFirstPass : MonoBehaviour
     public bool calculatePath;
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
     private void Update()

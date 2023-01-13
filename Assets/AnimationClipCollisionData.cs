@@ -8,6 +8,7 @@ public class AnimationClipCollisionData : ScriptableObject
     public AnimationClip animationClip;
     public List<FrameCollisionData> hitboxes;
     public List<FrameCollisionData> hurtboxes;
+    public List<FrameCollisionData> groundboxes;
 
     public AnimationClipCollisionData()
     {

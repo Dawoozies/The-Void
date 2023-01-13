@@ -483,7 +483,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump0
+      name: HornetJumpAscent0
       rect:
         serializedVersion: 2
         x: 3
@@ -504,7 +504,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump1
+      name: HornetJumpAscent1
       rect:
         serializedVersion: 2
         x: 194
@@ -525,7 +525,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump2
+      name: HornetJumpAscent2
       rect:
         serializedVersion: 2
         x: 385
@@ -546,7 +546,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump3
+      name: HornetJumpDescentStart0
       rect:
         serializedVersion: 2
         x: 576
@@ -567,7 +567,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump4
+      name: HornetJumpDescentStart1
       rect:
         serializedVersion: 2
         x: 767
@@ -588,7 +588,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump5
+      name: HornetJumpDescent0
       rect:
         serializedVersion: 2
         x: 958
@@ -609,7 +609,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump6
+      name: HornetJumpDescent1
       rect:
         serializedVersion: 2
         x: 1149
@@ -630,7 +630,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump7
+      name: HornetJumpDescent2
       rect:
         serializedVersion: 2
         x: 1340
@@ -651,7 +651,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJump8
+      name: HornetJumpDescent3
       rect:
         serializedVersion: 2
         x: 1531
@@ -735,7 +735,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJumpLandEnd0
+      name: HornetJumpHardLand0
       rect:
         serializedVersion: 2
         x: 653
@@ -756,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJumpLandEnd1
+      name: HornetJumpHardLand1
       rect:
         serializedVersion: 2
         x: 863
@@ -777,7 +777,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJumpLandEnd2
+      name: HornetJumpHardLand2
       rect:
         serializedVersion: 2
         x: 1073
@@ -798,7 +798,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HornetJumpLandEnd3
+      name: HornetJumpHardLand3
       rect:
         serializedVersion: 2
         x: 1283
@@ -1834,8 +1834,8 @@ TextureImporter:
         y: 4536
         width: 260
         height: 280
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35308862, y: 0.42813545}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1855,8 +1855,8 @@ TextureImporter:
         y: 4444
         width: 360
         height: 372
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.6870324, y: 0.36467785}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1876,8 +1876,8 @@ TextureImporter:
         y: 4483
         width: 598
         height: 333
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.4847463, y: 0.33392718}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1931,6 +1931,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Hornet_CounterStart0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4838
+        width: 185
+        height: 215
+      alignment: 9
+      pivot: {x: 0.5091399, y: 0.49999774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5266d4660b6c61145be63fca41050054
+      internalID: -196360292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1942,12 +1963,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      HornetJumpDescent1: 1486017291
       Hornet_Counter6: -986421381
       HornetStun1: 1331464059
       HornetRun5: 280456908
-      HornetJump6: 1486017291
       HornetRun2: 562848616
       HornetStun4: 680349857
+      HornetJumpDescentStart1: -134438660
+      HornetJumpDescent3: 851709903
       HornetRun7: -289657475
       HornetStunRecover5: -1112589615
       HornetIdle0: 1694848959
@@ -1955,68 +1978,67 @@ TextureImporter:
       HornetGThrustAtkFX5: 654342508
       HornetIdle4: 1286621714
       HornetGThrustAtkFX3: -273823365
-      HornetRun1: 1096705536
-      HornetJumpSquat2: -1226014697
-      HornetWallGrab1: 1090589065
-      HornetJumpLandEnd3: 499391686
-      HornetWallGrab0: 1399026278
-      HornetDodgeStartup0: -60456912
-      Hornet_Counter4: -359476460
-      HornetGThrustAtkEnd2: -2115950240
       HornetDodge1: -1030069167
-      HornetJump8: 851709903
+      HornetJumpDescentStart0: 322987764
+      HornetJumpHardLand2: -1358767178
+      HornetRun1: 1096705536
+      HornetWallGrab1: 1090589065
+      HornetWallGrab0: 1399026278
+      HornetJumpSquat2: -1226014697
+      Hornet_Counter4: -359476460
+      HornetJumpHardLand1: -169165584
+      HornetGThrustAtkEnd2: -2115950240
+      HornetDodgeStartup0: -60456912
       HornetStun2: -1882561407
       HornetJumpLand2: 381783329
       HornetGThrustAtk0: 68432215
       HornetStun3: -827390544
+      HornetJumpDescent2: -1324412602
       HornetGThrustAtkEnd1: 958413742
       HornetGThrustAtk1: 1665709536
       HornetStunRecover0: -467486718
       Hornet_Counter5: -2144550933
-      HornetJump5: -2028248349
       HornetGThrustAtkStartup4: 1901478371
       HornetJumpSquat0: -943800773
-      HornetJumpLandEnd2: -1358767178
       HornetStun0: -1884573098
       HornetGThrustAtkStartup7: -1202409658
+      HornetJumpHardLand3: 499391686
       HornetGThrustAtkEnd4: -1643077384
       HornetGThrustAtkStartup9: 1340901100
       HornetGThrustAtkEnd5: 1415429155
-      HornetJump0: -720305417
       HornetGThrustAtkStartup0: 1424859503
       HornetDodgeStartup2: -1426406489
       HornetGThrustAtkStartup5: -425041895
+      HornetJumpAscent2: -782140943
       Hornet_Counter2: 50094021
       HornetGThrustAtkFX0: -582586511
       HornetStunRecover3: -73861612
-      HornetJump1: 2107177394
       HornetIdle3: -735003834
       Hornet_Counter0: -1918564527
       HornetDodgeStartup1: 1199988792
-      HornetJump7: -1324412602
+      HornetJumpHardLand0: 743001724
       HornetJumpLand0: -1605751321
+      Hornet_CounterStart0: -196360292
       HornetWallGrab3: -1551650274
+      HornetJumpAscent1: 2107177394
       HornetIdle1: -883682808
       Hornet_Flourish0: -697757841
       Hornet_Flourish1: 241365599
       HornetStunRecover4: 355698607
       HornetStunRecover2: 1773237791
       HornetIdle2: 1285664738
-      HornetGThrustAtkFX1: 1175379042
       HornetGThrustAtkStartup3: 455909159
-      HornetGThrustAtkFX2: -1723028223
+      HornetGThrustAtkFX1: 1175379042
       HornetDodge2: 619446642
       HornetRun0: -2142172953
-      HornetGThrustAtkStartup1: 1319403837
+      HornetGThrustAtkFX2: -1723028223
       HornetJumpLand1: -903905729
-      HornetJumpLandEnd0: 743001724
+      HornetGThrustAtkStartup1: 1319403837
       HornetStun5: -1298012377
-      HornetJump2: -782140943
       HornetRun3: -696917821
-      HornetJump3: 322987764
-      HornetJump4: -134438660
-      HornetRun4: 1986589507
       HornetGThrustAtkStartup2: 1290958290
+      HornetRun4: 1986589507
+      HornetJumpAscent0: -720305417
       HornetIdle5: -777375951
       HornetGThrustAtkStartup8: 504966123
       HornetGThrustAtkStartup6: 2072427966
@@ -2024,7 +2046,7 @@ TextureImporter:
       HornetJumpSquat1: -1332338363
       HornetWallGrab2: -388193793
       HornetStunRecover1: 79392271
-      HornetJumpLandEnd1: -169165584
+      HornetJumpDescent0: -2028248349
       HornetGThrustAtkEnd3: 271246433
       Hornet_Counter3: -1927729233
       HornetDodge0: 175689763

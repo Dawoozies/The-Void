@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class PlayerSpriteDirection : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(spriteRenderer != null)
+        //This only works with sprite sheets that have default left facing characters
+        if (BasicInput.ins.InputLDirection > 0)
         {
-            if(BasicInput.ins.InputLDirection > 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-            if(BasicInput.ins.InputLDirection < 0)
-            {
-                spriteRenderer.flipX = false;
-            }
+            transform.localScale = new Vector3(-1,1,1);
+        }
+        if (BasicInput.ins.InputLDirection < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

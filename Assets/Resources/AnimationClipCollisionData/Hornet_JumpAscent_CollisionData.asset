@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Hornet_JumpAscent_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 35e9624db46d3db45ae4ac2780b78933, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.052735507, y: 0.24024022}
+      radius: 0.17380804
+    - center: {x: 0.18750477, y: -0.29297605}
+      radius: 0.22068426
+  - frame: 1
+    circles:
+    - center: {x: -0.064454556, y: 0.27539742}
+      radius: 0.17380804
+    - center: {x: 0.2109428, y: -0.2753976}
+      radius: 0.22068426
+  - frame: 2
+    circles:
+    - center: {x: -0.052735507, y: 0.2578187}
+      radius: 0.17380804
+    - center: {x: 0.19336426, y: -0.28125715}
+      radius: 0.22068426
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []

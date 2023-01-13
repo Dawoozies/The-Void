@@ -1,0 +1,348 @@
+fileFormatVersion: 2
+guid: 0e0704ddca6b1724ca9d2ef836bc6eac
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 2764
+        width: 1184
+        height: 1192
+      alignment: 9
+      pivot: {x: 0.111721724, y: 0.03780534}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdef9f45567d95e489c9c016c44079d1
+      internalID: -1529453790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 2774
+        width: 1057
+        height: 1146
+      alignment: 9
+      pivot: {x: 0.024091737, y: 0.030233387}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 978b22240cda21949b6aa56aa60bc68c
+      internalID: -1374418606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 2418
+        y: 2782
+        width: 933
+        height: 1156
+      alignment: 9
+      pivot: {x: 0.02649436, y: 0.023068333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bdeb4a10c1298042afa67eb3f140736
+      internalID: 542768275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 3534
+        y: 2775
+        width: 952
+        height: 1209
+      alignment: 9
+      pivot: {x: 0.028439563, y: 0.027232079}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca4aec5f0c15bb540a6af387b0b983ff
+      internalID: -850995721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 4691
+        y: 2784
+        width: 1170
+        height: 1234
+      alignment: 9
+      pivot: {x: 0.059708033, y: 0.019796757}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae8da04ea9e41be43ad440257c77f00c
+      internalID: 388585272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 1217
+        width: 1159
+        height: 1197
+      alignment: 9
+      pivot: {x: 0.11517885, y: 0.0371056}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21653dc2f9d1c9141871a82dbfedded8
+      internalID: -734305077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1281
+        y: 1227
+        width: 1078
+        height: 1146
+      alignment: 9
+      pivot: {x: 0.024132667, y: 0.028460277}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c4ac043305cc7249bb692ad5aaac0e6
+      internalID: -1378182430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 2420
+        y: 1235
+        width: 949
+        height: 1156
+      alignment: 9
+      pivot: {x: 0.02521157, y: 0.02200497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7343b30ec9393c644828bcb38b29851f
+      internalID: 806463771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 3513
+        y: 1228
+        width: 963
+        height: 1209
+      alignment: 9
+      pivot: {x: 0.027372144, y: 0.027850408}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bda2c8e4095e47449413ae4ab54eef1
+      internalID: 279339618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_RunCycle_SpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 4688
+        y: 1237
+        width: 1170
+        height: 1234
+      alignment: 9
+      pivot: {x: 0.06025057, y: 0.020145955}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1d6be9e9991e24da056ebd8db93cba
+      internalID: 21997526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      TV_Minotaur_RunCycle_SpriteSheet_8: 279339618
+      TV_Minotaur_RunCycle_SpriteSheet_17: -1661580792
+      TV_Minotaur_RunCycle_SpriteSheet_0: -1529453790
+      TV_Minotaur_RunCycle_SpriteSheet_6: -1378182430
+      TV_Minotaur_RunCycle_SpriteSheet_16: -1349911507
+      TV_Minotaur_RunCycle_SpriteSheet_4: 388585272
+      TV_Minotaur_RunCycle_SpriteSheet_1: -1374418606
+      TV_Minotaur_RunCycle_SpriteSheet_19: -1417695167
+      TV_Minotaur_RunCycle_SpriteSheet_15: -1783345298
+      TV_Minotaur_RunCycle_SpriteSheet_5: -734305077
+      TV_Minotaur_RunCycle_SpriteSheet_18: -1213917308
+      TV_Minotaur_RunCycle_SpriteSheet_7: 806463771
+      TV_Minotaur_RunCycle_SpriteSheet_9: 21997526
+      TV_Minotaur_RunCycle_SpriteSheet_3: -850995721
+      TV_Minotaur_RunCycle_SpriteSheet_2: 542768275
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
