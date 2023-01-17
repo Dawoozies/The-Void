@@ -65,9 +65,9 @@ public class AnimationClipCollisionDataEditor : EditorWindow
                 GUILayout.Label("Frame 0 is the first frame");
 
                 currentFrameTimes = new List<float>();
-                for (int i = 0; currentFrameTimes.Count <= totalFrames; i++)// redundant code
+                for (int i = 0; currentFrameTimes.Count <= totalFrames; i++)
                 {
-                    currentFrameTimes.Add(i / animationClip.frameRate); // you gotta remember: COCK IS KING COCK IS KING COCK IS KING
+                    currentFrameTimes.Add(i / animationClip.frameRate);
                 }
 
                 GUILayout.BeginHorizontal();
@@ -156,7 +156,7 @@ public class AnimationClipCollisionDataEditor : EditorWindow
                             currentClipData.groundboxes.Add(newFrameCollisionData);
                         }
                     }
-
+                    GUILayout.BeginHorizontal();
                     if (GUILayout.Button("Duplicate Previous Frame Data"))
                     {
                         if(currentFrame > 0)
@@ -213,6 +213,90 @@ public class AnimationClipCollisionDataEditor : EditorWindow
                             }
                         }
                     }
+                    if (GUILayout.Button("Duplicate Next Frame Data"))
+                    {
+                        if (currentFrame < currentFrameTimes.Count - 1)
+                        {
+                            //Set the currentFrame hitbox circles to a fresh list of circles
+                            //Then we add the circles from the previous frame to this new one
+                            //Being careful that we don't set a reference to the previous frame's list
+                            if (currentClipData.hitboxes[currentFrame + 1].circles.Count > 0)
+                            {
+                                currentClipData.hitboxes[currentFrame].circles = new List<Circle>();
+                                for (int i = 0; i < currentClipData.hitboxes[currentFrame + 1].circles.Count; i++)
+                                {
+                                    Vector2 newCenter = currentClipData.hitboxes[currentFrame + 1].circles[i].center;
+                                    float newRadius = currentClipData.hitboxes[currentFrame + 1].circles[i].radius;
+                                    Circle newCircle = new Circle(newCenter, newRadius);
+
+                                    currentClipData.hitboxes[currentFrame].circles.Add(newCircle);
+                                }
+
+                                EditorUtility.SetDirty(currentClipData);
+                                Repaint();
+                            }
+
+                            if (currentClipData.hurtboxes[currentFrame + 1].circles.Count > 0)
+                            {
+                                currentClipData.hurtboxes[currentFrame].circles = new List<Circle>();
+                                for (int i = 0; i < currentClipData.hurtboxes[currentFrame + 1].circles.Count; i++)
+                                {
+                                    Vector2 newCenter = currentClipData.hurtboxes[currentFrame + 1].circles[i].center;
+                                    float newRadius = currentClipData.hurtboxes[currentFrame + 1].circles[i].radius;
+                                    Circle newCircle = new Circle(newCenter, newRadius);
+
+                                    currentClipData.hurtboxes[currentFrame].circles.Add(newCircle);
+                                }
+
+                                EditorUtility.SetDirty(currentClipData);
+                                Repaint();
+                            }
+
+                            if (currentClipData.groundboxes[currentFrame + 1].circles.Count > 0)
+                            {
+                                currentClipData.groundboxes[currentFrame].circles = new List<Circle>();
+                                for (int i = 0; i < currentClipData.groundboxes[currentFrame + 1].circles.Count; i++)
+                                {
+                                    Vector2 newCenter = currentClipData.groundboxes[currentFrame + 1].circles[i].center;
+                                    float newRadius = currentClipData.groundboxes[currentFrame + 1].circles[i].radius;
+                                    Circle newCircle = new Circle(newCenter, newRadius);
+
+                                    currentClipData.groundboxes[currentFrame].circles.Add(newCircle);
+                                }
+
+                                EditorUtility.SetDirty(currentClipData);
+                                Repaint();
+                            }
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("Duplicate Previous Groundbox Data"))
+                    {
+                        if (currentFrame > 0)
+                        {
+                            //Set the currentFrame hitbox circles to a fresh list of circles
+                            //Then we add the circles from the previous frame to this new one
+                            //Being careful that we don't set a reference to the previous frame's list
+
+                            if (currentClipData.groundboxes[currentFrame - 1].circles.Count > 0)
+                            {
+                                currentClipData.groundboxes[currentFrame].circles = new List<Circle>();
+                                for (int i = 0; i < currentClipData.groundboxes[currentFrame - 1].circles.Count; i++)
+                                {
+                                    Vector2 newCenter = currentClipData.groundboxes[currentFrame - 1].circles[i].center;
+                                    float newRadius = currentClipData.groundboxes[currentFrame - 1].circles[i].radius;
+                                    Circle newCircle = new Circle(newCenter, newRadius);
+
+                                    currentClipData.groundboxes[currentFrame].circles.Add(newCircle);
+                                }
+
+                                EditorUtility.SetDirty(currentClipData);
+                                Repaint();
+                            }
+                        }
+                    }
+                    GUILayout.EndHorizontal();
                     GUILayout.BeginHorizontal();
                     if (GUILayout.Button("Add Hitbox Circle"))
                     {
@@ -281,6 +365,12 @@ public class AnimationClipCollisionDataEditor : EditorWindow
     private void OnDestroy()
     {
         SceneView.duringSceneGui -= this.OnSceneGUI;
+
+        if (AnimationMode.InAnimationMode())
+        {
+            AnimationMode.StopAnimationMode();
+        }
+            
     }
 
     void OnSceneGUI(SceneView sceneView)

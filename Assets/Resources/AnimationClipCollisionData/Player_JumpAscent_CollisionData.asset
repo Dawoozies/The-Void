@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Player_JumpAscent_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 67b98bbe5c5d387468b6068621ea5aa8, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.27883393, y: 0.3624839}
+      radius: 0.68631184
+    - center: {x: -0.32065904, y: -0.44613427}
+      radius: 0.2959444
+  hurtboxes:
+  - frame: 0
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles: []

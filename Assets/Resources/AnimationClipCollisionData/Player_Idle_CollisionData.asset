@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Player_Idle_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 2530be7cd4fd82c4998cf59d6e7d450e, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.3375495, y: 0.89625305}
+      radius: 0.35981917
+    - center: {x: 0.093117, y: 0.33173}
+      radius: 0.598432
+    - center: {x: 0.5105375, y: -0.27353188}
+      radius: 0.3132606
+    - center: {x: 0.0465585, y: -0.4248474}
+      radius: 0.3016208
+    - center: {x: 0.58780223, y: -0.7158384}
+      radius: 0.19104415
+    - center: {x: 0.5412435, y: -1.0533888}
+      radius: 0.15612525
+    - center: {x: 0.5587031, y: -1.3327404}
+      radius: 0.115386486
+    - center: {x: -0.21533394, y: -0.7973162}
+      radius: 0.19104409
+    - center: {x: -0.31427073, y: -1.0708483}
+      radius: 0.14448547
+    - center: {x: -0.40209198, y: -1.3192673}
+      radius: 0.10598731
+  hurtboxes:
+  - frame: 0
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.00000017881393, y: -1.4659501}
+      radius: 0.22626305

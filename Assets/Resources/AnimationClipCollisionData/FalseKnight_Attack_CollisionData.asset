@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: FalseKnight_Attack_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 6a016541de9bdc841b8c978da7a4a159, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.80192417, y: -1.1294764}
+      radius: 1.3473058
+    - center: {x: -1.3122482, y: -0.3483129}
+      radius: 0.62738633
+    - center: {x: -0.3251968, y: -0.16141367}
+      radius: 0.95139825
+    - center: {x: 0.76447666, y: -0.039356172}
+      radius: 0.5216203
+    - center: {x: -0.3773138, y: 0.7950537}
+      radius: 0.66311276
+    - center: {x: 0.10075727, y: -2.1326997}
+      radius: 0.31149065
+    - center: {x: 0.25189325, y: -2.4853508}
+      radius: 0.23592253
+    - center: {x: -1.5701375, y: -2.208268}
+      radius: 0.36186934
+    - center: {x: -1.8724098, y: -2.544126}
+      radius: 0.2611122
+  - frame: 1
+    circles:
+    - center: {x: -0.62151664, y: -1.3902318}
+      radius: 1.3389089
+    - center: {x: 0.07556826, y: -1.5472217}
+      radius: 1.2099115
+    - center: {x: 1.4190011, y: -1.3686221}
+      radius: 0.38705873
+    - center: {x: 1.1922963, y: -0.8816273}
+      radius: 0.21912956
+    - center: {x: 1.1755036, y: -0.5625623}
+      radius: 0.19394028
+    - center: {x: 1.125125, y: -0.2770828}
+      radius: 0.18554366
+    - center: {x: 0.990782, y: -0.02518928}
+      radius: 0.1351651
+    - center: {x: 0.26029006, y: -0.28547943}
+      radius: 0.17714751
+    - center: {x: 0.3946334, y: -0.05037868}
+      radius: 0.12676835
+    - center: {x: 0.5205805, y: 0.10075772}
+      radius: 0.109975696
+    - center: {x: -1.7044799, y: -2.2754393}
+      radius: 0.28630114
+    - center: {x: -1.982921, y: -2.561273}
+      radius: 0.19284964
+  - frame: 2
+    circles:
+    - center: {x: -0.62683356, y: -1.3989561}
+      radius: 1.3389089
+    - center: {x: 0.169608, y: -1.4965852}
+      radius: 1.2099115
+    - center: {x: 1.0409331, y: -1.8907158}
+      radius: 0.38705873
+    - center: {x: 1.0572715, y: -0.63858354}
+      radius: 0.21912956
+    - center: {x: 1.0764859, y: -0.28351194}
+      radius: 0.19394028
+    - center: {x: 0.9720975, y: 0.02897191}
+      radius: 0.18554366
+    - center: {x: 0.8377543, y: 0.26286232}
+      radius: 0.1351651
+    - center: {x: 0.14922601, y: -0.11229238}
+      radius: 0.23191357
+    - center: {x: 0.23260427, y: 0.17466211}
+      radius: 0.12676835
+    - center: {x: 0.37655437, y: 0.34380168}
+      radius: 0.109975696
+    - center: {x: -1.7044799, y: -2.2754393}
+      radius: 0.28630114
+    - center: {x: -1.982921, y: -2.561273}
+      radius: 0.19284964
+  hurtboxes:
+  - frame: 0
+    circles:
+    - center: {x: -1.6186678, y: 2.1417727}
+      radius: 0.723642
+  - frame: 1
+    circles:
+    - center: {x: 2.8227978, y: -0.5329759}
+      radius: 0.624943
+    - center: {x: 2.2503424, y: -0.15791884}
+      radius: 0.70390236
+    - center: {x: 1.4015288, y: 0.029609919}
+      radius: 0.8914307
+    - center: {x: 0.5428455, y: 0.2368787}
+      radius: 1
+  - frame: 2
+    circles:
+    - center: {x: 2.4477406, y: -2.2207332}
+      radius: 0.624943
+    - center: {x: 2.0533211, y: -1.2570391}
+      radius: 1.2069342
+    - center: {x: 1.3031889, y: -0.22187418}
+      radius: 1.2171382
+    - center: {x: 0.1990099, y: 0.33151186}
+      radius: 1.1480491
+  groundboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []

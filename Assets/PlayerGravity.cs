@@ -7,8 +7,10 @@ public class PlayerGravity : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
 
-    AnimatorStateInfo currentAnimationState;
-    float gravity = 20;
+    float verticalInput => BasicInput.ins.InputLVertical;
+
+    float gravity = 80;
+    float fastFallGravity = 120;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -16,22 +18,24 @@ public class PlayerGravity : MonoBehaviour
     }
     void FixedUpdate()
     {
-        currentAnimationState = animator.GetCurrentAnimatorStateInfo(0);
 
-        if(currentAnimationState.IsTag("ApplyGravity"))
+        if(!animator.GetBool("Grounded"))
         {
-            rb.AddForce(new Vector2(0f, -gravity));
+            if(verticalInput < 0)
+            {
+                rb.AddForce(new Vector2(0f, -fastFallGravity));
+            }
+            else
+            {
+                rb.AddForce(new Vector2(0f, -gravity));
+            }
         }
         else
         {
-            Debug.Log(rb.velocity);
-            if(animator.GetBool("Grounded"))
+            if (rb.velocity.y < 0)
             {
-                if(rb.velocity.y < 0)
-                {
-                    //Then previous frame application of gravity is leaving behind some velocity
-                    rb.velocity = new Vector2(rb.velocity.x, 0f);
-                }
+                //Then previous frame application of gravity is leaving behind some velocity
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
             }
         }
     }

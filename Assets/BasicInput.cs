@@ -12,6 +12,7 @@ public class BasicInput : MonoBehaviour
 
     public string ControllerType = "PS4";
 
+    //Movement Inputs
     public int InputLDirection = 1;
     public float InputLHorizontal;
     public float InputLVertical;
@@ -21,7 +22,8 @@ public class BasicInput : MonoBehaviour
     public float LeftHeldTime;
     public float RightHeldTime;
 
-
+    //Attack Inputs
+    public bool InputLightAttack;
     private void Update()
     {
         //Direction held times
@@ -57,10 +59,18 @@ public class BasicInput : MonoBehaviour
         {
             InputLDirection = -1;
         }
+
+        //Attack Input Check
+        InputLightAttack = LightAttackInputCheck();
     }
 
     bool JumpInputCheck()
     {
         return Input.GetButton($"Jump{ControllerType}");
+    }
+
+    bool LightAttackInputCheck()
+    {
+        return Input.GetButton($"LightAttack{ControllerType}");
     }
 }

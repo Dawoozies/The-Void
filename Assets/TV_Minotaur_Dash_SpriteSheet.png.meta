@@ -1,0 +1,313 @@
+fileFormatVersion: 2
+guid: 6782f6e8351f6b547aceed7abffa0f2c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 400
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Idle0
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 1779
+        width: 892
+        height: 1173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09d38541da51b054c904df8b663b5f3f
+      internalID: -1107165721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 1779
+        width: 867
+        height: 1147
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf44919791b1c444f90d1c32ffaf0c6f
+      internalID: 284917897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 2851
+        y: 1780
+        width: 1123
+        height: 1031
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42487fd084347fb47b7ed03c399adce5
+      internalID: -374326644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 4352
+        y: 1951
+        width: 1431
+        height: 884
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8113c0f57826b904f8d7bc1fe86aab48
+      internalID: -1553264126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 557
+        width: 1078
+        height: 969
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59d1224147b32a8488b50bf5d8efd191
+      internalID: 1403773208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 1686
+        y: 352
+        width: 995
+        height: 1214
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2536bb3aa3a843e4da4813d644dac46e
+      internalID: 1506024605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 3280
+        y: 359
+        width: 782
+        height: 1129
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e709cd05acd8234aab438263752c3b7
+      internalID: -498492125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TV_Minotaur_Dash_SpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 3159
+        y: 374
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09947c36a95fb4d47a0d8fc84ddacf1a
+      internalID: 796806389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      TV_Minotaur_Dash_SpriteSheet_5: 1506024605
+      TV_Minotaur_Dash_SpriteSheet_13: 208185239
+      TV_Minotaur_Dash_SpriteSheet_20: -359012148
+      TV_Minotaur_Dash_SpriteSheet_11: 1229745917
+      TV_Minotaur_Dash_SpriteSheet_9: 1871591724
+      TV_Minotaur_Dash_SpriteSheet_4: 1403773208
+      TV_Minotaur_Dash_SpriteSheet_1: 284917897
+      TV_Minotaur_Dash_SpriteSheet_16: 210155033
+      TV_Minotaur_Dash_SpriteSheet_17: 796806389
+      TV_Minotaur_Dash_SpriteSheet_7: -896699234
+      TV_Minotaur_Dash_SpriteSheet_10: -1371103329
+      TV_Minotaur_Dash_SpriteSheet_2: -374326644
+      TV_Minotaur_Dash_SpriteSheet_14: -686959933
+      TV_Minotaur_Dash_SpriteSheet_6: -498492125
+      TV_Minotaur_Dash_SpriteSheet_18: 1827871055
+      Player_Idle0: -1107165721
+      TV_Minotaur_Dash_SpriteSheet_19: 2053732997
+      TV_Minotaur_Dash_SpriteSheet_12: -1635426346
+      TV_Minotaur_Dash_SpriteSheet_21: 2082761601
+      TV_Minotaur_Dash_SpriteSheet_8: 1332102449
+      TV_Minotaur_Dash_SpriteSheet_3: -1553264126
+      TV_Minotaur_Dash_SpriteSheet_15: -1605062800
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

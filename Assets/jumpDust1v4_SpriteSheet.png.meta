@@ -1,0 +1,563 @@
+fileFormatVersion: 2
+guid: dbb35a17220f67742968433dab208806
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 828
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf436cf73a9d0654fa579796f986956f
+      internalID: -163069064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 828
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afac4c9376cdc7e4faf4054d2be2a370
+      internalID: -851122348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 828
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ff606623240d234eaa238853bcce62a
+      internalID: 2146597105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 828
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d274508580f97494a8cc8a62f3512a2f
+      internalID: 258886564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 828
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7229a63656fa4f24eab1fb1204cec72b
+      internalID: 1918433864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 629
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52f5b6e41b881a9449c551466447f181
+      internalID: -1937810318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 629
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f1776dfd2939b64e9f59086a7f05ce1
+      internalID: 72655472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 629
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e219024445bb39d4e99a46b3a482674e
+      internalID: 1499486206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 629
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f93fd9b52b5a694cb1a1b61da83a96e
+      internalID: -1550078832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 629
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb34e5b27b1d624dbed3321db55ba81
+      internalID: -525702722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 430
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd7961e13289c7419e1e24722726a6d
+      internalID: -1396156825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 430
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b6d1f9717792c499c83479b22f0bae
+      internalID: 1939290810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 430
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f824716c1c276294b9bdc2bcfdb0e17c
+      internalID: 297767122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 430
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7d97044ff784b4469e80b05b67e10b3
+      internalID: 580555891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 430
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d593ee42a17544bbd733fd5f117581
+      internalID: 289995257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 231
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dedaa6a0f49dbd43a1cdf6bd50452fe
+      internalID: 882069995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 231
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a890da60f9b33094581182e2bd8a0850
+      internalID: -1599293417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 231
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0262983fba61fa4da799539195fd843
+      internalID: 365686581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 231
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641547ea35d96894bba4f7c6bad40665
+      internalID: -1077928271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpDust1v4_SpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 231
+        width: 406
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2a40caba56168f4f940851653470db9
+      internalID: -1562443704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      jumpDust1v4_SpriteSheet_12: 297767122
+      jumpDust1v4_SpriteSheet_18: -1077928271
+      jumpDust1v4_SpriteSheet_9: -525702722
+      jumpDust1v4_SpriteSheet_13: 580555891
+      jumpDust1v4_SpriteSheet_7: 1499486206
+      jumpDust1v4_SpriteSheet_3: 258886564
+      jumpDust1v4_SpriteSheet_17: 365686581
+      jumpDust1v4_SpriteSheet_16: -1599293417
+      jumpDust1v4_SpriteSheet_19: -1562443704
+      jumpDust1v4_SpriteSheet_10: -1396156825
+      jumpDust1v4_SpriteSheet_8: -1550078832
+      jumpDust1v4_SpriteSheet_15: 882069995
+      jumpDust1v4_SpriteSheet_0: -163069064
+      jumpDust1v4_SpriteSheet_4: 1918433864
+      jumpDust1v4_SpriteSheet_11: 1939290810
+      jumpDust1v4_SpriteSheet_1: -851122348
+      jumpDust1v4_SpriteSheet_5: -1937810318
+      jumpDust1v4_SpriteSheet_6: 72655472
+      jumpDust1v4_SpriteSheet_2: 2146597105
+      jumpDust1v4_SpriteSheet_14: 289995257
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

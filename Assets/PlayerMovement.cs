@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     float dashMultiplier = 5;
 
     //Vertical Movement
-    float jumpVelocity = 8;
+    float jumpVelocity = 16;
     Animator animator;
     Rigidbody2D rb;
     // Start is called before the first frame update
@@ -77,7 +77,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.AddForce(new Vector2(-Mathf.Sign(rb.velocity.x) * accForce / 4 * Mathf.Abs(rb.velocity.x) / maxSpeed, 0));
+            //rb.AddForce(new Vector2(-Mathf.Sign(rb.velocity.x) * accForce / 4 * Mathf.Abs(rb.velocity.x) / maxSpeed, 0));
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
         if (jumpInput && animator.GetCurrentAnimatorStateInfo(0).IsTag("JumpAscent"))
