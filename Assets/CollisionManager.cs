@@ -29,7 +29,12 @@ public class CollisionManager : MonoBehaviour
         {
             foreach (AnimationClipCollisionData collisionData in allCollisionData)
             {
-                if(collisionData.animationClip.name.Contains(nameOfEntity))
+                if(collisionData.animationClip == null)
+                {
+                    Debug.LogError("AnimationClipCollisionData has null animationClip, delete " + collisionData.name);
+                }
+
+                if(collisionData.animationClip != null && collisionData.animationClip.name.Contains(nameOfEntity))
                 {
                     //Debug.Log(collisionData.animationClip.name + " contains substring " + nameOfEntity);
                     entityCollisionData.Add(collisionData.animationClip.name, collisionData);
@@ -42,7 +47,7 @@ public class CollisionManager : MonoBehaviour
     {
         if(entityCollisionData.ContainsKey(animationClipName) == false)
         {
-            Debug.LogError("CollisionManager Error: Trying to get Hitbox Data which does not exist");
+            Debug.LogError("CollisionManager Error: Trying to get Hitbox Data which does not exist " + animationClipName);
             return null;
         }
 

@@ -147,15 +147,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_2
+      name: Player_JumpAscentStart0
       rect:
         serializedVersion: 2
         x: 2851
         y: 1780
         width: 1123
         height: 1031
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,16 +288,16 @@ TextureImporter:
       TV_Minotaur_Dash_SpriteSheet_20: -359012148
       TV_Minotaur_Dash_SpriteSheet_11: 1229745917
       TV_Minotaur_Dash_SpriteSheet_9: 1871591724
+      Player_JumpAscentStart0: -374326644
       TV_Minotaur_Dash_SpriteSheet_4: 1403773208
       TV_Minotaur_Dash_SpriteSheet_1: 284917897
       TV_Minotaur_Dash_SpriteSheet_16: 210155033
       TV_Minotaur_Dash_SpriteSheet_17: 796806389
       TV_Minotaur_Dash_SpriteSheet_7: -896699234
       TV_Minotaur_Dash_SpriteSheet_10: -1371103329
-      TV_Minotaur_Dash_SpriteSheet_2: -374326644
       TV_Minotaur_Dash_SpriteSheet_14: -686959933
-      TV_Minotaur_Dash_SpriteSheet_6: -498492125
       TV_Minotaur_Dash_SpriteSheet_18: 1827871055
+      TV_Minotaur_Dash_SpriteSheet_6: -498492125
       Player_Idle0: -1107165721
       TV_Minotaur_Dash_SpriteSheet_19: 2053732997
       TV_Minotaur_Dash_SpriteSheet_12: -1635426346
