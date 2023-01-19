@@ -8,12 +8,12 @@ public class PlayerMovement : MonoBehaviour
     float normalizedHorizontalInput => new Vector2(horizontalInput, 0).normalized.x;
     bool jumpInput => BasicInput.ins.InputJump;
     //Horizontal Movement
-    float maxSpeed = 10;
+    float maxSpeed = 15;
     float accForce = 100;
     float dashMultiplier = 5;
 
     //Vertical Movement
-    float jumpVelocity = 16;
+    float jumpVelocity = 20;
     Animator animator;
     Rigidbody2D rb;
     // Start is called before the first frame update

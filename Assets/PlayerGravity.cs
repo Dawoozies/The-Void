@@ -21,7 +21,7 @@ public class PlayerGravity : MonoBehaviour
 
         if(!animator.GetBool("Grounded"))
         {
-            if(verticalInput < 0)
+            if(verticalInput < -0.75f)
             {
                 rb.AddForce(new Vector2(0f, -fastFallGravity));
             }

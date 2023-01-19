@@ -124,8 +124,24 @@ public class HitboxManager : MonoBehaviour
         }
     }
 
+    public bool showHitboxGizmos = false;
     private void OnDrawGizmos()
     {
-        
+        if (hitboxPool == null)
+            return;
+
+        if(showHitboxGizmos)
+        {
+            for (int i = 0; i < hitboxPool.transform.childCount; i++)
+            {
+                if (hitboxPool.GetChild(i).gameObject.activeSelf)
+                {
+                    Vector3 position = hitboxPool.GetChild(i).position;
+                    float radius = hitboxPool.GetChild(i).GetComponent<CircleCollider2D>().radius;
+                    Gizmos.color = new Color(1f, 0, 1f, 0.65f);
+                    Gizmos.DrawSphere(position, radius);
+                }
+            }
+        }
     }
 }

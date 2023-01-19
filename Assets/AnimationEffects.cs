@@ -29,12 +29,43 @@ public class AnimationEffects : MonoBehaviour
         {
             foreach (AnimationEffect animationEffect in data)
             {
+                //Ensure the AnimatorController is updated with all states
+                if(animationEffect.effectsList.Count > 0)
+                {
+                    //Check through each frame seeing if there are non zero effects assigned
+                    for (int frame = 0; frame < animationEffect.effectsList.Count; frame++)
+                    {
+                        if (animationEffect.effectsList[frame].effects != null && animationEffect.effectsList[frame].effects.Count > 0)
+                        {
+                            //Then there are effects here check that each effect has a state reflected in the controller
+                            for (int effectIndex = 0; effectIndex < animationEffect.effectsList[frame].effects.Count; effectIndex++)
+                            {
+                                InitEffectInController(animationEffect.effectsList[frame].effects[effectIndex]);
+                            }
+                        }
+                    }
+                }
+
+
                 if(animationEffect.clip.name.Contains(nameOfEntity))
                 {
                     animationEffectData.Add(animationEffect.clip.name, animationEffect);
                 }
             }
         }
+    }
+    void InitEffectInController (EffectData effectData)
+    {
+        AnimationClip[] controllerClips = animatorController.animationClips;
+        foreach (AnimationClip controllerClip in controllerClips)
+        {
+            if(effectData.clip.name == controllerClip.name)
+            {
+                return;
+            }
+        }
+
+        animatorController.AddMotion(effectData.clip);
     }
     void GenerateAnimatorPool()
     {
@@ -54,7 +85,7 @@ public class AnimationEffects : MonoBehaviour
             effectAnimators.Add(effectAnimator);
         }
     }
-    public void PlayEffect(Animator animator, AnimationClip clip, AnimatorStateInfo stateInfo)
+    public void PlayEffect(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 entityLocalScale, bool copyEntityDirection)
     {
         if(!animationEffectData.ContainsKey(clip.name))
         {
@@ -72,12 +103,39 @@ public class AnimationEffects : MonoBehaviour
 
         for (int i = 0; i < effectAnimators.Count; i++)
         {
-            if (effectAnimators[i].TryPlayEffect(effectData, transform.position))
+            if (effectAnimators[i].TryPlayEffect(effectData, transform.position, entityLocalScale, copyEntityDirection))
             {
                 break;
             }
         }
 
         Debug.Log("Trying to play effects for clip: " + clip.name);
+    }
+
+    public void PlayEffectAtPosition(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 worldPositionToPlayAt, Vector3 entityLocalScale, bool copyEntityDirection)
+    {
+        if(!animationEffectData.ContainsKey(clip.name))
+        {
+            Debug.LogError($"Trying to play effect for {clip.name} but no effect data exists for this clip.");
+            return;
+        }
+
+        float normalizedTime = stateInfo.normalizedTime;
+        int totalFrames = Mathf.RoundToInt(clip.length);
+        float clipTime = normalizedTime - Mathf.FloorToInt(normalizedTime);
+        int frame = Mathf.FloorToInt(totalFrames * clipTime);
+
+        int randomEffectIndex = Random.Range(0, animationEffectData[clip.name].effectsList[frame].effects.Count);
+        EffectData effectData = animationEffectData[clip.name].effectsList[frame].effects[randomEffectIndex];
+
+        for (int i = 0; i < effectAnimators.Count; i++)
+        {
+            if (effectAnimators[i].TryPlayEffectAtPosition(effectData, worldPositionToPlayAt, entityLocalScale, copyEntityDirection))
+            {
+                break;
+            }
+        }
+
+        Debug.Log($"Trying to play effect at position {worldPositionToPlayAt} for clip: {clip.name}");
     }
 }

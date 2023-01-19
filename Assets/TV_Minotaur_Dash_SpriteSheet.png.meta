@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 450
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -154,8 +154,8 @@ TextureImporter:
         y: 1780
         width: 1123
         height: 1031
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.38917342, y: 0.6669588}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,15 +210,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_5
+      name: Player_JumpLand0
       rect:
         serializedVersion: 2
         x: 1686
         y: 352
         width: 995
         height: 1214
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -238,8 +238,8 @@ TextureImporter:
         y: 359
         width: 782
         height: 1129
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -283,7 +283,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TV_Minotaur_Dash_SpriteSheet_5: 1506024605
+      Player_JumpLand0: 1506024605
       TV_Minotaur_Dash_SpriteSheet_13: 208185239
       TV_Minotaur_Dash_SpriteSheet_20: -359012148
       TV_Minotaur_Dash_SpriteSheet_11: 1229745917

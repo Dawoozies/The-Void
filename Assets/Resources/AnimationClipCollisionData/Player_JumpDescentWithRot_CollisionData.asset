@@ -16,9 +16,9 @@ MonoBehaviour:
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: -0.20825326, y: 0.88507617}
+    - center: {x: -0.23243767, y: 0.95158297}
       radius: 0.45705414
-    - center: {x: -0.15618992, y: 0.19337791}
+    - center: {x: -0.15014362, y: 0.21151623}
       radius: 0.36780274
   hurtboxes:
   - frame: 0
@@ -26,5 +26,5 @@ MonoBehaviour:
   groundboxes:
   - frame: 0
     circles:
-    - center: {x: 0.00000011920929, y: -0.65419674}
+    - center: {x: -0.024184167, y: -0.9081315}
       radius: 0.5141634

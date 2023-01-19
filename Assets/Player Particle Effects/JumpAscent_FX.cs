@@ -5,6 +5,8 @@ using UnityEngine;
 public class JumpAscent_FX : StateMachineBehaviour
 {
     AnimationEffects animationEffectsSystem;
+    SpriteRenderer spriteRenderer;
+    public LayerMask layerMask;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -15,7 +17,12 @@ public class JumpAscent_FX : StateMachineBehaviour
             return;
         }
 
-        animationEffectsSystem.PlayEffect(animator, animator.GetCurrentAnimatorClipInfo(0)[0].clip, stateInfo);
+        if (spriteRenderer == null)
+            spriteRenderer = animator.GetComponent<SpriteRenderer>();
+
+        Vector3 worldPositionToPlayAt = Physics2D.Raycast(animator.transform.position, Vector2.down, spriteRenderer.size.y/2, layerMask).point;
+        Debug.Log(Physics2D.Raycast(animator.transform.position, Vector2.down, spriteRenderer.size.y / 2, layerMask).collider);
+        animationEffectsSystem.PlayEffectAtPosition(animator.GetCurrentAnimatorClipInfo(0)[0].clip, stateInfo, worldPositionToPlayAt, animator.transform.localScale, true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
