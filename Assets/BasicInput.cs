@@ -16,6 +16,7 @@ public class BasicInput : MonoBehaviour
     public float InputLHorizontal;
     public float InputLVertical;
     public bool InputJump;
+    public bool InputRoll;
 
     //Hold Times
     public float LeftHeldTime;
@@ -48,6 +49,8 @@ public class BasicInput : MonoBehaviour
         InputLHorizontal = Input.GetAxis("L_Horizontal");
         InputLVertical = Input.GetAxis("L_Vertical");
 
+        InputRoll = RollInputCheck();
+
         InputJump = JumpInputCheck();
 
         if(InputLHorizontal > 0)
@@ -71,5 +74,10 @@ public class BasicInput : MonoBehaviour
     bool LightAttackInputCheck()
     {
         return Input.GetButton($"LightAttack{ControllerType}");
+    }
+
+    bool RollInputCheck()
+    {
+        return Input.GetButton($"Roll{ControllerType}");
     }
 }

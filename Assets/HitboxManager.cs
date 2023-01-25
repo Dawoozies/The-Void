@@ -99,6 +99,14 @@ public class HitboxManager : MonoBehaviour
         clipTime = normalizedTime - Mathf.FloorToInt(normalizedTime);
         frame = Mathf.FloorToInt(totalFrames * clipTime);
 
+        if(!currentClipInfo.clip.isLooping)
+        {
+            if(normalizedTime > 1)
+            {
+                frame = totalFrames - 1;
+            }
+        }
+
         SetHitboxCircles();
     }
 

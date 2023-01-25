@@ -448,7 +448,7 @@ MonoBehaviour:
   clipTime: 0
   totalFrames: 0
   frame: 0
-  showHitboxGizmos: 0
+  showHitboxGizmos: 1
 --- !u!114 &447214927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +497,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  showGroundboxGizmos: 1
 --- !u!114 &447214930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1709,6 +1710,7 @@ MonoBehaviour:
   InputLHorizontal: 0
   InputLVertical: 0
   InputJump: 0
+  InputRoll: 0
   LeftHeldTime: 0
   RightHeldTime: 0
   InputLightAttack: 0
@@ -1932,6 +1934,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  showGroundboxGizmos: 0
 --- !u!58 &1705348835
 CircleCollider2D:
   m_ObjectHideFlags: 0

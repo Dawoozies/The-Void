@@ -92,17 +92,20 @@ public class GroundCheck : MonoBehaviour
             }
         }
     }
-
+    public bool showGroundboxGizmos = false;
     private void OnDrawGizmos()
     {
-        if(groundboxes.Count > 0)
+        if(showGroundboxGizmos)
         {
-            //Then we draw all the groundbox circles as wireframe spheres
-            for (int i = 0; i < groundboxes[frame].circles.Count; i++)
+            if (groundboxes.Count > 0)
             {
-                Gizmos.color = Color.green;
-                Vector3 circlePos = transform.position + new Vector3(groundboxes[frame].circles[i].center.x, groundboxes[frame].circles[i].center.y, 0f);
-                Gizmos.DrawWireSphere(circlePos, groundboxes[frame].circles[i].radius);
+                //Then we draw all the groundbox circles as wireframe spheres
+                for (int i = 0; i < groundboxes[frame].circles.Count; i++)
+                {
+                    Gizmos.color = new Color(0, 1, 0, 0.65f);
+                    Vector3 circlePos = transform.position + new Vector3(groundboxes[frame].circles[i].center.x, groundboxes[frame].circles[i].center.y, 0f);
+                    Gizmos.DrawSphere(circlePos, groundboxes[frame].circles[i].radius);
+                }
             }
         }
     }

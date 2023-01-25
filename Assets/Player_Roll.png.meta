@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6782f6e8351f6b547aceed7abffa0f2c
+guid: 83d5a40529a9deb48bc36be5a7f31537
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,169 +105,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Idle0
+      name: Player_Roll_0
       rect:
         serializedVersion: 2
-        x: 213
-        y: 1779
-        width: 892
-        height: 1173
+        x: 20
+        y: 1408
+        width: 1622
+        height: 1274
       alignment: 9
-      pivot: {x: 0.5, y: 0.55}
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09d38541da51b054c904df8b663b5f3f
-      internalID: -1107165721
+      spriteID: 2671129b8a59db5429501d79d64833b5
+      internalID: -82295755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_1
+      name: Player_Roll_1
       rect:
         serializedVersion: 2
-        x: 1361
-        y: 1779
-        width: 867
-        height: 1147
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf44919791b1c444f90d1c32ffaf0c6f
-      internalID: 284917897
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_JumpAscentStart0
-      rect:
-        serializedVersion: 2
-        x: 2851
-        y: 1780
-        width: 1123
-        height: 1031
+        x: 1672
+        y: 1408
+        width: 1622
+        height: 1274
       alignment: 9
-      pivot: {x: 0.38917342, y: 0.6669588}
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42487fd084347fb47b7ed03c399adce5
-      internalID: -374326644
+      spriteID: b0f2890b3018a534586e29c9dcdcfc58
+      internalID: -199095800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_3
+      name: Player_Roll_2
       rect:
         serializedVersion: 2
-        x: 4352
-        y: 1951
-        width: 1431
-        height: 884
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 3324
+        y: 1408
+        width: 1622
+        height: 1274
+      alignment: 9
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8113c0f57826b904f8d7bc1fe86aab48
-      internalID: -1553264126
+      spriteID: 7ab1280860856be45aab9ee4bb04a7c9
+      internalID: 1133490551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_4
+      name: Player_Roll_3
       rect:
         serializedVersion: 2
-        x: 431
-        y: 557
-        width: 1078
-        height: 969
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 4976
+        y: 1408
+        width: 1622
+        height: 1274
+      alignment: 9
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59d1224147b32a8488b50bf5d8efd191
-      internalID: 1403773208
+      spriteID: eb0fa3eb0710de84bb235fe602ef7e50
+      internalID: 1612590721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Turn0
+      name: Player_Roll_4
       rect:
         serializedVersion: 2
-        x: 1686
-        y: 352
-        width: 995
-        height: 1214
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 20
+        y: 102
+        width: 1622
+        height: 1274
+      alignment: 9
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2536bb3aa3a843e4da4813d644dac46e
-      internalID: 1506024605
+      spriteID: eb9d8c7fadadc2d4bbe42f8960e97232
+      internalID: 667322381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_6
+      name: Player_Roll_5
       rect:
         serializedVersion: 2
-        x: 3280
-        y: 359
-        width: 782
-        height: 1129
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1672
+        y: 102
+        width: 1622
+        height: 1274
+      alignment: 9
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e709cd05acd8234aab438263752c3b7
-      internalID: -498492125
+      spriteID: d096935c1a4c94d438e6b86ea28000e2
+      internalID: 1497865925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_17
+      name: Player_Roll_6
       rect:
         serializedVersion: 2
-        x: 3159
-        y: 374
-        width: 5
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 3324
+        y: 102
+        width: 1622
+        height: 1274
+      alignment: 9
+      pivot: {x: 0.4777921, y: 0.5502661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09947c36a95fb4d47a0d8fc84ddacf1a
-      internalID: 796806389
+      spriteID: 37c80c9d8aa81184baa28feacb9a204a
+      internalID: -1930480060
       vertices: []
       indices: 
       edges: []
@@ -283,28 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Turn0: 1506024605
-      TV_Minotaur_Dash_SpriteSheet_13: 208185239
-      TV_Minotaur_Dash_SpriteSheet_20: -359012148
-      TV_Minotaur_Dash_SpriteSheet_11: 1229745917
-      TV_Minotaur_Dash_SpriteSheet_9: 1871591724
-      Player_JumpAscentStart0: -374326644
-      TV_Minotaur_Dash_SpriteSheet_4: 1403773208
-      TV_Minotaur_Dash_SpriteSheet_1: 284917897
-      TV_Minotaur_Dash_SpriteSheet_16: 210155033
-      TV_Minotaur_Dash_SpriteSheet_17: 796806389
-      TV_Minotaur_Dash_SpriteSheet_7: -896699234
-      TV_Minotaur_Dash_SpriteSheet_10: -1371103329
-      TV_Minotaur_Dash_SpriteSheet_14: -686959933
-      TV_Minotaur_Dash_SpriteSheet_18: 1827871055
-      TV_Minotaur_Dash_SpriteSheet_6: -498492125
-      Player_Idle0: -1107165721
-      TV_Minotaur_Dash_SpriteSheet_19: 2053732997
-      TV_Minotaur_Dash_SpriteSheet_12: -1635426346
-      TV_Minotaur_Dash_SpriteSheet_21: 2082761601
-      TV_Minotaur_Dash_SpriteSheet_8: 1332102449
-      TV_Minotaur_Dash_SpriteSheet_3: -1553264126
-      TV_Minotaur_Dash_SpriteSheet_15: -1605062800
+      Player_Roll_4: 667322381
+      Player_Roll_6: -1930480060
+      Player_Roll_0: -82295755
+      Player_Roll_5: 1497865925
+      Player_Roll_1: -199095800
+      Player_Roll_2: 1133490551
+      Player_Roll_3: 1612590721
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

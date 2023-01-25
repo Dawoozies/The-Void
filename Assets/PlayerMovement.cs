@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput => BasicInput.ins.InputLHorizontal;
     float normalizedHorizontalInput => new Vector2(horizontalInput, 0).normalized.x;
     bool jumpInput => BasicInput.ins.InputJump;
+    bool rollInput => BasicInput.ins.InputRoll;
     //Horizontal Movement
     float maxSpeed = 15;
     float accForce = 100;
@@ -36,6 +37,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(rollInput)
+        {
+            animator.SetBool("Roll", true);
+        }
+        else
+        {
+            animator.SetBool("Roll", false);
+        }
+
         if (Mathf.Abs(horizontalInput) > 0f)
         {
             animator.SetBool("Run", true);
@@ -67,6 +77,15 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Horizontal Movement
+        if(animator.GetCurrentAnimatorStateInfo(0).IsTag("Roll"))
+            return;
+
+        RunMovement();
+        JumpMovement();
+    }
+
+    void RunMovement()
+    {
         if (normalizedHorizontalInput == 1)
         {
             rb.AddForce(new Vector2((rb.velocity.x < 0 ? 1 : dashMultiplier) * accForce * Mathf.Abs(horizontalInput) * (1 - rb.velocity.x / maxSpeed), 0));
@@ -77,13 +96,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //rb.AddForce(new Vector2(-Mathf.Sign(rb.velocity.x) * accForce / 4 * Mathf.Abs(rb.velocity.x) / maxSpeed, 0));
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+    }
 
+    void JumpMovement()
+    {
         if (jumpInput && animator.GetCurrentAnimatorStateInfo(0).IsTag("JumpAscent"))
         {
-            rb.velocity =  new Vector2(rb.velocity.x, jumpVelocity);
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
     }
 }

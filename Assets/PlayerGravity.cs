@@ -18,7 +18,6 @@ public class PlayerGravity : MonoBehaviour
     }
     void FixedUpdate()
     {
-
         if(!animator.GetBool("Grounded"))
         {
             if(verticalInput < -0.75f)

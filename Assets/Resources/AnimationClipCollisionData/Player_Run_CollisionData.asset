@@ -26,7 +26,7 @@ MonoBehaviour:
       radius: 0.27426594
     - center: {x: 0.7923831, y: -0.8960595}
       radius: 0.21502244
-    - center: {x: 0.88865405, y: -1.2367101}
+    - center: {x: 0.8684248, y: -1.1709654}
       radius: 0.12615687
     - center: {x: -0.4591378, y: -0.49616522}
       radius: 0.26686054
@@ -54,7 +54,7 @@ MonoBehaviour:
       radius: 0.27426594
     - center: {x: 0.7923831, y: -0.8960595}
       radius: 0.21502244
-    - center: {x: 0.88865405, y: -1.2367101}
+    - center: {x: 0.8684248, y: -1.1709654}
       radius: 0.12615687
     - center: {x: -0.4591378, y: -0.49616522}
       radius: 0.26686054
@@ -82,7 +82,7 @@ MonoBehaviour:
       radius: 0.27426594
     - center: {x: 0.7923831, y: -0.8960595}
       radius: 0.21502244
-    - center: {x: 0.88865405, y: -1.2367101}
+    - center: {x: 0.8684248, y: -1.1709654}
       radius: 0.12615687
     - center: {x: -0.4591378, y: -0.49616522}
       radius: 0.26686054
@@ -184,8 +184,6 @@ MonoBehaviour:
       radius: 0.21309668
     - center: {x: -0.28380156, y: -1.1287549}
       radius: 0.19374645
-    - center: {x: -0.43215203, y: -1.3674059}
-      radius: 0.13569641
   - frame: 7
     circles:
     - center: {x: 0.50955224, y: 0.9804042}
@@ -200,8 +198,6 @@ MonoBehaviour:
       radius: 0.21309668
     - center: {x: -0.28380156, y: -1.1287549}
       radius: 0.19374645
-    - center: {x: -0.43215203, y: -1.3674059}
-      radius: 0.13569641
   - frame: 8
     circles:
     - center: {x: 0.49665213, y: 0.9933042}
@@ -276,11 +272,11 @@ MonoBehaviour:
       radius: 0.16794646
     - center: {x: 0.66435313, y: -0.6192025}
       radius: 0.16794658
-    - center: {x: 0.8385035, y: -0.9030039}
+    - center: {x: 0.8233317, y: -0.86254567}
       radius: 0.14859653
     - center: {x: 0.78690314, y: 0.30315128}
       radius: 0.18729666
-    - center: {x: 0.90945363, y: -1.1932551}
+    - center: {x: 0.8841673, y: -1.1072812}
       radius: 0.14214647
   - frame: 11
     circles:
@@ -304,11 +300,11 @@ MonoBehaviour:
       radius: 0.16794646
     - center: {x: 0.66435313, y: -0.6192025}
       radius: 0.16794658
-    - center: {x: 0.8385035, y: -0.9030039}
+    - center: {x: 0.8233317, y: -0.86254567}
       radius: 0.14859653
     - center: {x: 0.78690314, y: 0.30315128}
       radius: 0.18729666
-    - center: {x: 0.90945363, y: -1.1932551}
+    - center: {x: 0.8841673, y: -1.1072812}
       radius: 0.14214647
   - frame: 12
     circles:
@@ -332,11 +328,11 @@ MonoBehaviour:
       radius: 0.16794646
     - center: {x: 0.66435313, y: -0.6192025}
       radius: 0.16794658
-    - center: {x: 0.8385035, y: -0.9030039}
+    - center: {x: 0.8233317, y: -0.86254567}
       radius: 0.14859653
     - center: {x: 0.78690314, y: 0.30315128}
       radius: 0.18729666
-    - center: {x: 0.90945363, y: -1.1932551}
+    - center: {x: 0.8841673, y: -1.1072812}
       radius: 0.14214647
   - frame: 13
     circles:
@@ -356,7 +352,7 @@ MonoBehaviour:
       radius: 0.20019662
     - center: {x: 0.70950305, y: -0.948154}
       radius: 0.1743964
-    - center: {x: 0.69015276, y: -1.2190552}
+    - center: {x: 0.6699236, y: -1.1937687}
       radius: 0.1227963
     - center: {x: 0.8385035, y: 0.103200406}
       radius: 0.14214635
@@ -382,7 +378,7 @@ MonoBehaviour:
       radius: 0.20019662
     - center: {x: 0.70950305, y: -0.948154}
       radius: 0.1743964
-    - center: {x: 0.69015276, y: -1.2190552}
+    - center: {x: 0.6699236, y: -1.1937687}
       radius: 0.1227963
     - center: {x: 0.8385035, y: 0.103200406}
       radius: 0.14214635
@@ -400,7 +396,7 @@ MonoBehaviour:
       radius: 0.516248
     - center: {x: 0.15480065, y: -0.81270355}
       radius: 0.30339706
-    - center: {x: -0.10965037, y: -1.1868052}
+    - center: {x: -0.08436394, y: -1.1665761}
       radius: 0.19374657
   - frame: 16
     circles:
@@ -414,8 +410,6 @@ MonoBehaviour:
       radius: 0.30339706
     - center: {x: -0.25155067, y: -1.0191045}
       radius: 0.19374657
-    - center: {x: -0.41925168, y: -1.2771056}
-      radius: 0.15504646
   - frame: 17
     circles:
     - center: {x: 0.4902022, y: 1.0320044}
@@ -428,8 +422,6 @@ MonoBehaviour:
       radius: 0.30339706
     - center: {x: -0.25155067, y: -1.0191045}
       radius: 0.19374657
-    - center: {x: -0.41925168, y: -1.2771056}
-      radius: 0.15504646
   - frame: 18
     circles:
     - center: {x: 0.5031023, y: 0.97395414}

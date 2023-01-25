@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Player_RollImpact_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 9dae699a4ce59ef48aff1e21c4193974, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.008504987, y: -1.1821781}
+      radius: 0.23456049
+  hurtboxes:
+  - frame: 0
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.00000035762787, y: -1.312635}
+      radius: 0.20722234
