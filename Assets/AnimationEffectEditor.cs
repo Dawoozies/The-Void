@@ -226,6 +226,7 @@ public class AnimationEffectEditor : EditorWindow
                     effectTransform.localPosition = effectToEdit.position;
                     Animator effectAnimator = effectTransform.gameObject.AddComponent(typeof(Animator)) as Animator;
                     SpriteRenderer spriteRenderer = effectTransform.gameObject.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+                    spriteRenderer.sortingOrder = 1000;
                 }
 
                 if (effectTransform != null)

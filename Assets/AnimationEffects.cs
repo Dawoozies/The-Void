@@ -85,18 +85,24 @@ public class AnimationEffects : MonoBehaviour
             effectAnimators.Add(effectAnimator);
         }
     }
-    public void PlayEffect(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 entityLocalScale, bool copyEntityDirection)
+    public bool PlayEffect(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 entityLocalScale, bool copyEntityDirection)
     {
         if(!animationEffectData.ContainsKey(clip.name))
         {
             Debug.LogError($"Trying to play effect for {clip.name} but no effect data exists for this clip.");
-            return;
+            return false;
         }
 
         float normalizedTime = stateInfo.normalizedTime;
         int totalFrames = Mathf.RoundToInt(clip.length);
         float clipTime = normalizedTime - Mathf.FloorToInt(normalizedTime);
         int frame = Mathf.FloorToInt(totalFrames * clipTime);
+
+        if (animationEffectData[clip.name].effectsList == null || animationEffectData[clip.name].effectsList.Count <= 0)
+            return false;
+
+        if (animationEffectData[clip.name].effectsList[frame].effects == null || animationEffectData[clip.name].effectsList[frame].effects.Count <= 0)
+            return false;
 
         int randomEffectIndex = Random.Range(0, animationEffectData[clip.name].effectsList[frame].effects.Count);
         EffectData effectData = animationEffectData[clip.name].effectsList[frame].effects[randomEffectIndex];
@@ -105,11 +111,11 @@ public class AnimationEffects : MonoBehaviour
         {
             if (effectAnimators[i].TryPlayEffect(effectData, transform.position, entityLocalScale, copyEntityDirection))
             {
-                break;
+                return true;
             }
         }
 
-        Debug.Log("Trying to play effects for clip: " + clip.name);
+        return false;
     }
 
     public void PlayEffectAtPosition(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 worldPositionToPlayAt, Vector3 entityLocalScale, bool copyEntityDirection)
