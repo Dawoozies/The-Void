@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ff5d3a3811273ec47a7169ff0cd22380
+guid: 92072dcab6e70384199b0e88e816dc6e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 90
+  spritePixelsToUnits: 180
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,421 +105,337 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JumpDustOne_0
+      name: ShortHopDustOne_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 884
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 2
+        y: 978
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 994accf9be44f0b48ad83641b7ed2770
-      internalID: 1027175453
+      spriteID: a7e73a7172af09a43a8449fcffc61185
+      internalID: -578831755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_1
+      name: ShortHopDustOne_1
       rect:
         serializedVersion: 2
-        x: 416
-        y: 884
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 628
+        y: 978
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74daa22b10e795b49badcbb3b70b6fda
-      internalID: -1954220268
+      spriteID: 4b410aec766b41a4d9aa5fbd48129a9c
+      internalID: -710725962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_2
+      name: ShortHopDustOne_2
       rect:
         serializedVersion: 2
-        x: 831
-        y: 884
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 1254
+        y: 978
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba3ed397c4f822842bed45dc65bd1cf4
-      internalID: -1632155801
+      spriteID: c4a04eeedccd2904b871e1abd222e05a
+      internalID: 1485353971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_3
+      name: ShortHopDustOne_3
       rect:
         serializedVersion: 2
-        x: 1246
-        y: 884
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 2
+        y: 803
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 656fede76e0913442a7d43f9bc10e9ee
-      internalID: -583537799
+      spriteID: 1ee9e9bd35ff2d04d888318cc8f457dd
+      internalID: -1554144733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_4
+      name: ShortHopDustOne_4
       rect:
         serializedVersion: 2
-        x: 1
-        y: 676
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 628
+        y: 803
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ce8b783dc535d14bb2a804aea6baf8a
-      internalID: 669330664
+      spriteID: 87599dbc79537504490692b34762089e
+      internalID: 1763535775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_5
+      name: ShortHopDustOne_5
       rect:
         serializedVersion: 2
-        x: 416
-        y: 676
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 1254
+        y: 803
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dc52038ec9b8334ab272e17ce1c4818
-      internalID: 431634419
+      spriteID: bc1a3158afe3ad545b47a1ff69746759
+      internalID: -236399582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_6
+      name: ShortHopDustOne_6
       rect:
         serializedVersion: 2
-        x: 831
-        y: 676
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 2
+        y: 628
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3be208e0430c934caa9624fef1dc307
-      internalID: 1066285675
+      spriteID: 62125f8bef59c0d4cafa6a9800272cef
+      internalID: -2080253108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_7
+      name: ShortHopDustOne_7
       rect:
         serializedVersion: 2
-        x: 1246
-        y: 676
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 628
+        y: 628
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5b4de9a19eba254a94d1a43e0e95258
-      internalID: -524420813
+      spriteID: 802f881daa05ef04fb743d8b6c14656e
+      internalID: -148540313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_8
+      name: ShortHopDustOne_8
       rect:
         serializedVersion: 2
-        x: 1
-        y: 468
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 1254
+        y: 628
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a35bcb174d7e6614d80fd4307f915d27
-      internalID: 1048291696
+      spriteID: b9b8c2c934584214cabe95b2fd4b01a5
+      internalID: -840543457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_9
+      name: ShortHopDustOne_9
       rect:
         serializedVersion: 2
-        x: 416
-        y: 468
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 2
+        y: 453
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9d7bffd46039f74b926c6ca653c5374
-      internalID: 1116514988
+      spriteID: b349e20bc8ed7ad4d867d3d9d0eb81b2
+      internalID: -1841013601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_10
+      name: ShortHopDustOne_10
       rect:
         serializedVersion: 2
-        x: 831
-        y: 468
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 628
+        y: 453
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0f7238bc2c09a443a5d630e952c776e
-      internalID: 349272164
+      spriteID: b3fa590566c346f4e80f59f134fb3fb8
+      internalID: -1390322932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_11
+      name: ShortHopDustOne_11
       rect:
         serializedVersion: 2
-        x: 1246
-        y: 468
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 1254
+        y: 453
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678c9701a63457047a59a88281a4953c
-      internalID: 2099400543
+      spriteID: 63cee77face7c9641afbc9951b5206c8
+      internalID: 910134192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_12
+      name: ShortHopDustOne_12
       rect:
         serializedVersion: 2
-        x: 1
-        y: 260
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 2
+        y: 278
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8ab4afe29bc2874b9d3e9ee5b7e339a
-      internalID: -985620740
+      spriteID: f7dd70160329ccc41a6254e745bb6e21
+      internalID: 336233818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_13
+      name: ShortHopDustOne_13
       rect:
         serializedVersion: 2
-        x: 416
-        y: 260
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 628
+        y: 278
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd4e192040b67fe479c2b00e4829a183
-      internalID: -1677987662
+      spriteID: a13e0fd583a0a654bab544e3c26eecef
+      internalID: -1613489255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_14
+      name: ShortHopDustOne_14
       rect:
         serializedVersion: 2
-        x: 831
-        y: 260
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 1254
+        y: 278
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17e78f82d0da9ee44b4349c1bdd0ab82
-      internalID: 1019330607
+      spriteID: 1eb85c5a8f83b9741a1dedf2f39a37a9
+      internalID: 1597026639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JumpDustOne_15
+      name: ShortHopDustOne_15
       rect:
         serializedVersion: 2
-        x: 1246
-        y: 260
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 2
+        y: 103
+        width: 621
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: befcbc0c5b3388c48a6c4ccca8a9b15a
-      internalID: -751017224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JumpDustOne_16
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 52
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0046fde639b21c14ab2053cbd02b9d67
-      internalID: -1815328412
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JumpDustOne_17
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 52
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee1fbd33cba842547996ec14a1261cd0
-      internalID: -1515602389
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JumpDustOne_18
-      rect:
-        serializedVersion: 2
-        x: 831
-        y: 52
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0cff6066ded82c844af3cd89370cb90b
-      internalID: -156114310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JumpDustOne_19
-      rect:
-        serializedVersion: 2
-        x: 1246
-        y: 52
-        width: 412
-        height: 204
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d504a6f92ef09a347a073c15abb198f5
-      internalID: -2029998238
+      spriteID: d401ebbd18c40c34982bf68ff7047b10
+      internalID: -1792730958
       vertices: []
       indices: 
       edges: []
@@ -535,26 +451,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      JumpDustOne_2: -1632155801
-      JumpDustOne_14: 1019330607
-      JumpDustOne_16: -1815328412
-      JumpDustOne_12: -985620740
-      JumpDustOne_5: 431634419
-      JumpDustOne_8: 1048291696
-      JumpDustOne_3: -583537799
-      JumpDustOne_19: -2029998238
-      JumpDustOne_10: 349272164
-      JumpDustOne_7: -524420813
-      JumpDustOne_1: -1954220268
-      JumpDustOne_15: -751017224
-      JumpDustOne_18: -156114310
-      JumpDustOne_17: -1515602389
-      JumpDustOne_4: 669330664
-      JumpDustOne_11: 2099400543
-      JumpDustOne_0: 1027175453
-      JumpDustOne_6: 1066285675
-      JumpDustOne_13: -1677987662
-      JumpDustOne_9: 1116514988
+      ShortHopDustOne_9: -1841013601
+      ShortHopDustOne_5: -236399582
+      ShortHopDustOne_6: -2080253108
+      ShortHopDustOne_2: 1485353971
+      ShortHopDustOne_7: -148540313
+      ShortHopDustOne_8: -840543457
+      ShortHopDustOne_3: -1554144733
+      ShortHopDustOne_14: 1597026639
+      ShortHopDustOne_10: -1390322932
+      ShortHopDustOne_15: -1792730958
+      ShortHopDustOne_13: -1613489255
+      ShortHopDustOne_1: -710725962
+      ShortHopDustOne_11: 910134192
+      ShortHopDustOne_0: -578831755
+      ShortHopDustOne_4: 1763535775
+      ShortHopDustOne_12: 336233818
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

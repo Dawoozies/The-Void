@@ -75,8 +75,8 @@ public class GroundCheck : MonoBehaviour
                 float circleRadius = groundboxCircles[i].radius;
 
                 Collider2D hitCollider = Physics2D.OverlapCircle(circlePos, circleRadius, layerMask);
-
-                if(hitCollider != null)
+                
+                if(hitCollider != null && Physics2D.Raycast(circlePos, Vector2.down, groundboxCircles[i].radius, layerMask))
                 {
                     hitColliders.Add(hitCollider);
                 }

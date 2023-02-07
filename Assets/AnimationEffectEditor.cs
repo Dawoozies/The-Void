@@ -163,6 +163,40 @@ public class AnimationEffectEditor : EditorWindow
                 }
             }
         }
+
+        if(effectToEdit != null)
+        {
+            if(effectTransform != null)
+            {
+                GUILayout.BeginHorizontal();
+                if(GUILayout.Button("Previous Frame"))
+                {
+                    if(effectTime > 0)
+                    {
+                        effectTime -= 1 / effectToEdit.clip.frameRate;
+                    }
+
+                    if(effectTime < 0)
+                    {
+                        effectTime = 0;
+                    }
+                }
+
+                if(GUILayout.Button("Next Frame"))
+                {
+                    if(effectTime < effectToEdit.clip.length)
+                    {
+                        effectTime += 1 / effectToEdit.clip.frameRate;
+                    }
+
+                    if(effectTime > effectToEdit.clip.length)
+                    {
+                        effectTime = effectToEdit.clip.length;
+                    }
+                }    
+                GUILayout.EndHorizontal();
+            }
+        }
     }
 
     private void OnFocus()
@@ -234,14 +268,14 @@ public class AnimationEffectEditor : EditorWindow
                     //Debug.Log("We should be animating the effect");
                     AnimationMode.SampleAnimationClip(effectTransform.gameObject, effectToEdit.clip, effectTime);
 
-                    if(effectTime < effectToEdit.clip.length)
-                    {
-                        effectTime += Time.deltaTime/(effectToEdit.clip.frameRate);
-                    }
-                    else
-                    {
-                        effectTime = 0f;
-                    }
+                    //if(effectTime < effectToEdit.clip.length)
+                    //{
+                    //    effectTime += Time.deltaTime/(effectToEdit.clip.frameRate);
+                    //}
+                    //else
+                    //{
+                    //    effectTime = 0f;
+                    //}
                 }
             }
 

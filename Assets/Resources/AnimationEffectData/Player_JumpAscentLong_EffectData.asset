@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5e4ce1f07676d34ba601898a9efa7c8, type: 3}
-  m_Name: Player_JumpAscent_EffectData
+  m_Name: Player_JumpAscentLong_EffectData
   m_EditorClassIdentifier: 
-  clip: {fileID: 7400000, guid: 67b98bbe5c5d387468b6068621ea5aa8, type: 2}
+  clip: {fileID: 7400000, guid: 5ab0969b4c36b23448d0fcc27056a54e, type: 2}
   effectsList:
   - effects:
-    - clip: {fileID: 7400000, guid: b329c8436ba803247856cf532e4f32ff, type: 2}
-      position: {x: 0, y: -1.3690345}
+    - clip: {fileID: 7400000, guid: f43913da8d5ed184a8437bffe0df51b6, type: 2}
+      position: {x: 0, y: -1.3745682}

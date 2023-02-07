@@ -10,21 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
-  m_Name: Player_JumpDescentWithRot_CollisionData
+  m_Name: Player_JumpAscentLong_CollisionData
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 155085a65dd1f2946927b342565b79e4, type: 2}
+  animationClip: {fileID: 7400000, guid: 5ab0969b4c36b23448d0fcc27056a54e, type: 2}
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: -0.23243767, y: 0.95158297}
-      radius: 0.45705414
-    - center: {x: -0.15014362, y: 0.21151623}
-      radius: 0.36780274
+    - center: {x: 0.25464982, y: 0.834077}
+      radius: 0.68631184
+    - center: {x: -0.302521, y: 0.049643107}
+      radius: 0.2959444
   hurtboxes:
   - frame: 0
     circles: []
   groundboxes:
   - frame: 0
-    circles:
-    - center: {x: -0.022442758, y: -0.7698624}
-      radius: 0.24329364
+    circles: []

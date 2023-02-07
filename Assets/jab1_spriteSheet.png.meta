@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6782f6e8351f6b547aceed7abffa0f2c
+guid: 615ddeef460eada4392968ba3db3d8fb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 450
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,169 +105,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Idle0
+      name: jab1_spriteSheet_0
       rect:
         serializedVersion: 2
-        x: 213
-        y: 1779
-        width: 892
-        height: 1173
-      alignment: 9
-      pivot: {x: 0.5, y: 0.55}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09d38541da51b054c904df8b663b5f3f
-      internalID: -1107165721
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_1
-      rect:
-        serializedVersion: 2
-        x: 1361
-        y: 1779
-        width: 867
-        height: 1147
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf44919791b1c444f90d1c32ffaf0c6f
-      internalID: 284917897
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_JumpAscentStart0
-      rect:
-        serializedVersion: 2
-        x: 2851
-        y: 1780
-        width: 1123
-        height: 1031
-      alignment: 9
-      pivot: {x: 0.38917342, y: 0.6669588}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42487fd084347fb47b7ed03c399adce5
-      internalID: -374326644
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_3
-      rect:
-        serializedVersion: 2
-        x: 4352
-        y: 1951
-        width: 1431
-        height: 884
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8113c0f57826b904f8d7bc1fe86aab48
-      internalID: -1553264126
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_4
-      rect:
-        serializedVersion: 2
-        x: 431
-        y: 557
-        width: 1078
-        height: 969
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59d1224147b32a8488b50bf5d8efd191
-      internalID: 1403773208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Turn0
-      rect:
-        serializedVersion: 2
-        x: 1686
-        y: 352
-        width: 995
-        height: 1214
+        x: 10
+        y: 794
+        width: 435
+        height: 354
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2536bb3aa3a843e4da4813d644dac46e
-      internalID: 1506024605
+      spriteID: 2c96af98b6cee7940b6d0123b56e73e6
+      internalID: -185122638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_6
+      name: jab1_spriteSheet_1
       rect:
         serializedVersion: 2
-        x: 3280
-        y: 359
-        width: 782
-        height: 1129
+        x: 460
+        y: 794
+        width: 435
+        height: 354
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e709cd05acd8234aab438263752c3b7
-      internalID: -498492125
+      spriteID: 7577d1b9cf2f8df4f8375b46b287a911
+      internalID: 277824767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TV_Minotaur_Dash_SpriteSheet_17
+      name: jab1_spriteSheet_2
       rect:
         serializedVersion: 2
-        x: 3159
-        y: 374
-        width: 5
-        height: 4
+        x: 910
+        y: 794
+        width: 435
+        height: 354
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09947c36a95fb4d47a0d8fc84ddacf1a
-      internalID: 796806389
+      spriteID: 14ede5a66e1da9f48ab43b3356f85a0f
+      internalID: 915882942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 794
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ed845ea80f2c544389955d4a1ac6f72
+      internalID: -1962089581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 406
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2f3912e6c88a6943b62fbc152e8bed1
+      internalID: 318238485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 406
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ddcc2ece3a7724c9f479c27a9d9561
+      internalID: 1537692932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 406
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d41ce8f0b793734a95d0c266f68ce87
+      internalID: 194632317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 406
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b11dfa617538e17479ba1fd9fb98ff4e
+      internalID: 1255200076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 18
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6264a4e01bb375b469d8354872e1598c
+      internalID: 1195733670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 18
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df58b53aa95c904ea36c067a8cdace0
+      internalID: -680894237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 18
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fe81e66515f0ee468b38fd51c714c17
+      internalID: 881454370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jab1_spriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 18
+        width: 435
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ba49a7579713344f955b37508500d23
+      internalID: 64334013
       vertices: []
       indices: 
       edges: []
@@ -281,34 +365,20 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: c0891406dbef16f4b8841fac4894519a, type: 3}
-      name: _NormalMap
-    - texture: {fileID: 2800000, guid: 9080ef45dfad1e24688e1990d2271da7, type: 3}
-      name: _MaskTex
+    secondaryTextures: []
     nameFileIdTable:
-      Player_Turn0: 1506024605
-      TV_Minotaur_Dash_SpriteSheet_13: 208185239
-      TV_Minotaur_Dash_SpriteSheet_20: -359012148
-      TV_Minotaur_Dash_SpriteSheet_11: 1229745917
-      TV_Minotaur_Dash_SpriteSheet_9: 1871591724
-      Player_JumpAscentStart0: -374326644
-      TV_Minotaur_Dash_SpriteSheet_4: 1403773208
-      TV_Minotaur_Dash_SpriteSheet_1: 284917897
-      TV_Minotaur_Dash_SpriteSheet_16: 210155033
-      TV_Minotaur_Dash_SpriteSheet_17: 796806389
-      TV_Minotaur_Dash_SpriteSheet_7: -896699234
-      TV_Minotaur_Dash_SpriteSheet_10: -1371103329
-      TV_Minotaur_Dash_SpriteSheet_14: -686959933
-      TV_Minotaur_Dash_SpriteSheet_18: 1827871055
-      TV_Minotaur_Dash_SpriteSheet_6: -498492125
-      Player_Idle0: -1107165721
-      TV_Minotaur_Dash_SpriteSheet_19: 2053732997
-      TV_Minotaur_Dash_SpriteSheet_12: -1635426346
-      TV_Minotaur_Dash_SpriteSheet_21: 2082761601
-      TV_Minotaur_Dash_SpriteSheet_8: 1332102449
-      TV_Minotaur_Dash_SpriteSheet_3: -1553264126
-      TV_Minotaur_Dash_SpriteSheet_15: -1605062800
+      jab1_spriteSheet_6: 194632317
+      jab1_spriteSheet_9: -680894237
+      jab1_spriteSheet_0: -185122638
+      jab1_spriteSheet_1: 277824767
+      jab1_spriteSheet_2: 915882942
+      jab1_spriteSheet_10: 881454370
+      jab1_spriteSheet_8: 1195733670
+      jab1_spriteSheet_3: -1962089581
+      jab1_spriteSheet_4: 318238485
+      jab1_spriteSheet_5: 1537692932
+      jab1_spriteSheet_7: 1255200076
+      jab1_spriteSheet_11: 64334013
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

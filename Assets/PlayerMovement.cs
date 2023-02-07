@@ -86,6 +86,12 @@ public class PlayerMovement : MonoBehaviour
 
     void RunMovement()
     {
+        rb.velocity = new Vector2(maxSpeed * horizontalInput, rb.velocity.y);
+       
+    }
+
+    void LegacyRunMovement() {
+        //----------Run with speed acceleration
         if (normalizedHorizontalInput == 1)
         {
             rb.AddForce(new Vector2((rb.velocity.x < 0 ? 1 : dashMultiplier) * accForce * Mathf.Abs(horizontalInput) * (1 - rb.velocity.x / maxSpeed), 0));
