@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeInput
 {
-    float horizontalInput => BasicInput.ins.InputLHorizontal;
+    //float horizontalInput => BasicInput.ins.InputLHorizontal;
+    float horizontalInput => InputManager.ins.R_Input.x;
     float normalizedHorizontalInput => new Vector2(horizontalInput, 0).normalized.x;
-    bool jumpInput => BasicInput.ins.InputJump;
-    bool rollInput => BasicInput.ins.InputRoll;
     //Horizontal Movement
     float maxSpeed = 15;
     float accForce = 100;
@@ -32,20 +31,14 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("RigidBody not found for the player");
         }
 
+        //Subscribe to InputManager
+        InputManager.ins.Subscribe((Listener_JumpInput)this);
+        InputManager.ins.Subscribe((Listener_DodgeInput)this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(rollInput)
-        {
-            animator.SetBool("Roll", true);
-        }
-        else
-        {
-            animator.SetBool("Roll", false);
-        }
-
         if (Mathf.Abs(horizontalInput) > 0f)
         {
             animator.SetBool("Run", true);
@@ -53,15 +46,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("Run", false);
-        }
-        //Debug.Log(rb.velocity);
-        if(jumpInput)
-        {
-            animator.SetBool("JumpInputDown", true);
-        }
-        else
-        {
-            animator.SetBool("JumpInputDown", false);
         }
 
         if(animator.GetCurrentAnimatorStateInfo(0).IsTag("JumpAscent"))
@@ -107,9 +91,18 @@ public class PlayerMovement : MonoBehaviour
 
     void JumpMovement()
     {
-        if (jumpInput && animator.GetCurrentAnimatorStateInfo(0).IsTag("JumpAscent"))
+        if (animator.GetBool("JumpInput") && animator.GetCurrentAnimatorStateInfo(0).IsTag("JumpAscent"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
+    }
+    public void Update_JumpInput(bool jumpInput)
+    {
+        animator.SetBool("JumpInput", jumpInput);
+    }
+
+    public void Update_DodgeInput(bool dodgeInput)
+    {
+        animator.SetBool("DodgeInput", dodgeInput);
     }
 }

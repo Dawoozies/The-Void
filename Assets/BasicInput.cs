@@ -24,7 +24,7 @@ public class BasicInput : MonoBehaviour
 
     //Attack Inputs
     public bool InputLightAttack;
-    //CUM
+
     private void Update()
     {
         //Direction held times
