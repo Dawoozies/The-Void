@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Player_Kick_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 3cd2f609a1650a647be3b61ec188e7ec, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.095541954, y: 0.35406673}
+      radius: 0.3545879
+    - center: {x: 0.23042452, y: -0.24728483}
+      radius: 0.42112875
+    - center: {x: 0.63507235, y: -0.6350724}
+      radius: 0.16260386
+    - center: {x: 0.7418544, y: -0.9610386}
+      radius: 0.14012378
+    - center: {x: -0.07868171, y: -0.7924354}
+      radius: 0.19632438
+    - center: {x: -0.23604417, y: -1.0846813}
+      radius: 0.14012319
+  - frame: 1
+    circles:
+    - center: {x: -0.3203454, y: 0.4833296}
+      radius: 0.43888956
+    - center: {x: -0.06744099, y: -0.089921914}
+      radius: 0.3986485
+    - center: {x: 0.016860366, y: -0.5058099}
+      radius: 0.16260386
+    - center: {x: -0.19108367, y: -0.93293804}
+      radius: 0.14012378
+    - center: {x: -0.13488245, y: -0.6800332}
+      radius: 0.19632438
+    - center: {x: -0.29786515, y: -1.0846813}
+      radius: 0.14012319
+  - frame: 2
+    circles:
+    - center: {x: -0.55639005, y: 0.51143014}
+      radius: 0.43888956
+    - center: {x: -0.21918368, y: -0.106782064}
+      radius: 0.3986485
+    - center: {x: -0.20232391, y: -0.69127357}
+      radius: 0.18508434
+    - center: {x: -0.32596612, y: -1.0509604}
+      radius: 0.14012378
+  - frame: 3
+    circles:
+    - center: {x: -0.53390956, y: 0.5732514}
+      radius: 0.43888956
+    - center: {x: -0.27538443, y: -0.061821133}
+      radius: 0.43236914
+    - center: {x: -0.2585249, y: -0.6519329}
+      radius: 0.18508434
+    - center: {x: -0.32596612, y: -1.0509604}
+      radius: 0.14012378
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles:
+    - center: {x: 1.3769275, y: 0.30910605}
+      radius: 0.44450915
+    - center: {x: 0.93293834, y: -0.07306131}
+      radius: 0.6571733
+    - center: {x: 0.40464795, y: -0.39902788}
+      radius: 0.7142749
+  - frame: 2
+    circles:
+    - center: {x: 1.1577425, y: 0.29786563}
+      radius: 0.30400693
+    - center: {x: 0.71375406, y: 0.16860326}
+      radius: 0.36582804
+    - center: {x: 0.33158636, y: -0.011240229}
+      radius: 0.4042685
+  - frame: 3
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.258525, y: -1.4162675}
+      radius: 0.20756418
+  - frame: 1
+    circles:
+    - center: {x: 0.258525, y: -1.4162675}
+      radius: 0.20756418
+  - frame: 2
+    circles:
+    - center: {x: 0.258525, y: -1.4162675}
+      radius: 0.20756418
+  - frame: 3
+    circles:
+    - center: {x: 0.258525, y: -1.4162675}
+      radius: 0.20756418

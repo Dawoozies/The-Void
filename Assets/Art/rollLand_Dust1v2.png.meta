@@ -1,0 +1,651 @@
+fileFormatVersion: 2
+guid: e3e7454d133e09b4aae872370c36b552
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1361
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c279582de63d2d47941d296255450f4
+      internalID: 139700094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_1
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1361
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43efe36d12bf17a409bf94d82d70c707
+      internalID: -1926420529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_2
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 1361
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3b7dcd84a2264047b309db8dc05184a
+      internalID: -309025154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1170
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d13d266bb03c25e41b3abaaf067f0479
+      internalID: 263315039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_4
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1170
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d39ef0183306248a96e650e32942a7
+      internalID: -2084886069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_5
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 1170
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f936e2f878565d43ae22493058ac73d
+      internalID: 193259737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 979
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5608766a46a1c654fa52f88a9781b11a
+      internalID: -151666385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_7
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 979
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7b375438555dd04c93e67ca1977b230
+      internalID: 175341062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_8
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 979
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6eed1c6491dc1348a75e3bc64dd6f4c
+      internalID: 1114789723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_9
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 788
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 740097082b262ad408ed6601b6730e6d
+      internalID: -582417286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_10
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 788
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f28d354154b80654d8e87b5971c980ec
+      internalID: -2116961776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_11
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 788
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bac80910d69e6ad4db58566101cffba2
+      internalID: -239633109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_12
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 597
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 044d32d750aa1f1498a271994fc5bc42
+      internalID: -126311396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_13
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 597
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a967d442aa80f444a83d9e1af13fc9c5
+      internalID: -1863538571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_14
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 597
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0d4514b21a0583458b982fbf96a7f57
+      internalID: 2047867437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 406
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dafa1f8c6498b041b65d7105ac8f569
+      internalID: 879354541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_16
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 406
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3451f20eb89399c4ba2a40b0a1aa8996
+      internalID: 137560433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_17
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 406
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad648b149de87a4ba18f0ac968a7f20
+      internalID: 1310120223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 215
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e745ea7de5adc44fab7a6f67ca1de69
+      internalID: 640143219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_19
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 215
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72dbfa7bba1ec1d4b807cbb3deec37aa
+      internalID: -827225806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_20
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 215
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70fec159985d30a46921b3e52dd8bc85
+      internalID: -1531123362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_21
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 24
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afba50b85301e574090c92c8c33247d0
+      internalID: -1872483597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_22
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 24
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4afc75392eff6fa428299f836e5eaa37
+      internalID: -1649383318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollLand_Dust1v2_23
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 24
+        width: 762
+        height: 187
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a49981f1b5d2e44ab1c8c64a80fb7aa
+      internalID: -1734023852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      rollLand_Dust1v2_20: -1531123362
+      rollLand_Dust1v2_0: 139700094
+      rollLand_Dust1v2_1: -1926420529
+      rollLand_Dust1v2_7: 175341062
+      rollLand_Dust1v2_23: -1734023852
+      rollLand_Dust1v2_16: 137560433
+      rollLand_Dust1v2_13: -1863538571
+      rollLand_Dust1v2_9: -582417286
+      rollLand_Dust1v2_17: 1310120223
+      rollLand_Dust1v2_6: -151666385
+      rollLand_Dust1v2_22: -1649383318
+      rollLand_Dust1v2_3: 263315039
+      rollLand_Dust1v2_14: 2047867437
+      rollLand_Dust1v2_19: -827225806
+      rollLand_Dust1v2_15: 879354541
+      rollLand_Dust1v2_10: -2116961776
+      rollLand_Dust1v2_4: -2084886069
+      rollLand_Dust1v2_5: 193259737
+      rollLand_Dust1v2_12: -126311396
+      rollLand_Dust1v2_11: -239633109
+      rollLand_Dust1v2_18: 640143219
+      rollLand_Dust1v2_21: -1872483597
+      rollLand_Dust1v2_2: -309025154
+      rollLand_Dust1v2_8: 1114789723
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

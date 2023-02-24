@@ -48,55 +48,27 @@ public class PlayerSpriteDirection : MonoBehaviour
 
     void RegularDirection()
     {
-        //This only works with sprite sheets that have default left facing characters
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Turn"))
+        if (BasicInput.ins.InputLDirection > 0)
         {
-            if (BasicInput.ins.InputLDirection > 0)
+            if (rightFacing)
             {
-                if (rightFacing)
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
-                else
-                {
-                    transform.localScale = new Vector3(-1, 1, 1);
-                }
+                transform.localScale = new Vector3(1, 1, 1);
             }
-            if (BasicInput.ins.InputLDirection < 0)
+            else
             {
-                if (rightFacing)
-                {
-                    transform.localScale = new Vector3(-1, 1, 1);
-                }
-                else
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
+                transform.localScale = new Vector3(-1, 1, 1);
             }
         }
-        else
+
+        if (BasicInput.ins.InputLDirection < 0)
         {
-            if (BasicInput.ins.InputLDirection > 0)
+            if (rightFacing)
             {
-                if (rightFacing)
-                {
-                    transform.localScale = new Vector3(-1, 1, 1);
-                }
-                else
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
+                transform.localScale = new Vector3(-1, 1, 1);
             }
-            if (BasicInput.ins.InputLDirection < 0)
+            else
             {
-                if (rightFacing)
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
-                else
-                {
-                    transform.localScale = new Vector3(-1, 1, 1);
-                }
+                transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }

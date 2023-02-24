@@ -118,12 +118,12 @@ public class AnimationEffects : MonoBehaviour
         return false;
     }
 
-    public void PlayEffectAtPosition(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 worldPositionToPlayAt, Vector3 entityLocalScale, bool copyEntityDirection)
+    public bool PlayEffectAtPosition(AnimationClip clip, AnimatorStateInfo stateInfo, Vector3 worldPositionToPlayAt, Vector3 entityLocalScale, bool copyEntityDirection)
     {
         if(!animationEffectData.ContainsKey(clip.name))
         {
             Debug.LogError($"Trying to play effect for {clip.name} but no effect data exists for this clip.");
-            return;
+            return false;
         }
 
         float normalizedTime = stateInfo.normalizedTime;
@@ -138,10 +138,10 @@ public class AnimationEffects : MonoBehaviour
         {
             if (effectAnimators[i].TryPlayEffectAtPosition(effectData, worldPositionToPlayAt, entityLocalScale, copyEntityDirection))
             {
-                break;
+                return true;
             }
         }
 
-        Debug.Log($"Trying to play effect at position {worldPositionToPlayAt} for clip: {clip.name}");
+        return false;
     }
 }

@@ -439,14 +439,14 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: L_Horizontal
-    descriptiveName: Right Stick Horizontal Axis
+    descriptiveName: Left Stick Horizontal Axis
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
-    dead: 0.05
+    dead: 0.2
     sensitivity: 1
     snap: 0
     invert: 0
@@ -455,14 +455,14 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: R_Horizontal
-    descriptiveName: 
+    descriptiveName: Right Stick Horizontal Axis
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
-    dead: 0.19
+    dead: 0.2
     sensitivity: 1
     snap: 0
     invert: 0
@@ -514,7 +514,7 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 5
     joyNum: 0
   - serializedVersion: 3
@@ -530,7 +530,7 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 5
     joyNum: 0
   - serializedVersion: 3
@@ -562,7 +562,7 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 5
     joyNum: 0
   - serializedVersion: 3
@@ -572,13 +572,13 @@ InputManager:
     negativeButton: 
     positiveButton: joystick button 2
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: a
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 5
     joyNum: 0
   - serializedVersion: 3
@@ -594,7 +594,7 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 5
     joyNum: 0
   - serializedVersion: 3
@@ -610,7 +610,7 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 5
     joyNum: 0
   m_UsePhysicalKeys: 0

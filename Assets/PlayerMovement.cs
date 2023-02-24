@@ -87,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
     void RunMovement()
     {
         rb.velocity = new Vector2(maxSpeed * horizontalInput, rb.velocity.y);
-       
     }
 
     void LegacyRunMovement() {
