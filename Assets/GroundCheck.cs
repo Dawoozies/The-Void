@@ -71,7 +71,7 @@ public class GroundCheck : MonoBehaviour
             List<Collider2D> hitColliders = new List<Collider2D>();
             for (int i = 0; i < groundboxCircles.Count; i++)
             {
-                Vector3 circlePos = transform.position + new Vector3(groundboxCircles[i].center.x, groundboxCircles[i].center.y, 0f);
+                Vector3 circlePos = transform.position + new Vector3(groundboxCircles[i].center.x * animator.transform.localScale.x, groundboxCircles[i].center.y, 0f);
                 float circleRadius = groundboxCircles[i].radius;
 
                 Collider2D hitCollider = Physics2D.OverlapCircle(circlePos, circleRadius, layerMask);
@@ -103,7 +103,7 @@ public class GroundCheck : MonoBehaviour
                 for (int i = 0; i < groundboxes[frame].circles.Count; i++)
                 {
                     Gizmos.color = new Color(0, 1, 0, 0.65f);
-                    Vector3 circlePos = transform.position + new Vector3(groundboxes[frame].circles[i].center.x, groundboxes[frame].circles[i].center.y, 0f);
+                    Vector3 circlePos = transform.position + new Vector3(groundboxes[frame].circles[i].center.x * animator.transform.localScale.x, groundboxes[frame].circles[i].center.y, 0f);
                     Gizmos.DrawSphere(circlePos, groundboxes[frame].circles[i].radius);
                 }
             }

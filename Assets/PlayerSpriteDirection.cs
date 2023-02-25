@@ -6,6 +6,7 @@ public class PlayerSpriteDirection : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D rb;
+    float horizontalInput => InputManager.ins.R_Input.x;
     public bool rightFacing = false;
     private void Start()
     {
@@ -48,7 +49,7 @@ public class PlayerSpriteDirection : MonoBehaviour
 
     void RegularDirection()
     {
-        if (BasicInput.ins.InputLDirection > 0)
+        if (horizontalInput > 0)
         {
             if (rightFacing)
             {
@@ -60,7 +61,7 @@ public class PlayerSpriteDirection : MonoBehaviour
             }
         }
 
-        if (BasicInput.ins.InputLDirection < 0)
+        if (horizontalInput < 0)
         {
             if (rightFacing)
             {
