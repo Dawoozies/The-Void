@@ -67,6 +67,9 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("AirDodge"))
             return;
 
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("LightAttackGround"))
+            return;
+
         RunMovement();
         JumpMovement();
     }

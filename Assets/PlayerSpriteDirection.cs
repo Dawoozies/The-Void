@@ -15,7 +15,7 @@ public class PlayerSpriteDirection : MonoBehaviour
     }
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Roll"))
+        if (animator.GetBool("TurningNotAllowed"))
             return;
 
         RegularDirection();
