@@ -21,7 +21,7 @@ public class JumpLand_FX : StateMachineBehaviour
             spriteRenderer = animator.GetComponent<SpriteRenderer>();
 
         Vector3 worldPositionToPlayAt = Physics2D.Raycast(animator.transform.position, Vector2.down, spriteRenderer.size.y / 2, layerMask).point;
-        Debug.Log(Physics2D.Raycast(animator.transform.position, Vector2.down, spriteRenderer.size.y / 2, layerMask).collider);
+        //Debug.Log(Physics2D.Raycast(animator.transform.position, Vector2.down, spriteRenderer.size.y / 2, layerMask).collider);
         animationEffectsSystem.PlayEffectAtPosition(animator.GetCurrentAnimatorClipInfo(0)[0].clip, stateInfo, worldPositionToPlayAt, animator.transform.localScale, true);
     }
 

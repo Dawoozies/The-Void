@@ -11,11 +11,11 @@ public class StatePhysics_AirDodgeLand : StateMachineBehaviour
         if (rb == null)
             rb = animator.GetComponentInParent<Rigidbody2D>();
 
-        Debug.Log("Velocity Before: " + rb.velocity);
+        //Debug.Log("Velocity Before: " + rb.velocity);
 
         rb.velocity = new Vector2(rb.velocity.x*1.25f, 0f);
 
-        Debug.Log("Velocity After: " + rb.velocity);
+        //Debug.Log("Velocity After: " + rb.velocity);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
