@@ -915,6 +915,7 @@ GameObject:
   - component: {fileID: 693890126}
   - component: {fileID: 693890125}
   - component: {fileID: 693890124}
+  - component: {fileID: 693890127}
   m_Layer: 7
   m_Name: Player_SpriteAnimator
   m_TagString: Untagged
@@ -1022,6 +1023,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &693890127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693890122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6582c1e3d12c9c4fb5b7918bf5ec7da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onColor: {r: 0.4292453, g: 0.8666667, b: 1, a: 1}
+  offColor: {r: 1, g: 1, b: 1, a: 1}
+  onTime: 0.05
+  timer: 0
 --- !u!1 &1045573626
 GameObject:
   m_ObjectHideFlags: 0

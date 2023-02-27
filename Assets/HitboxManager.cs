@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ExtensionMethods_Transform;
 public class HitboxManager : MonoBehaviour
 {
     CollisionManager collisionManager;
@@ -108,6 +108,12 @@ public class HitboxManager : MonoBehaviour
         }
 
         SetHitboxCircles();
+
+        //Send all information to listeners given conditions met
+        if(hitboxPool.ActiveChildCount() <= 0)
+        {
+            HandleListeners_IFrames();
+        }
     }
 
     void SetHitboxCircles()
@@ -129,6 +135,21 @@ public class HitboxManager : MonoBehaviour
             {
                 hitboxPool.GetChild(hitboxIndex).gameObject.SetActive(false);
             }
+        }
+    }
+
+    Listener_IFrames[] listener_IFrames;
+    void HandleListeners_IFrames()
+    {
+        listener_IFrames = GetComponentsInChildren<Listener_IFrames>();
+
+        if (listener_IFrames == null)
+            return;
+
+        for (int i = 0; i < listener_IFrames.Length; i++)
+        {
+            listener_IFrames[i].Update_OnIFrames();
+
         }
     }
 
