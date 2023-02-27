@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ExtensionMethods_Animator;
 public class GroundCheck : MonoBehaviour
 {
     Animator animator;
@@ -10,17 +10,11 @@ public class GroundCheck : MonoBehaviour
     //Have to run checks for when animator changes clip/state
     //Have to always get frame of current animation clip/state
 
-    AnimatorStateInfo currentStateInfo;
     AnimatorClipInfo currentClipInfo;
 
     List<FrameCollisionData> groundboxes = new List<FrameCollisionData>();
 
-    public float normalizedTime;
-    public float speed;
-
-    public float clipTime; //[0,1]
-    public int totalFrames; //Integer from 1 to infinity
-    public int frame; //Integer from 1 to totalFrames
+    int frame;
 
     public LayerMask layerMask;
     void Start()
@@ -30,7 +24,6 @@ public class GroundCheck : MonoBehaviour
 
         if (currentClipInfo.clip == null)
         {
-            currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
             currentClipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
 
             groundboxes = collisionManager.GetGroundboxData(currentClipInfo.clip.name);
@@ -53,18 +46,11 @@ public class GroundCheck : MonoBehaviour
             }
         }
 
-        currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         currentClipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
 
-        speed = currentStateInfo.speed;
-        normalizedTime = currentStateInfo.normalizedTime;
-
-        totalFrames = Mathf.RoundToInt(currentClipInfo.clip.length);
-        clipTime = normalizedTime - Mathf.FloorToInt(normalizedTime);
-        frame = Mathf.FloorToInt(totalFrames * clipTime);
+        frame = animator.CurrentFrame();
 
         //Debug.Log("Groundboxes Frame: " + groundboxes[frame].frame + "Current Frame: " + frame);
-
         if(groundboxes.Count > 0)
         {
             List<Circle> groundboxCircles = groundboxes[frame].circles;

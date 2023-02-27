@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ExtensionMethods_Transform;
+using ExtensionMethods_Animator;
 public class HitboxManager : MonoBehaviour
 {
     CollisionManager collisionManager;
     Animator animator;
 
-    AnimatorStateInfo currentStateInfo;
     AnimatorClipInfo currentClipInfo;
 
     List<FrameCollisionData> hitboxes = new List<FrameCollisionData>();
 
-    public float normalizedTime;
-    public float speed;
-
-    public float clipTime;
-    public int totalFrames;
-    public int frame;
+    int frame;
 
     Transform hitboxPool;
     int maxHitboxes = 20;
@@ -29,7 +24,6 @@ public class HitboxManager : MonoBehaviour
 
         if (currentClipInfo.clip == null)
         {
-            currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
             currentClipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
 
             hitboxes = collisionManager.GetHitboxData(currentClipInfo.clip.name);
@@ -89,23 +83,9 @@ public class HitboxManager : MonoBehaviour
             }
         }
 
-        currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         currentClipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
 
-        speed = currentStateInfo.speed;
-        normalizedTime = currentStateInfo.normalizedTime;
-
-        totalFrames = Mathf.RoundToInt(currentClipInfo.clip.length);
-        clipTime = normalizedTime - Mathf.FloorToInt(normalizedTime);
-        frame = Mathf.FloorToInt(totalFrames * clipTime);
-
-        if(!currentClipInfo.clip.isLooping)
-        {
-            if(normalizedTime > 1)
-            {
-                frame = totalFrames - 1;
-            }
-        }
+        frame = animator.CurrentFrame();
 
         SetHitboxCircles();
 
