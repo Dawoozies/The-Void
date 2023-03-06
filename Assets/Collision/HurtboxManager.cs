@@ -79,6 +79,20 @@ public class HurtboxManager : MonoBehaviour
         }
     }
 
+    Listener_ColliderOverlap[] listener_ColliderOverlaps;
+    void HandleListeners_ColliderOverlaps()
+    {
+        listener_ColliderOverlaps = GetComponentsInChildren<Listener_ColliderOverlap>();
+
+        if (listener_ColliderOverlaps == null)
+            return;
+
+        for (int i = 0; i < listener_ColliderOverlaps.Length; i++)
+        {
+            listener_ColliderOverlaps[i].Update_ColliderOverlap(lastCastReturn);
+        }
+    }
+
     public bool showHurtboxGizmos = false;
     private void OnDrawGizmos()
     {
