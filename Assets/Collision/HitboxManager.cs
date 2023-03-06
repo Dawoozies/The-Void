@@ -133,6 +133,8 @@ public class HitboxManager : MonoBehaviour
         }
     }
 
+    // :))
+
     public bool showHitboxGizmos = false;
     private void OnDrawGizmos()
     {
