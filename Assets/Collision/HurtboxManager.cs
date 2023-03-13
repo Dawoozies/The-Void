@@ -76,6 +76,10 @@ public class HurtboxManager : MonoBehaviour
             }
 
             lastCastReturn = collidersHit;
+
+            //Think about moving this in the update and dealing with it another way
+            //Do not like that it is embedded in another method
+            HandleListeners_ColliderOverlaps();
         }
     }
 

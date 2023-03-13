@@ -14,9 +14,9 @@ TagManager:
   - Telegraph Bloom
   - Player
   - Ground
-  - 
-  - 
-  - 
+  - Enemy
+  - Projectile
+  - Solid Object
   - 
   - 
   - 
