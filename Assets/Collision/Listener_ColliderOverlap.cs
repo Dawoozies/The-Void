@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface Listener_ColliderOverlap
 {
-    void Update_ColliderOverlap(List<Collider2D> colliders);
+    void Update_ColliderOverlap(List<HurtboxOverlap> overlaps);
 }

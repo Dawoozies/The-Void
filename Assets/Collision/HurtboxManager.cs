@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ExtensionMethods_Animator;
+using ExtensionMethods_List;
 public class HurtboxManager : MonoBehaviour
 {
     CollisionManager collisionManager;
@@ -13,6 +14,7 @@ public class HurtboxManager : MonoBehaviour
     int frame;
 
     public List<Collider2D> lastCastReturn = new List<Collider2D>();
+    public List<HurtboxOverlap> lastHurtboxOverlap = new List<HurtboxOverlap>();
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -71,14 +73,25 @@ public class HurtboxManager : MonoBehaviour
 
                 foreach (Collider2D collider in colliders)
                 {
+                    //We only want to package up some overlap data for a collider we haven't dealt with
                     if(!collidersHit.Contains(collider))
+                    {
+                        //Package the overlap data here
+                        HurtboxOverlap hurtboxOverlap = new HurtboxOverlap();
+                        hurtboxOverlap.clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+                        hurtboxOverlap.SetStateData(animator.GetCurrentAnimatorStateInfo(0));
+                        hurtboxOverlap.collider = collider;
+
+                        //Add this to last cast return so we know not to do any more with this collider
                         collidersHit.Add(collider);
+                    }
                 }
             }
 
             if(lastCastReturn != collidersHit)
             {
                 lastCastReturn = collidersHit;
+
                 HandleListeners_ColliderOverlaps();
             }
         }
@@ -94,7 +107,7 @@ public class HurtboxManager : MonoBehaviour
 
         for (int i = 0; i < listener_ColliderOverlaps.Length; i++)
         {
-            listener_ColliderOverlaps[i].Update_ColliderOverlap(lastCastReturn);
+            listener_ColliderOverlaps[i].Update_ColliderOverlap(lastHurtboxOverlap);
         }
     }
 
