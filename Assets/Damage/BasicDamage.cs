@@ -12,11 +12,15 @@ public class BasicDamage : MonoBehaviour, Listener_ColliderOverlap
         {
             if (layerMask.Contains(collider.gameObject.layer))
             {
-                Debug.Log($"{collider.name} is in layer mask");
-            }
-            else
-            {
-                Debug.Log($"{collider.name} is not in layer mask");
+                //Debug.Log($"{collider.name} is in layer mask");
+                Listener_DamageReceiver[] listener_DamageReceivers = collider.GetComponents<Listener_DamageReceiver>();
+                if(listener_DamageReceivers != null && listener_DamageReceivers.Length > 0)
+                {
+                    for (int i = 0; i < listener_DamageReceivers.Length; i++)
+                    {
+                        listener_DamageReceivers[i].Update_DamageReceiver();
+                    }
+                }
             }
         }
     }

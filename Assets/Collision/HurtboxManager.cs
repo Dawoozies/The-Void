@@ -71,15 +71,16 @@ public class HurtboxManager : MonoBehaviour
 
                 foreach (Collider2D collider in colliders)
                 {
-                    collidersHit.Add(collider);
+                    if(!collidersHit.Contains(collider))
+                        collidersHit.Add(collider);
                 }
             }
 
-            lastCastReturn = collidersHit;
-
-            //Think about moving this in the update and dealing with it another way
-            //Do not like that it is embedded in another method
-            HandleListeners_ColliderOverlaps();
+            if(lastCastReturn != collidersHit)
+            {
+                lastCastReturn = collidersHit;
+                HandleListeners_ColliderOverlaps();
+            }
         }
     }
 
