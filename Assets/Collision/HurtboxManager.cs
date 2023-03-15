@@ -13,8 +13,7 @@ public class HurtboxManager : MonoBehaviour
 
     int frame;
 
-    public List<Collider2D> lastCastReturn = new List<Collider2D>();
-    public List<HurtboxOverlap> lastHurtboxOverlap = new List<HurtboxOverlap>();
+    List<HurtboxOverlap> lastHurtboxOverlap = new List<HurtboxOverlap>();
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -60,6 +59,7 @@ public class HurtboxManager : MonoBehaviour
         if (hurtboxes.Count > 0 && hurtboxes[frame].circles.Count > 0)
         {
             List<Collider2D> collidersHit = new List<Collider2D>();
+            List<HurtboxOverlap> overlaps = new List<HurtboxOverlap>();
             for (int i = 0; i < hurtboxes[frame].circles.Count; i++)
             {
                 Vector3 circlePos = transform.position + new Vector3(
@@ -69,6 +69,7 @@ public class HurtboxManager : MonoBehaviour
 
                 float circleRadius = hurtboxes[frame].circles[i].radius;
 
+                //Grabs all colliders overlapping with current circle
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(circlePos, circleRadius);
 
                 foreach (Collider2D collider in colliders)
@@ -82,15 +83,17 @@ public class HurtboxManager : MonoBehaviour
                         hurtboxOverlap.SetStateData(animator.GetCurrentAnimatorStateInfo(0));
                         hurtboxOverlap.collider = collider;
 
+                        overlaps.Add(hurtboxOverlap);
                         //Add this to last cast return so we know not to do any more with this collider
                         collidersHit.Add(collider);
                     }
                 }
             }
 
-            if(lastCastReturn != collidersHit)
+            if(!lastHurtboxOverlap.OverlapEquals(overlaps))
             {
-                lastCastReturn = collidersHit;
+                Debug.Log("Current overlaps does not match last overlaps");
+                lastHurtboxOverlap = overlaps;
 
                 HandleListeners_ColliderOverlaps();
             }

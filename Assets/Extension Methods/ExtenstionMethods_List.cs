@@ -44,5 +44,29 @@ namespace ExtensionMethods_List
             //If we got here then the lists are equal
             return true;
         }
+
+        //Use this method specifically for constructing a list which gets just the first instance of overlap
+        //Instead of every frame an overlap exists
+        public static void AddFirstInstance(this List<HurtboxOverlap> list, HurtboxOverlap overlap)
+        {
+            //Then nothing is in this list so we freely add the overlap
+            if(list.Count <= 0)
+            { list.Add(overlap); return; }
+
+            //If we get here then list contains stuff and we need to check that the overlap isn't here but with just different normalized time
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].clip.name == overlap.clip.name && list[i].collider.name == overlap.collider.name)
+                {
+                    //Then same clip + same collider
+                    //Then we just return without adding anything
+                    if (list[i].stateNormalizedTime <= overlap.stateNormalizedTime)
+                        return;
+                }
+            }
+
+            //If we make it here then we got through the whole list without finding any other earlier instances
+            list.Add(overlap);
+        }
     }
 }

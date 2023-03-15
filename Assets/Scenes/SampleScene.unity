@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 447214933}
   - component: {fileID: 447214934}
   - component: {fileID: 447214936}
-  - component: {fileID: 447214937}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -669,8 +668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d2eefce93d0b04fb9675f8af74a2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastCastReturn: []
-  lastHurtboxOverlap: []
   showHurtboxGizmos: 1
 --- !u!114 &447214936
 MonoBehaviour:
@@ -687,27 +684,8 @@ MonoBehaviour:
   damage: 15
   layerMask:
     serializedVersion: 2
-    m_Bits: 3584
---- !u!114 &447214937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447214923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8b54e2f7d2b3a47a911e518b868faa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listsEquate: 0
-  listOne: []
-  listTwo:
-  - clip: {fileID: 7400000, guid: 6a016541de9bdc841b8c978da7a4a159, type: 2}
-    stateLength: 1
-    stateNormalizedTime: 1
-    stateSpeed: 1
-    collider: {fileID: 1045573627}
+    m_Bits: 512
+  queuedOverlaps: []
 --- !u!1 &497418114
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +698,7 @@ GameObject:
   - component: {fileID: 497418116}
   - component: {fileID: 497418115}
   - component: {fileID: 497418118}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
