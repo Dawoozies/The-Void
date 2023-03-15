@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour, Listener_DamageReceiver
 {
-    public int damageCount;
+    int damageCount;
     float damageRecoverTime;
     float timer;
     HurtboxOverlap lastOverlap;
+    void Start()
+    {
+        //This should only ever be 1
+        damageCount = 1;
+    }
     public void Update_DamageReceiver(HurtboxOverlap overlap)
     {
         if (damageCount > 0)
