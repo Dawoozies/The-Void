@@ -95,7 +95,6 @@ public class HurtboxManager : MonoBehaviour
             if(!lastHurtboxOverlap.OverlapEquals(overlaps))
             {
                 lastHurtboxOverlap = overlaps;
-
                 HandleListeners_ColliderOverlaps();
             }
         }
