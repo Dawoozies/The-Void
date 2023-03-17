@@ -82,7 +82,9 @@ public class HurtboxManager : MonoBehaviour
                         hurtboxOverlap.clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
                         hurtboxOverlap.SetStateData(animator.GetCurrentAnimatorStateInfo(0));
                         hurtboxOverlap.collider = collider;
+                        hurtboxOverlap.SetHurtboxData(circlePos, circleRadius);
 
+                        //Now we've finished packaging the overlap data we add it to the overlap list
                         overlaps.Add(hurtboxOverlap);
                         //Add this to last cast return so we know not to do any more with this collider
                         collidersHit.Add(collider);
