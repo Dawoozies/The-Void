@@ -1,0 +1,409 @@
+fileFormatVersion: 2
+guid: 79186148f3dba2f4b8f66364b9158bc3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 470
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4647
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05816801f1cfde14d8e7dbcf9bfc503e
+      internalID: -1143913521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_1
+      rect:
+        serializedVersion: 2
+        x: 2510
+        y: 4647
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302fa30687ebbbe44bbc3908a3870f25
+      internalID: -479035007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_2
+      rect:
+        serializedVersion: 2
+        x: 5018
+        y: 4647
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37847f17f39fd0f4bad895be49d75b79
+      internalID: 170654867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_3
+      rect:
+        serializedVersion: 2
+        x: 7526
+        y: 4647
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c2979132d7dd944f8c9412ededaf585
+      internalID: -1603889461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3138
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ece97b6e6eb1f28458297b9c52c0a068
+      internalID: -1939629708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_5
+      rect:
+        serializedVersion: 2
+        x: 2510
+        y: 3138
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac5517db6d0ba364c9fa27b70d33fef0
+      internalID: -1751085336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_6
+      rect:
+        serializedVersion: 2
+        x: 5018
+        y: 3138
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc47c1d50aeaa9e4290a23e4dc196649
+      internalID: -1249996880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_7
+      rect:
+        serializedVersion: 2
+        x: 7526
+        y: 3138
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6c0f43276195744da2c5d38e1aa9545
+      internalID: 1892819231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1629
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c341c00409226408e9dfc5a78b0160
+      internalID: 428560837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_9
+      rect:
+        serializedVersion: 2
+        x: 2510
+        y: 1629
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d40966696175c4843b9a02f881af37e8
+      internalID: 1857914456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_10
+      rect:
+        serializedVersion: 2
+        x: 5018
+        y: 1629
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15f6fa2fbe03ff8449307c0724dd9314
+      internalID: 1900722208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_11
+      rect:
+        serializedVersion: 2
+        x: 7526
+        y: 1629
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d43aa044e4859d948bef293829271bf5
+      internalID: 1650311413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Claw Light Attack Ground 1_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 120
+        width: 2504
+        height: 1505
+      alignment: 9
+      pivot: {x: 0.4004492, y: 0.5290279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36f5775731117e4095431342e200c19
+      internalID: 1234698810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Claw Light Attack Ground 1_4: -1939629708
+      Claw Light Attack Ground 1_5: -1751085336
+      Claw Light Attack Ground 1_2: 170654867
+      Claw Light Attack Ground 1_1: -479035007
+      Claw Light Attack Ground 1_8: 428560837
+      Claw Light Attack Ground 1_0: -1143913521
+      Claw Light Attack Ground 1_10: 1900722208
+      Claw Light Attack Ground 1_12: 1234698810
+      Claw Light Attack Ground 1_7: 1892819231
+      Claw Light Attack Ground 1_9: 1857914456
+      Claw Light Attack Ground 1_11: 1650311413
+      Claw Light Attack Ground 1_6: -1249996880
+      Claw Light Attack Ground 1_3: -1603889461
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DamageSystem;
 public class BasicEnemy : MonoBehaviour, Listener_DamageReceiver
 {
     int damageCount;
-    public float damageRecoverTime;
+    float damageRecoverTime;
     float timer;
-    HurtboxOverlap lastOverlap;
     void Start()
     {
         //This should only ever be 1
@@ -21,16 +20,8 @@ public class BasicEnemy : MonoBehaviour, Listener_DamageReceiver
             return;
 
         timer = 0;
-        lastOverlap = overlap;
-        Debug.Log($"{gameObject.name} taking damage");
 
-        //Compute how many seconds left until the current animation state has finished
-        //This will result in the first overlap instance in this animation being able to deal damage but no others
-        //Hopefully this will stop damage from going through multiple times during one damage window
-        damageRecoverTime = overlap.stateLength - (overlap.stateNormalizedTime * overlap.clip.length) / overlap.stateSpeed;
-
-        if (damageRecoverTime < 0)
-            Debug.LogError($"Damage Recover Time is negative: This is not fucking good, please increase frames of animation that is causing this. Anim Clip Name = {overlap.clip.name}");
+        damageRecoverTime = DamageUtilities.DamageRecoveryTime(overlap);
     }
 
     void Update()

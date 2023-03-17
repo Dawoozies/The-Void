@@ -10,7 +10,6 @@ namespace ExtensionMethods_List
         //You want this functionality to be like some value type shit
         public static bool OverlapEquals(this List<HurtboxOverlap> firstList, List<HurtboxOverlap> secondList)
         {
-            Debug.Log("We running the right method?");
             //Obviously if the counts are different the lists are different
             if (firstList.Count != secondList.Count)
                 return false;
