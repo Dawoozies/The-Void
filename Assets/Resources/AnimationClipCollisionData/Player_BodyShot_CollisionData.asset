@@ -56,40 +56,6 @@ MonoBehaviour:
       radius: 0.21880502
     - center: {x: -0.033720016, y: -0.9441788}
       radius: 0.14574343
-  - frame: 0
-    circles:
-    - center: {x: 0.30571055, y: 0.3411556}
-      radius: 0.38857865
-    - center: {x: 0.36773908, y: -0.19937637}
-      radius: 0.4240234
-    - center: {x: 0.03987539, y: -0.669019}
-      radius: 0.24679983
-    - center: {x: -0.2126683, y: -1.0500497}
-      radius: 0.1271739
-    - center: {x: 0.70003355, y: -0.6557274}
-      radius: 0.17591035
-    - center: {x: 0.77978384, y: -0.9968826}
-      radius: 0.1404658
-  - frame: 1
-    circles:
-    - center: {x: 0.30571055, y: 0.3411556}
-      radius: 0.38857865
-    - center: {x: 0.36773908, y: -0.19937637}
-      radius: 0.4240234
-    - center: {x: 0.03987539, y: -0.669019}
-      radius: 0.24679983
-    - center: {x: -0.2126683, y: -1.0500497}
-      radius: 0.1271739
-    - center: {x: 0.70003355, y: -0.6557274}
-      radius: 0.17591035
-    - center: {x: 0.77978384, y: -0.9968826}
-      radius: 0.1404658
-  - frame: 2
-    circles: []
-  - frame: 3
-    circles: []
-  - frame: 4
-    circles: []
   hurtboxes:
   - frame: 0
     circles: []
@@ -105,16 +71,6 @@ MonoBehaviour:
       radius: 0.23566532
     - center: {x: 1.1071615, y: -0.2810056}
       radius: 0.3199669
-  - frame: 0
-    circles: []
-  - frame: 1
-    circles: []
-  - frame: 2
-    circles: []
-  - frame: 3
-    circles: []
-  - frame: 4
-    circles: []
   groundboxes:
   - frame: 0
     circles:
@@ -128,17 +84,3 @@ MonoBehaviour:
     circles:
     - center: {x: 0.28662562, y: -1.4162675}
       radius: 0.20756477
-  - frame: 0
-    circles:
-    - center: {x: 0.28662562, y: -1.4162675}
-      radius: 0.20756477
-  - frame: 1
-    circles:
-    - center: {x: 0.28662562, y: -1.4162675}
-      radius: 0.20756477
-  - frame: 2
-    circles: []
-  - frame: 3
-    circles: []
-  - frame: 4
-    circles: []
