@@ -10,38 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
-  m_Name: FalseKnight_AttackRecover_CollisionData
+  m_Name: FalseKnight_Run_CollisionData
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: a2644d48322ca464284687f1141c2326, type: 2}
+  animationClip: {fileID: 7400000, guid: ace340c4c90b1144aaf661fd2c1cfdae, type: 2}
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: -0.24782097, y: -1.0025463}
-      radius: 1.5181701
+    - center: {x: 1.2954254, y: -1.0250758}
+      radius: 1.5181702
+    - center: {x: -0.46184707, y: -0.79978436}
+      radius: 0.4930942
   - frame: 1
     circles:
-    - center: {x: -0.5294355, y: -1.0138109}
-      radius: 1.5181701
-    - center: {x: -0.87863636, y: 0.6646095}
-      radius: 0.34665495
+    - center: {x: 1.5207167, y: -1.0138112}
+      radius: 1.5181702
+    - center: {x: -0.022529364, y: 0.04505843}
+      radius: 0.4930942
   - frame: 2
     circles:
-    - center: {x: -0.27035058, y: -1.0588691}
-      radius: 1.5181701
-    - center: {x: 0.75472635, y: -0.19149786}
-      radius: 0.34665495
+    - center: {x: 1.4306003, y: -0.99128217}
+      radius: 1.5181702
+    - center: {x: 0.022528172, y: 0.10138148}
+      radius: 0.4930942
   - frame: 3
     circles:
-    - center: {x: 0.29287767, y: -1.453129}
-      radius: 1.5181701
-    - center: {x: 1.903712, y: -1.5319815}
-      radius: 0.34665495
+    - center: {x: 1.4756582, y: -0.9349593}
+      radius: 1.5181702
+    - center: {x: 0.07885027, y: 0.00000029802322}
+      radius: 0.4930942
   - frame: 4
     circles:
-    - center: {x: 0.27034855, y: -1.3179543}
-      radius: 1.675874
-    - center: {x: 1.8924475, y: -1.2954254}
-      radius: 0.34665495
+    - center: {x: 1.3630127, y: -0.91243005}
+      radius: 1.5970222
+    - center: {x: 0.045056105, y: 0.09011692}
+      radius: 0.4930942
   hurtboxes:
   - frame: 0
     circles: []

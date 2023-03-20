@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     List<Listener_JumpInput> listeners_JumpInput;
     List<Listener_DodgeInput> listeners_DodgeInput;
     List<Listener_LightAttackInput> listeners_LightAttackInput;
+    List<Listener_JumpReleaseInput> listeners_JumpReleaseInput;
     private void OnEnable()
     {
         if(inputActions == null)
@@ -56,6 +57,17 @@ public class InputManager : MonoBehaviour
                     listener.Update_LightAttackInput(inputActions.ReadValueAsButton());
                 }
             };
+
+            inputActions.PlayerDefault.JumpRelease.performed += inputActions =>
+            {
+                if (listeners_JumpReleaseInput == null)
+                    return;
+
+                foreach (Listener_JumpReleaseInput listener in listeners_JumpReleaseInput)
+                {
+                    listener.Update_JumpReleaseInput();
+                }
+            };
         }
 
         inputActions.Enable();
@@ -89,5 +101,13 @@ public class InputManager : MonoBehaviour
             listeners_LightAttackInput = new List<Listener_LightAttackInput>();
 
         listeners_LightAttackInput.Add(listener);
+    }
+
+    public void Subscribe(Listener_JumpReleaseInput listener)
+    {
+        if (listeners_JumpReleaseInput == null)
+            listeners_JumpReleaseInput = new List<Listener_JumpReleaseInput>();
+
+        listeners_JumpReleaseInput.Add(listener);
     }
 }

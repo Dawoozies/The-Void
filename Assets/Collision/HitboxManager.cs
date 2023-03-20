@@ -62,6 +62,7 @@ public class HitboxManager : MonoBehaviour
 
         if(hitboxPool != null)
         {
+            hitboxPool.transform.localPosition = Vector3.zero;
             //Create the pool
             for (int i = 0; i < maxHitboxes; i++)
             {

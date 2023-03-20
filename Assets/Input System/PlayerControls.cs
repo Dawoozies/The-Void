@@ -62,6 +62,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JumpRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6879ed6-d62d-4618-b67b-7310fe0afe01"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39aff7e8-7ec5-4805-b8b7-6a130006b65c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerDefault_LightAttack = m_PlayerDefault.FindAction("LightAttack", throwIfNotFound: true);
         m_PlayerDefault_Jump = m_PlayerDefault.FindAction("Jump", throwIfNotFound: true);
         m_PlayerDefault_Dodge = m_PlayerDefault.FindAction("Dodge", throwIfNotFound: true);
+        m_PlayerDefault_JumpRelease = m_PlayerDefault.FindAction("JumpRelease", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerDefault_LightAttack;
     private readonly InputAction m_PlayerDefault_Jump;
     private readonly InputAction m_PlayerDefault_Dodge;
+    private readonly InputAction m_PlayerDefault_JumpRelease;
     public struct PlayerDefaultActions
     {
         private @PlayerControls m_Wrapper;
@@ -235,6 +257,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @LightAttack => m_Wrapper.m_PlayerDefault_LightAttack;
         public InputAction @Jump => m_Wrapper.m_PlayerDefault_Jump;
         public InputAction @Dodge => m_Wrapper.m_PlayerDefault_Dodge;
+        public InputAction @JumpRelease => m_Wrapper.m_PlayerDefault_JumpRelease;
         public InputActionMap Get() { return m_Wrapper.m_PlayerDefault; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +279,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnDodge;
+                @JumpRelease.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJumpRelease;
+                @JumpRelease.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJumpRelease;
+                @JumpRelease.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJumpRelease;
             }
             m_Wrapper.m_PlayerDefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +298,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @JumpRelease.started += instance.OnJumpRelease;
+                @JumpRelease.performed += instance.OnJumpRelease;
+                @JumpRelease.canceled += instance.OnJumpRelease;
             }
         }
     }
@@ -282,5 +311,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnLightAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnJumpRelease(InputAction.CallbackContext context);
     }
 }
