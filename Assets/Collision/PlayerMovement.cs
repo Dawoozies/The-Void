@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeInput, Listener_JumpReleaseInput
+public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeInput, Listener_JumpReleaseInput, Listener_Grounded
 {
     //float horizontalInput => BasicInput.ins.InputLHorizontal;
     float horizontalInput => InputManager.ins.R_Input.x;
@@ -16,17 +16,14 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
     float jumpVelocity = 20;
     Animator animator;
     Rigidbody2D rb;
-    public int jumpCount;
-    int maxJumpCount;
-    public float jumpTime;
+
+    float jumpTime;
     float maxJumpTime;
     // Start is called before the first frame update
     void Start()
     {
-        jumpCount = 1;
-        maxJumpCount = 1;
-        jumpTime = 0f;
-        maxJumpTime = 0.35f;
+        maxJumpTime = 0.2f;
+        jumpTime = maxJumpTime;
 
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -57,22 +54,20 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
             animator.SetBool("Run", false);
         }
 
-        if(jumpCount < maxJumpCount)
+        if(jumpTime < maxJumpTime)
         {
-            if(jumpTime > 0)
+            if (jumpTime > 0.075f && !animator.GetBool("JumpLong"))
             {
-                jumpTime -= Time.deltaTime;
+                animator.SetBool("JumpLong", true);
             }
-            else
-            {
-                bool refreshJump = animator.GetCurrentAnimatorStateInfo(0).IsName("JumpLand");
 
-                if (refreshJump)
-                    jumpCount++;
-            }
+            animator.SetBool("Jump", true);
+            jumpTime += Time.deltaTime;
         }
-
-        animator.SetFloat("VelocityY", rb.velocity.y);
+        else
+        {
+            animator.SetBool("Jump", false);
+        }
     }
 
     void FixedUpdate()
@@ -114,26 +109,21 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
 
     void JumpMovement()
     {
-        if (animator.GetBool("JumpInput") && animator.GetCurrentAnimatorStateInfo(0).IsTag("JumpAscent"))
-        {
-            //rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
-        }
+        bool inJumpStates =
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")
+            || animator.GetCurrentAnimatorStateInfo(0).IsName("JumpLong");
 
-        if(jumpTime > 0)
+        if(inJumpStates && jumpTime < maxJumpTime)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
     }
     public void Update_JumpInput(bool jumpInput)
     {
-        bool canJump =
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
-            || animator.GetCurrentAnimatorStateInfo(0).IsName("Run")
-            || animator.GetCurrentAnimatorStateInfo(0).IsName("JumpLandStartRun");
-        if (canJump && jumpCount > 0)
+        if(animator.GetBool("Grounded"))
         {
-            jumpCount--;
-            jumpTime = maxJumpTime;
+            jumpTime = 0;
+            animator.SetBool("JumpLong", false);
         }
     }
 
@@ -144,6 +134,11 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
 
     public void Update_JumpReleaseInput()
     {
-        jumpTime = 0;
+        jumpTime = maxJumpTime;
+    }
+
+    public void Update_Grounded()
+    {
+        throw new System.NotImplementedException();
     }
 }
