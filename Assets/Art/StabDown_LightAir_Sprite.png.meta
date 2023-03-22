@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f66e69d1324911419c196902d7b6e0e
+guid: 6d4f4e431c36fa146bb8dd5305cf8235
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,85 +105,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Jump0
+      name: StabDown_LightAir_Sprite_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 2624
-        width: 1038
-        height: 1471
+        x: 2
+        y: 79
+        width: 1196
+        height: 2096
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.467, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bccf874c0dcc1549a77c2feffbee6c3
-      internalID: -729021937
+      spriteID: 03b184463e2bf0d43b2f1e9f1babb820
+      internalID: 468444101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump1
+      name: StabDown_LightAir_Sprite_1
       rect:
         serializedVersion: 2
-        x: 1042
-        y: 2624
-        width: 1038
-        height: 1471
+        x: 1202
+        y: 79
+        width: 1196
+        height: 2096
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.467, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 710f1c9442da7df45b4606a9045dc539
-      internalID: -1384684354
+      spriteID: d364238f6e23d8b47b04ff78111fbde3
+      internalID: -42608027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump2
+      name: StabDown_LightAir_Sprite_2
       rect:
         serializedVersion: 2
-        x: 2083
-        y: 2624
-        width: 1038
-        height: 1471
+        x: 2402
+        y: 79
+        width: 1196
+        height: 2096
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.467, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbf1f1098554c9644b4127239a225dc2
-      internalID: 1316192950
+      spriteID: 69c0f4a2d94baa24ebfb12e28fa69035
+      internalID: 835493693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump3
+      name: StabDown_LightAir_Sprite_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1148
-        width: 1038
-        height: 1471
+        x: 3602
+        y: 79
+        width: 1196
+        height: 2096
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.467, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 629987a20da4c4649b25a0d1da1de528
-      internalID: 1183222846
+      spriteID: d7d5a58ec5f14b748848372ccde9af76
+      internalID: 529250409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StabDown_LightAir_Sprite_4
+      rect:
+        serializedVersion: 2
+        x: 4802
+        y: 79
+        width: 1196
+        height: 2096
+      alignment: 9
+      pivot: {x: 0.467, y: 0.46}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9297d1cbe4670c9419999c908a16ddfc
+      internalID: 1362135070
       vertices: []
       indices: 
       edges: []
@@ -199,10 +220,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Jump0: -729021937
-      Player_Jump2: 1316192950
-      Player_Jump1: -1384684354
-      Player_Jump3: 1183222846
+      StabDown_LightAir_Sprite_3: 529250409
+      StabDown_LightAir_Sprite_4: 1362135070
+      StabDown_LightAir_Sprite_1: -42608027
+      StabDown_LightAir_Sprite_0: 468444101
+      StabDown_LightAir_Sprite_2: 835493693
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

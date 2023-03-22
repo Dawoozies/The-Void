@@ -16,16 +16,16 @@ MonoBehaviour:
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: -0.26775444, y: 0.91482663}
-      radius: 0.41986638
-    - center: {x: -0.052063465, y: 0.3421301}
-      radius: 0.38267815
+    - center: {x: -0.22064376, y: 0.80714476}
+      radius: 0.3592953
+    - center: {x: -0.052063227, y: 0.26136857}
+      radius: 0.29518664
   - frame: 1
     circles:
-    - center: {x: -0.23800361, y: 0.9668898}
-      radius: 0.44961685
-    - center: {x: -0.12643969, y: 0.30494225}
-      radius: 0.4273039
+    - center: {x: -0.17353284, y: 0.80714476}
+      radius: 0.3592953
+    - center: {x: 0.0017776489, y: 0.046004802}
+      radius: 0.44997942
   hurtboxes:
   - frame: 0
     circles: []

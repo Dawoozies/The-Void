@@ -14,7 +14,7 @@ public class AirDodge : StateMachineBehaviour
         if (rb == null)
             rb = animator.GetComponentInParent<Rigidbody2D>();
 
-        Vector2 rInput = InputManager.ins.R_Input;
+        Vector2 rInput = InputManager.ins.L_Input;
         airDodgeVelocity = new Vector2(rInput.x, rInput.y) * airDodgeSpeed;
 
         animator.SetInteger("AirDodgeCount", 1);

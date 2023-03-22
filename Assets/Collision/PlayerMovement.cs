@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeInput, Listener_JumpReleaseInput, Listener_Grounded
 {
     //float horizontalInput => BasicInput.ins.InputLHorizontal;
-    float horizontalInput => InputManager.ins.R_Input.x;
+    float horizontalInput => InputManager.ins.L_Input.x;
     float normalizedHorizontalInput => new Vector2(horizontalInput, 0).normalized.x;
     //Horizontal Movement
     float maxSpeed = 15;

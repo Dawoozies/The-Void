@@ -16,12 +16,12 @@ MonoBehaviour:
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: 0.007437587, y: 0.86276317}
-      radius: 0.5165551
-    - center: {x: -0.04462564, y: 0.29750457}
-      radius: 0.62811935
+    - center: {x: 0.0074374676, y: 0.8291124}
+      radius: 0.38195264
+    - center: {x: -0.017704725, y: 0.28404433}
+      radius: 0.5137074
     - center: {x: -0.13387704, y: -0.30494225}
-      radius: 0.30830175
+      radius: 0.23427045
   hurtboxes:
   - frame: 0
     circles: []

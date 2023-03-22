@@ -11,19 +11,20 @@ public class InputManager : MonoBehaviour
     }
 
     PlayerControls inputActions;
-    public Vector2 R_Input;
+    public Vector2 L_Input;
 
     //Listeners
     List<Listener_JumpInput> listeners_JumpInput;
     List<Listener_DodgeInput> listeners_DodgeInput;
     List<Listener_LightAttackInput> listeners_LightAttackInput;
     List<Listener_JumpReleaseInput> listeners_JumpReleaseInput;
+    List<Listener_AnyAttackInput> listeners_AnyAttackInput;
     private void OnEnable()
     {
         if(inputActions == null)
         {
             inputActions = new PlayerControls();
-            inputActions.PlayerDefault.Movement.performed += inputActions => R_Input = inputActions.ReadValue<Vector2>();
+            inputActions.PlayerDefault.Movement.performed += inputActions => L_Input = inputActions.ReadValue<Vector2>();
 
             inputActions.PlayerDefault.Jump.performed += inputActions =>
             {
@@ -49,12 +50,13 @@ public class InputManager : MonoBehaviour
 
             inputActions.PlayerDefault.LightAttack.performed += inputActions =>
             {
-                if (listeners_LightAttackInput == null)
+
+                if (listeners_AnyAttackInput == null)
                     return;
 
-                foreach(Listener_LightAttackInput listener in listeners_LightAttackInput)
+                foreach (Listener_AnyAttackInput listener in listeners_AnyAttackInput)
                 {
-                    listener.Update_LightAttackInput(inputActions.ReadValueAsButton());
+                    listener.Update_AnyAttackInput("Light Attack", inputActions.ReadValueAsButton());
                 }
             };
 
@@ -109,5 +111,13 @@ public class InputManager : MonoBehaviour
             listeners_JumpReleaseInput = new List<Listener_JumpReleaseInput>();
 
         listeners_JumpReleaseInput.Add(listener);
+    }
+
+    public void Subscribe(Listener_AnyAttackInput listener)
+    {
+        if (listeners_AnyAttackInput == null)
+            listeners_AnyAttackInput = new List<Listener_AnyAttackInput>();
+
+        listeners_AnyAttackInput.Add(listener);
     }
 }

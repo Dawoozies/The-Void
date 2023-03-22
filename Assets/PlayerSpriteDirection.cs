@@ -6,7 +6,7 @@ public class PlayerSpriteDirection : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D rb;
-    float horizontalInput => InputManager.ins.R_Input.x;
+    float horizontalInput => InputManager.ins.L_Input.x;
     public bool rightFacing = false;
     private void Start()
     {

@@ -10,7 +10,6 @@ public class PlayerGravity : MonoBehaviour
     float verticalInput => BasicInput.ins.InputLVertical;
 
     float gravity = 80;
-    float fastFallGravity = 120;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,14 +19,7 @@ public class PlayerGravity : MonoBehaviour
     {
         if(!animator.GetBool("Grounded"))
         {
-            if(verticalInput < -0.75f)
-            {
-                rb.AddForce(new Vector2(0f, -fastFallGravity));
-            }
-            else
-            {
-                rb.AddForce(new Vector2(0f, -gravity));
-            }
+            rb.AddForce(new Vector2(0f, -gravity));
         }
         else
         {

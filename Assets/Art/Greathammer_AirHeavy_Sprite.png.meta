@@ -1,0 +1,387 @@
+fileFormatVersion: 2
+guid: a4305613784cbc24da09447cb2c6a188
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 470
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4031
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e55b0b57d789774385bcb0a4d487770
+      internalID: 1437429306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_1
+      rect:
+        serializedVersion: 2
+        x: 3002
+        y: 4031
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d0214a89336c1d4c819c20fff229219
+      internalID: 1767406656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_2
+      rect:
+        serializedVersion: 2
+        x: 6002
+        y: 4031
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba34d5d9e20d3da4bbae9c319073025f
+      internalID: -186739273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_3
+      rect:
+        serializedVersion: 2
+        x: 9002
+        y: 4031
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6c3e1cd8dec97444b0b78a8c578ec3e
+      internalID: 1737457926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2081
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c10e4fd8cd3d7b488ec0ec0f8237d7c
+      internalID: 1868438337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_5
+      rect:
+        serializedVersion: 2
+        x: 3002
+        y: 2081
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b39c658b89487645937e4dfe3b64b77
+      internalID: 1548716369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_6
+      rect:
+        serializedVersion: 2
+        x: 6002
+        y: 2081
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8232a5e7f1e03694cbf5fd40c9fdc8c9
+      internalID: -478645449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_7
+      rect:
+        serializedVersion: 2
+        x: 9002
+        y: 2081
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6419bf396d8de2e46914c5925935ae3a
+      internalID: -857598333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 131
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69045569f3c695b4e8f2920ce8c5625c
+      internalID: 139447497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_9
+      rect:
+        serializedVersion: 2
+        x: 3002
+        y: 131
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db57269802b843541bd502ea000daa6c
+      internalID: -70634300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_10
+      rect:
+        serializedVersion: 2
+        x: 6002
+        y: 131
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e72c6447122d0d4891554af4e815377
+      internalID: -16871209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Greathammer_AirHeavy_Sprite_11
+      rect:
+        serializedVersion: 2
+        x: 9002
+        y: 131
+        width: 2996
+        height: 1946
+      alignment: 9
+      pivot: {x: 0.38, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cc651416ce6c2f45bfaca050859c49e
+      internalID: 1223280634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Greathammer_AirHeavy_Sprite_7: -857598333
+      Greathammer_AirHeavy_Sprite_9: -70634300
+      Greathammer_AirHeavy_Sprite_2: -186739273
+      Greathammer_AirHeavy_Sprite_11: 1223280634
+      Greathammer_AirHeavy_Sprite_6: -478645449
+      Greathammer_AirHeavy_Sprite_10: -16871209
+      Greathammer_AirHeavy_Sprite_5: 1548716369
+      Greathammer_AirHeavy_Sprite_4: 1868438337
+      Greathammer_AirHeavy_Sprite_1: 1767406656
+      Greathammer_AirHeavy_Sprite_8: 139447497
+      Greathammer_AirHeavy_Sprite_3: 1737457926
+      Greathammer_AirHeavy_Sprite_0: 1437429306
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

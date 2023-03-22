@@ -16,28 +16,28 @@ MonoBehaviour:
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: 0.14083916, y: 1.2848349}
-      radius: 0.4353614
-    - center: {x: 0.13941693, y: 0.67374784}
-      radius: 0.37262374
+    - center: {x: 0.12737906, y: 1.0290904}
+      radius: 0.38152063
+    - center: {x: 0.13268685, y: 0.5593358}
+      radius: 0.27167195
   - frame: 1
     circles:
-    - center: {x: 0.14083916, y: 1.2848349}
-      radius: 0.4353614
-    - center: {x: 0.13941693, y: 0.67374784}
-      radius: 0.37262374
+    - center: {x: 0.12064886, y: 1.1031216}
+      radius: 0.34113955
+    - center: {x: 0.13268721, y: 0.5593358}
+      radius: 0.2918623
   - frame: 0
     circles:
-    - center: {x: 0.026958466, y: 1.2946502}
-      radius: 0.4353614
-    - center: {x: 0.17199421, y: 0.39712086}
-      radius: 0.5357976
+    - center: {x: 0.020228624, y: 1.0658262}
+      radius: 0.3613298
+    - center: {x: 0.15853405, y: 0.33654988}
+      radius: 0.40119517
   - frame: 1
     circles:
-    - center: {x: 0.026958466, y: 1.2946502}
-      radius: 0.4353614
-    - center: {x: 0.17199421, y: 0.39712086}
-      radius: 0.5357976
+    - center: {x: 0.020228624, y: 1.0658262}
+      radius: 0.3613298
+    - center: {x: 0.15853405, y: 0.33654988}
+      radius: 0.40119517
   - frame: 2
     circles: []
   - frame: 3

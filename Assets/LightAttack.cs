@@ -13,10 +13,7 @@ public class LightAttack : MonoBehaviour, Listener_LightAttackInput
     }
     public void Update_LightAttackInput(bool lightAttackInput)
     {
-        if (lightAttackInput)
-        {
-            animator.SetTrigger("LightAttack");
-            animator.SetTrigger("Attack");
-        }
+        Debug.Log("Light Attack Input = " + lightAttackInput);
+        animator.SetBool("LightAttack", lightAttackInput);
     }
 }
