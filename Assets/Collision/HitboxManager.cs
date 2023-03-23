@@ -17,6 +17,12 @@ public class HitboxManager : MonoBehaviour
     Transform hitboxPool;
     int maxHitboxes = 20;
 
+    //Player = 7
+    //Ground = 8
+    //Enemy = 9
+    //Projectile = 10
+    public int hitboxLayer;
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -69,6 +75,13 @@ public class HitboxManager : MonoBehaviour
                 Transform newHitbox = new GameObject("Hitbox" + i).transform;
                 newHitbox.parent = hitboxPool;
                 CircleCollider2D newCircleCollider = newHitbox.gameObject.AddComponent(typeof(CircleCollider2D)) as CircleCollider2D;
+
+                if(hitboxLayer == 0)
+                {
+                    Debug.LogError("Hitbox Manager Error: No layer selected for hitboxes, this will result in hurtboxes not damaging things properly");
+                }
+
+                newHitbox.gameObject.layer = hitboxLayer;
             }
         }
     }

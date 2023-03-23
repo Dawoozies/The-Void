@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 447214925}
   - component: {fileID: 447214933}
   - component: {fileID: 447214938}
+  - component: {fileID: 447214939}
   - component: {fileID: 447214937}
   m_Layer: 7
   m_Name: Player
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0713f2952f164488e3d0e07635c8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitboxLayer: 7
   showHitboxGizmos: 1
 --- !u!114 &447214927
 MonoBehaviour:
@@ -475,6 +477,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b90bb5ae2491814b8930a295826e549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &447214939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447214923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcd47b1f25f8fa45972983893f22e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  knockbackIntensity: 100
+  shift: {x: 0, y: 0}
+  showFrameData: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +1006,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 40
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1036,6 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0713f2952f164488e3d0e07635c8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitboxLayer: 9
   showHitboxGizmos: 1
 --- !u!114 &1140075432
 MonoBehaviour:
@@ -1095,7 +1116,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  knockbackIntensity: 300
+  shift: {x: 2, y: -5}
+  showFrameData: 0
 --- !u!1 &1241008213
 GameObject:
   m_ObjectHideFlags: 0

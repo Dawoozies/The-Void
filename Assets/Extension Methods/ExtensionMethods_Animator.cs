@@ -21,5 +21,15 @@ namespace ExtensionMethods_Animator
 
             return frame;
         }
+
+        public static int TotalFrames(this Animator a)
+        {
+            AnimatorStateInfo stateInfo = a.GetCurrentAnimatorStateInfo(0);
+            AnimatorClipInfo clipInfo = a.GetCurrentAnimatorClipInfo(0)[0];
+
+            int totalFrames = Mathf.RoundToInt(clipInfo.clip.length);
+
+            return totalFrames;
+        }
     }
 }
