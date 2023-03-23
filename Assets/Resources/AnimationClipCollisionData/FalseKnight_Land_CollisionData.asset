@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: FalseKnight_Land_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 6f4c288a0a8072045ad015c156dbe489, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.57760906, y: -0.50185704}
+      radius: 1.4166362
+    - center: {x: 1.628669, y: -1.7138897}
+      radius: 0.38451445
+    - center: {x: -0.4355743, y: -1.6476064}
+      radius: 0.3939836
+    - center: {x: 1.7707033, y: -0.21778691}
+      radius: 0.8295579
+    - center: {x: -0.35035324, y: -0.23672485}
+      radius: 1
+    - center: {x: 0.8616793, y: 1.0131832}
+      radius: 0.8011508
+  - frame: 1
+    circles:
+    - center: {x: 0.5492022, y: -0.60601604}
+      radius: 1.3503532
+    - center: {x: 1.628669, y: -1.7138897}
+      radius: 0.38451445
+    - center: {x: -0.4355743, y: -1.6476064}
+      radius: 0.3939836
+    - center: {x: 1.3635365, y: -0.19884896}
+      radius: 0.8295579
+    - center: {x: -0.12309718, y: -0.18937963}
+      radius: 1
+    - center: {x: 1.1646874, y: 0.5302638}
+      radius: 0.8011508
+    - center: {x: 1.8085791, y: -0.99424547}
+      radius: 0.507612
+  - frame: 2
+    circles:
+    - center: {x: 0.5586715, y: -0.71964383}
+      radius: 1.3503532
+    - center: {x: 1.6097311, y: -1.7138896}
+      radius: 0.38451445
+    - center: {x: -0.4355743, y: -1.6476064}
+      radius: 0.3939836
+    - center: {x: 1.3351291, y: -0.25566277}
+      radius: 0.8295579
+    - center: {x: -0.13256598, y: -0.30300763}
+      radius: 1
+    - center: {x: 1.1646874, y: 0.32194543}
+      radius: 0.8011508
+    - center: {x: 1.818048, y: -1.0131834}
+      radius: 0.507612
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.5586717, y: -1.8653938}
+      radius: 0.60230184
+  - frame: 1
+    circles:
+    - center: {x: 0.5586717, y: -1.8653938}
+      radius: 0.60230184
+  - frame: 2
+    circles:
+    - center: {x: 0.5586717, y: -1.8653938}
+      radius: 0.60230184

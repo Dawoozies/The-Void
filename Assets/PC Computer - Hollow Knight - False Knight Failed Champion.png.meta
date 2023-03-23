@@ -214,11 +214,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 12871
+        y: 12872
         width: 548
-        height: 393
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 392
+      alignment: 9
+      pivot: {x: 0.375, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -238,8 +238,8 @@ TextureImporter:
         y: 12872
         width: 548
         height: 392
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.375, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -259,8 +259,8 @@ TextureImporter:
         y: 12470
         width: 574
         height: 380
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.58, y: 0.54}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -280,8 +280,8 @@ TextureImporter:
         y: 12470
         width: 574
         height: 380
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.58, y: 0.54}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -301,8 +301,8 @@ TextureImporter:
         y: 11956
         width: 623
         height: 492
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.59, y: 0.426}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -322,8 +322,8 @@ TextureImporter:
         y: 11956
         width: 623
         height: 492
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.59, y: 0.426}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -343,8 +343,8 @@ TextureImporter:
         y: 11956
         width: 623
         height: 492
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.59, y: 0.426}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -364,8 +364,8 @@ TextureImporter:
         y: 11956
         width: 623
         height: 492
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.59, y: 0.426}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -385,8 +385,8 @@ TextureImporter:
         y: 11956
         width: 623
         height: 492
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.59, y: 0.426}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -406,8 +406,8 @@ TextureImporter:
         y: 10360
         width: 582
         height: 402
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.662, y: 0.517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -427,8 +427,8 @@ TextureImporter:
         y: 10360
         width: 582
         height: 402
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.662, y: 0.517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -448,8 +448,8 @@ TextureImporter:
         y: 10360
         width: 582
         height: 402
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.662, y: 0.517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -469,8 +469,8 @@ TextureImporter:
         y: 10360
         width: 582
         height: 402
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.662, y: 0.517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -490,8 +490,8 @@ TextureImporter:
         y: 10360
         width: 582
         height: 402
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.662, y: 0.517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -511,8 +511,8 @@ TextureImporter:
         y: 9955
         width: 582
         height: 402
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.662, y: 0.517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -532,8 +532,8 @@ TextureImporter:
         y: 9338
         width: 705
         height: 595
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.277, y: 0.373}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -553,8 +553,8 @@ TextureImporter:
         y: 9338
         width: 705
         height: 595
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.277, y: 0.373}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -574,8 +574,8 @@ TextureImporter:
         y: 9338
         width: 705
         height: 595
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.277, y: 0.373}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -595,8 +595,8 @@ TextureImporter:
         y: 8737
         width: 658
         height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.43, y: 0.341}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -616,8 +616,8 @@ TextureImporter:
         y: 8737
         width: 658
         height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.43, y: 0.341}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -637,8 +637,8 @@ TextureImporter:
         y: 8737
         width: 658
         height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.43, y: 0.341}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -658,8 +658,8 @@ TextureImporter:
         y: 8737
         width: 658
         height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.43, y: 0.341}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -679,8 +679,8 @@ TextureImporter:
         y: 8737
         width: 658
         height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.43, y: 0.341}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -688,6 +688,447 @@ TextureImporter:
       bones: []
       spriteID: ab3c530cb0c71ae4eb570a0a98b5d63f
       internalID: -1043679402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackUp_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 8291
+        width: 713
+        height: 424
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22e92b2d8f9608d4dbfe765182c0b23c
+      internalID: 1355070483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackUp_1
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 8291
+        width: 713
+        height: 424
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fc14984e3de3234a97ae9ca2db776ef
+      internalID: -1734615366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackUp_2
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 8291
+        width: 713
+        height: 424
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63376cf214bab0c4dab040f192ef18ab
+      internalID: 947728751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackUp_3
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 8291
+        width: 713
+        height: 424
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85bd38ba1078dcc41a72ac3578decf62
+      internalID: 531513267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackUp_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 7864
+        width: 713
+        height: 424
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f937f31cc61f7d4a887cea45afbafec
+      internalID: -1466896449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackPart1_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 7218
+        width: 842
+        height: 624
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55531d204c480334da068a4087d1536a
+      internalID: -1651470220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackPart1_1
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 7218
+        width: 842
+        height: 624
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94d06044e006119449400c9a6366d19e
+      internalID: -420280487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackPart2_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 6604
+        width: 489
+        height: 592
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8b6c928685ec7c4092bf2078f99d58d
+      internalID: -1512324840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackPart2_1
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 6604
+        width: 489
+        height: 592
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee26e01811425194289826df5dfbd8bf
+      internalID: -636419632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackPart3_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 6184
+        width: 618
+        height: 398
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 171c60a6099f8b749938cf079591c34f
+      internalID: 1555243465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpAttackPart3_1
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 6184
+        width: 618
+        height: 398
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e898c0c93cec106459f6a1ef49dd169c
+      internalID: -725559936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpStart_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 11551
+        width: 610
+        height: 383
+      alignment: 9
+      pivot: {x: 0.49, y: 0.53}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48fed05df9335fe438ee6bf7f9fa3b17
+      internalID: 2145577891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpStart_1
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 11551
+        width: 610
+        height: 383
+      alignment: 9
+      pivot: {x: 0.49, y: 0.53}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a551250e285dcb4ca97c05187d772c1
+      internalID: 1610175581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJumpStart_2
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 11551
+        width: 610
+        height: 383
+      alignment: 9
+      pivot: {x: 0.49, y: 0.53}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d10b1676241d50746a52719dc4a65fa6
+      internalID: -1268054199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJump_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 11189
+        width: 604
+        height: 340
+      alignment: 9
+      pivot: {x: 0.607, y: 0.516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39a60ddc74cb5094c812ee2ef8ef99e0
+      internalID: -310297917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJump_1
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 11189
+        width: 604
+        height: 340
+      alignment: 9
+      pivot: {x: 0.607, y: 0.516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 176065d85d9d94f4b9ccb1e220995f59
+      internalID: -2032962397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJump_2
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 11189
+        width: 604
+        height: 340
+      alignment: 9
+      pivot: {x: 0.607, y: 0.516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aceb4c1630cfeb42a3d24aa8f5cf85b
+      internalID: 1543132126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightJump_3
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 11189
+        width: 604
+        height: 340
+      alignment: 9
+      pivot: {x: 0.607, y: 0.516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1295f7532ebe45a429a9f74030de6610
+      internalID: 637515742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightLand_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 10784
+        width: 610
+        height: 383
+      alignment: 9
+      pivot: {x: 0.493, y: 0.534}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5f04fd314ef014cadece81e96ffa1d
+      internalID: -810756995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightLand_1
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 10784
+        width: 610
+        height: 383
+      alignment: 9
+      pivot: {x: 0.493, y: 0.534}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9576b6c19563674a9704cc9d72520a5
+      internalID: 408802724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FalseKnightLand_2
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 10784
+        width: 610
+        height: 383
+      alignment: 9
+      pivot: {x: 0.493, y: 0.534}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd0debea6a30f04d81aec5404891b52
+      internalID: -268979625
       vertices: []
       indices: 
       edges: []
@@ -704,31 +1145,52 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       FalseKnight_Run1: -133138763
-      FalseKnight_Idle0: 335190993
+      FalseKnightLand_1: 408802724
+      FalseKnightJumpAttackUp_1: -1734615366
       FalseKnight_AttackTelegraph4: 286920670
-      FalseKnight_AttackTelegraph5: -43338979
+      FalseKnightJumpAttackPart2_0: -1512324840
       FalseKnight_Turn0: -212235917
+      FalseKnightJumpAttackUp_0: 1355070483
+      FalseKnightJumpStart_1: 1610175581
+      FalseKnightJump_3: 637515742
+      FalseKnight_Idle1: 1860083214
+      FalseKnight_Turn1: 1454188827
+      FalseKnight_AttackRecover3: 1220706115
+      FalseKnightJumpAttackUp_4: -1466896449
+      FalseKnightJump_0: -310297917
+      FalseKnight_AttackRecover4: -1043679402
+      FalseKnight_AttackRecover2: -180666628
+      FalseKnightJumpAttackPart1_1: -420280487
+      FalseKnight_RunStart1: -623101517
+      FalseKnight_AttackTelegraph2: -714436900
+      FalseKnight_AttackRecover1: 472227960
+      FalseKnightJumpStart_2: -1268054199
+      FalseKnightJumpAttackUp_3: 531513267
+      FalseKnightJumpAttackPart3_0: 1555243465
+      FalseKnightJumpAttackPart2_1: -636419632
+      FalseKnightJumpAttackUp_2: 947728751
+      FalseKnight_Idle0: 335190993
+      FalseKnight_AttackTelegraph5: -43338979
       FalseKnight_Idle4: 625858424
       FalseKnight_Run3: -500147570
       FalseKnight_Attack1: -136660215
-      FalseKnight_Idle1: 1860083214
+      FalseKnightJumpStart_0: 2145577891
       FalseKnight_RunStart0: 1124894916
+      FalseKnightJump_1: -2032962397
       FalseKnight_Idle3: -1007149637
       FalseKnight_Run4: 2095637770
-      FalseKnight_Turn1: 1454188827
-      FalseKnight_AttackRecover3: 1220706115
+      FalseKnightJumpAttackPart1_0: -1651470220
       FalseKnight_Attack0: 1437123045
-      FalseKnight_AttackRecover4: -1043679402
+      FalseKnightLand_0: -810756995
       FalseKnight_AttackRecover0: 427623311
-      FalseKnight_AttackRecover2: -180666628
       FalseKnight_AttackTelegraph0: 1886529442
-      FalseKnight_RunStart1: -623101517
       FalseKnight_AttackTelegraph1: -1536611719
-      FalseKnight_AttackTelegraph2: -714436900
-      FalseKnight_AttackRecover1: 472227960
       FalseKnight_Run2: 722770239
+      FalseKnightLand_2: -268979625
       FalseKnight_AttackTelegraph3: -83460171
+      FalseKnightJump_2: 1543132126
       FalseKnight_Run0: 787410887
+      FalseKnightJumpAttackPart3_1: -725559936
       FalseKnight_Attack2: -287487813
       FalseKnight_Idle2: 2121674440
   spritePackingTag: 

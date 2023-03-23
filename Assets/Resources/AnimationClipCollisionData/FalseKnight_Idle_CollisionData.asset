@@ -187,12 +187,22 @@ MonoBehaviour:
     circles: []
   groundboxes:
   - frame: 0
-    circles: []
+    circles:
+    - center: {x: 0.62495446, y: -1.8275177}
+      radius: 0.49814272
   - frame: 1
-    circles: []
+    circles:
+    - center: {x: 0.62495446, y: -1.8275177}
+      radius: 0.49814272
   - frame: 2
-    circles: []
+    circles:
+    - center: {x: 0.62495446, y: -1.8275177}
+      radius: 0.49814272
   - frame: 3
-    circles: []
+    circles:
+    - center: {x: 0.62495446, y: -1.8275177}
+      radius: 0.49814272
   - frame: 4
-    circles: []
+    circles:
+    - center: {x: 0.62495446, y: -1.8275177}
+      radius: 0.49814272

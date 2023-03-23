@@ -7,9 +7,12 @@ public class BossKnowledge : MonoBehaviour
     Transform playerTransform;
     Animator animator;
 
-    ParametrisedLine linearPathToPlayer;
+    ParametrisedLine linearPathToPlayer = new ParametrisedLine();
 
     public float closeThreshold;
+    public float closeThresholdX;
+    public float closeThresholdY;
+    Vector3 direction;
     void Update()
     {
         if (playerTransform == null)
@@ -28,7 +31,14 @@ public class BossKnowledge : MonoBehaviour
                 return;
         }
 
+        linearPathToPlayer.pathStart = transform.position;
+        linearPathToPlayer.pathEnd = playerTransform.position;
+        direction = linearPathToPlayer.direction;
+
         animator.SetBool("closeToPlayer", (GetDistanceFromPlayer() < closeThreshold));
+        animator.SetBool("closeToPlayerX", (GetXDistanceFromPlayer() < closeThresholdX));
+        animator.SetBool("closeToPlayerY", (GetYDistanceFromPlayer() < closeThresholdY));
+        animator.SetBool("facingPlayerX", (GetFaceDirectionX() == GetDirectionX()));
     }
 
     public Vector3 GetPlayerPosition ()
@@ -39,5 +49,38 @@ public class BossKnowledge : MonoBehaviour
     public float GetDistanceFromPlayer()
     {
         return Vector3.Distance(transform.position, GetPlayerPosition());
+    }
+
+    public float GetXDistanceFromPlayer()
+    {
+        return Mathf.Abs(transform.position.x - GetPlayerPosition().x);
+    }
+
+    public float GetYDistanceFromPlayer()
+    {
+        return Mathf.Abs(transform.position.y - GetPlayerPosition().y);
+    }
+
+    public int GetDirectionX ()
+    {
+        return Mathf.RoundToInt(Mathf.Sign(direction.x));
+    }
+    public int GetDirectionY ()
+    {
+        return Mathf.RoundToInt(Mathf.Sign(direction.y));
+    }
+
+    public int GetFaceDirectionX ()
+    {
+        return Mathf.RoundToInt(Mathf.Sign(animator.transform.localScale.x));
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (playerTransform == null)
+            return;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position, transform.position + direction);
     }
 }

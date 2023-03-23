@@ -16,32 +16,70 @@ MonoBehaviour:
   hitboxes:
   - frame: 0
     circles:
-    - center: {x: -0.24782097, y: -1.0025463}
-      radius: 1.5181701
+    - center: {x: 0.2110517, y: -0.070350766}
+      radius: 1.539356
+    - center: {x: 1.2897635, y: -1.102163}
+      radius: 0.4020182
+    - center: {x: -0.4455557, y: -1.7001448}
+      radius: 0.33166742
+    - center: {x: 0.51590466, y: 1.219414}
+      radius: 0.40201807
+    - center: {x: -0.480731, y: 1.3483918}
+      radius: 0.8827486
   - frame: 1
     circles:
-    - center: {x: -0.5294355, y: -1.0138109}
-      radius: 1.5181701
-    - center: {x: -0.87863636, y: 0.6646095}
-      radius: 0.34665495
+    - center: {x: -0.16415262, y: -0.11725092}
+      radius: 1.4221048
+    - center: {x: 1.2897635, y: -1.102163}
+      radius: 0.4020182
+    - center: {x: -0.4455557, y: -1.7001448}
+      radius: 0.33166742
+    - center: {x: 0.9145591, y: 0.8559349}
+      radius: 0.40201807
+    - center: {x: -0.8793857, y: 1.0318129}
+      radius: 0.8827486
   - frame: 2
     circles:
-    - center: {x: -0.27035058, y: -1.0588691}
-      radius: 1.5181701
-    - center: {x: 0.75472635, y: -0.19149786}
-      radius: 0.34665495
+    - center: {x: 0.03517461, y: -0.19932693}
+      radius: 1.4221048
+    - center: {x: 1.2897635, y: -1.102163}
+      radius: 0.4020182
+    - center: {x: -0.4455557, y: -1.7001448}
+      radius: 0.33166742
+    - center: {x: 1.1607871, y: 0.6331572}
+      radius: 0.40201807
+    - center: {x: -0.66833305, y: 1.1138887}
+      radius: 0.8827486
   - frame: 3
     circles:
-    - center: {x: 0.29287767, y: -1.453129}
-      radius: 1.5181701
-    - center: {x: 1.903712, y: -1.5319815}
-      radius: 0.34665495
+    - center: {x: 0.66833186, y: -0.45728007}
+      radius: 1.4221048
+    - center: {x: 1.7235934, y: -1.6297939}
+      radius: 0.4020182
+    - center: {x: -0.4455557, y: -1.7001448}
+      radius: 0.33166742
+    - center: {x: 2.3098497, y: -0.6097069}
+      radius: 0.40201807
+    - center: {x: 1.4304662, y: -0.04689914}
+      radius: 0.8827486
+    - center: {x: 1.2545896, y: 0.5628065}
+      radius: 0.7889478
   - frame: 4
     circles:
-    - center: {x: 0.27034855, y: -1.3179543}
-      radius: 1.675874
-    - center: {x: 1.8924475, y: -1.2954254}
-      radius: 0.34665495
+    - center: {x: 0.66833186, y: -0.45728007}
+      radius: 1.4221048
+    - center: {x: 1.7235934, y: -1.6297939}
+      radius: 0.4020182
+    - center: {x: -0.4455557, y: -1.7001448}
+      radius: 0.33166742
+    - center: {x: 2.321575, y: -0.31657833}
+      radius: 0.46064353
+    - center: {x: 1.5477176, y: -0.070349306}
+      radius: 0.8827486
+    - center: {x: 0.89111066, y: 1.1959636}
+      radius: 0.7889478
+    - center: {x: -0.023449898, y: -0.16415212}
+      radius: 1
   hurtboxes:
   - frame: 0
     circles: []
@@ -55,12 +93,22 @@ MonoBehaviour:
     circles: []
   groundboxes:
   - frame: 0
-    circles: []
+    circles:
+    - center: {x: 0.42610526, y: -1.7991107}
+      radius: 0.4602666
   - frame: 1
-    circles: []
+    circles:
+    - center: {x: 0.42610526, y: -1.7991107}
+      radius: 0.4602666
   - frame: 2
-    circles: []
+    circles:
+    - center: {x: 0.42610526, y: -1.7991107}
+      radius: 0.4602666
   - frame: 3
-    circles: []
+    circles:
+    - center: {x: 0.42610526, y: -1.7991107}
+      radius: 0.4602666
   - frame: 4
-    circles: []
+    circles:
+    - center: {x: 0.42610526, y: -1.7991107}
+      radius: 0.4602666

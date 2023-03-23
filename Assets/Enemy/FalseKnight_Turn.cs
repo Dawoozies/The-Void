@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FalseKnight_Run : StateMachineBehaviour
+public class FalseKnight_Turn : StateMachineBehaviour
 {
-    Rigidbody2D rb;
     BossKnowledge knowledge;
+    SpriteDirection spriteDirection;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -15,13 +15,16 @@ public class FalseKnight_Run : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(rb == null)
-            rb = animator.GetComponentInParent<Rigidbody2D>();
-
         if (knowledge == null)
             knowledge = animator.GetComponentInParent<BossKnowledge>();
 
-        rb.velocity = new Vector2(animator.transform.localScale.x*10f, rb.velocity.y);
+        if (spriteDirection == null)
+            spriteDirection = animator.GetComponentInParent<SpriteDirection>();
+
+        if(!animator.GetBool("facingPlayerX"))
+        {
+            spriteDirection.SetDirection(knowledge.GetDirectionX());
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
