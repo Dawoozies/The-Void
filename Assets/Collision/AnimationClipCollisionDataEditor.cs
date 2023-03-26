@@ -5,10 +5,7 @@ public class AnimationClipCollisionDataEditor : EditorWindow
 {
     float time = 0f;
 
-    Transform currentlySelected;
-
     Transform entityToEdit;
-    Animator entityAnimator;
     AnimationClip animationClip;
     List<float> currentFrameTimes;
     int currentFrame = 0;
@@ -34,8 +31,6 @@ public class AnimationClipCollisionDataEditor : EditorWindow
         {
             entityToEdit = Selection.transforms[0];
             GUILayout.Label("Entity: " + entityToEdit.name, EditorStyles.label);
-
-            entityAnimator = entityToEdit.GetComponent<Animator>();
 
             AnimationMode.StartAnimationMode();
 
