@@ -13,6 +13,7 @@ public class FrameSoundDataEditor : EditorWindow
     List<float> frameTimes;
     FrameSoundData currentSoundData;
     AudioClip soundToAdd;
+    List<AudioClip> soundList;
     [MenuItem("Window/Frame Sound Data Editor")]
     static void Init()
     {
@@ -23,12 +24,12 @@ public class FrameSoundDataEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Frame Sound Data", EditorStyles.boldLabel);
-        if(Selection.transforms.Length > 0)
+        if (Selection.transforms.Length > 0)
         {
             selectedTransform = Selection.transforms[0];
             newAnimationClip = EditorGUILayout.ObjectField(newAnimationClip, typeof(AnimationClip), false) as AnimationClip;
 
-            if(newAnimationClip == null)
+            if (newAnimationClip == null)
                 return;
 
             if (animationClip == null)
@@ -53,6 +54,7 @@ public class FrameSoundDataEditor : EditorWindow
             frame = Mathf.FloorToInt(time * animationClip.frameRate);
             float totalFrames = (animationClip.length - 1) * animationClip.frameRate;
             GUILayout.Label("Current Frame = " + frame);
+            GUILayout.Label("Total Frames = " + Mathf.RoundToInt(totalFrames));
 
             frameTimes = new List<float>();
             for (int i = 0; frameTimes.Count <= totalFrames; i++)
@@ -62,7 +64,7 @@ public class FrameSoundDataEditor : EditorWindow
 
             //FRAME SELECTION STUFF
             GUILayout.BeginHorizontal();
-            if(GUILayout.Button("Previous Frame"))
+            if (GUILayout.Button("Previous Frame"))
             {
                 frame--;
                 if (frame < 0)
@@ -70,13 +72,10 @@ public class FrameSoundDataEditor : EditorWindow
 
                 time = frameTimes[frame];
             }
-            if(GUILayout.Button("Next Frame"))
+            if (GUILayout.Button("Next Frame"))
             {
                 if (frame < frameTimes.Count - 1)
                     frame++;
-
-                if (frame >= frameTimes.Count)
-                    frame = frameTimes.Count - 1;
 
                 time = frameTimes[frame];
             }
@@ -84,83 +83,141 @@ public class FrameSoundDataEditor : EditorWindow
             EditorGUILayout.EndVertical();
 
             string[] results = AssetDatabase.FindAssets(animationClip.name + "_SoundData");
-            if(results.Length <= 0)
+            if (results.Length <= 0)
             {
                 FrameSoundData frameSoundData = CreateInstance<FrameSoundData>();
-                frameSoundData.clip = animationClip;
-                frameSoundData.dataList = new List<List<AudioClip>>();
 
-                for (int i = 0; frameSoundData.dataList.Count < frameTimes.Count; i++)
+                frameSoundData.clip = animationClip;
+
+                if (frameSoundData.dataList == null)
                 {
-                    frameSoundData.dataList.Add(new List<AudioClip>());
+                    frameSoundData.dataList = new List<SoundList>();
+
+                    for (int i = 0; i <= totalFrames; i++)
+                    {
+                        frameSoundData.dataList.Add(new SoundList(i));
+                    }
                 }
 
-                if(!AssetDatabase.IsValidFolder("Assets/Resources/FrameSoundData"))
+                if (!AssetDatabase.IsValidFolder("Assets/Resources/FrameSoundData"))
                 {
                     AssetDatabase.CreateFolder("Assets/Resources", "FrameSoundData");
                 }
 
                 AssetDatabase.CreateAsset(frameSoundData, $"Assets/Resources/FrameSoundData/{animationClip.name}_SoundData.asset");
                 AssetDatabase.SaveAssets();
-
-                return;
             }
 
-            currentSoundData = AssetDatabase.LoadAssetAtPath<FrameSoundData>(AssetDatabase.GUIDToAssetPath(results[0]));
-
-            if (currentSoundData.dataList == null)
-                currentSoundData.dataList = new List<List<AudioClip>>();
-
-            while(currentSoundData.dataList.Count < totalFrames)
+            if(results.Length > 0)
             {
-                currentSoundData.dataList.Add(new List<AudioClip>());
-            }
+                currentSoundData = AssetDatabase.LoadAssetAtPath<FrameSoundData>(AssetDatabase.GUIDToAssetPath(results[0]));
+                soundToAdd = EditorGUILayout.ObjectField(soundToAdd, typeof(AudioClip), false) as AudioClip;
 
-
-            GUILayout.BeginHorizontal();
-            soundToAdd = EditorGUILayout.ObjectField(soundToAdd, typeof(AudioClip), false) as AudioClip;
-            if(GUILayout.Button("Add"))
-            {
-                currentSoundData.dataList[frame].Add(soundToAdd);
-                soundToAdd = null;
-
-                EditorUtility.SetDirty(currentSoundData);
-                Repaint();
-            }
-            GUILayout.EndHorizontal();
-
-            //We should add a button which will let us play all sound assigned to the current frame
-
-            if (currentSoundData == null)
-                return;
-            if (currentSoundData.dataList == null)
-                return;
-
-            GUILayout.BeginVertical();
-            for (int i = 0; i < currentSoundData.dataList[frame].Count; i++)
-            {
-                GUILayout.BeginHorizontal();
-                currentSoundData.dataList[frame][i] = EditorGUILayout.ObjectField(currentSoundData.dataList[frame][i], typeof(AudioClip), false) as AudioClip;
-                if (GUILayout.Button("Play"))
-                    AudioPreview.Play(currentSoundData.dataList[frame][i]);
-                if (GUILayout.Button("Remove"))
+                if (GUILayout.Button("Add To Cycle"))
                 {
-                    currentSoundData.dataList[frame].RemoveAt(i);
+                    if (currentSoundData.cycleAudioClips == null)
+                        currentSoundData.cycleAudioClips = new List<AudioClip>();
+
+                    currentSoundData.cycleAudioClips.Add(soundToAdd);
+                    soundToAdd = null;
+
                     EditorUtility.SetDirty(currentSoundData);
                     Repaint();
                 }
-                GUILayout.EndHorizontal();
+                if(GUILayout.Button("Add To Fixed"))
+                {
+                    if (currentSoundData.dataList[frame].fixedAudioClips == null)
+                        currentSoundData.dataList[frame].fixedAudioClips = new List<AudioClip>();
+
+                    currentSoundData.dataList[frame].fixedAudioClips.Add(soundToAdd);
+                    soundToAdd = null;
+
+                    EditorUtility.SetDirty(currentSoundData);
+                    Repaint();
+                }
+                if(GUILayout.Button("Add To Random"))
+                {
+                    if (currentSoundData.dataList[frame].randomAudioClips == null)
+                        currentSoundData.dataList[frame].randomAudioClips = new List<AudioClip>();
+
+                    currentSoundData.dataList[frame].randomAudioClips.Add(soundToAdd);
+                    soundToAdd = null;
+
+                    EditorUtility.SetDirty(currentSoundData);
+                    Repaint();
+                }
+
+                GUILayout.BeginVertical();
+                if (currentSoundData.cycleAudioClips != null)
+                {
+                    if (currentSoundData.cycleAudioClips.Count > 0)
+                    {
+                        currentSoundData.dataList[frame].useCycleAudioClips = EditorGUILayout.Toggle($"Frame {frame} Use Cycle Clips", currentSoundData.dataList[frame].useCycleAudioClips);
+                        GUILayout.Label("Cycle Audio Clips");
+                        for (int i = 0; i < currentSoundData.cycleAudioClips.Count; i++)
+                        {
+                            GUILayout.BeginHorizontal();
+                            currentSoundData.cycleAudioClips[i] = EditorGUILayout.ObjectField(currentSoundData.cycleAudioClips[i], typeof(AudioClip), false) as AudioClip;
+                            if(GUILayout.Button("Remove"))
+                            {
+                                currentSoundData.cycleAudioClips.RemoveAt(i);
+
+                                EditorUtility.SetDirty(currentSoundData);
+                                Repaint();
+                            }
+                            GUILayout.EndHorizontal();
+                        }
+                    }
+                }
+                if (currentSoundData.dataList[frame].fixedAudioClips != null)
+                {
+                    if (currentSoundData.dataList[frame].fixedAudioClips.Count > 0)
+                    {
+                        GUILayout.Label("Fixed Audio Clips");
+                        for (int i = 0; i < currentSoundData.dataList[frame].fixedAudioClips.Count; i++)
+                        {
+                            GUILayout.BeginHorizontal();
+                            currentSoundData.dataList[frame].fixedAudioClips[i] = EditorGUILayout.ObjectField(currentSoundData.dataList[frame].fixedAudioClips[i], typeof(AudioClip), false) as AudioClip;
+                            if(GUILayout.Button("Remove"))
+                            {
+                                currentSoundData.dataList[frame].fixedAudioClips.RemoveAt(i);
+
+                                EditorUtility.SetDirty(currentSoundData);
+                                Repaint();
+                            }
+                            GUILayout.EndHorizontal();
+                        }
+                    }
+                }
+                if (currentSoundData.dataList[frame].randomAudioClips != null)
+                {
+                    if (currentSoundData.dataList[frame].randomAudioClips.Count > 0)
+                    {
+                        GUILayout.Label("Random Audio Clips");
+                        for (int i = 0; i < currentSoundData.dataList[frame].randomAudioClips.Count; i++)
+                        {
+                            GUILayout.BeginHorizontal();
+                            currentSoundData.dataList[frame].randomAudioClips[i] = EditorGUILayout.ObjectField(currentSoundData.dataList[frame].randomAudioClips[i], typeof(AudioClip), false) as AudioClip;
+                            if(GUILayout.Button("Remove"))
+                            {
+                                currentSoundData.dataList[frame].randomAudioClips.RemoveAt(i);
+
+                                EditorUtility.SetDirty(currentSoundData);
+                                Repaint();
+                            }
+                            GUILayout.EndHorizontal();
+                        }
+                    }
+                }
+                GUILayout.EndVertical();
             }
-            GUILayout.EndVertical();
         }
     }
-
     private void OnDestroy()
     {
         if (AnimationMode.InAnimationMode())
             AnimationMode.StopAnimationMode();
     }
-
     private void Update()
     {
         if (selectedTransform == null)
