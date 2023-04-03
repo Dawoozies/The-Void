@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Player_HalberdGUpSpinLoop_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 2663fbcd2ff1e7a4aa25e5d62e75c72d, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.24785799, y: 0.24677396}
+      radius: 0.2300353
+    - center: {x: 0.372028, y: -0.22321683}
+      radius: 0.26125932
+    - center: {x: 0.35076916, y: -0.66964996}
+      radius: 0.18685365
+  - frame: 1
+    circles:
+    - center: {x: 0.39341652, y: 0.27709848}
+      radius: 0.2300353
+    - center: {x: 0.26892412, y: -0.21715188}
+      radius: 0.26125932
+    - center: {x: 0.28405488, y: -0.6817797}
+      radius: 0.18685365
+  hurtboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.39084554, y: 2.4170713}
+      radius: 0.44458795
+    - center: {x: 0.38056016, y: 1.7588053}
+      radius: 0.43430257
+    - center: {x: 0.41141605, y: 1.0079706}
+      radius: 0.45487332
+    - center: {x: 0.40113044, y: 0.2674207}
+      radius: 0.47544444
+  - frame: 1
+    circles:
+    - center: {x: 0.2159934, y: 2.375929}
+      radius: 0.45487332
+    - center: {x: 0.21599269, y: 1.6970919}
+      radius: 0.45487332
+    - center: {x: 0.2159934, y: 0.97711384}
+      radius: 0.46515858
+    - center: {x: 0.20570803, y: 0.23656437}
+      radius: 0.46515906
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.3032471, y: -2.0984674}
+      radius: 0.12058449
+  - frame: 1
+    circles:
+    - center: {x: 0.3032471, y: -2.0984674}
+      radius: 0.12058449

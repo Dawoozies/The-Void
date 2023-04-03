@@ -1,0 +1,365 @@
+fileFormatVersion: 2
+guid: 90fc9b75860502a4395a314adc39fad6
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 470
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4531
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a144ae031d71e4191100c2992735c7
+      internalID: -603189504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_1
+      rect:
+        serializedVersion: 2
+        x: 2450
+        y: 4531
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f2da8bf0ed4b24282ae073fb835e71
+      internalID: 1366380415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_2
+      rect:
+        serializedVersion: 2
+        x: 4898
+        y: 4531
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92803433174cad1419011193e6f49f49
+      internalID: 929026223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_3
+      rect:
+        serializedVersion: 2
+        x: 7346
+        y: 4531
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0a9277a105afbf44b36562fb48c152f
+      internalID: 1618888636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2515
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e1d589292851ad47b4065f27e168ae4
+      internalID: 192370654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_5
+      rect:
+        serializedVersion: 2
+        x: 2450
+        y: 2515
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48031d942fe3ed742832df6ec0693893
+      internalID: -1425513072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_6
+      rect:
+        serializedVersion: 2
+        x: 4898
+        y: 2515
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fdbcf67a277beb40b524d3819f436de
+      internalID: -1292666554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_7
+      rect:
+        serializedVersion: 2
+        x: 7346
+        y: 2515
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea7ef0ceef9881048b2b41560329fac5
+      internalID: 1663690688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 499
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0b623d6a326b2340aa14702c1a9742a
+      internalID: -1919783548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_9
+      rect:
+        serializedVersion: 2
+        x: 2450
+        y: 499
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc690b1f32455e64d93a1d17ab0878f7
+      internalID: -2090324180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_AirHeavy_Halberd_RGH_SPR_TV_10
+      rect:
+        serializedVersion: 2
+        x: 4898
+        y: 499
+        width: 2444
+        height: 2012
+      alignment: 9
+      pivot: {x: 0.465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fd8992c301bf6544ae38a15930367d2
+      internalID: -48335186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      P_AirHeavy_Halberd_RGH_SPR_TV_0: -603189504
+      P_AirHeavy_Halberd_RGH_SPR_TV_6: -1292666554
+      P_AirHeavy_Halberd_RGH_SPR_TV_3: 1618888636
+      P_AirHeavy_Halberd_RGH_SPR_TV_5: -1425513072
+      P_AirHeavy_Halberd_RGH_SPR_TV_9: -2090324180
+      P_AirHeavy_Halberd_RGH_SPR_TV_8: -1919783548
+      P_AirHeavy_Halberd_RGH_SPR_TV_2: 929026223
+      P_AirHeavy_Halberd_RGH_SPR_TV_7: 1663690688
+      P_AirHeavy_Halberd_RGH_SPR_TV_10: -48335186
+      P_AirHeavy_Halberd_RGH_SPR_TV_4: 192370654
+      P_AirHeavy_Halberd_RGH_SPR_TV_1: 1366380415
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
 {
     Animator animator;
+    float horizontalInput => InputManager.ins.L_Input.x;
     float verticalInput => InputManager.ins.L_Input.y;
+    public bool lightAttackHeld;
+    public float lightCharge;
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -16,6 +20,11 @@ public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
     void Update()
     {
         animator.SetFloat("L_InputY", verticalInput);
+
+        if(lightAttackHeld)
+        {
+            lightCharge += Time.deltaTime;
+        }
     }
 
     public void Update_AnyAttackInput(string attackType, bool anyAttackInput)
@@ -26,6 +35,15 @@ public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
         {
             animator.SetBool("LightAttack", anyAttackInput);
             animator.SetBool("Attack", anyAttackInput);
+
+            lightAttackHeld = anyAttackInput;
+            
+            if(anyAttackInput)
+            {
+                //Then we just pushed the button
+                //So we want to start the charge time
+                lightCharge = 0f;
+            }
         }
     }
 }
