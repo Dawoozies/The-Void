@@ -7,8 +7,8 @@ public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
     Animator animator;
     float horizontalInput => InputManager.ins.L_Input.x;
     float verticalInput => InputManager.ins.L_Input.y;
-    public bool lightAttackHeld;
-    public float lightCharge;
+    bool lightAttackHeld;
+    float lightCharge;
 
     void Start()
     {

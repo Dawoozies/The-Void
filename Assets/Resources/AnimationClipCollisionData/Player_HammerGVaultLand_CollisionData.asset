@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Player_HammerGVaultLand_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 4f51153038d4ac5429df6c45e21af6a6, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.8348353, y: 0.94697726}
+      radius: 0.3582983
+    - center: {x: 0.7912245, y: 0.40495747}
+      radius: 0.38944888
+  - frame: 1
+    circles:
+    - center: {x: 0.8348353, y: 0.94697726}
+      radius: 0.3582983
+    - center: {x: 0.7912245, y: 0.40495747}
+      radius: 0.38944888
+  - frame: 2
+    circles:
+    - center: {x: 0.8348353, y: 0.94697726}
+      radius: 0.3582983
+    - center: {x: 0.7912245, y: 0.40495747}
+      radius: 0.38944888
+  - frame: 3
+    circles:
+    - center: {x: 0.9220569, y: -0.062301457}
+      radius: 0.3582983
+    - center: {x: 0.7413837, y: -0.40495718}
+      radius: 0.38944888
+  - frame: 4
+    circles:
+    - center: {x: 0.9220569, y: -0.062301457}
+      radius: 0.3582983
+    - center: {x: 0.7413837, y: -0.40495718}
+      radius: 0.38944888
+  - frame: 5
+    circles:
+    - center: {x: 0.9220569, y: -0.062301457}
+      radius: 0.3582983
+    - center: {x: 0.7413837, y: -0.40495718}
+      radius: 0.38944888
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []
+  - frame: 3
+    circles: []
+  - frame: 4
+    circles: []
+  - frame: 5
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.78499436, y: -1.0715795}
+      radius: 0.38321877
+  - frame: 1
+    circles:
+    - center: {x: 0.78499436, y: -1.0715795}
+      radius: 0.38321877
+  - frame: 2
+    circles:
+    - center: {x: 0.78499436, y: -1.0715795}
+      radius: 0.38321877
+  - frame: 3
+    circles:
+    - center: {x: 0.78499436, y: -1.0715795}
+      radius: 0.38321877
+  - frame: 4
+    circles:
+    - center: {x: 0.78499436, y: -1.0715795}
+      radius: 0.38321877
+  - frame: 5
+    circles:
+    - center: {x: 0.78499436, y: -1.0715795}
+      radius: 0.38321877
