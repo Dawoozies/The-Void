@@ -54,9 +54,9 @@ MonoBehaviour:
   groundboxes:
   - frame: 0
     circles:
-    - center: {x: 0.3032471, y: -2.0984674}
+    - center: {x: 0.28248137, y: -1.7939044}
       radius: 0.12058449
   - frame: 1
     circles:
-    - center: {x: 0.3032471, y: -2.0984674}
+    - center: {x: 0.28248137, y: -1.7939044}
       radius: 0.12058449

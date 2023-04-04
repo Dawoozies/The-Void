@@ -52,7 +52,8 @@ public class FlashOnIFrames : MonoBehaviour, Listener_IFrames
 
             if (t1 == t2)
             {
-                spriteRenderer.color = offColor;
+                if(spriteRenderer.color == onColor)
+                    spriteRenderer.color = offColor;
             }
 
             timerValues.Enqueue(t1);

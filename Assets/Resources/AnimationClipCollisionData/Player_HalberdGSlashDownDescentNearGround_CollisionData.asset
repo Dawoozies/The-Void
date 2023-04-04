@@ -10,17 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
-  m_Name: Player_AirDodge_CollisionData
+  m_Name: Player_HalberdGSlashDownDescentNearGround_CollisionData
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 6e1f1fbcd59e62b4dab9fd25cadde0e2, type: 2}
+  animationClip: {fileID: 7400000, guid: e9accd54866a23540ad542c211ae35d5, type: 2}
   hitboxes:
   - frame: 0
-    circles: []
+    circles:
+    - center: {x: -0.11345911, y: 0.3702333}
+      radius: 0.28341877
+    - center: {x: -0.1498251, y: -0.06595534}
+      radius: 0.23564672
+    - center: {x: -0.1617682, y: -0.40170354}
+      radius: 0.2356466
   hurtboxes:
   - frame: 0
     circles: []
   groundboxes:
   - frame: 0
     circles:
-    - center: {x: 0.3536514, y: -1.2764076}
-      radius: 0.25118995
+    - center: {x: -0.119855404, y: -1.6697583}
+      radius: 0.24668801

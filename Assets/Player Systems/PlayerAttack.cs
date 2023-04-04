@@ -25,6 +25,8 @@ public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
         {
             lightCharge += Time.deltaTime;
         }
+
+        animator.SetFloat("AttackCharge", lightCharge);
     }
 
     public void Update_AnyAttackInput(string attackType, bool anyAttackInput)
