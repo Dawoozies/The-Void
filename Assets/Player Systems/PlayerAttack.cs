@@ -27,6 +27,44 @@ public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
         }
 
         animator.SetFloat("AttackCharge", lightCharge);
+
+        bool atLowThreshold = (Mathf.Abs(horizontalInput) <= 0.35f);
+        bool upDirection = false;
+        bool neutralDirection = false;
+        bool downDirection = false;
+        if(atLowThreshold)
+        {
+            //Directional input should stay at max sensitivity
+            if(verticalInput > 0.25f)
+            {
+                upDirection = true;
+            }
+            if(verticalInput < -0.25f)
+            {
+                downDirection = true;
+            }
+        }
+        else
+        {
+            //0.95f comes from specific line gradient
+            if(verticalInput > Mathf.Abs(0.95f*horizontalInput))
+            {
+                upDirection = true;
+            }
+            if(verticalInput < -Mathf.Abs(0.95f*horizontalInput))
+            {
+                downDirection = true;
+            }
+        }
+
+        if(!upDirection && !downDirection)
+        {
+            neutralDirection = true;
+        }
+
+        animator.SetBool("ATKDirection = Up", upDirection);
+        animator.SetBool("ATKDirection = Neutral", neutralDirection);
+        animator.SetBool("ATKDirection = Down", downDirection);
     }
 
     public void Update_AnyAttackInput(string attackType, bool anyAttackInput)
