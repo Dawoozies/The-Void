@@ -14,8 +14,15 @@ public class AirDodge : StateMachineBehaviour
         if (rb == null)
             rb = animator.GetComponentInParent<Rigidbody2D>();
 
-        Vector2 rInput = InputManager.ins.L_Input;
-        airDodgeVelocity = new Vector2(rInput.x, rInput.y) * airDodgeSpeed;
+        Vector2 L_Input = InputManager.ins.L_Input;
+        Vector2 waveDashHelp = new Vector2();
+        if(Mathf.Abs(L_Input.x) > 0.35f && L_Input.y < -0.25f)
+        {
+            //Then add some x velocity in the direction the player is trying to go
+            waveDashHelp.x = Mathf.Sign(L_Input.x) * 10f;
+            waveDashHelp.y = -10f;
+        }
+        airDodgeVelocity = new Vector2(L_Input.x, L_Input.y) * airDodgeSpeed + waveDashHelp;
 
         animator.SetInteger("AirDodgeCount", 1);
     }

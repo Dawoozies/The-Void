@@ -47,11 +47,11 @@ public class PlayerAttack : MonoBehaviour, Listener_AnyAttackInput
         else
         {
             //0.95f comes from specific line gradient
-            if(verticalInput > Mathf.Abs(0.95f*horizontalInput))
+            if(verticalInput > Mathf.Abs(0.5f*horizontalInput))
             {
                 upDirection = true;
             }
-            if(verticalInput < -Mathf.Abs(0.95f*horizontalInput))
+            if(verticalInput < -Mathf.Abs(0.5f*horizontalInput))
             {
                 downDirection = true;
             }

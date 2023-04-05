@@ -82,6 +82,9 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("GroundAttack"))
             return;
 
+        if (animator.GetBool("STATETYPE:StopMovement"))
+            return;
+
         RunMovement();
         JumpMovement();
     }
