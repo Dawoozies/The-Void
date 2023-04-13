@@ -1030,28 +1030,28 @@ AnimatorStateMachine:
     m_Position: {x: -1180, y: 1250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2907583300526561820}
-    m_Position: {x: -2930, y: -350, z: 0}
+    m_Position: {x: -2660, y: -440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5300078810125770834}
-    m_Position: {x: -2930, y: -420, z: 0}
+    m_Position: {x: -2660, y: -510, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2609881150068017482}
-    m_Position: {x: -2930, y: -490, z: 0}
+    m_Position: {x: -2660, y: -580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5174806249235625573}
-    m_Position: {x: -2930, y: -560, z: 0}
+    m_Position: {x: -2660, y: -650, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -252998032341857128}
-    m_Position: {x: -2930, y: -620, z: 0}
+    m_Position: {x: -2660, y: -710, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3306006937838031614}
-    m_Position: {x: -2930, y: -200, z: 0}
+    m_Position: {x: -2660, y: -290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5265938134219265912}
-    m_Position: {x: -2930, y: -270, z: 0}
+    m_Position: {x: -2660, y: -360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -522129713344304861}
-    m_Position: {x: -3330, y: -230, z: 0}
+    m_Position: {x: -3060, y: -320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7415253553629055547}
     m_Position: {x: 610, y: -760, z: 0}
@@ -1129,49 +1129,49 @@ AnimatorStateMachine:
     m_Position: {x: 1520, y: -610, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8342641337425281254}
-    m_Position: {x: -630, y: -600, z: 0}
+    m_Position: {x: -970, y: -720, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5326894957634765234}
-    m_Position: {x: -360, y: -670, z: 0}
+    m_Position: {x: -700, y: -790, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6925052650249097581}
-    m_Position: {x: -630, y: -670, z: 0}
+    m_Position: {x: -970, y: -790, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8351652725190730583}
-    m_Position: {x: -630, y: -420, z: 0}
+    m_Position: {x: -970, y: -540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -130708449705496588}
-    m_Position: {x: -630, y: -330, z: 0}
+    m_Position: {x: -970, y: -450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4280869428278363537}
-    m_Position: {x: -630, y: -250, z: 0}
+    m_Position: {x: -970, y: -370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2323555742277581937}
-    m_Position: {x: -400, y: -140, z: 0}
+    m_Position: {x: -740, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6872389599387700348}
-    m_Position: {x: -400, y: -60, z: 0}
+    m_Position: {x: -740, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7995453227787544999}
-    m_Position: {x: -400, y: 20, z: 0}
+    m_Position: {x: -740, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5240270910894783151}
-    m_Position: {x: -400, y: 100, z: 0}
+    m_Position: {x: -740, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4131399902314501595}
-    m_Position: {x: -630, y: -140, z: 0}
+    m_Position: {x: -970, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6630153060282170121}
-    m_Position: {x: -630, y: -740, z: 0}
+    m_Position: {x: -970, y: -860, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2673565389778560421}
-    m_Position: {x: -360, y: -600, z: 0}
+    m_Position: {x: -700, y: -720, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8280561717367495789}
-    m_Position: {x: 40, y: -250, z: 0}
+    m_Position: {x: -300, y: -370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4334003030217772127}
-    m_Position: {x: 40, y: -300, z: 0}
+    m_Position: {x: -300, y: -420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1898054177351738839}
     m_Position: {x: -1420, y: -1250, z: 0}
@@ -3788,7 +3788,7 @@ AnimatorController:
   - m_Name: WeaponID
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 2
+    m_DefaultInt: 1
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Attack

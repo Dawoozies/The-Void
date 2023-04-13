@@ -22,6 +22,7 @@ public class HitboxManager : MonoBehaviour
     //Enemy = 9
     //Projectile = 10
     public int hitboxLayer;
+    public bool setToTrigger;
 
     void Start()
     {
@@ -76,7 +77,10 @@ public class HitboxManager : MonoBehaviour
                 newHitbox.parent = hitboxPool;
                 CircleCollider2D newCircleCollider = newHitbox.gameObject.AddComponent(typeof(CircleCollider2D)) as CircleCollider2D;
 
-                if(hitboxLayer == 0)
+                if(setToTrigger)
+                    newCircleCollider.isTrigger = true;
+
+                if (hitboxLayer == 0)
                 {
                     Debug.LogError("Hitbox Manager Error: No layer selected for hitboxes, this will result in hurtboxes not damaging things properly");
                 }
