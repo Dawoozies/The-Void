@@ -18,6 +18,9 @@ public class FrameByFrameAnimation : MonoBehaviour
 
     void Update()
     {
+        if (animator.GetBool("STATETYPE:NoFrameByFrame"))
+            return;
+
         if(currentClip == null || currentClip.name != animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
         {
             currentClip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
