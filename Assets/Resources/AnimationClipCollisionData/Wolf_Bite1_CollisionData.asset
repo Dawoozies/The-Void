@@ -1,0 +1,286 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: Wolf_Bite1_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 083cf052b1fff5542bfa43b5a00de235, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.17672586, y: 0.88362557}
+      radius: 3.7981534
+    - center: {x: -2.267977, y: -3.181059}
+      radius: 2.5021667
+    - center: {x: 0.44181395, y: -4.3297744}
+      radius: 2.354895
+  - frame: 1
+    circles:
+    - center: {x: -0.17672586, y: 0.88362557}
+      radius: 3.7981534
+    - center: {x: -2.267977, y: -3.181059}
+      radius: 2.5021667
+    - center: {x: 0.44181395, y: -4.3297744}
+      radius: 2.354895
+  - frame: 2
+    circles:
+    - center: {x: -0.0883646, y: 0.85417145}
+      radius: 3.7981534
+    - center: {x: -2.267977, y: -3.181059}
+      radius: 2.5021667
+    - center: {x: 0.44181395, y: -4.3297744}
+      radius: 2.354895
+  - frame: 3
+    circles:
+    - center: {x: -0.0883646, y: 0.85417145}
+      radius: 3.7981534
+    - center: {x: -2.267977, y: -3.181059}
+      radius: 2.5021667
+    - center: {x: 0.44181395, y: -4.3297744}
+      radius: 2.354895
+  - frame: 4
+    circles:
+    - center: {x: -0.0883646, y: 0.85417145}
+      radius: 3.7981534
+    - center: {x: -2.267977, y: -3.181059}
+      radius: 2.5021667
+    - center: {x: 0.44181395, y: -4.3297744}
+      radius: 2.354895
+  - frame: 5
+    circles:
+    - center: {x: 1.3254385, y: 1.1781678}
+      radius: 3.1207056
+    - center: {x: -1.7967086, y: 2.7981527}
+      radius: 1.7952633
+    - center: {x: -4.3003206, y: 2.1501596}
+      radius: 1.4418135
+    - center: {x: -0.05890894, y: -2.8570623}
+      radius: 2.0603526
+    - center: {x: -0.5301771, y: -5.625761}
+      radius: 2.0603528
+  - frame: 6
+    circles:
+    - center: {x: 1.3254385, y: 1.1781678}
+      radius: 3.1207056
+    - center: {x: -1.7967086, y: 2.7981527}
+      radius: 1.7952633
+    - center: {x: -4.3003206, y: 2.1501596}
+      radius: 1.4418135
+    - center: {x: -0.05890894, y: -2.8570623}
+      radius: 2.0603526
+    - center: {x: -0.5301771, y: -5.625761}
+      radius: 2.0603528
+  - frame: 7
+    circles:
+    - center: {x: -3.2097955, y: -1.9096496}
+      radius: 3.1207056
+    - center: {x: -5.849471, y: -0.675642}
+      radius: 1.7952633
+    - center: {x: -8.160093, y: -0.8733287}
+      radius: 1.4418135
+    - center: {x: -4.2724953, y: -6.0413737}
+      radius: 2.0603526
+    - center: {x: -4.840258, y: -9.389038}
+      radius: 2.0603528
+  - frame: 8
+    circles:
+    - center: {x: -3.2097955, y: -1.9096496}
+      radius: 3.1207056
+    - center: {x: -5.849471, y: -0.675642}
+      radius: 1.7952633
+    - center: {x: -8.160093, y: -0.8733287}
+      radius: 1.4418135
+    - center: {x: -4.2724953, y: -6.0413737}
+      radius: 2.0603526
+    - center: {x: -4.840258, y: -9.389038}
+      radius: 2.0603528
+  - frame: 9
+    circles:
+    - center: {x: -3.2097955, y: -1.9096496}
+      radius: 3.1207056
+    - center: {x: -5.849471, y: -0.675642}
+      radius: 1.7952633
+    - center: {x: -8.160093, y: -0.8733287}
+      radius: 1.4418135
+    - center: {x: -4.2724953, y: -6.0413737}
+      radius: 2.0603526
+    - center: {x: -4.840258, y: -9.389038}
+      radius: 2.0603528
+  - frame: 10
+    circles:
+    - center: {x: -3.2097955, y: -1.9096496}
+      radius: 3.1207056
+    - center: {x: -5.849471, y: -0.675642}
+      radius: 1.7952633
+    - center: {x: -8.160093, y: -0.8733287}
+      radius: 1.4418135
+    - center: {x: -4.2724953, y: -6.0413737}
+      radius: 2.0603526
+    - center: {x: -4.840258, y: -9.389038}
+      radius: 2.0603528
+  - frame: 11
+    circles:
+    - center: {x: -3.6989489, y: -4.406574}
+      radius: 3.669676
+    - center: {x: -5.1142006, y: -8.973971}
+      radius: 2.47958
+  - frame: 12
+    circles:
+    - center: {x: -3.6989489, y: -4.406574}
+      radius: 3.669676
+    - center: {x: -5.1142006, y: -8.973971}
+      radius: 2.47958
+  - frame: 13
+    circles:
+    - center: {x: -3.6989489, y: -4.406574}
+      radius: 3.669676
+    - center: {x: -5.1142006, y: -8.973971}
+      radius: 2.47958
+  - frame: 14
+    circles:
+    - center: {x: -3.6989489, y: -4.406574}
+      radius: 3.669676
+    - center: {x: -5.1142006, y: -8.973971}
+      radius: 2.47958
+  - frame: 15
+    circles:
+    - center: {x: -3.6989489, y: -4.406574}
+      radius: 3.669676
+    - center: {x: -5.1142006, y: -8.973971}
+      radius: 2.47958
+  - frame: 16
+    circles:
+    - center: {x: -3.4416308, y: -4.7925506}
+      radius: 3.669676
+    - center: {x: -4.696059, y: -9.359949}
+      radius: 2.47958
+  - frame: 17
+    circles:
+    - center: {x: -3.4416308, y: -4.7925506}
+      radius: 3.669676
+    - center: {x: -4.696059, y: -9.359949}
+      radius: 2.47958
+  - frame: 18
+    circles:
+    - center: {x: -3.4416308, y: -4.7925506}
+      radius: 3.669676
+    - center: {x: -4.696059, y: -9.359949}
+      radius: 2.47958
+  - frame: 19
+    circles:
+    - center: {x: -0.3538108, y: 0.7076254}
+      radius: 3.669676
+    - center: {x: -2.5731833, y: -3.505961}
+      radius: 2.47958
+    - center: {x: 0.41814375, y: -4.6638923}
+      radius: 2.1579313
+  - frame: 20
+    circles:
+    - center: {x: -0.3538108, y: 0.7076254}
+      radius: 3.669676
+    - center: {x: -2.5731833, y: -3.505961}
+      radius: 2.47958
+    - center: {x: 0.41814375, y: -4.6638923}
+      radius: 2.1579313
+  hurtboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []
+  - frame: 3
+    circles: []
+  - frame: 4
+    circles: []
+  - frame: 5
+    circles: []
+  - frame: 6
+    circles: []
+  - frame: 7
+    circles: []
+  - frame: 8
+    circles: []
+  - frame: 9
+    circles: []
+  - frame: 10
+    circles: []
+  - frame: 11
+    circles:
+    - center: {x: -6.079145, y: -7.2692385}
+      radius: 3.9269948
+    - center: {x: -6.111311, y: -5.435846}
+      radius: 4.02349
+  - frame: 12
+    circles:
+    - center: {x: -6.079145, y: -7.2692385}
+      radius: 3.9269948
+    - center: {x: -6.111311, y: -5.435846}
+      radius: 4.02349
+  - frame: 13
+    circles: []
+  - frame: 14
+    circles: []
+  - frame: 15
+    circles: []
+  - frame: 16
+    circles: []
+  - frame: 17
+    circles: []
+  - frame: 18
+    circles: []
+  - frame: 19
+    circles: []
+  - frame: 20
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles: []
+  - frame: 1
+    circles: []
+  - frame: 2
+    circles: []
+  - frame: 3
+    circles: []
+  - frame: 4
+    circles: []
+  - frame: 5
+    circles: []
+  - frame: 6
+    circles: []
+  - frame: 7
+    circles: []
+  - frame: 8
+    circles: []
+  - frame: 9
+    circles: []
+  - frame: 10
+    circles: []
+  - frame: 11
+    circles: []
+  - frame: 12
+    circles: []
+  - frame: 13
+    circles: []
+  - frame: 14
+    circles: []
+  - frame: 15
+    circles: []
+  - frame: 16
+    circles: []
+  - frame: 17
+    circles: []
+  - frame: 18
+    circles: []
+  - frame: 19
+    circles: []
+  - frame: 20
+    circles: []

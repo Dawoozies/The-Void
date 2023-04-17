@@ -1124,6 +1124,10 @@ GameObject:
   - component: {fileID: 1069377313}
   - component: {fileID: 1069377315}
   - component: {fileID: 1069377316}
+  - component: {fileID: 1069377317}
+  - component: {fileID: 1069377319}
+  - component: {fileID: 1069377318}
+  - component: {fileID: 1069377320}
   m_Layer: 0
   m_Name: WolfBoss
   m_TagString: Untagged
@@ -1183,6 +1187,62 @@ MonoBehaviour:
   time: 0
   frameRate: 16
   overrideStateSpeed: 0
+--- !u!114 &1069377317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069377312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56dfe3b7379d8b9408a401dc8dee48ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCount: 4
+  attackChoice: 0
+  forceUseAttack: 0
+--- !u!114 &1069377318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069377312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0713f2952f164488e3d0e07635c8dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxLayer: 9
+  setToTrigger: 1
+  showHitboxGizmos: 1
+--- !u!114 &1069377319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069377312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460f38c6a0b0d234db1553f817a05068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfEntity: Wolf
+--- !u!114 &1069377320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069377312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d2eefce93d0b04fb9675f8af74a2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showHurtboxGizmos: 1
 --- !u!1 &1140075426
 GameObject:
   m_ObjectHideFlags: 0

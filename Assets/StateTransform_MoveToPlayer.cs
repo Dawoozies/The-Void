@@ -4,7 +4,7 @@ using UnityEngine;
 using LinearAlgebra;
 public class StateTransform_MoveToPlayer : StateMachineBehaviour
 {
-    public Vector3 offset;
+    public Vector3 pathEndOffset;
     public Vector2 yBoundary; //Min then Max
     public Vector3 lastPlayerPosition;
     Transform playerTransform;
@@ -27,7 +27,7 @@ public class StateTransform_MoveToPlayer : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         parametrisedLine.pathStart = animator.transform.position;
-        parametrisedLine.pathEnd = lastPlayerPosition;
+        parametrisedLine.pathEnd = lastPlayerPosition + pathEndOffset;
         float distance = Vector3.Distance(parametrisedLine.pathStart, parametrisedLine.pathEnd);
         Vector3 translation = parametrisedLine.direction*Time.deltaTime*speed;
         if(distance > distanceThreshold)
