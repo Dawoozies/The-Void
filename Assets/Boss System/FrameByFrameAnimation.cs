@@ -16,8 +16,10 @@ public class FrameByFrameAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
+    void LateUpdate()
     {
+
+
         if (animator.GetBool("STATETYPE:NoFrameByFrame"))
             return;
 
@@ -43,9 +45,9 @@ public class FrameByFrameAnimation : MonoBehaviour
         }
 
         float normalizedTime = (float)Mathf.FloorToInt(time) / totalFrames;
-        animator.Play(currentStateInfo.fullPathHash, -1, normalizedTime);
+        animator.SetFloat("NormalizedTime", normalizedTime);
 
-        if (normalizedTime > 1)
-            time = 0;
+        if(animator.GetFloat("NormalizedTime") > 1)
+            time = 0f;
     }
 }

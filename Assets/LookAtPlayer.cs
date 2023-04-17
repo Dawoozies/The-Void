@@ -2,36 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LinearAlgebra;
-public class StateTransform_MoveToPosition : StateMachineBehaviour
+public class LookAtPlayer : StateMachineBehaviour
 {
-    public Vector3 position;
-    public float distanceThreshold;
-    public float speed;
-    public string stateTarget;
+    Transform playerTransform;
     ParametrisedLine parametrisedLine = new ParametrisedLine();
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        parametrisedLine.pathStart = animator.transform.position;
-        parametrisedLine.pathEnd = position;
+        if (playerTransform == null)
+            playerTransform = GameObject.Find("Player").transform;
 
-        float distance = Vector3.Distance(animator.transform.position, position);
-        Vector3 translation = parametrisedLine.direction * Time.fixedDeltaTime * speed;
+        parametrisedLine.pathStart = playerTransform.position;
+        parametrisedLine.pathEnd = animator.transform.position;
 
-        if(distance > distanceThreshold)
-        {
-            animator.transform.Translate(translation);
-        }
-        else
-        {
-            animator.Play(stateTarget);
-        }
+        animator.transform.right = parametrisedLine.direction;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

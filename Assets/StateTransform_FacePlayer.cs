@@ -1,17 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LinearAlgebra;
-public class StateTransform_MoveToPlayer : StateMachineBehaviour
+public class StateTransform_FacePlayer : StateMachineBehaviour
 {
-    public Vector3 offset;
-    public Vector2 yBoundary; //Min then Max
-    public Vector3 lastPlayerPosition;
+    Vector3 lastPlayerPosition;
     Transform playerTransform;
-    public float distanceThreshold;
-    public float speed;
-    public string stateTarget;
-    ParametrisedLine parametrisedLine = new ParametrisedLine();
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,24 +13,11 @@ public class StateTransform_MoveToPlayer : StateMachineBehaviour
 
         lastPlayerPosition = playerTransform.position;
 
-        lastPlayerPosition.y = Mathf.Clamp(lastPlayerPosition.y, yBoundary.x, yBoundary.y);
-    }
+        if (lastPlayerPosition.x > animator.transform.position.x)
+            animator.transform.localScale = new Vector3(-1, 1, 1);
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        parametrisedLine.pathStart = animator.transform.position;
-        parametrisedLine.pathEnd = lastPlayerPosition;
-        float distance = Vector3.Distance(parametrisedLine.pathStart, parametrisedLine.pathEnd);
-        Vector3 translation = parametrisedLine.direction*Time.deltaTime*speed;
-        if(distance > distanceThreshold)
-        {
-            animator.transform.Translate(translation);
-        }
-        else
-        {
-            animator.Play(stateTarget);
-        }
+        if (lastPlayerPosition.x < animator.transform.position.x)
+            animator.transform.localScale = new Vector3(1, 1, 1);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
