@@ -12,10 +12,10 @@ public class HalberdUpSpin : StateMachineBehaviour
             rb = animator.GetComponentInParent<Rigidbody2D>();
 
         float attackCharge = animator.GetFloat("AttackCharge");
-        bool shortCharge = (attackCharge < 0.25f);
-        bool mediumCharge = (attackCharge >= 0.25f) && (attackCharge < 0.5f);
-        bool longCharge = (attackCharge >= 0.5f) && (attackCharge < 1f);
-        bool maxCharge = (attackCharge >= 1f);
+        bool shortCharge = (attackCharge < 0.125f);
+        bool mediumCharge = (attackCharge >= 0.125f) && (attackCharge < 0.25f);
+        bool longCharge = (attackCharge >= 0.25f) && (attackCharge < 0.45f);
+        bool maxCharge = (attackCharge >= 0.45f);
 
         if(shortCharge)
         {
