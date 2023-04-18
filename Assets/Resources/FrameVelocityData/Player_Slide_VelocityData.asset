@@ -16,4 +16,4 @@ MonoBehaviour:
   dataList:
   - {x: 0, y: 0, z: 0}
   dataListSecondary:
-  - 10
+  - 20
