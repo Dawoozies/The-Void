@@ -12,8 +12,9 @@ public class FrameVelocityDataManager : MonoBehaviour
     Animator animator;
     string clipName;
     string lastClipName;
-    float currentVelocityMagnitude;
     Vector3 currentVelocity;
+    float currentVelocityMagnitude;
+    float currentDrag;
     Listener_FrameVelocityData[] listeners_FrameVelocityData;
     private void Awake()
     {
@@ -41,23 +42,36 @@ public class FrameVelocityDataManager : MonoBehaviour
             }
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (!frameVelocityDataDictionary.ContainsKey(clipName))
             return;
         int frame = animator.CurrentFrame();
-        currentVelocity = frameVelocityDataDictionary[clipName].VelocityAtFrame(frame);
-        currentVelocityMagnitude = frameVelocityDataDictionary[clipName].MagnitudeAtFrame(frame);
+        FrameVelocityData currentData = frameVelocityDataDictionary[clipName];
+        currentVelocity = currentData.VelocityAtFrame(frame) * animator.transform.localScale.x;
+        currentVelocityMagnitude = currentData.MagnitudeAtFrame(frame);
+        currentDrag = currentData.DragAtFrame(frame);
         HandleListeners_FrameVelocityData();
     }
     void HandleListeners_FrameVelocityData()
     {
-
+        if (listeners_FrameVelocityData == null)
+            return;
+        for (int i = 0; i < listeners_FrameVelocityData.Length; i++)
+        {
+            listeners_FrameVelocityData[i].Update_FrameVelocityData(currentVelocity, currentVelocityMagnitude, currentDrag);
+        }
     }
     private void OnDrawGizmos()
     {
         if (!showVelocityGizmos)
+            return;
+        if (frameVelocityDataDictionary == null)
+            return;
+        if (clipName == null || clipName.Length == 0)
+            return;
+        if (!frameVelocityDataDictionary.ContainsKey(clipName))
             return;
         ParametrisedLine line = new ParametrisedLine();
         line.pathStart = transform.position;

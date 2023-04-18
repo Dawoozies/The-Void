@@ -70,9 +70,11 @@ public class FrameVelocityDataEditor : EditorWindow
                 if(frameVelocityData.dataList == null)
                 {
                     frameVelocityData.dataList = new List<Vector3>();
+                    frameVelocityData.dataListSecondary = new List<float>();
                     for (int i = 0; i < totalFrames; i++)
                     {
                         frameVelocityData.dataList.Add(Vector3.zero);
+                        frameVelocityData.dataListSecondary.Add(0f);
                     }
                 }
                 if (!AssetDatabase.IsValidFolder("Assets/Resources/FrameVelocityData"))
@@ -84,7 +86,16 @@ public class FrameVelocityDataEditor : EditorWindow
             {
                 currentFrameData = AssetDatabase.LoadAssetAtPath<FrameVelocityData>(AssetDatabase.GUIDToAssetPath(results[0]));
                 GUILayout.Label("NOTE: Z component is magnitude factor");
+                currentFrameData.dataListSecondary[frame] = EditorGUILayout.FloatField("Drag/Secondary Data", currentFrameData.dataListSecondary[frame]);
                 currentFrameData.dataList[frame] = EditorGUILayout.Vector3Field("Velocity", currentFrameData.dataList[frame]);
+                if(GUILayout.Button("Duplicate Previous Frame"))
+                {
+                    if(frame > 0)
+                    {
+                        currentFrameData.dataList[frame] = currentFrameData.dataList[frame - 1];
+                        currentFrameData.dataListSecondary[frame] = currentFrameData.dataListSecondary[frame - 1];
+                    }
+                }
                 if (GUILayout.Button("Normalize"))
                 {
                     Vector3 velocity = currentFrameData.VelocityAtFrame(frame).normalized;

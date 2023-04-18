@@ -28,7 +28,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""ec1b28e5-e4e9-411b-aeae-d054f06b5f7e"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
+                    ""name"": ""LeftStick"",
                     ""type"": ""PassThrough"",
                     ""id"": ""584c4412-1026-4329-9741-5c1e312686d1"",
                     ""expectedControlType"": ""Vector2"",
@@ -71,17 +71,26 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightStick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7171db59-ba57-4ba6-a0c9-7507190c8381"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Right Stick"",
+                    ""name"": ""Left Stick"",
                     ""id"": ""b61c6d55-6e05-4017-a9de-1994802e0730"",
                     ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftStick"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -92,7 +101,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -103,7 +112,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -114,7 +123,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -125,7 +134,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -172,6 +181,61 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""JumpRelease"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Right Stick"",
+                    ""id"": ""7279188c-57b9-4b68-8ced-1c6ac2aa6cfe"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""36838860-c463-4d73-8243-1dbe81794930"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5c1c7d1d-7ec9-4c0e-9754-fd13ec023822"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ba61cc2b-b711-4806-86f7-3404a8f6b5e2"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b064e157-b6eb-4a7f-a103-e7eeb1f1cd47"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -180,11 +244,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
 }");
         // PlayerDefault
         m_PlayerDefault = asset.FindActionMap("PlayerDefault", throwIfNotFound: true);
-        m_PlayerDefault_Movement = m_PlayerDefault.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerDefault_LeftStick = m_PlayerDefault.FindAction("LeftStick", throwIfNotFound: true);
         m_PlayerDefault_LightAttack = m_PlayerDefault.FindAction("LightAttack", throwIfNotFound: true);
         m_PlayerDefault_Jump = m_PlayerDefault.FindAction("Jump", throwIfNotFound: true);
         m_PlayerDefault_Dodge = m_PlayerDefault.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerDefault_JumpRelease = m_PlayerDefault.FindAction("JumpRelease", throwIfNotFound: true);
+        m_PlayerDefault_RightStick = m_PlayerDefault.FindAction("RightStick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -244,20 +309,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     // PlayerDefault
     private readonly InputActionMap m_PlayerDefault;
     private IPlayerDefaultActions m_PlayerDefaultActionsCallbackInterface;
-    private readonly InputAction m_PlayerDefault_Movement;
+    private readonly InputAction m_PlayerDefault_LeftStick;
     private readonly InputAction m_PlayerDefault_LightAttack;
     private readonly InputAction m_PlayerDefault_Jump;
     private readonly InputAction m_PlayerDefault_Dodge;
     private readonly InputAction m_PlayerDefault_JumpRelease;
+    private readonly InputAction m_PlayerDefault_RightStick;
     public struct PlayerDefaultActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerDefaultActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_PlayerDefault_Movement;
+        public InputAction @LeftStick => m_Wrapper.m_PlayerDefault_LeftStick;
         public InputAction @LightAttack => m_Wrapper.m_PlayerDefault_LightAttack;
         public InputAction @Jump => m_Wrapper.m_PlayerDefault_Jump;
         public InputAction @Dodge => m_Wrapper.m_PlayerDefault_Dodge;
         public InputAction @JumpRelease => m_Wrapper.m_PlayerDefault_JumpRelease;
+        public InputAction @RightStick => m_Wrapper.m_PlayerDefault_RightStick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerDefault; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,9 +334,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_PlayerDefaultActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnMovement;
+                @LeftStick.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftStick;
+                @LeftStick.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftStick;
+                @LeftStick.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftStick;
                 @LightAttack.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLightAttack;
                 @LightAttack.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLightAttack;
                 @LightAttack.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLightAttack;
@@ -282,13 +349,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @JumpRelease.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJumpRelease;
                 @JumpRelease.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJumpRelease;
                 @JumpRelease.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJumpRelease;
+                @RightStick.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightStick;
+                @RightStick.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightStick;
+                @RightStick.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightStick;
             }
             m_Wrapper.m_PlayerDefaultActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
+                @LeftStick.started += instance.OnLeftStick;
+                @LeftStick.performed += instance.OnLeftStick;
+                @LeftStick.canceled += instance.OnLeftStick;
                 @LightAttack.started += instance.OnLightAttack;
                 @LightAttack.performed += instance.OnLightAttack;
                 @LightAttack.canceled += instance.OnLightAttack;
@@ -301,16 +371,20 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @JumpRelease.started += instance.OnJumpRelease;
                 @JumpRelease.performed += instance.OnJumpRelease;
                 @JumpRelease.canceled += instance.OnJumpRelease;
+                @RightStick.started += instance.OnRightStick;
+                @RightStick.performed += instance.OnRightStick;
+                @RightStick.canceled += instance.OnRightStick;
             }
         }
     }
     public PlayerDefaultActions @PlayerDefault => new PlayerDefaultActions(this);
     public interface IPlayerDefaultActions
     {
-        void OnMovement(InputAction.CallbackContext context);
+        void OnLeftStick(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnJumpRelease(InputAction.CallbackContext context);
+        void OnRightStick(InputAction.CallbackContext context);
     }
 }

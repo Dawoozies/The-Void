@@ -7,8 +7,6 @@ public class PlayerGravity : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
 
-    float verticalInput => BasicInput.ins.InputLVertical;
-
     float gravity = 80;
     void Start()
     {

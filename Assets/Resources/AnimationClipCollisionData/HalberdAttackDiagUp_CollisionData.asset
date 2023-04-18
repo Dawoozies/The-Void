@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2046d8c40176e4f4b820f11ef6ffcb1b, type: 3}
+  m_Name: HalberdAttackDiagUp_CollisionData
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 742f14e31612186499152e90caa254ef, type: 2}
+  hitboxes:
+  - frame: 0
+    circles:
+    - center: {x: 0.00000047683716, y: 0.057343483}
+      radius: 0.42656696
+    - center: {x: 0.038229465, y: 0.6116624}
+      radius: 0.44568157
+  - frame: 1
+    circles:
+    - center: {x: 0.00000047683716, y: 0.057343483}
+      radius: 0.42656696
+    - center: {x: 0.038229465, y: 0.6116624}
+      radius: 0.44568157
+  hurtboxes:
+  - frame: 0
+    circles:
+    - center: {x: 4.8359504, y: 4.8741817}
+      radius: 1
+    - center: {x: 3.555284, y: 3.669971}
+      radius: 1
+    - center: {x: 2.370189, y: 2.4657621}
+      radius: 1
+    - center: {x: 1.1850944, y: 1.2806665}
+      radius: 1
+  - frame: 1
+    circles: []
+  groundboxes:
+  - frame: 0
+    circles:
+    - center: {x: -0.019114494, y: -0.36317438}
+      radius: 0.3883381
+  - frame: 1
+    circles:
+    - center: {x: -0.019114494, y: -0.36317438}
+      radius: 0.3883381

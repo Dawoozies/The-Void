@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
 
     PlayerControls inputActions;
     public Vector2 L_Input;
+    public Vector2 R_Input;
 
     //Listeners
     List<Listener_JumpInput> listeners_JumpInput;
@@ -24,8 +25,8 @@ public class InputManager : MonoBehaviour
         if(inputActions == null)
         {
             inputActions = new PlayerControls();
-            inputActions.PlayerDefault.Movement.performed += inputActions => L_Input = inputActions.ReadValue<Vector2>();
-
+            inputActions.PlayerDefault.LeftStick.performed += inputActions => L_Input = inputActions.ReadValue<Vector2>();
+            inputActions.PlayerDefault.RightStick.performed += inputActions => R_Input = inputActions.ReadValue<Vector2>();
             inputActions.PlayerDefault.Jump.performed += inputActions =>
             {
                 if (listeners_JumpInput == null)
