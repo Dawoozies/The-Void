@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCount: 4
   attackChoice: 0
-  forceUseAttack: 0
+  forceUseAttack: 1
 --- !u!114 &1069377318
 MonoBehaviour:
   m_ObjectHideFlags: 0
