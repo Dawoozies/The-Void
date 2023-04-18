@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 447214938}
   - component: {fileID: 447214939}
   - component: {fileID: 447214937}
+  - component: {fileID: 447214940}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -492,6 +493,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfEntity: Player
+--- !u!114 &447214940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447214923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d25c96cb8e1447870e81c0029f7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfEntity: Player
+  showVelocityGizmos: 0
 --- !u!1 &451355314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,6 +1143,7 @@ GameObject:
   - component: {fileID: 1069377319}
   - component: {fileID: 1069377318}
   - component: {fileID: 1069377320}
+  - component: {fileID: 1069377321}
   m_Layer: 0
   m_Name: WolfBoss
   m_TagString: Untagged
@@ -1200,7 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCount: 4
-  attackChoice: 0
+  attackChoice: 1
   forceUseAttack: 1
 --- !u!114 &1069377318
 MonoBehaviour:
@@ -1243,6 +1259,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showHurtboxGizmos: 1
+--- !u!114 &1069377321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069377312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d25c96cb8e1447870e81c0029f7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfEntity: Wolf
+  showVelocityGizmos: 1
 --- !u!1 &1140075426
 GameObject:
   m_ObjectHideFlags: 0
