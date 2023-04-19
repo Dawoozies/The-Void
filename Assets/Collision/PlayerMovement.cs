@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeInput, Listener_JumpReleaseInput, Listener_Grounded
+public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeInput, Listener_JumpReleaseInput
 {
     //float horizontalInput => BasicInput.ins.InputLHorizontal;
     float horizontalInput => InputManager.ins.L_Input.x;
@@ -138,10 +138,5 @@ public class PlayerMovement : MonoBehaviour, Listener_JumpInput, Listener_DodgeI
     public void Update_JumpReleaseInput()
     {
         jumpTime = maxJumpTime;
-    }
-
-    public void Update_Grounded()
-    {
-        throw new System.NotImplementedException();
     }
 }

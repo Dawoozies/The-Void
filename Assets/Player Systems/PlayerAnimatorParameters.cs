@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput
+public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, Listener_GroundboxOverlap
 {
     Vector2 L_Input => InputManager.ins.L_Input;
     Vector2 R_Input => InputManager.ins.R_Input;
@@ -30,5 +30,10 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput
         {
             animator.SetBool("LightAttack", anyAttackInput);
         }
+    }
+
+    public void Update_GroundboxOverlap(bool hitResult)
+    {
+        animator.SetBool("Grounded", hitResult);
     }
 }

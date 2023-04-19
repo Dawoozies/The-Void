@@ -64,7 +64,7 @@ public class HurtboxManager : MonoBehaviour
             {
                 Vector3 circlePos = transform.position + new Vector3(
                         hurtboxes[frame].circles[i].center.x * animator.transform.localScale.x,
-                        hurtboxes[frame].circles[i].center.y,
+                        hurtboxes[frame].circles[i].center.y * animator.transform.localScale.y,
                         0f);
 
                 float circleRadius = hurtboxes[frame].circles[i].radius;

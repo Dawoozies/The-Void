@@ -86,7 +86,7 @@ public class CollisionManager : MonoBehaviour
     {
         if(entityCollisionData.ContainsKey(animationClipName) == false)
         {
-            Debug.LogError("CollisionManager Error: Trying to get Groundbox Data which does not exist");
+            //Debug.LogError("CollisionManager Error: Trying to get Groundbox Data which does not exist");
             return null;
         }
 
