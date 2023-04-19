@@ -71,10 +71,14 @@ public class FrameVelocityDataEditor : EditorWindow
                 {
                     frameVelocityData.dataList = new List<Vector3>();
                     frameVelocityData.dataListSecondary = new List<float>();
+                    frameVelocityData.dataListLeftStick = new List<Vector3>();
+                    frameVelocityData.dataListRightStick = new List<Vector3>();
                     for (int i = 0; i < totalFrames; i++)
                     {
                         frameVelocityData.dataList.Add(Vector3.zero);
                         frameVelocityData.dataListSecondary.Add(0f);
+                        frameVelocityData.dataListLeftStick.Add(Vector3.zero);
+                        frameVelocityData.dataListRightStick.Add(Vector3.zero);
                     }
                 }
                 if (!AssetDatabase.IsValidFolder("Assets/Resources/FrameVelocityData"))
@@ -86,16 +90,20 @@ public class FrameVelocityDataEditor : EditorWindow
             {
                 currentFrameData = AssetDatabase.LoadAssetAtPath<FrameVelocityData>(AssetDatabase.GUIDToAssetPath(results[0]));
                 GUILayout.Label("NOTE: Z component is magnitude factor");
-                currentFrameData.dataListSecondary[frame] = EditorGUILayout.FloatField("Drag/Secondary Data", currentFrameData.dataListSecondary[frame]);
-                currentFrameData.dataList[frame] = EditorGUILayout.Vector3Field("Velocity", currentFrameData.dataList[frame]);
                 if(GUILayout.Button("Duplicate Previous Frame"))
                 {
                     if(frame > 0)
                     {
                         currentFrameData.dataList[frame] = currentFrameData.dataList[frame - 1];
                         currentFrameData.dataListSecondary[frame] = currentFrameData.dataListSecondary[frame - 1];
+                        currentFrameData.dataListLeftStick[frame] = currentFrameData.dataListLeftStick[frame - 1];
+                        currentFrameData.dataListRightStick[frame] = currentFrameData.dataListRightStick[frame - 1];
                     }
                 }
+                currentFrameData.dataListSecondary[frame] = EditorGUILayout.FloatField("Drag/Secondary Data", currentFrameData.dataListSecondary[frame]);
+                currentFrameData.dataList[frame] = EditorGUILayout.Vector3Field("Velocity", currentFrameData.dataList[frame]);
+                currentFrameData.dataListLeftStick[frame] = EditorGUILayout.Vector3Field("L_Stick Velocity", currentFrameData.dataListLeftStick[frame]);
+                currentFrameData.dataListRightStick[frame] = EditorGUILayout.Vector3Field("R_Stick Velocity", currentFrameData.dataListRightStick[frame]);
                 if (GUILayout.Button("Normalize"))
                 {
                     Vector3 velocity = currentFrameData.VelocityAtFrame(frame).normalized;

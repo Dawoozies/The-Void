@@ -6,6 +6,8 @@ public class VelocityApply : MonoBehaviour, Listener_FrameVelocityData
 {
     Rigidbody2D rb;
     public Vector2 velocityLimit;
+    //Insufficient for stick based input
+    //Do another listener which reads the velocity data as X = Left stick magnitude Y = Right stick magnitude
     public void Update_FrameVelocityData(Vector3 direction, float magnitude, float drag)
     {
         if (rb == null)

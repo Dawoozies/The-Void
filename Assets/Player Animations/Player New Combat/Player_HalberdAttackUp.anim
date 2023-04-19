@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HalberdAttackDown
+  m_Name: Player_HalberdAttackUp
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 926543768, guid: b2a78740b7ce1b4498d26f580f42b548, type: 3}
+      value: {fileID: -954665673, guid: e2185c2e8cf0a804cadfefae71582886, type: 3}
     - time: 1
-      value: {fileID: 1477305976, guid: b2a78740b7ce1b4498d26f580f42b548, type: 3}
+      value: {fileID: 1508071203, guid: e2185c2e8cf0a804cadfefae71582886, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 926543768, guid: b2a78740b7ce1b4498d26f580f42b548, type: 3}
-    - {fileID: 1477305976, guid: b2a78740b7ce1b4498d26f580f42b548, type: 3}
+    - {fileID: -954665673, guid: e2185c2e8cf0a804cadfefae71582886, type: 3}
+    - {fileID: 1508071203, guid: e2185c2e8cf0a804cadfefae71582886, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

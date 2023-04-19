@@ -15,11 +15,17 @@ public class FrameVelocityDataManager : MonoBehaviour
     Vector3 currentVelocity;
     float currentVelocityMagnitude;
     float currentDrag;
+    Vector3 currentLStickVelocity;
+    Vector3 currentRStickVelocity;
     Listener_FrameVelocityData[] listeners_FrameVelocityData;
+    Listener_FrameVelocityDataLStick[] listeners_FrameVelocityDataLStick;
+    Listener_FrameVelocityDataRStick[] listeners_FrameVelocityDataRStick;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         listeners_FrameVelocityData = GetComponentsInChildren<Listener_FrameVelocityData>();
+        listeners_FrameVelocityDataLStick = GetComponentsInChildren<Listener_FrameVelocityDataLStick>();
+        listeners_FrameVelocityDataRStick = GetComponentsInChildren<Listener_FrameVelocityDataRStick>();
         LoadData();
     }
     void LoadData()
@@ -52,7 +58,11 @@ public class FrameVelocityDataManager : MonoBehaviour
         currentVelocity = currentData.VelocityAtFrame(frame) * animator.transform.localScale.x;
         currentVelocityMagnitude = currentData.MagnitudeAtFrame(frame);
         currentDrag = currentData.DragAtFrame(frame);
+        currentLStickVelocity = currentData.LeftStickVelocityAtFrame(frame);
+        currentRStickVelocity = currentData.RightStickVelocityAtFrame(frame);
         HandleListeners_FrameVelocityData();
+        HandleListeners_FrameVelocityDataLStick();
+        HandleListeners_FrameVelocityDataRStick();
     }
     void HandleListeners_FrameVelocityData()
     {
@@ -61,6 +71,24 @@ public class FrameVelocityDataManager : MonoBehaviour
         for (int i = 0; i < listeners_FrameVelocityData.Length; i++)
         {
             listeners_FrameVelocityData[i].Update_FrameVelocityData(currentVelocity, currentVelocityMagnitude, currentDrag);
+        }
+    }
+    void HandleListeners_FrameVelocityDataLStick()
+    {
+        if (listeners_FrameVelocityDataLStick == null)
+            return;
+        for (int i = 0; i < listeners_FrameVelocityDataLStick.Length; i++)
+        {
+            listeners_FrameVelocityDataLStick[i].Update_FrameVelocityDataLStick(currentLStickVelocity);
+        }
+    }
+    void HandleListeners_FrameVelocityDataRStick()
+    {
+        if (listeners_FrameVelocityDataRStick == null)
+            return;
+        for (int i = 0; i < listeners_FrameVelocityDataRStick.Length; i++)
+        {
+            listeners_FrameVelocityDataRStick[i].Update_FrameVelocityDataRStick(currentRStickVelocity);
         }
     }
     private void OnDrawGizmos()
@@ -76,7 +104,7 @@ public class FrameVelocityDataManager : MonoBehaviour
         ParametrisedLine line = new ParametrisedLine();
         line.pathStart = transform.position;
         line.pathEnd = transform.position + currentVelocity*currentVelocityMagnitude;
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.white; 
         Gizmos.DrawLine(line.pathStart, line.pathEnd);
     }
 }
