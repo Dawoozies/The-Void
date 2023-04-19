@@ -11,12 +11,8 @@ public class FrameVelocityDataManager : MonoBehaviour
     Dictionary<string, FrameVelocityData> frameVelocityDataDictionary = new Dictionary<string, FrameVelocityData>();
     Animator animator;
     string clipName;
-    string lastClipName;
-    Vector3 currentVelocity;
-    float currentVelocityMagnitude;
-    float currentDrag;
-    Vector3 currentLStickVelocity;
-    Vector3 currentRStickVelocity;
+    int frame;
+    FrameVelocityData currentData;
     Listener_FrameVelocityData[] listeners_FrameVelocityData;
     Listener_FrameVelocityDataLStick[] listeners_FrameVelocityDataLStick;
     Listener_FrameVelocityDataRStick[] listeners_FrameVelocityDataRStick;
@@ -53,13 +49,8 @@ public class FrameVelocityDataManager : MonoBehaviour
         clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (!frameVelocityDataDictionary.ContainsKey(clipName))
             return;
-        int frame = animator.CurrentFrame();
-        FrameVelocityData currentData = frameVelocityDataDictionary[clipName];
-        currentVelocity = currentData.VelocityAtFrame(frame) * animator.transform.localScale.x;
-        currentVelocityMagnitude = currentData.MagnitudeAtFrame(frame);
-        currentDrag = currentData.DragAtFrame(frame);
-        currentLStickVelocity = currentData.LeftStickVelocityAtFrame(frame);
-        currentRStickVelocity = currentData.RightStickVelocityAtFrame(frame);
+        frame = animator.CurrentFrame();
+        currentData = frameVelocityDataDictionary[clipName];
         HandleListeners_FrameVelocityData();
         HandleListeners_FrameVelocityDataLStick();
         HandleListeners_FrameVelocityDataRStick();
@@ -68,9 +59,10 @@ public class FrameVelocityDataManager : MonoBehaviour
     {
         if (listeners_FrameVelocityData == null)
             return;
+        Vector3 baseData = new Vector3(currentData.VelocityAtFrame(frame).x * animator.transform.localScale.x, currentData.VelocityAtFrame(frame).y, currentData.VelocityAtFrame(frame).z);
         for (int i = 0; i < listeners_FrameVelocityData.Length; i++)
         {
-            listeners_FrameVelocityData[i].Update_FrameVelocityData(currentVelocity, currentVelocityMagnitude, currentDrag);
+            listeners_FrameVelocityData[i].Update_FrameVelocityData(baseData, currentData.DragAtFrame(frame), currentData.velocityAdditive);
         }
     }
     void HandleListeners_FrameVelocityDataLStick()
@@ -79,7 +71,7 @@ public class FrameVelocityDataManager : MonoBehaviour
             return;
         for (int i = 0; i < listeners_FrameVelocityDataLStick.Length; i++)
         {
-            listeners_FrameVelocityDataLStick[i].Update_FrameVelocityDataLStick(currentLStickVelocity);
+            listeners_FrameVelocityDataLStick[i].Update_FrameVelocityDataLStick(currentData.LeftStickVelocityAtFrame(frame), currentData.leftStickVelocityAdditive);
         }
     }
     void HandleListeners_FrameVelocityDataRStick()
@@ -88,23 +80,7 @@ public class FrameVelocityDataManager : MonoBehaviour
             return;
         for (int i = 0; i < listeners_FrameVelocityDataRStick.Length; i++)
         {
-            listeners_FrameVelocityDataRStick[i].Update_FrameVelocityDataRStick(currentRStickVelocity);
+            listeners_FrameVelocityDataRStick[i].Update_FrameVelocityDataRStick(currentData.RightStickVelocityAtFrame(frame), currentData.rightStickVelocityAdditive);
         }
-    }
-    private void OnDrawGizmos()
-    {
-        if (!showVelocityGizmos)
-            return;
-        if (frameVelocityDataDictionary == null)
-            return;
-        if (clipName == null || clipName.Length == 0)
-            return;
-        if (!frameVelocityDataDictionary.ContainsKey(clipName))
-            return;
-        ParametrisedLine line = new ParametrisedLine();
-        line.pathStart = transform.position;
-        line.pathEnd = transform.position + currentVelocity*currentVelocityMagnitude;
-        Gizmos.color = Color.white; 
-        Gizmos.DrawLine(line.pathStart, line.pathEnd);
     }
 }

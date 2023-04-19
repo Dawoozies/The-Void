@@ -9,9 +9,12 @@ public class FrameVelocityData : ScriptableObject
     public List<float> dataListSecondary;
     public List<Vector3> dataListLeftStick;
     public List<Vector3> dataListRightStick;
+    public bool velocityAdditive;
+    public bool leftStickVelocityAdditive;
+    public bool rightStickVelocityAdditive;
     public Vector3 VelocityAtFrame(int frame)
     {
-        return new Vector3(dataList[frame].x, dataList[frame].y, 0f);
+        return dataList[frame];
     }
     public float MagnitudeAtFrame(int frame)
     {
