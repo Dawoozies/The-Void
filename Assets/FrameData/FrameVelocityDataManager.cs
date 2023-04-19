@@ -7,7 +7,6 @@ public class FrameVelocityDataManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public string nameOfEntity;
-    public bool showVelocityGizmos;
     Dictionary<string, FrameVelocityData> frameVelocityDataDictionary = new Dictionary<string, FrameVelocityData>();
     Animator animator;
     string clipName;

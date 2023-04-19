@@ -108,8 +108,8 @@ public class FrameVelocityDataEditor : EditorWindow
                 currentFrameData.dataListLeftStick[frame] = EditorGUILayout.Vector3Field("L_Stick Velocity", currentFrameData.dataListLeftStick[frame]);
                 currentFrameData.dataListRightStick[frame] = EditorGUILayout.Vector3Field("R_Stick Velocity", currentFrameData.dataListRightStick[frame]);
                 currentFrameData.velocityAdditive = EditorGUILayout.Toggle("Velocity Additive: ", currentFrameData.velocityAdditive);
-                currentFrameData.leftStickVelocityAdditive = EditorGUILayout.Toggle("Velocity Additive: ", currentFrameData.leftStickVelocityAdditive);
-                currentFrameData.rightStickVelocityAdditive = EditorGUILayout.Toggle("Velocity Additive: ", currentFrameData.rightStickVelocityAdditive);
+                currentFrameData.leftStickVelocityAdditive = EditorGUILayout.Toggle("L Stick Additive: ", currentFrameData.leftStickVelocityAdditive);
+                currentFrameData.rightStickVelocityAdditive = EditorGUILayout.Toggle("R Stick Additive: ", currentFrameData.rightStickVelocityAdditive);
                 if (GUILayout.Button("Normalize"))
                 {
                     Vector3 velocity = currentFrameData.VelocityAtFrame(frame).normalized;

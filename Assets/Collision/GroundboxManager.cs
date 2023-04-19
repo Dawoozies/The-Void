@@ -6,6 +6,7 @@ public class GroundboxManager : MonoBehaviour
 {
     CollisionManager collisionManager;
     Animator animator;
+    public LayerMask layerMask;
     public bool showGizmos = false;
     private List<FrameCollisionData> groundboxData;
     Listener_GroundboxOverlap[] listeners_GroundboxOverlap;
@@ -33,7 +34,7 @@ public class GroundboxManager : MonoBehaviour
                 castCircles[i].center.y * animator.transform.localScale.y,
                 0f);
             float circleRadius = castCircles[i].radius;
-            Collider2D[] overlappedColliders = Physics2D.OverlapCircleAll(circleWorldPos, circleRadius);
+            Collider2D[] overlappedColliders = Physics2D.OverlapCircleAll(circleWorldPos, circleRadius, layerMask);
             hitResult = !(overlappedColliders == null) && !(overlappedColliders.Length == 0);
             if (hitResult)
                 break;
