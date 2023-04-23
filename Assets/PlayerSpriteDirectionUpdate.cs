@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerSpriteDirectionUpdate : StateMachineBehaviour
 {
-    
+
+    public bool useRightStick;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -14,6 +15,16 @@ public class PlayerSpriteDirectionUpdate : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(useRightStick)
+        {
+            if (InputManager.ins.R_Input.x > 0)
+                animator.transform.localScale = new Vector3(1, 1, 1);
+            if (InputManager.ins.R_Input.x < 0)
+                animator.transform.localScale = new Vector3(-1, 1, 1);
+
+            return;
+        }
+
         if (InputManager.ins.L_Input.x > 0)
             animator.transform.localScale = new Vector3(1, 1, 1);
         if (InputManager.ins.L_Input.x < 0)
