@@ -7,12 +7,13 @@ public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listen
     public Vector2 velocityCap;
     public float updateSpeed;
     float drag;
-    Vector2 velocityBase;
-    Vector2 velocityLStick;
-    Vector2 velocityRStick;
+    public Vector2 velocityBase;
+    public Vector2 velocityLStick;
+    public Vector2 velocityRStick;
     Rigidbody2D rb;
     Vector2 L_Input => InputManager.ins.L_Input;
     Vector2 R_Input => InputManager.ins.R_Input;
+    public bool disableManager;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,6 +51,9 @@ public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listen
     }
     void FixedUpdate()
     {
+        if (disableManager)
+            return;
+
         rb.drag = drag;
         Vector2 velocityFinal = velocityBase + velocityLStick + velocityRStick;
         velocityFinal.x = Mathf.Clamp(velocityFinal.x, -velocityCap.x, velocityCap.x);
