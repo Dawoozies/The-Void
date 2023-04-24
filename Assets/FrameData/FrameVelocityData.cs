@@ -9,9 +9,9 @@ public class FrameVelocityData : ScriptableObject
     public List<float> dataListSecondary;
     public List<Vector3> dataListLeftStick;
     public List<Vector3> dataListRightStick;
-    public bool velocityAdditive;
-    public bool leftStickVelocityAdditive;
-    public bool rightStickVelocityAdditive;
+    public List<bool> dataListVelocityAdditive;
+    public List<bool> dataListLeftStickVelocityAdditive;
+    public List<bool> dataListRightStickVelocityAdditive;
     public Vector3 VelocityAtFrame(int frame)
     {
         return dataList[frame];
@@ -31,5 +31,17 @@ public class FrameVelocityData : ScriptableObject
     public Vector3 RightStickVelocityAtFrame(int frame)
     {
         return dataListRightStick[frame];
+    }
+    public bool IsVelocityAdditiveAtFrame(int frame)
+    {
+        return dataListVelocityAdditive[frame];
+    }
+    public bool IsLeftStickVelocityAdditiveAtFrame(int frame)
+    {
+        return dataListLeftStickVelocityAdditive[frame];
+    }
+    public bool IsRightStickVelocityAdditiveAtFrame(int frame)
+    {
+        return dataListRightStickVelocityAdditive[frame];
     }
 }

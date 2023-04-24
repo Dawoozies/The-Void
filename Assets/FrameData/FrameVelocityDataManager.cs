@@ -61,7 +61,7 @@ public class FrameVelocityDataManager : MonoBehaviour
         Vector3 baseData = new Vector3(currentData.VelocityAtFrame(frame).x * animator.transform.localScale.x, currentData.VelocityAtFrame(frame).y, currentData.VelocityAtFrame(frame).z);
         for (int i = 0; i < listeners_FrameVelocityData.Length; i++)
         {
-            listeners_FrameVelocityData[i].Update_FrameVelocityData(baseData, currentData.DragAtFrame(frame), currentData.velocityAdditive);
+            listeners_FrameVelocityData[i].Update_FrameVelocityData(baseData, currentData.DragAtFrame(frame), currentData.IsVelocityAdditiveAtFrame(frame));
         }
     }
     void HandleListeners_FrameVelocityDataLStick()
@@ -70,7 +70,7 @@ public class FrameVelocityDataManager : MonoBehaviour
             return;
         for (int i = 0; i < listeners_FrameVelocityDataLStick.Length; i++)
         {
-            listeners_FrameVelocityDataLStick[i].Update_FrameVelocityDataLStick(currentData.LeftStickVelocityAtFrame(frame), currentData.leftStickVelocityAdditive);
+            listeners_FrameVelocityDataLStick[i].Update_FrameVelocityDataLStick(currentData.LeftStickVelocityAtFrame(frame), currentData.IsLeftStickVelocityAdditiveAtFrame(frame));
         }
     }
     void HandleListeners_FrameVelocityDataRStick()
@@ -79,7 +79,7 @@ public class FrameVelocityDataManager : MonoBehaviour
             return;
         for (int i = 0; i < listeners_FrameVelocityDataRStick.Length; i++)
         {
-            listeners_FrameVelocityDataRStick[i].Update_FrameVelocityDataRStick(currentData.RightStickVelocityAtFrame(frame), currentData.rightStickVelocityAdditive);
+            listeners_FrameVelocityDataRStick[i].Update_FrameVelocityDataRStick(currentData.RightStickVelocityAtFrame(frame), currentData.IsRightStickVelocityAdditiveAtFrame(frame));
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listener_FrameVelocityDataLStick, Listener_FrameVelocityDataRStick
 {
+    public Vector2 velocityCap;
     public float updateSpeed;
     float drag;
     Vector2 velocityBase;
@@ -51,6 +52,8 @@ public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listen
     {
         rb.drag = drag;
         Vector2 velocityFinal = velocityBase + velocityLStick + velocityRStick;
+        velocityFinal.x = Mathf.Clamp(velocityFinal.x, -velocityCap.x, velocityCap.x);
+        velocityFinal.y = Mathf.Clamp(velocityFinal.y, -velocityCap.y, velocityCap.y);
         rb.velocity = velocityFinal;
     }
 }

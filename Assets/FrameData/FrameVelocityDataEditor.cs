@@ -73,15 +73,18 @@ public class FrameVelocityDataEditor : EditorWindow
                     frameVelocityData.dataListSecondary = new List<float>();
                     frameVelocityData.dataListLeftStick = new List<Vector3>();
                     frameVelocityData.dataListRightStick = new List<Vector3>();
-                    frameVelocityData.velocityAdditive = false;
-                    frameVelocityData.leftStickVelocityAdditive = false;
-                    frameVelocityData.rightStickVelocityAdditive = false;
+                    frameVelocityData.dataListVelocityAdditive = new List<bool>();
+                    frameVelocityData.dataListLeftStickVelocityAdditive = new List<bool>();
+                    frameVelocityData.dataListRightStickVelocityAdditive = new List<bool>();
                     for (int i = 0; i < totalFrames; i++)
                     {
                         frameVelocityData.dataList.Add(Vector3.zero);
                         frameVelocityData.dataListSecondary.Add(0f);
                         frameVelocityData.dataListLeftStick.Add(Vector3.zero);
                         frameVelocityData.dataListRightStick.Add(Vector3.zero);
+                        frameVelocityData.dataListVelocityAdditive.Add(false);
+                        frameVelocityData.dataListLeftStickVelocityAdditive.Add(false);
+                        frameVelocityData.dataListRightStickVelocityAdditive.Add(false);
                     }
                 }
                 if (!AssetDatabase.IsValidFolder("Assets/Resources/FrameVelocityData"))
@@ -101,15 +104,18 @@ public class FrameVelocityDataEditor : EditorWindow
                         currentFrameData.dataListSecondary[frame] = currentFrameData.dataListSecondary[frame - 1];
                         currentFrameData.dataListLeftStick[frame] = currentFrameData.dataListLeftStick[frame - 1];
                         currentFrameData.dataListRightStick[frame] = currentFrameData.dataListRightStick[frame - 1];
+                        currentFrameData.dataListVelocityAdditive[frame] = currentFrameData.dataListVelocityAdditive[frame - 1];
+                        currentFrameData.dataListLeftStickVelocityAdditive[frame] = currentFrameData.dataListLeftStickVelocityAdditive[frame - 1];
+                        currentFrameData.dataListRightStickVelocityAdditive[frame] = currentFrameData.dataListRightStickVelocityAdditive[frame - 1];
                     }
                 }
                 currentFrameData.dataListSecondary[frame] = EditorGUILayout.FloatField("Drag/Secondary Data", currentFrameData.dataListSecondary[frame]);
                 currentFrameData.dataList[frame] = EditorGUILayout.Vector3Field("Velocity", currentFrameData.dataList[frame]);
                 currentFrameData.dataListLeftStick[frame] = EditorGUILayout.Vector3Field("L_Stick Velocity", currentFrameData.dataListLeftStick[frame]);
                 currentFrameData.dataListRightStick[frame] = EditorGUILayout.Vector3Field("R_Stick Velocity", currentFrameData.dataListRightStick[frame]);
-                currentFrameData.velocityAdditive = EditorGUILayout.Toggle("Velocity Additive: ", currentFrameData.velocityAdditive);
-                currentFrameData.leftStickVelocityAdditive = EditorGUILayout.Toggle("L Stick Additive: ", currentFrameData.leftStickVelocityAdditive);
-                currentFrameData.rightStickVelocityAdditive = EditorGUILayout.Toggle("R Stick Additive: ", currentFrameData.rightStickVelocityAdditive);
+                currentFrameData.dataListVelocityAdditive[frame] = EditorGUILayout.Toggle("Velocity Additive: ", currentFrameData.dataListVelocityAdditive[frame]);
+                currentFrameData.dataListLeftStickVelocityAdditive[frame] = EditorGUILayout.Toggle("L Stick Additive: ", currentFrameData.dataListLeftStickVelocityAdditive[frame]);
+                currentFrameData.dataListRightStickVelocityAdditive[frame] = EditorGUILayout.Toggle("R Stick Additive: ", currentFrameData.dataListRightStickVelocityAdditive[frame]);
                 if (GUILayout.Button("Normalize"))
                 {
                     Vector3 velocity = currentFrameData.VelocityAtFrame(frame).normalized;
