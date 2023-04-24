@@ -108,12 +108,12 @@ TextureImporter:
       name: Player_Jump0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 2624
         width: 1038
         height: 1471
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.6179639, y: 0.5538127}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,7 +134,7 @@ TextureImporter:
         width: 1038
         height: 1471
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.6500035, y: 0.56203395}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +155,7 @@ TextureImporter:
         width: 1038
         height: 1471
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.6414122, y: 0.55214584}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,7 +176,7 @@ TextureImporter:
         width: 1038
         height: 1471
       alignment: 9
-      pivot: {x: 0.5, y: 0.375}
+      pivot: {x: 0.6116041, y: 0.5452712}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

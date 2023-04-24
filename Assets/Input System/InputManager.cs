@@ -14,7 +14,6 @@ public class InputManager : MonoBehaviour
     public Vector2 L_Input;
     public Vector2 R_Input;
     public float LeftTrigger_Input;
-
     //Listeners
     List<Listener_JumpInput> listeners_JumpInput;
     List<Listener_DodgeInput> listeners_DodgeInput;

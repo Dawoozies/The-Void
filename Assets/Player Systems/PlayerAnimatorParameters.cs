@@ -7,6 +7,8 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
     Vector2 L_Input => InputManager.ins.L_Input;
     Vector2 R_Input => InputManager.ins.R_Input;
     float LeftTrigger_Input => InputManager.ins.LeftTrigger_Input;
+    int R_Direction => DirectionManager.ins.R_Direction;
+    bool ThrownHalberd => PlayerDataManager.ins.ThrownHalberd;
     Animator animator;
     Rigidbody2D rb;
     bool jumpInput;
@@ -27,6 +29,8 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
         animator.SetFloat("VelocityY", rb.velocity.y);
         animator.SetBool("JumpInput", jumpInput);
         animator.SetFloat("LeftTrigger_Input", LeftTrigger_Input);
+        animator.SetInteger("R_Direction", R_Direction);
+        animator.SetBool("ThrownHalberd", ThrownHalberd);
     }
 
     public void Update_AnyAttackInput(string attackType, bool anyAttackInput)
