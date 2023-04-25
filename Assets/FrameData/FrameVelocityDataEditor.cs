@@ -67,6 +67,7 @@ public class FrameVelocityDataEditor : EditorWindow
             {
                 FrameVelocityData frameVelocityData = CreateInstance<FrameVelocityData>();
                 frameVelocityData.clip = animationClip;
+                frameVelocityData.InitializeFrameData(Mathf.RoundToInt(totalFrames));
                 if(frameVelocityData.dataList == null)
                 {
                     frameVelocityData.dataList = new List<Vector3>();
@@ -109,6 +110,42 @@ public class FrameVelocityDataEditor : EditorWindow
                         currentFrameData.dataListRightStickVelocityAdditive[frame] = currentFrameData.dataListRightStickVelocityAdditive[frame - 1];
                     }
                 }
+                if(currentFrameData.velocityDataList == null || currentFrameData.velocityDataList.Count <= 0)
+                    currentFrameData.InitializeFrameData(Mathf.RoundToInt(totalFrames));
+                if(GUILayout.Button("Add New Velocity Component"))
+                {
+                    currentFrameData.VelocityComponentsAtFrame(frame).Add(new VelocityComponent());
+                    EditorUtility.SetDirty(currentFrameData);
+                    Repaint();
+                    return;
+                }
+                List<VelocityComponent> velocityComponentsAtFrame = currentFrameData.VelocityComponentsAtFrame(frame);
+                for (int i = 0; i < velocityComponentsAtFrame.Count; i++)
+                {
+                    GUILayout.Label($"Frame {frame} Velocity Component {i}");
+                    velocityComponentsAtFrame[i].velocityBase = EditorGUILayout.Vector3Field("Velocity Base", velocityComponentsAtFrame[i].velocityBase);
+                    velocityComponentsAtFrame[i].threshold = EditorGUILayout.Vector3Field("Threshold", velocityComponentsAtFrame[i].threshold);
+                    velocityComponentsAtFrame[i].multiplier = EditorGUILayout.FloatField("Multiplier", velocityComponentsAtFrame[i].multiplier);
+                    velocityComponentsAtFrame[i].isImpulse = EditorGUILayout.Toggle("Is Impulse", velocityComponentsAtFrame[i].isImpulse);
+                    velocityComponentsAtFrame[i].isGravitational = EditorGUILayout.Toggle("Is Gravitational", velocityComponentsAtFrame[i].isGravitational);
+                    velocityComponentsAtFrame[i].isConstant = EditorGUILayout.Toggle("Is Constant", velocityComponentsAtFrame[i].isConstant);
+                    velocityComponentsAtFrame[i].useLocalSpace = EditorGUILayout.Toggle("Use Local Space", velocityComponentsAtFrame[i].useLocalSpace);
+                    velocityComponentsAtFrame[i].useLStick = EditorGUILayout.Toggle("Use L Stick", velocityComponentsAtFrame[i].useLStick);
+                    velocityComponentsAtFrame[i].useRStick = EditorGUILayout.Toggle("Use R Stick", velocityComponentsAtFrame[i].useRStick);
+                    velocityComponentsAtFrame[i].useGravity = EditorGUILayout.Toggle("Use Gravity", velocityComponentsAtFrame[i].useGravity);
+                    velocityComponentsAtFrame[i].useTransformUp = EditorGUILayout.Toggle("Use Transform Up", velocityComponentsAtFrame[i].useTransformUp);
+                    velocityComponentsAtFrame[i].useTransformRight = EditorGUILayout.Toggle("Use Transform Right", velocityComponentsAtFrame[i].useTransformRight);
+                    velocityComponentsAtFrame[i].useTransformForward = EditorGUILayout.Toggle("Use Transform Forward", velocityComponentsAtFrame[i].useTransformForward);
+                    velocityComponentsAtFrame[i].useVelocityDirection = EditorGUILayout.Toggle("Use Velocity Direction", velocityComponentsAtFrame[i].useVelocityDirection);
+                    if(GUILayout.Button($"Remove Component {i}"))
+                    {
+                        currentFrameData.VelocityComponentsAtFrame(frame).RemoveAt(i);
+                        EditorUtility.SetDirty(currentFrameData);
+                        Repaint();
+                        return;
+                    }
+                }
+
                 currentFrameData.dataListSecondary[frame] = EditorGUILayout.FloatField("Drag/Secondary Data", currentFrameData.dataListSecondary[frame]);
                 currentFrameData.dataList[frame] = EditorGUILayout.Vector3Field("Velocity", currentFrameData.dataList[frame]);
                 currentFrameData.dataListLeftStick[frame] = EditorGUILayout.Vector3Field("L_Stick Velocity", currentFrameData.dataListLeftStick[frame]);

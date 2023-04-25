@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listener_FrameVelocityDataLStick, Listener_FrameVelocityDataRStick
 {
     public Vector2 velocityCap;
@@ -10,6 +10,10 @@ public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listen
     public Vector2 velocityBase;
     public Vector2 velocityLStick;
     public Vector2 velocityRStick;
+    public Vector2 velocityBaseTarget;
+    public Vector2 velocityLStickTarget;
+    public Vector2 velocityRStickTarget;
+    public Vector3 lastVelocityBaseData;
     Rigidbody2D rb;
     Vector2 L_Input => InputManager.ins.L_Input;
     Vector2 R_Input => InputManager.ins.R_Input;
@@ -21,13 +25,12 @@ public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listen
     public void Update_FrameVelocityData(Vector3 baseData, float drag, bool additive)
     {
         this.drag = drag;
-        Vector2 v = new Vector2(baseData.x, baseData.y) * baseData.z;
-        if(additive)
+        if(lastVelocityBaseData != baseData)
         {
-            velocityBase += v * Time.fixedDeltaTime * updateSpeed;
-            return;
+            lastVelocityBaseData = baseData;
+            Vector2 v = new Vector2(baseData.x, baseData.y);
+            rb.velocity += v;
         }
-        velocityBase = v;
     }
     public void Update_FrameVelocityDataLStick(Vector3 stickData, bool additive)
     {
@@ -54,10 +57,10 @@ public class VelocityManager : MonoBehaviour, Listener_FrameVelocityData, Listen
         if (disableManager)
             return;
 
-        rb.drag = drag;
-        Vector2 velocityFinal = velocityBase + velocityLStick + velocityRStick;
-        velocityFinal.x = Mathf.Clamp(velocityFinal.x, -velocityCap.x, velocityCap.x);
-        velocityFinal.y = Mathf.Clamp(velocityFinal.y, -velocityCap.y, velocityCap.y);
-        rb.velocity = velocityFinal;
+        //rb.drag = drag;
+        //Vector2 velocityFinal = velocityBase + velocityLStick + velocityRStick;
+        //velocityFinal.x = Mathf.Clamp(velocityFinal.x, -velocityCap.x, velocityCap.x);
+        //velocityFinal.y = Mathf.Clamp(velocityFinal.y, -velocityCap.y, velocityCap.y);
+        //rb.velocity = velocityFinal;
     }
 }

@@ -214,14 +214,14 @@ GameObject:
   - component: {fileID: 63394252}
   - component: {fileID: 63394255}
   - component: {fileID: 63394253}
-  - component: {fileID: 63394254}
+  - component: {fileID: 63394256}
   m_Layer: 7
   m_Name: NewPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &63394247
 Transform:
   m_ObjectHideFlags: 0
@@ -313,24 +313,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   showGizmos: 1
---- !u!114 &63394254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63394246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e5d15c383a405642941c34110ac702a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityCap: {x: 40, y: 40}
-  updateSpeed: 1
-  velocityBase: {x: 0, y: 0}
-  velocityLStick: {x: 0, y: 0}
-  velocityRStick: {x: 0, y: 0}
-  disableManager: 0
 --- !u!114 &63394255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +328,18 @@ MonoBehaviour:
   hitboxLayer: 7
   setToTrigger: 0
   showHitboxGizmos: 1
+--- !u!114 &63394256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63394246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8576db0aabafe0449b492a110117bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &123496121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503700955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1727,6 +1721,10 @@ MonoBehaviour:
   velocityBase: {x: 0, y: 0}
   velocityLStick: {x: 0, y: 0}
   velocityRStick: {x: 0, y: 0}
+  velocityBaseTarget: {x: 0, y: 0}
+  velocityLStickTarget: {x: 0, y: 0}
+  velocityRStickTarget: {x: 0, y: 0}
+  lastVelocityBaseData: {x: 0, y: 0, z: 0}
   disableManager: 1
 --- !u!1 &519420028
 GameObject:
@@ -8612,6 +8610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1509517773}
   - component: {fileID: 1509517774}
+  - component: {fileID: 1509517778}
   - component: {fileID: 1509517775}
   - component: {fileID: 1509517776}
   - component: {fileID: 1509517777}
@@ -8694,6 +8693,19 @@ MonoBehaviour:
   halberdRigidbody: {fileID: 503700957}
   halberdAnimator: {fileID: 1752700364}
   velocityMultiplier: 60
+--- !u!114 &1509517778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509517771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e596a868b4da0c48b66ca196b571876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WorldGravityDirection: {x: 0, y: -1, z: 0}
 --- !u!1 &1544497458
 GameObject:
   m_ObjectHideFlags: 0

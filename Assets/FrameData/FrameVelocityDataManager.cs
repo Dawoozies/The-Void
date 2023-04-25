@@ -12,12 +12,14 @@ public class FrameVelocityDataManager : MonoBehaviour
     string clipName;
     int frame;
     FrameVelocityData currentData;
+    Listener_FrameVelocityDataNew[] listeners_FrameVelocityDataNew;
     Listener_FrameVelocityData[] listeners_FrameVelocityData;
     Listener_FrameVelocityDataLStick[] listeners_FrameVelocityDataLStick;
     Listener_FrameVelocityDataRStick[] listeners_FrameVelocityDataRStick;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        listeners_FrameVelocityDataNew = GetComponentsInChildren<Listener_FrameVelocityDataNew>();
         listeners_FrameVelocityData = GetComponentsInChildren<Listener_FrameVelocityData>();
         listeners_FrameVelocityDataLStick = GetComponentsInChildren<Listener_FrameVelocityDataLStick>();
         listeners_FrameVelocityDataRStick = GetComponentsInChildren<Listener_FrameVelocityDataRStick>();
@@ -45,14 +47,38 @@ public class FrameVelocityDataManager : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if(clipName != animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
+            NotifyListeners_FrameVelocityDataNew();
         clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (!frameVelocityDataDictionary.ContainsKey(clipName))
             return;
         frame = animator.CurrentFrame();
         currentData = frameVelocityDataDictionary[clipName];
+        HandleListeners_FrameVelocityDataNew();
         HandleListeners_FrameVelocityData();
         HandleListeners_FrameVelocityDataLStick();
         HandleListeners_FrameVelocityDataRStick();
+    }
+    void NotifyListeners_FrameVelocityDataNew()
+    {
+        if (listeners_FrameVelocityDataNew == null)
+            return;
+        for (int i = 0; i < listeners_FrameVelocityDataNew.Length; i++)
+        {
+            listeners_FrameVelocityDataNew[i].Notify_AnimationClipChanged();
+        }
+    }
+    void HandleListeners_FrameVelocityDataNew()
+    {
+        if (listeners_FrameVelocityDataNew == null)
+            return;
+        List<VelocityComponent> velocityComponents = currentData.VelocityComponentsAtFrame(frame);
+        if (velocityComponents == null || velocityComponents.Count <= 0)
+            return;
+        for (int i = 0; i < listeners_FrameVelocityDataNew.Length; i++)
+        {
+            listeners_FrameVelocityDataNew[i].Update_FrameVelocityData(frame, velocityComponents);
+        }
     }
     void HandleListeners_FrameVelocityData()
     {

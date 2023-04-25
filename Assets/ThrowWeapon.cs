@@ -27,7 +27,7 @@ public class ThrowWeapon : StateMachineBehaviour
                 Vector3 finalPosition = animator.transform.position + new Vector3(launchPosition.x*animator.transform.localScale.x, launchPosition.y, launchPosition.z);
                 Vector3 finalVelocity = new Vector3(launchVelocity.x * animator.transform.localScale.x, launchVelocity.y, launchVelocity.z);
                 ThrownWeaponTest.ins.LaunchHalberd(finalPosition, finalVelocity);
-                PlayerDataManager.ins.ThrownHalberd = true;
+                //PlayerDataManager.ins.ThrownHalberd = true;
             }
         }
 
