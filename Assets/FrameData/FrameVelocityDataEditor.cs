@@ -7,6 +7,7 @@ public class FrameVelocityDataEditor : EditorWindow
     Transform selectedTransform;
     AnimationClip newAnimationClip;
     AnimationClip animationClip;
+    FrameVelocityData copiedVelocityData;
     int frame;
     float time;
     FrameVelocityData currentFrameData;
@@ -36,6 +37,8 @@ public class FrameVelocityDataEditor : EditorWindow
             if(newAnimationClip.name != animationClip.name)
             {
                 frame = 0;
+                time = 0f;
+                selectedComponentIndex = -1;
                 animationClip = newAnimationClip;
             }
             AnimationMode.StartAnimationMode();
@@ -80,6 +83,20 @@ public class FrameVelocityDataEditor : EditorWindow
                 currentFrameData = AssetDatabase.LoadAssetAtPath<FrameVelocityData>(AssetDatabase.GUIDToAssetPath(results[0]));
                 if(currentFrameData.velocityDataList == null || currentFrameData.velocityDataList.Count <= 0)
                     currentFrameData.InitializeFrameData(Mathf.RoundToInt(totalFrames));
+                if (GUILayout.Button($"Copy Data From {currentFrameData.clip.name} To Clipboard"))
+                {
+                    copiedVelocityData = currentFrameData;
+                }
+                if(copiedVelocityData != null && copiedVelocityData.clip.name.Length > 0)
+                {
+                    if(GUILayout.Button($"Paste Data From {copiedVelocityData.clip.name} To {currentFrameData.clip.name}"))
+                    {
+                        currentFrameData.PasteFrameVelocityData(copiedVelocityData);
+                        EditorUtility.SetDirty(currentFrameData);
+                        Repaint();
+                        return;
+                    }
+                }
                 if(GUILayout.Button("Add New Velocity Component"))
                 {
                     currentFrameData.VelocityComponentsAtFrame(frame).Add(new VelocityComponent());
@@ -116,7 +133,7 @@ public class FrameVelocityDataEditor : EditorWindow
                     return;
                 if (velocityComponentsAtFrame == null || velocityComponentsAtFrame.Count <= 0)
                     return;
-                if (selectedComponentIndex > velocityComponentsAtFrame.Count)
+                if (selectedComponentIndex >= velocityComponentsAtFrame.Count)
                     selectedComponentIndex = -1;
                 if (selectedComponentIndex >= 0)
                 {

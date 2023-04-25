@@ -30,6 +30,16 @@ public class FrameVelocityData : ScriptableObject
             velocityDataList[i].PasteVelocityData(velocityDataList[frame]);
         }
     }
+    public void PasteFrameVelocityData(FrameVelocityData newFrameVelocityData)
+    {
+        velocityDataList = new List<VelocityData>();
+        for (int i = 0; i < newFrameVelocityData.velocityDataList.Count; i++)
+        {
+            VelocityData velocityData = new VelocityData();
+            velocityData.PasteVelocityData(newFrameVelocityData.velocityDataList[i]);
+            velocityDataList.Add(velocityData);
+        }
+    }
 }
 [System.Serializable]
 public class VelocityData
