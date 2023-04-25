@@ -10,6 +10,8 @@ public class FrameVelocityDataEditor : EditorWindow
     int frame;
     float time;
     FrameVelocityData currentFrameData;
+    Vector2 scrollPosition;
+    int selectedComponentIndex;
     [MenuItem("Window/Frame Velocity Data Editor")]
     static void Init()
     {
@@ -68,26 +70,6 @@ public class FrameVelocityDataEditor : EditorWindow
                 FrameVelocityData frameVelocityData = CreateInstance<FrameVelocityData>();
                 frameVelocityData.clip = animationClip;
                 frameVelocityData.InitializeFrameData(Mathf.RoundToInt(totalFrames));
-                if(frameVelocityData.dataList == null)
-                {
-                    frameVelocityData.dataList = new List<Vector3>();
-                    frameVelocityData.dataListSecondary = new List<float>();
-                    frameVelocityData.dataListLeftStick = new List<Vector3>();
-                    frameVelocityData.dataListRightStick = new List<Vector3>();
-                    frameVelocityData.dataListVelocityAdditive = new List<bool>();
-                    frameVelocityData.dataListLeftStickVelocityAdditive = new List<bool>();
-                    frameVelocityData.dataListRightStickVelocityAdditive = new List<bool>();
-                    for (int i = 0; i < totalFrames; i++)
-                    {
-                        frameVelocityData.dataList.Add(Vector3.zero);
-                        frameVelocityData.dataListSecondary.Add(0f);
-                        frameVelocityData.dataListLeftStick.Add(Vector3.zero);
-                        frameVelocityData.dataListRightStick.Add(Vector3.zero);
-                        frameVelocityData.dataListVelocityAdditive.Add(false);
-                        frameVelocityData.dataListLeftStickVelocityAdditive.Add(false);
-                        frameVelocityData.dataListRightStickVelocityAdditive.Add(false);
-                    }
-                }
                 if (!AssetDatabase.IsValidFolder("Assets/Resources/FrameVelocityData"))
                     AssetDatabase.CreateFolder("Assets/Resources", "FrameVelocityData");
                 AssetDatabase.CreateAsset(frameVelocityData, $"Assets/Resources/FrameVelocityData/{animationClip.name}_VelocityData.asset");
@@ -96,20 +78,6 @@ public class FrameVelocityDataEditor : EditorWindow
             if (results.Length > 0)
             {
                 currentFrameData = AssetDatabase.LoadAssetAtPath<FrameVelocityData>(AssetDatabase.GUIDToAssetPath(results[0]));
-                GUILayout.Label("NOTE: Z component is magnitude factor");
-                if(GUILayout.Button("Duplicate Previous Frame"))
-                {
-                    if(frame > 0)
-                    {
-                        currentFrameData.dataList[frame] = currentFrameData.dataList[frame - 1];
-                        currentFrameData.dataListSecondary[frame] = currentFrameData.dataListSecondary[frame - 1];
-                        currentFrameData.dataListLeftStick[frame] = currentFrameData.dataListLeftStick[frame - 1];
-                        currentFrameData.dataListRightStick[frame] = currentFrameData.dataListRightStick[frame - 1];
-                        currentFrameData.dataListVelocityAdditive[frame] = currentFrameData.dataListVelocityAdditive[frame - 1];
-                        currentFrameData.dataListLeftStickVelocityAdditive[frame] = currentFrameData.dataListLeftStickVelocityAdditive[frame - 1];
-                        currentFrameData.dataListRightStickVelocityAdditive[frame] = currentFrameData.dataListRightStickVelocityAdditive[frame - 1];
-                    }
-                }
                 if(currentFrameData.velocityDataList == null || currentFrameData.velocityDataList.Count <= 0)
                     currentFrameData.InitializeFrameData(Mathf.RoundToInt(totalFrames));
                 if(GUILayout.Button("Add New Velocity Component"))
@@ -120,11 +88,41 @@ public class FrameVelocityDataEditor : EditorWindow
                     return;
                 }
                 List<VelocityComponent> velocityComponentsAtFrame = currentFrameData.VelocityComponentsAtFrame(frame);
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
                 for (int i = 0; i < velocityComponentsAtFrame.Count; i++)
                 {
-                    GUILayout.Label($"Frame {frame} Velocity Component {i}");
+                    GUILayout.BeginHorizontal();
+                    if(GUILayout.Button($"Frame {frame} Velocity Component {i}"))
+                    {
+                        if (selectedComponentIndex != i)
+                        {
+                            selectedComponentIndex = i;
+                        }
+                        else
+                        {
+                            selectedComponentIndex = -1;
+                        }
+                    }
+                    if(GUILayout.Button($"Remove Component {i}"))
+                    {
+                        currentFrameData.VelocityComponentsAtFrame(frame).RemoveAt(i);
+                        EditorUtility.SetDirty(currentFrameData);
+                        Repaint();
+                    }
+                    GUILayout.EndHorizontal();
+                }
+                EditorGUILayout.EndScrollView();
+                if (currentFrameData.VelocityComponentsAtFrame(frame).Count != velocityComponentsAtFrame.Count)
+                    return;
+                if (velocityComponentsAtFrame == null || velocityComponentsAtFrame.Count <= 0)
+                    return;
+                if (selectedComponentIndex > velocityComponentsAtFrame.Count)
+                    selectedComponentIndex = -1;
+                if (selectedComponentIndex >= 0)
+                {
+                    int i = selectedComponentIndex;
                     velocityComponentsAtFrame[i].velocityBase = EditorGUILayout.Vector3Field("Velocity Base", velocityComponentsAtFrame[i].velocityBase);
-                    velocityComponentsAtFrame[i].threshold = EditorGUILayout.Vector3Field("Threshold", velocityComponentsAtFrame[i].threshold);
+                    velocityComponentsAtFrame[i].maxSpeed = EditorGUILayout.FloatField("Max Speed", velocityComponentsAtFrame[i].maxSpeed);
                     velocityComponentsAtFrame[i].multiplier = EditorGUILayout.FloatField("Multiplier", velocityComponentsAtFrame[i].multiplier);
                     velocityComponentsAtFrame[i].isImpulse = EditorGUILayout.Toggle("Is Impulse", velocityComponentsAtFrame[i].isImpulse);
                     velocityComponentsAtFrame[i].isGravitational = EditorGUILayout.Toggle("Is Gravitational", velocityComponentsAtFrame[i].isGravitational);
@@ -137,29 +135,12 @@ public class FrameVelocityDataEditor : EditorWindow
                     velocityComponentsAtFrame[i].useTransformRight = EditorGUILayout.Toggle("Use Transform Right", velocityComponentsAtFrame[i].useTransformRight);
                     velocityComponentsAtFrame[i].useTransformForward = EditorGUILayout.Toggle("Use Transform Forward", velocityComponentsAtFrame[i].useTransformForward);
                     velocityComponentsAtFrame[i].useVelocityDirection = EditorGUILayout.Toggle("Use Velocity Direction", velocityComponentsAtFrame[i].useVelocityDirection);
-                    if(GUILayout.Button($"Remove Component {i}"))
-                    {
-                        currentFrameData.VelocityComponentsAtFrame(frame).RemoveAt(i);
-                        EditorUtility.SetDirty(currentFrameData);
-                        Repaint();
-                        return;
-                    }
+                    velocityComponentsAtFrame[i].useVelocity = EditorGUILayout.Toggle("Use Velocity", velocityComponentsAtFrame[i].useVelocity);
                 }
-
-                currentFrameData.dataListSecondary[frame] = EditorGUILayout.FloatField("Drag/Secondary Data", currentFrameData.dataListSecondary[frame]);
-                currentFrameData.dataList[frame] = EditorGUILayout.Vector3Field("Velocity", currentFrameData.dataList[frame]);
-                currentFrameData.dataListLeftStick[frame] = EditorGUILayout.Vector3Field("L_Stick Velocity", currentFrameData.dataListLeftStick[frame]);
-                currentFrameData.dataListRightStick[frame] = EditorGUILayout.Vector3Field("R_Stick Velocity", currentFrameData.dataListRightStick[frame]);
-                currentFrameData.dataListVelocityAdditive[frame] = EditorGUILayout.Toggle("Velocity Additive: ", currentFrameData.dataListVelocityAdditive[frame]);
-                currentFrameData.dataListLeftStickVelocityAdditive[frame] = EditorGUILayout.Toggle("L Stick Additive: ", currentFrameData.dataListLeftStickVelocityAdditive[frame]);
-                currentFrameData.dataListRightStickVelocityAdditive[frame] = EditorGUILayout.Toggle("R Stick Additive: ", currentFrameData.dataListRightStickVelocityAdditive[frame]);
-                if (GUILayout.Button("Normalize"))
+                if(GUILayout.Button($"Override All Frames With Frame {frame}"))
                 {
-                    Vector3 velocity = currentFrameData.VelocityAtFrame(frame).normalized;
-                    currentFrameData.dataList[frame] = new Vector3(velocity.x, velocity.y, currentFrameData.MagnitudeAtFrame(frame));
+                    currentFrameData.CopyFromFrameToAll(frame);
                 }
-                if (GUILayout.Button("Set Zero Velocity"))
-                    currentFrameData.dataList[frame] = Vector3.zero;
                 EditorUtility.SetDirty(currentFrameData);
                 Repaint();
             }
@@ -194,16 +175,24 @@ public class FrameVelocityDataEditor : EditorWindow
     {
         if (currentFrameData == null)
             return;
+        if (currentFrameData.VelocityComponentsAtFrame(frame) == null || currentFrameData.VelocityComponentsAtFrame(frame).Count <= 0)
+            return;
+        if (selectedComponentIndex >= currentFrameData.VelocityComponentsAtFrame(frame).Count)
+            return;
+        if (selectedComponentIndex == -1)
+            return;
+        
         EditorGUI.BeginChangeCheck();
-        Vector3 oldVector = currentFrameData.VelocityAtFrame(frame);
-        Vector3 newVector = Handles.FreeMoveHandle(oldVector, Quaternion.identity, 0.25f, Vector3.one * 0.1f, Handles.RectangleHandleCap);
+        Vector3 oldVector = currentFrameData.VelocityComponentsAtFrame(frame)[selectedComponentIndex].velocityBase;
+        Handles.color = new Color(1f, 0f, 0.216f, 1f);
+        Vector3 newVector = Handles.FreeMoveHandle(oldVector, Quaternion.identity, 0.75f, Vector3.one * 0.1f, Handles.RectangleHandleCap);
         if(EditorGUI.EndChangeCheck())
         {
-            currentFrameData.dataList[frame] = new Vector3(newVector.x, newVector.y, currentFrameData.MagnitudeAtFrame(frame));
+            currentFrameData.VelocityComponentsAtFrame(frame)[selectedComponentIndex].velocityBase = new Vector3(newVector.x, newVector.y, newVector.z);
             EditorUtility.SetDirty(currentFrameData);
             Repaint();
         }
-
-        Handles.DrawDottedLine(Vector3.zero, currentFrameData.VelocityAtFrame(frame), 2f);
+        Handles.color = new Color(1f, 0f, 0.216f, 1f);
+        Handles.DrawDottedLine(selectedTransform.position, selectedTransform.position + currentFrameData.VelocityComponentsAtFrame(frame)[selectedComponentIndex].velocityBase, 3f);
     }
 }

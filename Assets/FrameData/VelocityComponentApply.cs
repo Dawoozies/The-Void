@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityDataNew
+public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityData
 {
     Rigidbody2D rb;
     int lastFrame;
@@ -12,41 +12,75 @@ public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityDataN
     }
     public void Notify_AnimationClipChanged()
     {
+        Debug.Log("Notification went through");
         lastFrame = -1;
     }
 
     public void Update_FrameVelocityData(int currentFrame, List<VelocityComponent> velocityComponents)
     {
+        Debug.Log("Trying to update");
         for (int i = 0; i < velocityComponents.Count; i++)
         {
             VelocityComponent velocityComponent = velocityComponents[i];
-            if(!velocityComponent.isImpulse && !velocityComponent.isGravitational && !velocityComponent.isConstant)
-            {
-                Debug.LogError("A velocity component has properties: isImpulse, isGravitational, isConstant all set to false. This velocity component will do nothing!");
-                continue;
-            }
             Vector3 velocityBase = velocityComponent.velocityBase;
-            Vector3 threshold = velocityComponent.threshold;
-            List<Vector3> finalVelocitySet = new List<Vector3>();
+            float maxSpeed = velocityComponent.maxSpeed;
+            float multiplier = velocityComponent.multiplier;
+            Vector3 finalVelocityVector = velocityBase;
+            //Basis transforms
             if (velocityComponent.useLocalSpace)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, rb.transform.localScale));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.localScale);
             if (velocityComponent.useLStick)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, new Vector3(InputManager.ins.L_Input.x, InputManager.ins.L_Input.y, 0f)));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, new Vector3(InputManager.ins.L_Input.x, InputManager.ins.L_Input.y, 0f));
             if (velocityComponent.useRStick)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, new Vector3(InputManager.ins.R_Input.x, InputManager.ins.R_Input.y, 0f)));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, new Vector3(InputManager.ins.R_Input.x, InputManager.ins.R_Input.y, 0f));
             if (velocityComponent.useGravity)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, GameDataManager.ins.WorldGravityDirection));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, GameDataManager.ins.WorldGravityDirection);
             if (velocityComponent.useTransformUp)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, rb.transform.up));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.up);
             if (velocityComponent.useTransformRight)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, rb.transform.right));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.right);
             if (velocityComponent.useTransformForward)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, rb.transform.forward));
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.forward);
             if (velocityComponent.useVelocityDirection)
-                finalVelocitySet.Add(Vector3.Scale(velocityBase, rb.velocity.normalized));
-
-            //Now we've added all the shit we might use
-            //If none of this shit is selected, we just do things normally
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.velocity.normalized);
+            if (velocityComponent.useVelocity)
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.velocity);
+            //Velocity Application
+            if (velocityComponent.isImpulse)
+                Impulse(currentFrame, finalVelocityVector);
+            if (velocityComponent.isGravitational)
+                Gravitational(multiplier, finalVelocityVector);
+            if (velocityComponent.isConstant)
+                Constant(maxSpeed, finalVelocityVector);
         }
+
+        if(lastFrame != currentFrame)
+        {
+            lastFrame = currentFrame;
+        }
+    }
+    void Impulse(int currentFrame, Vector3 finalVelocity)
+    {
+        if (currentFrame == lastFrame)
+            return;
+        rb.velocity += (Vector2)finalVelocity;
+        Debug.Log("Adding impulse velocity");
+    }
+    //Called gravitational because these will "act like" gravity
+    void Gravitational(float multiplier, Vector3 finalVelocity)
+    {
+        rb.velocity += (Vector2)finalVelocity * Time.fixedDeltaTime * multiplier;
+        Debug.Log("Adding gravity like velocity");
+    }
+    //Called constant because these will be constantly applied. These will act like constant vectors to the end of a vector field
+    void Constant(float maxSpeed, Vector3 finalVelocity)
+    {
+        Vector3 finalDirection = finalVelocity.normalized;
+        float finalMagnitude = finalVelocity.magnitude;
+        float projectedSpeed = Vector3.Dot(rb.velocity, finalDirection);
+        if (projectedSpeed + finalMagnitude > maxSpeed)
+            finalMagnitude = maxSpeed - projectedSpeed;
+        rb.velocity += (Vector2)finalDirection * finalMagnitude;
+        Debug.Log("Adding constant velocity");
     }
 }

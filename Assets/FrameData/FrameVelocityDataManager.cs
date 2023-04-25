@@ -12,17 +12,11 @@ public class FrameVelocityDataManager : MonoBehaviour
     string clipName;
     int frame;
     FrameVelocityData currentData;
-    Listener_FrameVelocityDataNew[] listeners_FrameVelocityDataNew;
     Listener_FrameVelocityData[] listeners_FrameVelocityData;
-    Listener_FrameVelocityDataLStick[] listeners_FrameVelocityDataLStick;
-    Listener_FrameVelocityDataRStick[] listeners_FrameVelocityDataRStick;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        listeners_FrameVelocityDataNew = GetComponentsInChildren<Listener_FrameVelocityDataNew>();
         listeners_FrameVelocityData = GetComponentsInChildren<Listener_FrameVelocityData>();
-        listeners_FrameVelocityDataLStick = GetComponentsInChildren<Listener_FrameVelocityDataLStick>();
-        listeners_FrameVelocityDataRStick = GetComponentsInChildren<Listener_FrameVelocityDataRStick>();
         LoadData();
     }
     void LoadData()
@@ -48,64 +42,33 @@ public class FrameVelocityDataManager : MonoBehaviour
     void FixedUpdate()
     {
         if(clipName != animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
-            NotifyListeners_FrameVelocityDataNew();
+            NotifyListeners_FrameVelocityData();
         clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (!frameVelocityDataDictionary.ContainsKey(clipName))
             return;
         frame = animator.CurrentFrame();
         currentData = frameVelocityDataDictionary[clipName];
-        HandleListeners_FrameVelocityDataNew();
         HandleListeners_FrameVelocityData();
-        HandleListeners_FrameVelocityDataLStick();
-        HandleListeners_FrameVelocityDataRStick();
     }
-    void NotifyListeners_FrameVelocityDataNew()
+    void NotifyListeners_FrameVelocityData()
     {
-        if (listeners_FrameVelocityDataNew == null)
+        if (listeners_FrameVelocityData == null)
             return;
-        for (int i = 0; i < listeners_FrameVelocityDataNew.Length; i++)
+        for (int i = 0; i < listeners_FrameVelocityData.Length; i++)
         {
-            listeners_FrameVelocityDataNew[i].Notify_AnimationClipChanged();
-        }
-    }
-    void HandleListeners_FrameVelocityDataNew()
-    {
-        if (listeners_FrameVelocityDataNew == null)
-            return;
-        List<VelocityComponent> velocityComponents = currentData.VelocityComponentsAtFrame(frame);
-        if (velocityComponents == null || velocityComponents.Count <= 0)
-            return;
-        for (int i = 0; i < listeners_FrameVelocityDataNew.Length; i++)
-        {
-            listeners_FrameVelocityDataNew[i].Update_FrameVelocityData(frame, velocityComponents);
+            listeners_FrameVelocityData[i].Notify_AnimationClipChanged();
         }
     }
     void HandleListeners_FrameVelocityData()
     {
         if (listeners_FrameVelocityData == null)
             return;
-        Vector3 baseData = new Vector3(currentData.VelocityAtFrame(frame).x * animator.transform.localScale.x, currentData.VelocityAtFrame(frame).y, currentData.VelocityAtFrame(frame).z);
+        List<VelocityComponent> velocityComponents = currentData.VelocityComponentsAtFrame(frame);
+        if (velocityComponents == null || velocityComponents.Count <= 0)
+            return;
         for (int i = 0; i < listeners_FrameVelocityData.Length; i++)
         {
-            listeners_FrameVelocityData[i].Update_FrameVelocityData(baseData, currentData.DragAtFrame(frame), currentData.IsVelocityAdditiveAtFrame(frame));
-        }
-    }
-    void HandleListeners_FrameVelocityDataLStick()
-    {
-        if (listeners_FrameVelocityDataLStick == null)
-            return;
-        for (int i = 0; i < listeners_FrameVelocityDataLStick.Length; i++)
-        {
-            listeners_FrameVelocityDataLStick[i].Update_FrameVelocityDataLStick(currentData.LeftStickVelocityAtFrame(frame), currentData.IsLeftStickVelocityAdditiveAtFrame(frame));
-        }
-    }
-    void HandleListeners_FrameVelocityDataRStick()
-    {
-        if (listeners_FrameVelocityDataRStick == null)
-            return;
-        for (int i = 0; i < listeners_FrameVelocityDataRStick.Length; i++)
-        {
-            listeners_FrameVelocityDataRStick[i].Update_FrameVelocityDataRStick(currentData.RightStickVelocityAtFrame(frame), currentData.IsRightStickVelocityAdditiveAtFrame(frame));
+            listeners_FrameVelocityData[i].Update_FrameVelocityData(frame, velocityComponents);
         }
     }
 }

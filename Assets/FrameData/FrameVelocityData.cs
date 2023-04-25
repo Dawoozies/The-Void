@@ -6,13 +6,6 @@ public class FrameVelocityData : ScriptableObject
 {
     public AnimationClip clip;
     public List<VelocityData> velocityDataList;
-    public List<Vector3> dataList;
-    public List<float> dataListSecondary;
-    public List<Vector3> dataListLeftStick;
-    public List<Vector3> dataListRightStick;
-    public List<bool> dataListVelocityAdditive;
-    public List<bool> dataListLeftStickVelocityAdditive;
-    public List<bool> dataListRightStickVelocityAdditive;
     public void InitializeFrameData(int totalFrames)
     {
         List<VelocityData> initVelocityDataList = new List<VelocityData>();
@@ -28,49 +21,50 @@ public class FrameVelocityData : ScriptableObject
     {
         return velocityDataList[frame].velocityComponents;
     }
-    public Vector3 VelocityAtFrame(int frame)
+    public void CopyFromFrameToAll(int frame)
     {
-        return dataList[frame];
-    }
-    public float MagnitudeAtFrame(int frame)
-    {
-        return dataList[frame].z;
-    }
-    public float DragAtFrame(int frame)
-    {
-        return dataListSecondary[frame];
-    }
-    public Vector3 LeftStickVelocityAtFrame(int frame)
-    {
-        return dataListLeftStick[frame];
-    }
-    public Vector3 RightStickVelocityAtFrame(int frame)
-    {
-        return dataListRightStick[frame];
-    }
-    public bool IsVelocityAdditiveAtFrame(int frame)
-    {
-        return dataListVelocityAdditive[frame];
-    }
-    public bool IsLeftStickVelocityAdditiveAtFrame(int frame)
-    {
-        return dataListLeftStickVelocityAdditive[frame];
-    }
-    public bool IsRightStickVelocityAdditiveAtFrame(int frame)
-    {
-        return dataListRightStickVelocityAdditive[frame];
+        for (int i = 0; i < velocityDataList.Count; i++)
+        {
+            if (i == frame)
+                continue;
+            velocityDataList[i].PasteVelocityData(velocityDataList[frame]);
+        }
     }
 }
 [System.Serializable]
 public class VelocityData
 {
     public List<VelocityComponent> velocityComponents;
+    public void PasteVelocityData(VelocityData newVelocityData)
+    {
+        velocityComponents = new List<VelocityComponent>();
+        for (int i = 0; i < newVelocityData.velocityComponents.Count; i++)
+        {
+            VelocityComponent newComponent = new VelocityComponent();
+            newComponent.velocityBase = newVelocityData.velocityComponents[i].velocityBase;
+            newComponent.maxSpeed = newVelocityData.velocityComponents[i].maxSpeed;
+            newComponent.multiplier = newVelocityData.velocityComponents[i].multiplier;
+            newComponent.isImpulse = newVelocityData.velocityComponents[i].isImpulse;
+            newComponent.isGravitational = newVelocityData.velocityComponents[i].isGravitational;
+            newComponent.isConstant = newVelocityData.velocityComponents[i].isConstant;
+            newComponent.useLocalSpace = newVelocityData.velocityComponents[i].useLocalSpace;
+            newComponent.useLStick = newVelocityData.velocityComponents[i].useLStick;
+            newComponent.useRStick = newVelocityData.velocityComponents[i].useRStick;
+            newComponent.useGravity = newVelocityData.velocityComponents[i].useGravity;
+            newComponent.useTransformUp = newVelocityData.velocityComponents[i].useTransformUp;
+            newComponent.useTransformRight = newVelocityData.velocityComponents[i].useTransformRight;
+            newComponent.useTransformForward = newVelocityData.velocityComponents[i].useTransformForward;
+            newComponent.useVelocityDirection = newVelocityData.velocityComponents[i].useVelocityDirection;
+            newComponent.useVelocity = newVelocityData.velocityComponents[i].useVelocity;
+            velocityComponents.Add(newComponent);
+        }
+    }
 }
 [System.Serializable]
 public class VelocityComponent
 {
     public Vector3 velocityBase;
-    public Vector3 threshold;
+    public float maxSpeed; //In ANY direction
     public float multiplier;
     public bool isImpulse; //Application instant, no frame repeat
     public bool isGravitational; //Application with timestepped, frame repeat ok
@@ -83,12 +77,13 @@ public class VelocityComponent
     public bool useTransformRight;
     public bool useTransformForward;
     public bool useVelocityDirection;
+    public bool useVelocity;
 
     public VelocityComponent()
     {
         velocityBase = Vector3.zero;
-        threshold = Vector3.zero;
-        multiplier = 0f;
+        maxSpeed = 40f;
+        multiplier = 1f;
         isImpulse = false;
         isGravitational = false;
         isConstant = false;
@@ -100,5 +95,6 @@ public class VelocityComponent
         useTransformRight = false;
         useTransformForward = false;
         useVelocityDirection = false;
+        useVelocity = false;
     }
 }
