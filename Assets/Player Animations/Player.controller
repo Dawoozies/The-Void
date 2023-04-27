@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &-9107604682954280945
 AnimatorState:
   serializedVersion: 6
@@ -983,6 +986,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &-6697667446447965040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1951,6 +1957,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &-5081056480752766441
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2214,6 +2223,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1101 &-4560929123382205298
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2810,6 +2822,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1101 &-2660298171665359738
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3077,6 +3092,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &-2215913874434898050
 AnimatorState:
   serializedVersion: 6
@@ -3368,6 +3386,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &-1474748166487030207
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3722,6 +3743,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &-265874649111828768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3834,109 +3858,109 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Grounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: DodgeInput
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: NextState_Roll
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: L_InputY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WeaponID
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 1
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LightAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AirDodgeCount
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: TurningNotAllowed
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: JumpLong
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackCharge
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: STATETYPE:AttackCharge
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATKDirection = Up
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATKDirection = Neutral
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATKDirection = Down
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: STATETYPE:StopMovement
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -3964,6 +3988,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &13974508272754464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3978,6 +4005,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1101 &109849850335451409
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4109,6 +4139,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &377371979784142516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4584,6 +4617,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &1898054177351738839
 AnimatorState:
   serializedVersion: 6
@@ -4678,6 +4714,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &2107653637158680844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4692,6 +4731,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &2119660326194596373
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4743,6 +4785,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &2264667869719543396
 AnimatorState:
   serializedVersion: 6
@@ -5353,6 +5398,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &3568589457140074835
 AnimatorState:
   serializedVersion: 6
@@ -5745,6 +5793,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1101 &4743175295631833262
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5886,6 +5937,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &4959170226827783559
 AnimatorState:
   serializedVersion: 6
@@ -6531,6 +6585,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1102 &6794824592321213143
 AnimatorState:
   serializedVersion: 6
@@ -6723,6 +6780,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1101 &7644593427293761369
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6850,6 +6910,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 1
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!1101 &7974368764162661377
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7148,6 +7211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameterName: TurningNotAllowed
   desiredValue: 0
+  onEnter: 1
+  onUpdate: 0
+  onExit: 0
 --- !u!114 &8647283999888065565
 MonoBehaviour:
   m_ObjectHideFlags: 1

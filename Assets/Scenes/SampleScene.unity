@@ -8640,6 +8640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca7f95d94d1e34da452ecfffee48ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AirDodgesMax: 0
+  JumpsMax: 0
   ThrownHalberd: 0
 --- !u!114 &1509517776
 MonoBehaviour:

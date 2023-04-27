@@ -66,6 +66,7 @@ public class VelocityData
             newComponent.useTransformForward = newVelocityData.velocityComponents[i].useTransformForward;
             newComponent.useVelocityDirection = newVelocityData.velocityComponents[i].useVelocityDirection;
             newComponent.useVelocity = newVelocityData.velocityComponents[i].useVelocity;
+            newComponent.parameterMultipliers = newVelocityData.velocityComponents[i].parameterMultipliers;
             velocityComponents.Add(newComponent);
         }
     }
@@ -88,7 +89,7 @@ public class VelocityComponent
     public bool useTransformForward;
     public bool useVelocityDirection;
     public bool useVelocity;
-
+    public List<string> parameterMultipliers;
     public VelocityComponent()
     {
         velocityBase = Vector3.zero;
@@ -106,5 +107,6 @@ public class VelocityComponent
         useTransformForward = false;
         useVelocityDirection = false;
         useVelocity = false;
+        parameterMultipliers = new List<string>();
     }
 }

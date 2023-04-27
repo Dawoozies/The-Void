@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ExtensionMethods_Bool;
 public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, Listener_GroundboxOverlap, Listener_JumpInput
 {
     Vector2 L_Input => InputManager.ins.L_Input;
@@ -31,6 +31,7 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
         animator.SetFloat("LeftTrigger_Input", LeftTrigger_Input);
         animator.SetInteger("R_Direction", R_Direction);
         animator.SetBool("ThrownHalberd", ThrownHalberd);
+        animator.SetFloat("AirTime", (animator.GetFloat("AirTime")+Time.deltaTime)*animator.GetBool("Grounded").DefinedValue(1f,0f));
     }
 
     public void Update_AnyAttackInput(string attackType, bool anyAttackInput)

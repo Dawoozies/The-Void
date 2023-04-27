@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ExtensionMethods_Bool;
 public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityData
 {
     Rigidbody2D rb;
     int lastFrame;
+    Animator animator;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
     }
     public void Notify_AnimationClipChanged()
     {
@@ -25,7 +27,7 @@ public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityData
             Vector3 velocityBase = velocityComponent.velocityBase;
             float maxSpeed = velocityComponent.maxSpeed;
             float multiplier = velocityComponent.multiplier;
-            Vector3 finalVelocityVector = velocityBase;
+            Vector3 finalVelocityVector = velocityBase*ParameterMultiplier(velocityComponent);
             //Basis transforms
             if (velocityComponent.useLocalSpace)
                 finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.localScale);
@@ -82,5 +84,43 @@ public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityData
             finalMagnitude = maxSpeed - projectedSpeed;
         rb.velocity += (Vector2)finalDirection * finalMagnitude;
         Debug.Log("Adding constant velocity");
+    }
+    Dictionary<string, AnimatorControllerParameterType> parameterTypeLookUp;
+    float ParameterMultiplier(VelocityComponent velocityComponent)
+    {
+        if (animator == null)
+            return 1f; //Ignore parameter multipliers
+        if (velocityComponent.parameterMultipliers == null || velocityComponent.parameterMultipliers.Count <= 0)
+            return 1f; //Ignore parameter multipliers
+        if(parameterTypeLookUp == null || parameterTypeLookUp.Count <= 0)
+        {
+            parameterTypeLookUp = new Dictionary<string, AnimatorControllerParameterType>();
+            foreach (AnimatorControllerParameter animatorParameter in animator.parameters)
+            {
+                parameterTypeLookUp.Add(animatorParameter.name, animatorParameter.type);
+            }
+        }
+        float finalMultiplier = 1f;
+        for (int i = 0; i < velocityComponent.parameterMultipliers.Count; i++)
+        {
+            if (!parameterTypeLookUp.ContainsKey(velocityComponent.parameterMultipliers[i]))
+            {
+                Debug.Log("VelocityComponentApply ParameterMultiplier Error: Trying to use a parameter which does not exist in the look up table. Has the parameter name been misspelled?");
+                continue;
+            }
+            switch (parameterTypeLookUp[velocityComponent.parameterMultipliers[i]])
+            {
+                case AnimatorControllerParameterType.Float:
+                    finalMultiplier *= animator.GetFloat(velocityComponent.parameterMultipliers[i]);
+                    break;
+                case AnimatorControllerParameterType.Int:
+                    finalMultiplier *= animator.GetInteger(velocityComponent.parameterMultipliers[i]);
+                    break;
+                case AnimatorControllerParameterType.Bool:
+                    finalMultiplier *= animator.GetBool(velocityComponent.parameterMultipliers[i]).DefinedValue(0f,1f);
+                    break;
+            }
+        }
+        return finalMultiplier;
     }
 }

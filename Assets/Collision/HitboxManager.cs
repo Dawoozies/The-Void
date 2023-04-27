@@ -101,6 +101,9 @@ public class HitboxManager : MonoBehaviour
             }
         }
 
+        if (hitboxes == null || hitboxes.Count <= 0)
+            return;
+
         currentClipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
 
         frame = animator.CurrentFrame();

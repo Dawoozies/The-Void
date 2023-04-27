@@ -47,7 +47,7 @@ public class CollisionManager : MonoBehaviour
     {
         if(entityCollisionData.ContainsKey(animationClipName) == false)
         {
-            Debug.LogError("CollisionManager Error: Trying to get Hitbox Data which does not exist " + animationClipName);
+            //Debug.Log("CollisionManager Warning: Trying to get Hitbox Data which does not exist " + animationClipName);
             return null;
         }
 

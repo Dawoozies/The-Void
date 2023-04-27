@@ -9,5 +9,7 @@ public class PlayerDataManager : MonoBehaviour
     {
         ins = this;
     }
+    public int AirDodgesMax;
+    public int JumpsMax;
     public bool ThrownHalberd;
 }

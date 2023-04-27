@@ -153,6 +153,25 @@ public class FrameVelocityDataEditor : EditorWindow
                     velocityComponentsAtFrame[i].useTransformForward = EditorGUILayout.Toggle("Use Transform Forward", velocityComponentsAtFrame[i].useTransformForward);
                     velocityComponentsAtFrame[i].useVelocityDirection = EditorGUILayout.Toggle("Use Velocity Direction", velocityComponentsAtFrame[i].useVelocityDirection);
                     velocityComponentsAtFrame[i].useVelocity = EditorGUILayout.Toggle("Use Velocity", velocityComponentsAtFrame[i].useVelocity);
+                    if(GUILayout.Button("Add Parameter Multiplier"))
+                    {
+                        velocityComponentsAtFrame[i].parameterMultipliers.Add("ParameterName");
+                    }
+                    if (velocityComponentsAtFrame[i].parameterMultipliers.Count > 0)
+                    {
+                        for(int j = 0; j < velocityComponentsAtFrame[i].parameterMultipliers.Count; j++)
+                        {
+                            GUILayout.BeginHorizontal();
+                            velocityComponentsAtFrame[i].parameterMultipliers[j] = EditorGUILayout.TextField($"Parameter Multiplier {j} = ", velocityComponentsAtFrame[i].parameterMultipliers[j]);
+                            if (GUILayout.Button("Remove"))
+                            {
+                                velocityComponentsAtFrame[i].parameterMultipliers.RemoveAt(j);
+                                GUILayout.EndHorizontal();
+                                break;
+                            }
+                            GUILayout.EndHorizontal();
+                        }
+                    }
                 }
                 if(GUILayout.Button($"Override All Frames With Frame {frame}"))
                 {
