@@ -28,17 +28,23 @@ public class OverlapData
     {
         overlapComponents = new List<OverlapComponent>();
     }
+    public List<ParameterComponent> ParameterComponentsAtIndex(int index)
+    {
+        return overlapComponents[index].parameterComponents;
+    }
 }
 [Serializable]
 public class OverlapComponent
 {
+    public string componentName; //Just for ease of remembering what the overlap component is for
     public List<Geometry.Circle> circles;
-    public LayerMask detectionLayers;
+    public LayerMask targetLayerMask;
     public List<ParameterComponent> parameterComponents; //Parameters that get changed when overlap happens
     public OverlapComponent ()
     {
+        componentName = "";
         circles = new List<Geometry.Circle>();
-        detectionLayers = 0;
+        targetLayerMask = 0;
         parameterComponents = new List<ParameterComponent>();
     }
 }
