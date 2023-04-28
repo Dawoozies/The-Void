@@ -8,14 +8,11 @@ public class FrameVelocityData : ScriptableObject
     public List<VelocityData> velocityDataList;
     public void InitializeFrameData(int totalFrames)
     {
-        List<VelocityData> initVelocityDataList = new List<VelocityData>();
+        velocityDataList = new List<VelocityData>();
         for (int i = 0; i < totalFrames; i++)
         {
-            VelocityData velocityData = new VelocityData();
-            velocityData.velocityComponents = new List<VelocityComponent>();
-            initVelocityDataList.Add(velocityData);
+            velocityDataList.Add(new VelocityData());
         }
-        velocityDataList = initVelocityDataList;
     }
     public List<VelocityComponent> VelocityComponentsAtFrame(int frame)
     {

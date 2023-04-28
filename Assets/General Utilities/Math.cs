@@ -1,11 +1,6 @@
 using UnityEngine;
 namespace LinearAlgebra
 {
-    public static class LinearAlgebra
-    {
-        //Parametrised Line between two points
-    }
-
     public class ParametrisedLine
     {
         private Vector3 _pathStart;
@@ -88,6 +83,20 @@ namespace LinearAlgebra
         void Update_Point()
         {
             _point = _pathStart + parameter * (_pathEnd - _pathStart);
+        }
+    }
+}
+namespace Geometry
+{
+    public class Circle
+    {
+        public Vector3 center;
+        public float radius;
+
+        public Circle ()
+        {
+            center = Vector3.zero;
+            radius = 0f;
         }
     }
 }
