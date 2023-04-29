@@ -258,8 +258,14 @@ public class FrameOverlapDataEditor : EditorWindow
             EditorGUILayout.EndScrollView();
         }
     }
+    private void OnFocus()
+    {
+        SceneView.duringSceneGui -= this.OnSceneGUI;
+        SceneView.duringSceneGui += this.OnSceneGUI;
+    }
     private void OnDestroy()
     {
+        SceneView.duringSceneGui -= this.OnSceneGUI;
         if (AnimationMode.InAnimationMode())
             AnimationMode.StopAnimationMode();
     }
@@ -276,5 +282,38 @@ public class FrameOverlapDataEditor : EditorWindow
             AnimationMode.EndSampling();
             SceneView.RepaintAll();
         }
+    }
+    void OnSceneGUI(SceneView sceneView)
+    {
+        if (Selection.transforms == null || Selection.transforms.Length == 0)
+            return;
+        if (overlapData == null)
+            return;
+        if (selectedComponentIndices.Item1 < 0)
+            return;
+        if(selectedComponentIndices.Item2 >= 0)
+        {
+            int i = selectedComponentIndices.Item1;
+            int j = selectedComponentIndices.Item2;
+            //Allow editing for selected one
+            //Then we have a circle selected
+            EditorGUI.BeginChangeCheck();
+            Geometry.Circle circle = overlapData.OverlapComponentsAtFrame(frame)[i].circles[j];
+            Vector3 oldArrowPosition = Selection.transforms[0].position + circle.center + new Vector3(circle.radius, 0f, 0f);
+            Vector3 newArrowPosition = Handles.Slider(oldArrowPosition, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
+            Vector3 oldSquarePosition = Selection.transforms[0].position + circle.center;
+            Vector3 newSquarePosition = Handles.FreeMoveHandle(oldSquarePosition, Quaternion.identity, 0.35f, Vector3.one*0.1f, Handles.RectangleHandleCap);
+            if(EditorGUI.EndChangeCheck())
+            {
+                overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].center += newSquarePosition - oldSquarePosition;
+                overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius += newArrowPosition.x - oldArrowPosition.x;
+                if (overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius < 0)
+                    overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius = 0;
+                EditorUtility.SetDirty(overlapData);
+                Repaint();
+            }
+        }
+        //Display all others
+
     }
 }
