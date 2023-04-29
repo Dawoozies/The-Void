@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using Geometry;
+using UnityEditorInternal;
 public class FrameOverlapDataEditor : EditorWindow
 {
     AnimationClip inputClip;
@@ -15,7 +16,6 @@ public class FrameOverlapDataEditor : EditorWindow
     Vector2 scrollPositionOverlapComponents;
     Vector2 scrollPositionCircles;
     Vector2 scrollPositionParameterOptions;
-    string inputOverlapComponentName;
     [MenuItem("Window/Frame Overlap Data Editor")]
     static void Init()
     {
@@ -90,17 +90,11 @@ public class FrameOverlapDataEditor : EditorWindow
             GUILayout.Label($"Overlap Data At Frame {frame}", EditorStyles.boldLabel);
             if(selectedComponentIndices.Item1 >= 0)
             {
-                GUILayout.BeginHorizontal();
-                inputOverlapComponentName = EditorGUILayout.TextField(inputOverlapComponentName);
                 OverlapComponent overlapComponent = overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1];
-                if (GUILayout.Button($"Set Name Of OverlapData {selectedComponentIndices.Item1}"))
-                {
-                    overlapComponent.componentName = inputOverlapComponentName;
-                    inputOverlapComponentName = "";
-                    EditorUtility.SetDirty(overlapData);
-                }
-                GUILayout.EndHorizontal();
-                overlapComponent.targetLayerMask = EditorGUILayout.LayerField("Target Layer Mask", overlapComponent.targetLayerMask);
+                overlapComponent.componentName = EditorGUILayout.TextField("Overlap Component Name", overlapComponent.componentName);
+                overlapComponent.circleColor = EditorGUILayout.ColorField("Circle Color", overlapComponent.circleColor);
+                overlapComponent.radiusColor = EditorGUILayout.ColorField("Radius Color", overlapComponent.radiusColor);
+                overlapComponent.targetLayerMask = EditorGUILayout.MaskField("Target Layer Mask", InternalEditorUtility.LayerMaskToConcatenatedLayersMask(overlapComponent.targetLayerMask), InternalEditorUtility.layers);
                 EditorUtility.SetDirty(overlapData);
                 Repaint();
             }
@@ -247,7 +241,7 @@ public class FrameOverlapDataEditor : EditorWindow
                 ParameterComponent parameterComponent = overlapData.OverlapComponentsAtFrame(frame)[i].parameterComponents[k];
                 GUILayout.Label($"  Parameter Component {k}", EditorStyles.miniBoldLabel);
                 parameterComponent.parameterName = EditorGUILayout.TextField("Parameter Name", parameterComponent.parameterName);
-                parameterComponent.parameterType = (AnimatorControllerParameterType)EditorGUILayout.EnumPopup("Parameter Type", parameterComponent.parameterType);
+                parameterComponent.parameterType = (UnityEngine.AnimatorControllerParameterType)EditorGUILayout.EnumPopup("Parameter Type", parameterComponent.parameterType);
                 parameterComponent.floatValue = EditorGUILayout.FloatField("Float Value", parameterComponent.floatValue);
                 parameterComponent.integerValue = EditorGUILayout.IntField("Integer Value", parameterComponent.integerValue);
                 parameterComponent.boolValue = EditorGUILayout.Toggle("Bool Value", parameterComponent.boolValue);
@@ -314,6 +308,13 @@ public class FrameOverlapDataEditor : EditorWindow
             }
         }
         //Display all others
-
+        if (overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles == null || overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles.Count == 0)
+            return;
+        List<Geometry.Circle> circles = overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles;
+        for (int j = 0; j < circles.Count; j++)
+        {
+            Handles.DrawSolidDisc(Selection.transforms[0].position + circles[j].center, Vector3.forward, circles[j].radius);
+            Handles.DrawDottedLine(Selection.transforms[0].position + circles[j].center, Selection.transforms[0].position + circles[j].center + Vector3.right * circles[j].radius, 3f);
+        }
     }
 }

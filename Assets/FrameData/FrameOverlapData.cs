@@ -37,12 +37,16 @@ public class OverlapData
 public class OverlapComponent
 {
     public string componentName; //Just for ease of remembering what the overlap component is for
+    public Color circleColor;
+    public Color radiusColor;
     public List<Geometry.Circle> circles;
     public LayerMask targetLayerMask;
     public List<ParameterComponent> parameterComponents; //Parameters that get changed when overlap happens
     public OverlapComponent ()
     {
         componentName = "";
+        circleColor = Color.white;
+        radiusColor = Color.white;
         circles = new List<Geometry.Circle>();
         targetLayerMask = 0;
         parameterComponents = new List<ParameterComponent>();
