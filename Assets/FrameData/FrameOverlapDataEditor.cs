@@ -53,6 +53,7 @@ public class FrameOverlapDataEditor : EditorWindow
                 frame = 0;
 
             time = frame;
+            selectedComponentIndices = (-1, -1, -1);
         }
         if (GUILayout.Button("Next Frame"))
         {
@@ -60,6 +61,7 @@ public class FrameOverlapDataEditor : EditorWindow
                 frame++;
 
             time = frame;
+            selectedComponentIndices = (-1, -1, -1);
         }
         GUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
@@ -157,7 +159,7 @@ public class FrameOverlapDataEditor : EditorWindow
             List<Geometry.Circle> circlesAtIndex = overlapComponentsAtFrame[i].circles;
             if (GUILayout.Button($"Add New Circle To Overlap Component {i}"))
             {
-                circlesAtIndex.Add(new Geometry.Circle());
+                overlapData.OverlapComponentsAtFrame(frame)[i].circles.Add(new Geometry.Circle());
                 EditorUtility.SetDirty(overlapData);
                 Repaint();
             }
@@ -288,19 +290,18 @@ public class FrameOverlapDataEditor : EditorWindow
         if (selectedComponentIndices.Item1 < 0)
             return;
         int i = selectedComponentIndices.Item1;
-        OverlapComponent overlapComponentToRender = overlapData.OverlapComponentsAtFrame(frame)[i];
         if (selectedComponentIndices.Item2 >= 0)
         {
             int j = selectedComponentIndices.Item2;
             //Allow editing for selected one
             //Then we have a circle selected
             EditorGUI.BeginChangeCheck();
-            Geometry.Circle circle = overlapComponentToRender.circles[j];
-            Handles.color = overlapComponentToRender.radiusColor;
-            Vector3 oldArrowPosition = Selection.transforms[0].position + circle.center + new Vector3(circle.radius, 0f, 0f);
+            //Geometry.Circle circle = overlapComponentToRender.circles[j];
+            Handles.color = overlapData.OverlapComponentsAtFrame(frame)[i].radiusColor;
+            Vector3 oldArrowPosition = Selection.transforms[0].position + overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].center + new Vector3(overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius, 0f, 0f);
             Vector3 newArrowPosition = Handles.Slider(oldArrowPosition, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
-            Handles.color = overlapComponentToRender.circleColor;
-            Vector3 oldSquarePosition = Selection.transforms[0].position + circle.center;
+            Handles.color = overlapData.OverlapComponentsAtFrame(frame)[i].circleColor;
+            Vector3 oldSquarePosition = Selection.transforms[0].position + overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].center;
             Vector3 newSquarePosition = Handles.FreeMoveHandle(oldSquarePosition, Quaternion.identity, 0.35f, Vector3.one*0.1f, Handles.RectangleHandleCap);
             if(EditorGUI.EndChangeCheck())
             {
@@ -316,18 +317,15 @@ public class FrameOverlapDataEditor : EditorWindow
         //Display all others
         if (overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles == null || overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles.Count == 0)
             return;
-        List<Geometry.Circle> circles = overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles;
-        for (int j = 0; j < circles.Count; j++)
+        for (int j = 0; j < overlapData.OverlapComponentsAtFrame(frame)[i].circles.Count; j++)
         {
             if(j == selectedComponentIndices.Item2)
-                Handles.color = overlapComponentToRender.circleColor * 0.85f;
+                Handles.color = overlapData.OverlapComponentsAtFrame(frame)[i].circleColor * 0.85f;
             if(j != selectedComponentIndices.Item2)
-                Handles.color = overlapComponentToRender.circleColor * 0.65f;
-            Handles.DrawSolidDisc(Selection.transforms[0].position + circles[j].center, Vector3.forward, circles[j].radius);
-            Handles.color = overlapComponentToRender.radiusColor * 1f;
-            Handles.DrawDottedLine(Selection.transforms[0].position + circles[j].center, Selection.transforms[0].position + circles[j].center + Vector3.right * circles[j].radius, 3f);
+                Handles.color = overlapData.OverlapComponentsAtFrame(frame)[i].circleColor * 0.65f;
+            Handles.DrawSolidDisc(Selection.transforms[0].position + overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].center, Vector3.forward, overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius);
+            Handles.color = overlapData.OverlapComponentsAtFrame(frame)[i].radiusColor * 1f;
+            Handles.DrawDottedLine(Selection.transforms[0].position + overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].center, Selection.transforms[0].position + overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].center + Vector3.right * overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius, 3f);
         }
-        EditorUtility.SetDirty(overlapData);
-        Repaint();
     }
 }
