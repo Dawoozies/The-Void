@@ -40,7 +40,8 @@ public class OverlapComponent
     public Color circleColor;
     public Color radiusColor;
     public List<Geometry.Circle> circles;
-    public LayerMask targetLayerMask;
+    private DefinedLayerMask _definedLayerMask;
+    public int collisionLayer;
     public List<ParameterComponent> parameterComponents; //Parameters that get changed when overlap happens
     public OverlapComponent ()
     {
@@ -48,8 +49,40 @@ public class OverlapComponent
         circleColor = Color.white;
         radiusColor = Color.white;
         circles = new List<Geometry.Circle>();
-        targetLayerMask = 0;
+        _definedLayerMask = 0;
         parameterComponents = new List<ParameterComponent>();
+    }
+    public LayerMask targetLayerMask
+    {
+        get => UpdateTargetLayerMask();
+    }
+    public DefinedLayerMask definedLayerMask
+    {
+        get => _definedLayerMask;
+        set
+        {
+            _definedLayerMask = value;
+            UpdateTargetLayerMask();
+        }
+    }
+    LayerMask UpdateTargetLayerMask()
+    {
+        List<string> layerMask = new List<string>();
+        if ((_definedLayerMask & DefinedLayerMask.Default) == DefinedLayerMask.Default)
+            layerMask.Add(DefinedLayerMask.Default.ToString());
+        if ((_definedLayerMask & DefinedLayerMask.Player) == DefinedLayerMask.Player)
+            layerMask.Add(DefinedLayerMask.Player.ToString());
+        if ((_definedLayerMask & DefinedLayerMask.Ground) == DefinedLayerMask.Ground)
+            layerMask.Add(DefinedLayerMask.Ground.ToString());
+        if ((_definedLayerMask & DefinedLayerMask.Enemy) == DefinedLayerMask.Enemy)
+            layerMask.Add(DefinedLayerMask.Enemy.ToString());
+        if ((_definedLayerMask & DefinedLayerMask.Projectile) == DefinedLayerMask.Projectile)
+            layerMask.Add(DefinedLayerMask.Projectile.ToString());
+        if ((_definedLayerMask & DefinedLayerMask.Halberd) == DefinedLayerMask.Halberd)
+            layerMask.Add(DefinedLayerMask.Halberd.ToString());
+        if ((_definedLayerMask & DefinedLayerMask.Hammer) == DefinedLayerMask.Hammer)
+            layerMask.Add(DefinedLayerMask.Hammer.ToString());
+        return LayerMask.GetMask(layerMask.ToArray());
     }
 }
 [Serializable]
@@ -119,4 +152,20 @@ public enum ParameterComponentOptions
     Overwrite = 1,
     Add = 2,
     Multiply = 4,
+}
+[Flags, Serializable]
+public enum DefinedLayerMask
+{
+    None = 0, //This will prevent the overlap from doing anything
+    Default = 1,
+    Player = 2,
+    Ground = 4,
+    Enemy = 8,
+    Projectile = 16,
+    Halberd = 32,
+    Hammer = 64,
+    //layer8 = 128,
+    //layer9 = 256,
+    //layer10 = 512,
+    //layer11 = 1024,
 }

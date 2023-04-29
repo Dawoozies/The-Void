@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using Geometry;
-using UnityEditorInternal;
 public class FrameOverlapDataEditor : EditorWindow
 {
     AnimationClip inputClip;
@@ -16,6 +15,8 @@ public class FrameOverlapDataEditor : EditorWindow
     Vector2 scrollPositionOverlapComponents;
     Vector2 scrollPositionCircles;
     Vector2 scrollPositionParameterOptions;
+    DefinedLayerMask inputLayerMask;
+    List<string> inputLayers;
     [MenuItem("Window/Frame Overlap Data Editor")]
     static void Init()
     {
@@ -94,7 +95,8 @@ public class FrameOverlapDataEditor : EditorWindow
                 overlapComponent.componentName = EditorGUILayout.TextField("Overlap Component Name", overlapComponent.componentName);
                 overlapComponent.circleColor = EditorGUILayout.ColorField("Circle Color", overlapComponent.circleColor);
                 overlapComponent.radiusColor = EditorGUILayout.ColorField("Radius Color", overlapComponent.radiusColor);
-                overlapComponent.targetLayerMask = EditorGUILayout.MaskField("Target Layer Mask", InternalEditorUtility.LayerMaskToConcatenatedLayersMask(overlapComponent.targetLayerMask), InternalEditorUtility.layers);
+                overlapComponent.definedLayerMask = (DefinedLayerMask)EditorGUILayout.EnumFlagsField("Target Layer Mask", overlapComponent.definedLayerMask);
+                overlapComponent.collisionLayer = EditorGUILayout.LayerField("Collision Layer", overlapComponent.collisionLayer);
                 EditorUtility.SetDirty(overlapData);
                 Repaint();
             }
@@ -241,7 +243,7 @@ public class FrameOverlapDataEditor : EditorWindow
                 ParameterComponent parameterComponent = overlapData.OverlapComponentsAtFrame(frame)[i].parameterComponents[k];
                 GUILayout.Label($"  Parameter Component {k}", EditorStyles.miniBoldLabel);
                 parameterComponent.parameterName = EditorGUILayout.TextField("Parameter Name", parameterComponent.parameterName);
-                parameterComponent.parameterType = (UnityEngine.AnimatorControllerParameterType)EditorGUILayout.EnumPopup("Parameter Type", parameterComponent.parameterType);
+                parameterComponent.parameterType = (AnimatorControllerParameterType)EditorGUILayout.EnumPopup("Parameter Type", parameterComponent.parameterType);
                 parameterComponent.floatValue = EditorGUILayout.FloatField("Float Value", parameterComponent.floatValue);
                 parameterComponent.integerValue = EditorGUILayout.IntField("Integer Value", parameterComponent.integerValue);
                 parameterComponent.boolValue = EditorGUILayout.Toggle("Bool Value", parameterComponent.boolValue);
@@ -285,16 +287,19 @@ public class FrameOverlapDataEditor : EditorWindow
             return;
         if (selectedComponentIndices.Item1 < 0)
             return;
-        if(selectedComponentIndices.Item2 >= 0)
+        int i = selectedComponentIndices.Item1;
+        OverlapComponent overlapComponentToRender = overlapData.OverlapComponentsAtFrame(frame)[i];
+        if (selectedComponentIndices.Item2 >= 0)
         {
-            int i = selectedComponentIndices.Item1;
             int j = selectedComponentIndices.Item2;
             //Allow editing for selected one
             //Then we have a circle selected
             EditorGUI.BeginChangeCheck();
-            Geometry.Circle circle = overlapData.OverlapComponentsAtFrame(frame)[i].circles[j];
+            Geometry.Circle circle = overlapComponentToRender.circles[j];
+            Handles.color = overlapComponentToRender.radiusColor;
             Vector3 oldArrowPosition = Selection.transforms[0].position + circle.center + new Vector3(circle.radius, 0f, 0f);
             Vector3 newArrowPosition = Handles.Slider(oldArrowPosition, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
+            Handles.color = overlapComponentToRender.circleColor;
             Vector3 oldSquarePosition = Selection.transforms[0].position + circle.center;
             Vector3 newSquarePosition = Handles.FreeMoveHandle(oldSquarePosition, Quaternion.identity, 0.35f, Vector3.one*0.1f, Handles.RectangleHandleCap);
             if(EditorGUI.EndChangeCheck())
@@ -303,6 +308,7 @@ public class FrameOverlapDataEditor : EditorWindow
                 overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius += newArrowPosition.x - oldArrowPosition.x;
                 if (overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius < 0)
                     overlapData.OverlapComponentsAtFrame(frame)[i].circles[j].radius = 0;
+
                 EditorUtility.SetDirty(overlapData);
                 Repaint();
             }
@@ -313,8 +319,15 @@ public class FrameOverlapDataEditor : EditorWindow
         List<Geometry.Circle> circles = overlapData.OverlapComponentsAtFrame(frame)[selectedComponentIndices.Item1].circles;
         for (int j = 0; j < circles.Count; j++)
         {
+            if(j == selectedComponentIndices.Item2)
+                Handles.color = overlapComponentToRender.circleColor * 0.85f;
+            if(j != selectedComponentIndices.Item2)
+                Handles.color = overlapComponentToRender.circleColor * 0.65f;
             Handles.DrawSolidDisc(Selection.transforms[0].position + circles[j].center, Vector3.forward, circles[j].radius);
+            Handles.color = overlapComponentToRender.radiusColor * 1f;
             Handles.DrawDottedLine(Selection.transforms[0].position + circles[j].center, Selection.transforms[0].position + circles[j].center + Vector3.right * circles[j].radius, 3f);
         }
+        EditorUtility.SetDirty(overlapData);
+        Repaint();
     }
 }

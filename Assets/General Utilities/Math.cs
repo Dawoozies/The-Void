@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 namespace LinearAlgebra
 {
     public class ParametrisedLine
@@ -88,6 +89,7 @@ namespace LinearAlgebra
 }
 namespace Geometry
 {
+    [Serializable]
     public class Circle
     {
         public Vector3 center;
