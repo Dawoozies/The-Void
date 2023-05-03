@@ -8,8 +8,11 @@ public class PlayerDataManager : MonoBehaviour
     private void Awake()
     {
         ins = this;
+        //Just for now
+        EquippedHalberd = true; //make this false when we start doing weapon swapping system
     }
     public int AirDodgesMax;
     public int JumpsMax;
     public bool ThrownHalberd;
+    public bool EquippedHalberd;
 }

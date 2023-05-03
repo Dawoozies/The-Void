@@ -100,5 +100,14 @@ namespace Geometry
             center = Vector3.zero;
             radius = 0f;
         }
+        public Circle(Vector3 center, float radius)
+        {
+            this.center = center;
+            this.radius = radius;
+        }
+        public Circle CopyCircle()
+        {
+            return new Geometry.Circle(center, radius);
+        }
     }
 }

@@ -105,6 +105,8 @@ public class FrameVelocityDataEditor : EditorWindow
                     return;
                 }
                 List<VelocityComponent> velocityComponentsAtFrame = currentFrameData.VelocityComponentsAtFrame(frame);
+                if (velocityComponentsAtFrame == null || velocityComponentsAtFrame.Count == 0)
+                    return;
                 scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
                 for (int i = 0; i < velocityComponentsAtFrame.Count; i++)
                 {

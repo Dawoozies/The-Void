@@ -24,6 +24,7 @@ public class ThrownWeaponTest : MonoBehaviour
         halberdRigidbody.velocity = launchVelocity*velocityMultiplier;
         halberdAnimator.transform.up = launchVelocity.normalized;
         halberdAnimator.transform.localScale = new Vector3(Mathf.Sign(launchVelocity.x), halberdAnimator.transform.localScale.y, halberdAnimator.transform.localScale.z);
+        PlayerDataManager.ins.EquippedHalberd = false;
         Debug.Log(halberdRigidbody.velocity);
         halberdAnimator.Play("Launch");
     }

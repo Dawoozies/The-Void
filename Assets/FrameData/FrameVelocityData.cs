@@ -9,6 +9,7 @@ public class FrameVelocityData : ScriptableObject
     public void InitializeFrameData(int totalFrames)
     {
         velocityDataList = new List<VelocityData>();
+        Debug.Log("Total Frames = " + totalFrames);
         for (int i = 0; i < totalFrames; i++)
         {
             velocityDataList.Add(new VelocityData());
@@ -42,6 +43,10 @@ public class FrameVelocityData : ScriptableObject
 public class VelocityData
 {
     public List<VelocityComponent> velocityComponents;
+    public VelocityData()
+    {
+        velocityComponents = new List<VelocityComponent>();
+    }
     public void PasteVelocityData(VelocityData newVelocityData)
     {
         velocityComponents = new List<VelocityComponent>();
