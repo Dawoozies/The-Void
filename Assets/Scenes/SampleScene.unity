@@ -1599,7 +1599,8 @@ GameObject:
   - component: {fileID: 503700956}
   - component: {fileID: 503700957}
   - component: {fileID: 503700958}
-  m_Layer: 0
+  - component: {fileID: 503700959}
+  m_Layer: 12
   m_Name: Halberd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1656,6 +1657,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfEntity: ThrownHalberd
+--- !u!114 &503700959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503700955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b0da20165a68747a04ffb3acd9da7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1871,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.1551745, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -8353,7 +8366,7 @@ GameObject:
   - component: {fileID: 1461015266}
   - component: {fileID: 1461015265}
   - component: {fileID: 1461015264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8426,7 +8439,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.1551745, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -8595,10 +8608,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca7f95d94d1e34da452ecfffee48ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerWorldPosition: {x: 0, y: 0, z: 0}
   AirDodgesMax: 0
   JumpsMax: 0
   ThrownHalberd: 0
   EquippedHalberd: 0
+  Recalling: 0
 --- !u!114 &1509517776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8627,7 +8642,6 @@ MonoBehaviour:
   halberdParent: {fileID: 503700956}
   halberdRigidbody: {fileID: 503700957}
   halberdAnimator: {fileID: 1752700364}
-  velocityMultiplier: 60
 --- !u!114 &1509517778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8883,7 +8897,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.1551745, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -9031,7 +9045,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 1417339658, guid: 386dad27bbf3fa54296b83d635cdff4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ab14b79c67e43348aece5a206b97c45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9069,7 +9083,8 @@ GameObject:
   - component: {fileID: 1752700363}
   - component: {fileID: 1752700365}
   - component: {fileID: 1752700364}
-  m_Layer: 0
+  - component: {fileID: 1752700366}
+  m_Layer: 12
   m_Name: Halberd_SpriteAnimator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9151,9 +9166,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 0
   m_Sprite: {fileID: 268927655, guid: bc7a935e2450df642a2cb3f625bfd610, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.21568628, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9163,6 +9178,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1752700366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752700362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051e1e2a435f1344ab5cb79b3025268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmos: 1
+  gizmosTransparency: 0.5
+  result: []
+  clip: {fileID: 0}
 --- !u!1 &1863268932
 GameObject:
   m_ObjectHideFlags: 0
@@ -9247,7 +9278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.1551745, g: 1, b: 0, a: 1}
   m_FlipX: 0

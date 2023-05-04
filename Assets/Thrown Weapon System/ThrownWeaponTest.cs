@@ -12,8 +12,13 @@ public class ThrownWeaponTest : MonoBehaviour
     public Transform halberdParent;
     public Rigidbody2D halberdRigidbody;
     public Animator halberdAnimator;
-    public float velocityMultiplier;
-    public void LaunchHalberd(Vector3 launchPos, Vector3 launchVelocity)
+    public void Update()
+    {
+        if (halberdAnimator == null)
+            return;
+        halberdAnimator.SetBool("Recall", PlayerDataManager.ins.Recalling);
+    }
+    public void LaunchHalberd(Vector3 launchPos, Vector3 launchDirection)
     {
         if (halberdParent == null)
             return;
@@ -21,11 +26,21 @@ public class ThrownWeaponTest : MonoBehaviour
             return;
 
         halberdParent.position = launchPos;
-        halberdRigidbody.velocity = launchVelocity*velocityMultiplier;
-        halberdAnimator.transform.up = launchVelocity.normalized;
-        halberdAnimator.transform.localScale = new Vector3(Mathf.Sign(launchVelocity.x), halberdAnimator.transform.localScale.y, halberdAnimator.transform.localScale.z);
+        halberdAnimator.transform.up = launchDirection.normalized;
+        halberdAnimator.transform.localScale = new Vector3(Mathf.Sign(launchDirection.x), halberdAnimator.transform.localScale.y, halberdAnimator.transform.localScale.z);
         PlayerDataManager.ins.EquippedHalberd = false;
-        Debug.Log(halberdRigidbody.velocity);
-        halberdAnimator.Play("Launch");
+        halberdAnimator.Play("ThrownHalberd_Launch");
+    }
+    public void CaughtHalberd()
+    {
+        if (halberdParent == null)
+            return;
+        if (halberdAnimator == null)
+            return;
+        if (halberdRigidbody == null)
+            return;
+        halberdParent.position = new Vector3(-1000, -1000, 0);
+        halberdRigidbody.velocity = Vector3.zero;
+        halberdAnimator.Play("ThrownHalberd_Idle");
     }
 }

@@ -10,7 +10,7 @@ public class CircleCollider2DPoolManager : MonoBehaviour
         ins = this;
     }
     public Dictionary<Transform, Collider2DPool> pools = new Dictionary<Transform, Collider2DPool>();
-    public void UpdatePool(Transform parent, List<Geometry.Circle> circles, bool isTrigger)
+    public void UpdatePool(Transform parent, OverlapComponent overlapComponent)
     {
         if(!pools.ContainsKey(parent))
         {
@@ -20,7 +20,7 @@ public class CircleCollider2DPoolManager : MonoBehaviour
         }
         if(pools.ContainsKey(parent))
         {
-            pools[parent].UpdateColliders(parent, circles, isTrigger);
+            pools[parent].UpdateColliders(parent, overlapComponent);
         }
     }
 }

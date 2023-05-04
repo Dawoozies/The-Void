@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class FrameVelocityData : ScriptableObject
 {
     public AnimationClip clip;
@@ -39,7 +39,7 @@ public class FrameVelocityData : ScriptableObject
         }
     }
 }
-[System.Serializable]
+[Serializable]
 public class VelocityData
 {
     public List<VelocityComponent> velocityComponents;
@@ -73,7 +73,7 @@ public class VelocityData
         }
     }
 }
-[System.Serializable]
+[Serializable]
 public class VelocityComponent
 {
     public Vector3 velocityBase;

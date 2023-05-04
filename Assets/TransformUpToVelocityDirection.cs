@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TransformUpToVelocityDirection : StateMachineBehaviour
 {
+    public float smoothTime;
+    Vector3 v;
     Rigidbody2D rb;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -17,8 +19,8 @@ public class TransformUpToVelocityDirection : StateMachineBehaviour
         if (rb == null)
             rb = animator.GetComponentInParent<Rigidbody2D>();
 
-        if(rb.velocity.magnitude > 0)
-            animator.transform.up = rb.velocity.normalized;
+        animator.transform.up = Vector3.SmoothDamp(animator.transform.up, rb.velocity.normalized, ref v, smoothTime);
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

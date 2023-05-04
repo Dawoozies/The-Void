@@ -60,15 +60,24 @@ public class OverlapComponent
     public DefinedLayerMask definedLayerMask;
     public int collisionLayer;
     public OverlapComponentType overlapComponentType;
+    public AxisTransform axisTransform;
     public List<ParameterComponent> parameterComponents; //Parameters that get changed when overlap happens
     public Vector3 GetCircleWorldPosition(Transform parentObject, Geometry.Circle circle)
     {
-        Vector3 circleWorldPosition = new Vector3
-            (
-            parentObject.position.x + circle.center.x * parentObject.localScale.x,
-            parentObject.position.y + circle.center.y * parentObject.localScale.y,
-            parentObject.position.z + circle.center.z * parentObject.localScale.z
-            );
+        Vector3 circleWorldPosition = Vector3.zero;
+        if (axisTransform == AxisTransform.LocalScale)
+            circleWorldPosition = parentObject.position + Vector3.Scale(circle.center, parentObject.localScale);
+        if (axisTransform == AxisTransform.TransformDirection)
+            circleWorldPosition = parentObject.position
+                + circle.center.x * parentObject.localScale.x * parentObject.right
+                + circle.center.y * parentObject.localScale.y * parentObject.up
+                + circle.center.z * parentObject.localScale.z * parentObject.forward;
+        //circleWorldPosition = new Vector3
+        //    (
+        //    parentObject.position.x + circle.center.x * parentObject.localScale.x,
+        //    parentObject.position.y + circle.center.y * parentObject.localScale.y,
+        //    parentObject.position.z + circle.center.z * parentObject.localScale.z
+        //    );
         return circleWorldPosition;
     }
     public List<Collider2D> CastCircles(Transform parentObject)
@@ -94,6 +103,7 @@ public class OverlapComponent
         }
         definedLayerMask = copiedOverlapComponent.definedLayerMask;
         collisionLayer = copiedOverlapComponent.collisionLayer;
+        axisTransform = copiedOverlapComponent.axisTransform;
         parameterComponents = new List<ParameterComponent>();
         for (int i = 0; i < copiedOverlapComponent.parameterComponents.Count; i++)
         {
@@ -109,6 +119,7 @@ public class OverlapComponent
         circles = new List<Geometry.Circle>();
         definedLayerMask = 0;
         overlapComponentType = 0;
+        axisTransform = 0;
         parameterComponents = new List<ParameterComponent>();
     }
     public LayerMask targetLayerMask
@@ -241,4 +252,10 @@ public enum DefinedLayerMask
     //layer9 = 256,
     //layer10 = 512,
     //layer11 = 1024,
+}
+[Serializable]
+public enum AxisTransform
+{
+    LocalScale = 0,
+    TransformDirection = 1,
 }

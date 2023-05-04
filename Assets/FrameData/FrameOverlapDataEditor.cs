@@ -129,6 +129,7 @@ public class FrameOverlapDataEditor : EditorWindow
                 overlapComponent.definedLayerMask = (DefinedLayerMask)EditorGUILayout.EnumFlagsField("Target Layer Mask", overlapComponent.definedLayerMask);
                 overlapComponent.collisionLayer = EditorGUILayout.LayerField("Collision Layer", overlapComponent.collisionLayer);
                 overlapComponent.overlapComponentType = (OverlapComponentType)EditorGUILayout.EnumFlagsField("Overlap Component Type", overlapComponent.overlapComponentType);
+                overlapComponent.axisTransform = (AxisTransform)EditorGUILayout.EnumPopup("Axis Transform", overlapComponent.axisTransform);
                 EditorUtility.SetDirty(overlapData);
                 Repaint();
             }

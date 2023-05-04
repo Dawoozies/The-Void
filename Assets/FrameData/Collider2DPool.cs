@@ -26,20 +26,17 @@ public class Collider2DPool
         }
         initialized = true;
     }
-    public void UpdateColliders(Transform parent, List<Geometry.Circle> circles, bool isTrigger)
+    public void UpdateColliders(Transform parent, OverlapComponent overlapComponent)
     {
+        List<Geometry.Circle> circles = overlapComponent.circles;
         for (int i = 0; i < colliders.Count; i++)
         {
             if (i < circles.Count)
             {
                 colliders[i].gameObject.SetActive(true);
-                colliders[i].isTrigger = isTrigger;
-                colliders[i].transform.position = new Vector3
-                    (
-                        parent.transform.position.x + circles[i].center.x * parent.transform.localScale.x,
-                        parent.transform.position.y + circles[i].center.y * parent.transform.localScale.y,
-                        parent.transform.position.z + circles[i].center.z * parent.transform.localScale.z
-                    );
+                colliders[i].gameObject.layer = overlapComponent.collisionLayer;
+                colliders[i].isTrigger = (overlapComponent.overlapComponentType & OverlapComponentType.Trigger) == OverlapComponentType.Trigger;
+                colliders[i].transform.position = overlapComponent.GetCircleWorldPosition(parent, circles[i]);
                 colliders[i].radius = circles[i].radius;
             }
             else

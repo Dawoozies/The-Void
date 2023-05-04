@@ -27,14 +27,7 @@ public class FrameOverlapDataManager : MonoBehaviour
         {
             if((component.overlapComponentType & OverlapComponentType.Collider) == OverlapComponentType.Collider)
             {
-                if ((component.overlapComponentType & OverlapComponentType.Trigger) == OverlapComponentType.Trigger)
-                {
-                    CircleCollider2DPoolManager.ins.UpdatePool(transform, component.circles, true);
-                }
-                else
-                {
-                    CircleCollider2DPoolManager.ins.UpdatePool(transform, component.circles, false);
-                }
+                CircleCollider2DPoolManager.ins.UpdatePool(transform, component);
             }
             if ((component.overlapComponentType & OverlapComponentType.Cast) == OverlapComponentType.Cast)
             {

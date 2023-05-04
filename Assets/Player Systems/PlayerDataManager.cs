@@ -15,4 +15,6 @@ public class PlayerDataManager : MonoBehaviour
     public int JumpsMax;
     public bool ThrownHalberd;
     public bool EquippedHalberd;
+    public bool Recalling;
+    public Vector3 RecallPosition;
 }

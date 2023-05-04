@@ -38,11 +38,11 @@ public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityData
             if (velocityComponent.useGravity)
                 finalVelocityVector = Vector3.Scale(finalVelocityVector, GameDataManager.ins.WorldGravityDirection);
             if (velocityComponent.useTransformUp)
-                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.up);
+                finalVelocityVector = finalVelocityVector.y * animator.transform.up;
             if (velocityComponent.useTransformRight)
-                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.right);
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, animator.transform.right);
             if (velocityComponent.useTransformForward)
-                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.forward);
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, animator.transform.forward);
             if (velocityComponent.useVelocityDirection)
                 finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.velocity.normalized);
             if (velocityComponent.useVelocity)

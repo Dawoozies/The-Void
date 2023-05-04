@@ -6,7 +6,7 @@ public class ThrowWeapon : StateMachineBehaviour
 {
     public int frameToThrow;
     public Vector3 launchPosition;
-    public Vector3 launchVelocity;
+    public Vector3 launchDirection;
     int lastFrame;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,13 +20,11 @@ public class ThrowWeapon : StateMachineBehaviour
         if (lastFrame != animator.CurrentFrame())
         {
             lastFrame = animator.CurrentFrame();
-            Debug.Log(animator.CurrentFrame());
             if (animator.CurrentFrame() == frameToThrow)
             {
-                Debug.Log("We should throw the weapon now");
                 Vector3 finalPosition = animator.transform.position + new Vector3(launchPosition.x*animator.transform.localScale.x, launchPosition.y, launchPosition.z);
-                Vector3 finalVelocity = new Vector3(launchVelocity.x * animator.transform.localScale.x, launchVelocity.y, launchVelocity.z);
-                ThrownWeaponTest.ins.LaunchHalberd(finalPosition, finalVelocity);
+                Vector3 finalDirection = new Vector3(launchDirection.x * animator.transform.localScale.x, launchDirection.y, launchDirection.z);
+                ThrownWeaponTest.ins.LaunchHalberd(finalPosition, finalDirection);
                 //PlayerDataManager.ins.ThrownHalberd = true;
             }
         }
