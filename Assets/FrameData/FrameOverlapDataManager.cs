@@ -25,6 +25,17 @@ public class FrameOverlapDataManager : MonoBehaviour
         OverlapData currentFrameData = overlapData.overlapDataList[animator.CurrentFrame()];
         foreach (OverlapComponent component in currentFrameData.overlapComponents)
         {
+            if((component.overlapComponentType & OverlapComponentType.Collider) == OverlapComponentType.Collider)
+            {
+                if ((component.overlapComponentType & OverlapComponentType.Trigger) == OverlapComponentType.Trigger)
+                {
+                    CircleCollider2DPoolManager.ins.UpdatePool(transform, component.circles, true);
+                }
+                else
+                {
+                    CircleCollider2DPoolManager.ins.UpdatePool(transform, component.circles, false);
+                }
+            }
             if ((component.overlapComponentType & OverlapComponentType.Cast) == OverlapComponentType.Cast)
             {
                 result = component.CastCircles(transform);

@@ -183,18 +183,22 @@ public class ParameterComponent
         if (parameterType == AnimatorControllerParameterType.Float)
             animator.SetFloat(parameterName, (result == null || result.Count == 0) ? animator.GetFloat(parameterName) : floatValue);
         if (parameterType == AnimatorControllerParameterType.Int)
+        {
             animator.SetInteger(parameterName, (result == null || result.Count == 0) ? animator.GetInteger(parameterName) : integerValue);
+            if (result != null && result.Count > 0)
+                Debug.Log("Overwriting WallGrabDirection at time " + Time.time);
+        }
         if (parameterType == AnimatorControllerParameterType.Bool)
             animator.SetBool(parameterName, (result == null || result.Count == 0) ? !boolValue : boolValue);
     }
     public void AddValue(Animator animator, List<Collider2D> result)
     {
         if (parameterType == AnimatorControllerParameterType.Float)
-            animator.SetFloat(parameterName, animator.GetFloat(parameterName) + floatValue);
+            animator.SetFloat(parameterName, (result == null || result.Count == 0) ? animator.GetFloat(parameterName) : (animator.GetFloat(parameterName) + floatValue));
         if (parameterType == AnimatorControllerParameterType.Int)
-            animator.SetInteger(parameterName, animator.GetInteger(parameterName) + integerValue);
+            animator.SetInteger(parameterName, (result == null || result.Count == 0) ? animator.GetInteger(parameterName) : (animator.GetInteger(parameterName) + integerValue));
         if (parameterType == AnimatorControllerParameterType.Bool)
-            animator.SetBool(parameterName, animator.GetBool(parameterName) | boolValue);
+            animator.SetBool(parameterName, (result == null || result.Count == 0) ? animator.GetBool(parameterName) : (animator.GetBool(parameterName) | boolValue));
     }
     public void MultiplyValue(Animator animator, List<Collider2D> result)
     {

@@ -30,7 +30,7 @@ public class VelocityComponentApply : MonoBehaviour, Listener_FrameVelocityData
             Vector3 finalVelocityVector = velocityBase*ParameterMultiplier(velocityComponent);
             //Basis transforms
             if (velocityComponent.useLocalSpace)
-                finalVelocityVector = Vector3.Scale(finalVelocityVector, rb.transform.localScale);
+                finalVelocityVector = Vector3.Scale(finalVelocityVector, animator.transform.localScale);
             if (velocityComponent.useLStick)
                 finalVelocityVector = Vector3.Scale(finalVelocityVector, new Vector3(InputManager.ins.L_Input.x, InputManager.ins.L_Input.y, 0f));
             if (velocityComponent.useRStick)
