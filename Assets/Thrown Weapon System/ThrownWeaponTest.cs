@@ -28,7 +28,7 @@ public class ThrownWeaponTest : MonoBehaviour
         halberdParent.position = launchPos;
         halberdAnimator.transform.up = launchDirection.normalized;
         halberdAnimator.transform.localScale = new Vector3(Mathf.Sign(launchDirection.x), halberdAnimator.transform.localScale.y, halberdAnimator.transform.localScale.z);
-        PlayerDataManager.ins.EquippedHalberd = false;
+        PlayerDataManager.ins.EquippedHalberd = false; //Should be in change variable
         halberdAnimator.Play("ThrownHalberd_Launch");
     }
     public void CaughtHalberd()
