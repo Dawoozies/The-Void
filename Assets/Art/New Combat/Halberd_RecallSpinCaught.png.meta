@@ -1,0 +1,277 @@
+fileFormatVersion: 2
+guid: 0bcadc6f35f2d8b4c8f75de5b9044599
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 470
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2185
+        width: 2157
+        height: 2077
+      alignment: 9
+      pivot: {x: 0.37475356, y: 0.34897852}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4821e4f4a50292d4996276a77e030eb5
+      internalID: -2028584412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_1
+      rect:
+        serializedVersion: 2
+        x: 2206
+        y: 2185
+        width: 2127
+        height: 2077
+      alignment: 9
+      pivot: {x: 0.3874785, y: 0.3481056}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 250e2a2d9a6678d4eacab94b73147dc3
+      internalID: -2042560190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_2
+      rect:
+        serializedVersion: 2
+        x: 4374
+        y: 2190
+        width: 2232
+        height: 2072
+      alignment: 9
+      pivot: {x: 0.3903349, y: 0.34773907}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe91069f2fc7ace46b97c735c0951a0c
+      internalID: -402412893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_3
+      rect:
+        serializedVersion: 2
+        x: 6660
+        y: 2190
+        width: 2241
+        height: 2072
+      alignment: 9
+      pivot: {x: 0.38623634, y: 0.33975846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c191ab526e226c54e81305fadc2b7016
+      internalID: -155654959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_4
+      rect:
+        serializedVersion: 2
+        x: 2227
+        y: 0
+        width: 2029
+        height: 2157
+      alignment: 9
+      pivot: {x: 0.5097263, y: 0.48703894}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 073fda3acaa916e4984a4468f08ddea0
+      internalID: -1334629330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_5
+      rect:
+        serializedVersion: 2
+        x: 4313
+        y: 0
+        width: 2110
+        height: 2161
+      alignment: 9
+      pivot: {x: 0.48173365, y: 0.49200493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f348882e37d7644b97b31da7415a4bb
+      internalID: -1395631946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_RecallSpinCaught_6
+      rect:
+        serializedVersion: 2
+        x: 6576
+        y: 0
+        width: 2355
+        height: 2157
+      alignment: 9
+      pivot: {x: 0.5052892, y: 0.49393427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ac4c49d3ec0e847abb1ee5c834dedb
+      internalID: -1191553377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Halberd_RecallSpinCaught_1: -2042560190
+      Halberd_RecallSpinCaught_3: -155654959
+      Halberd_RecallSpinCaught_2: -402412893
+      Halberd_RecallSpinCaught_6: -1191553377
+      Halberd_RecallSpinCaught_0: -2028584412
+      Halberd_RecallSpinCaught_4: -1334629330
+      Halberd_RecallSpinCaught_5: -1395631946
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

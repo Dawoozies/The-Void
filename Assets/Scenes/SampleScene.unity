@@ -1637,7 +1637,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 2
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 11d7e5d4ad9245946b7afeec66a46385, type: 2}
   m_Interpolate: 0
@@ -8608,12 +8608,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca7f95d94d1e34da452ecfffee48ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerWorldPosition: {x: 0, y: 0, z: 0}
   AirDodgesMax: 0
   JumpsMax: 0
   ThrownHalberd: 0
   EquippedHalberd: 0
   Recalling: 0
+  RecallPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1509517776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9045,7 +9045,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 0ab14b79c67e43348aece5a206b97c45, type: 3}
+  m_Sprite: {fileID: -67342970, guid: cedd2a2869202eb4a9a6ec1b95a9297a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
