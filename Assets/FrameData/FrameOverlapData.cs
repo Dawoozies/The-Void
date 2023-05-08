@@ -236,6 +236,7 @@ public enum OverlapComponentType
     Cast = 1,
     Collider = 2,
     Trigger = 4,
+    CastAndChildToResult = 8,
 }
 [Flags, Serializable]
 public enum DefinedLayerMask

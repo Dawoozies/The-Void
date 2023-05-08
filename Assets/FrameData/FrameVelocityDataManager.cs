@@ -41,7 +41,9 @@ public class FrameVelocityDataManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(clipName != animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
+        if (animator.GetCurrentAnimatorClipInfo(0) == null || animator.GetCurrentAnimatorClipInfo(0).Length == 0)
+            return;
+        if (clipName != animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
             NotifyListeners_FrameVelocityData();
         clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (!frameVelocityDataDictionary.ContainsKey(clipName))

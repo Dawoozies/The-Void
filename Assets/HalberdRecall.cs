@@ -10,6 +10,7 @@ public class HalberdRecall : StateMachineBehaviour
         recallPath.pathStart = animator.transform.position;
         recallPath.pathEnd = PlayerDataManager.ins.RecallPosition;
         animator.SetFloat("DistanceToRecallPoint", Vector3.Distance(recallPath.pathStart, recallPath.pathEnd));
+        animator.transform.up = -recallPath.direction.normalized;
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

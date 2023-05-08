@@ -17,4 +17,6 @@ public class PlayerDataManager : MonoBehaviour
     public bool EquippedHalberd;
     public bool Recalling;
     public Vector3 RecallPosition;
+    public Vector3 ThrowPosition;
+    public Vector3 ThrowDirection;
 }

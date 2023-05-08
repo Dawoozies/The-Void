@@ -17,7 +17,8 @@ public class FrameOverlapDataManager : MonoBehaviour
     {
         if (animator == null)
             return;
-
+        if (animator.GetCurrentAnimatorClipInfo(0) == null || animator.GetCurrentAnimatorClipInfo(0).Length == 0)
+            return;
         if (FrameOverlapDataCache.ins.GetOverlapData(animator.GetCurrentAnimatorClipInfo(0)[0].clip) == null)
             return;
         clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
@@ -39,6 +40,19 @@ public class FrameOverlapDataManager : MonoBehaviour
                     parameterComponent.InvokeComponentAction(animator, result);
                 }
             }
+            if((component.overlapComponentType & OverlapComponentType.CastAndChildToResult) == OverlapComponentType.CastAndChildToResult)
+            {
+                result = component.CastCircles(transform);
+                if (result != null && result.Count > 0)
+                    animator.GetComponentInParent<Rigidbody2D>().transform.parent = result[0].transform;
+
+                if (component.parameterComponents == null || component.parameterComponents.Count == 0)
+                    continue;
+                foreach (ParameterComponent parameterComponent in component.parameterComponents)
+                {
+                    parameterComponent.InvokeComponentAction(animator, result);
+                }
+            }
         }
     }
     private void OnDrawGizmos()
@@ -47,7 +61,8 @@ public class FrameOverlapDataManager : MonoBehaviour
             return;
         if (animator == null)
             return;
-
+        if (animator.GetCurrentAnimatorClipInfo(0) == null || animator.GetCurrentAnimatorClipInfo(0).Length == 0)
+            return;
         if (FrameOverlapDataCache.ins.GetOverlapData(animator.GetCurrentAnimatorClipInfo(0)[0].clip) == null)
             return;
         FrameOverlapData overlapData = FrameOverlapDataCache.ins.GetOverlapData(animator.GetCurrentAnimatorClipInfo(0)[0].clip);

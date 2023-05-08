@@ -32,6 +32,17 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
         animator.SetInteger("R_Direction", R_Direction);
         animator.SetBool("EquippedHalberd", EquippedHalberd);
         animator.SetFloat("AirTime", (animator.GetFloat("AirTime")+Time.deltaTime)*animator.GetBool("Grounded").DefinedValue(1f,0f));
+
+        if (animator.GetCurrentAnimatorClipInfo(0) == null || animator.GetCurrentAnimatorClipInfo(0).Length == 0)
+            return;
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Player_RunRecall")
+            animator.SetFloat("LastRecallRunTime", animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Player_Run")
+            animator.SetFloat("LastRunTime", animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Player_IdleRecall")
+            animator.SetFloat("LastRecallIdleTime", animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Player_Idle")
+            animator.SetFloat("LastIdleTime", animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
     }
 
     public void Update_AnyAttackInput(string attackType, bool anyAttackInput)
