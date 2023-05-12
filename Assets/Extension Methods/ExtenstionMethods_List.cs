@@ -1,11 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Geometry;
 namespace ExtensionMethods_List
 {
     public static class Extensions
     {
+        public static List<Circle> Copy(this List<Circle> list)
+        {
+            if (list == null || list.Count == 0)
+                return null;
+            List<Circle> copy = new List<Circle>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                copy.Add(list[i].Copy());
+            }
+            return copy;
+        }
+        public static List<Box> Copy(this List<Box> list)
+        {
+            if (list == null || list.Count == 0)
+                return null;
+            List<Box> copy = new List<Box>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                copy.Add(list[i].Copy());
+            }
+            return copy;
+        }
+        public static List<Area> Copy(this List<Area> list)
+        {
+            if (list == null || list.Count == 0)
+                return null;
+            List<Area> copy = new List<Area>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                copy.Add(list[i].Copy());
+            }
+            return copy;
+        }
         //Finish this, make sure not to get fucked by reference types
         //You want this functionality to be like some value type shit
         public static bool OverlapEquals(this List<HurtboxOverlap> firstList, List<HurtboxOverlap> secondList)

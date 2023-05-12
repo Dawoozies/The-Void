@@ -7,6 +7,7 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
     Vector2 L_Input => InputManager.ins.L_Input;
     Vector2 R_Input => InputManager.ins.R_Input;
     float LeftTrigger_Input => InputManager.ins.LeftTrigger_Input;
+    float RightTrigger_Input => InputManager.ins.RightTrigger_Input;
     int R_Direction => DirectionManager.ins.R_Direction;
     bool EquippedHalberd => PlayerDataManager.ins.EquippedHalberd;
     Animator animator;
@@ -29,6 +30,7 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
         animator.SetFloat("VelocityY", rb.velocity.y);
         animator.SetBool("JumpInput", jumpInput);
         animator.SetFloat("LeftTrigger_Input", LeftTrigger_Input);
+        animator.SetFloat("RightTrigger_Input", RightTrigger_Input);
         animator.SetInteger("R_Direction", R_Direction);
         animator.SetBool("EquippedHalberd", EquippedHalberd);
         animator.SetFloat("AirTime", (animator.GetFloat("AirTime")+Time.deltaTime)*animator.GetBool("Grounded").DefinedValue(1f,0f));

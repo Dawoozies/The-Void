@@ -99,7 +99,7 @@ public class OverlapComponent
         circles = new List<Geometry.Circle>();
         for (int i = 0; i < copiedOverlapComponent.circles.Count; i++)
         {
-            circles.Add(copiedOverlapComponent.circles[i].CopyCircle());
+            circles.Add(copiedOverlapComponent.circles[i].Copy());
         }
         definedLayerMask = copiedOverlapComponent.definedLayerMask;
         collisionLayer = copiedOverlapComponent.collisionLayer;
@@ -194,11 +194,7 @@ public class ParameterComponent
         if (parameterType == AnimatorControllerParameterType.Float)
             animator.SetFloat(parameterName, (result == null || result.Count == 0) ? animator.GetFloat(parameterName) : floatValue);
         if (parameterType == AnimatorControllerParameterType.Int)
-        {
             animator.SetInteger(parameterName, (result == null || result.Count == 0) ? animator.GetInteger(parameterName) : integerValue);
-            if (result != null && result.Count > 0)
-                Debug.Log("Overwriting WallGrabDirection at time " + Time.time);
-        }
         if (parameterType == AnimatorControllerParameterType.Bool)
             animator.SetBool(parameterName, (result == null || result.Count == 0) ? !boolValue : boolValue);
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ExtensionMethods_Transform;
 using ExtensionMethods_Animator;
+using OldData;
 public class HitboxManager : MonoBehaviour
 {
     CollisionManager collisionManager;

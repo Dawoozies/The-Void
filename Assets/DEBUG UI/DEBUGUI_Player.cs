@@ -12,6 +12,7 @@ public class DEBUGUI_Player : MonoBehaviour
     public RectTransform leftStickRect;
     public RectTransform rightStickRect;
     public Slider leftTriggerSlider;
+    public Slider rightTriggerSlider;
     public float stickMoveMultiplier;
     void Update()
     {
@@ -26,5 +27,6 @@ public class DEBUGUI_Player : MonoBehaviour
         leftStickRect.anchoredPosition = InputManager.ins.L_Input * stickMoveMultiplier;
         rightStickRect.anchoredPosition = InputManager.ins.R_Input * stickMoveMultiplier;
         leftTriggerSlider.value = InputManager.ins.LeftTrigger_Input;
+        rightTriggerSlider.value = InputManager.ins.RightTrigger_Input;
     }
 }

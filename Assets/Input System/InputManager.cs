@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     public Vector2 L_Input;
     public Vector2 R_Input;
     public float LeftTrigger_Input;
+    public float RightTrigger_Input;
     //Listeners
     List<Listener_JumpInput> listeners_JumpInput;
     List<Listener_DodgeInput> listeners_DodgeInput;
@@ -28,6 +29,7 @@ public class InputManager : MonoBehaviour
             inputActions.PlayerDefault.LeftStick.performed += inputActions => L_Input = inputActions.ReadValue<Vector2>();
             inputActions.PlayerDefault.RightStick.performed += inputActions => R_Input = inputActions.ReadValue<Vector2>();
             inputActions.PlayerDefault.LeftTrigger.performed += inputActions => LeftTrigger_Input = inputActions.ReadValue<float>();
+            inputActions.PlayerDefault.RightTrigger.performed += inputActions => RightTrigger_Input = inputActions.ReadValue<float>();
             inputActions.PlayerDefault.Jump.performed += inputActions =>
             {
                 if (listeners_JumpInput == null)

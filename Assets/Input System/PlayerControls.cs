@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightTrigger"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""71c62d2b-a58a-46a4-a7c9-317982e88c94"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""LeftTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be29de87-6ede-41b1-999d-b1d63788fa26"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerDefault_JumpRelease = m_PlayerDefault.FindAction("JumpRelease", throwIfNotFound: true);
         m_PlayerDefault_RightStick = m_PlayerDefault.FindAction("RightStick", throwIfNotFound: true);
         m_PlayerDefault_LeftTrigger = m_PlayerDefault.FindAction("LeftTrigger", throwIfNotFound: true);
+        m_PlayerDefault_RightTrigger = m_PlayerDefault.FindAction("RightTrigger", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +358,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerDefault_JumpRelease;
     private readonly InputAction m_PlayerDefault_RightStick;
     private readonly InputAction m_PlayerDefault_LeftTrigger;
+    private readonly InputAction m_PlayerDefault_RightTrigger;
     public struct PlayerDefaultActions
     {
         private @PlayerControls m_Wrapper;
@@ -348,6 +370,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @JumpRelease => m_Wrapper.m_PlayerDefault_JumpRelease;
         public InputAction @RightStick => m_Wrapper.m_PlayerDefault_RightStick;
         public InputAction @LeftTrigger => m_Wrapper.m_PlayerDefault_LeftTrigger;
+        public InputAction @RightTrigger => m_Wrapper.m_PlayerDefault_RightTrigger;
         public InputActionMap Get() { return m_Wrapper.m_PlayerDefault; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -378,6 +401,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @LeftTrigger.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftTrigger;
                 @LeftTrigger.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftTrigger;
                 @LeftTrigger.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftTrigger;
+                @RightTrigger.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightTrigger;
+                @RightTrigger.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightTrigger;
+                @RightTrigger.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightTrigger;
             }
             m_Wrapper.m_PlayerDefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -403,6 +429,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @LeftTrigger.started += instance.OnLeftTrigger;
                 @LeftTrigger.performed += instance.OnLeftTrigger;
                 @LeftTrigger.canceled += instance.OnLeftTrigger;
+                @RightTrigger.started += instance.OnRightTrigger;
+                @RightTrigger.performed += instance.OnRightTrigger;
+                @RightTrigger.canceled += instance.OnRightTrigger;
             }
         }
     }
@@ -416,5 +445,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnJumpRelease(InputAction.CallbackContext context);
         void OnRightStick(InputAction.CallbackContext context);
         void OnLeftTrigger(InputAction.CallbackContext context);
+        void OnRightTrigger(InputAction.CallbackContext context);
     }
 }

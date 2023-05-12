@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ExtensionMethods_Animator;
 using ExtensionMethods_List;
+using OldData;
 public class HurtboxManager : MonoBehaviour
 {
     CollisionManager collisionManager;

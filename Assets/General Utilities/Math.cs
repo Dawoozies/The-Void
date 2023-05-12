@@ -105,9 +105,63 @@ namespace Geometry
             this.center = center;
             this.radius = radius;
         }
-        public Circle CopyCircle()
+        public Circle Copy()
         {
-            return new Geometry.Circle(center, radius);
+            return new Circle(center, radius);
+        }
+    }
+    [Serializable]
+    public class Box
+    {
+        public Vector2 center;
+        public Vector2 size;
+        public float angle;
+        public Box()
+        {
+            center = Vector2.zero;
+            size = Vector2.zero;
+            angle = 0f;
+        }
+        public Box(Vector2 center, Vector2 size, float angle)
+        {
+            this.center = center;
+            this.size = size;
+            this.angle = angle;
+        }
+        public Box Copy()
+        {
+            return new Box(center, size, angle);
+        }
+        public void Paste(Box box)
+        {
+            this.center = box.center;
+            this.size = box.size;
+            this.angle = box.angle;
+        }
+    }
+    [Serializable]
+    public class Area
+    {
+        public Vector2 pointA;
+        public Vector2 pointB;
+        public Area()
+        {
+            pointA = Vector2.zero;
+            pointB = Vector2.zero;
+        }
+        public Area(Vector2 pointA, Vector2 pointB)
+        {
+            this.pointA = pointA;
+            this.pointB = pointB;
+        }
+        public Area Copy()
+        {
+            return new Area(pointA, pointB);
+        }
+        public void Paste(Area area)
+        {
+            this.pointA = area.pointA;
+            this.pointB = area.pointB;
         }
     }
 }

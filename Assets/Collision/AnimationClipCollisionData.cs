@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using OldData;
 [CreateAssetMenu(fileName = "NewAnimationClipCollisionData", menuName = "Collision System/AnimationClipCollisionData")]
 public class AnimationClipCollisionData : ScriptableObject
 {
