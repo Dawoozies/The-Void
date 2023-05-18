@@ -3,16 +3,23 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor.Animations;
-using System;
-using System.Linq.Expressions;
-using AnimatorStateData;
+using GameData.StateData;
+using GameData.StateData.IO;
+using GameData.StateData.VisualElements;
+using Geometry;
+using System.Collections.Generic;
 public class StateDataEditor : EditorWindow
 {
     private AnimatorController animatorController;
     private string stateTarget;
     private VisualElement root;
     private bool stateExistsInController;
-    [MenuItem("Window/UI Toolkit/StateDataEditor")]
+    private Circle circle = new Circle();
+
+    CircleCollider2DStateData circleCollider2DStateData;
+    ObjectField circleCollider2DStateDataField;
+    Button addCircleCollider2DStateDataButton;
+    [MenuItem("Window/StateDataEditor")]
     public static void ShowExample()
     {
         StateDataEditor wnd = GetWindow<StateDataEditor>();
@@ -35,20 +42,30 @@ public class StateDataEditor : EditorWindow
         var hashDisplay = new Label();
         hashDisplay.name = "HashDisplay";
         root.Add(hashDisplay);
-        // Import UXML
+
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/NewGameDataSystem/StateDataEditor.uxml");
         VisualElement labelFromUXML = visualTree.Instantiate();
         root.Add(labelFromUXML);
 
-        // A stylesheet can be added to a VisualElement.
-        // The style will be applied to the VisualElement and all of its children.
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/NewGameDataSystem/StateDataEditor.uss");
-        VisualElement labelWithStyle = new Label("Hello World! With Style");
-        labelWithStyle.styleSheets.Add(styleSheet);
-        root.Add(labelWithStyle);
+        circleCollider2DStateDataField = new ObjectField("CircleCollider2DStateData");
+        circleCollider2DStateDataField.objectType = typeof(CircleCollider2DStateData);
+        circleCollider2DStateDataField.RegisterValueChangedCallback(evt =>
+        {
+            circleCollider2DStateData = evt.newValue as CircleCollider2DStateData;
+            if (circleCollider2DStateData == null)
+                return;
+            var objectVisualElement = new CircleCollider2DStateDataVisualElement(circleCollider2DStateData);
+            root.Add(objectVisualElement);
+        });
 
-        controllerField.RegisterValueChangedCallback(evt => animatorController = evt.newValue as AnimatorController);
-        stringField.RegisterValueChangedCallback(evt => CheckStateIsInController(evt.newValue));
+        addCircleCollider2DStateDataButton = new Button(() =>
+        {
+            circleCollider2DStateData = StateDataIO.CreateInstanceAndAsset<CircleCollider2DStateData>("NewCircleCollider2DStateData");
+            root.Remove(addCircleCollider2DStateDataButton);
+            root.Add(circleCollider2DStateDataField);
+        });
+        addCircleCollider2DStateDataButton.name = "AddCircleCollider2DStateData";
+        addCircleCollider2DStateDataButton.text = "Create CircleCollider2DStateData Component";
     }
     void CheckStateIsInController(string stateName)
     {
@@ -74,13 +91,11 @@ public class StateDataEditor : EditorWindow
     }
     private void OnGUI()
     {
-        if (animatorController == null)
-            return;
-        Label hashDisplay = root.Query<Label>("HashDisplay");
-        hashDisplay.text = Animator.StringToHash(stateTarget).ToString();
-        StateData expression = new StateData();
-        //Expression<Func<StateDataType>> expression = () => null;
-        Type expType = expression.GetType();
-        Debug.Log($"expression isSerializable = {expType.IsSerializable}");
+        if(circleCollider2DStateData == null)
+        {
+            List<Button> button = root.Query<Button>("AddCircleCollider2DStateData").ToList();
+            if (button == null || button.Count == 0)
+                root.Add(addCircleCollider2DStateDataButton);
+        }
     }
 }

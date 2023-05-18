@@ -4,53 +4,49 @@ using UnityEngine;
 using System;
 using Geometry;
 using ExtensionMethods_List;
-namespace AnimatorStateData
+using GameData.StateData.IO;
+using System.Linq;
+namespace GameData.StateData
 {
     [Serializable]
-    public class StateData : ScriptableObject
+    public class StateData : ScriptableObject, ScriptableObjectInitialization
     {
         public int stateHash;
-        CircleCollider2DStateData _CircleCollider2DStateData;
-        OverlapStateData _OverlapStateData;
+        public StateComponentDictionary data;
+        public void Initialize()
+        {
+            this.stateHash = 0;
+            data = new StateComponentDictionary();
+        }
+        public Components ComponentsAtFrame(int frame)
+        {
+            if (!data.ContainsKey(frame))
+                return null;
+            return data.ValueWithKey(frame);
+        }
+        public void AddNewComponentToFrame(int frame, ScriptableObject component)
+        {
+            data.Add(frame, component);
+        }
+        public Type[] ComponentsNotAddedAtFrame(int frame)
+        {
+            if (!data.ContainsKey(frame))
+                return ComponentTypes.All;
+            return ComponentTypes.All.Except(data.ValueWithKey(frame).components
+                .Select(c => c.GetType())
+                ).ToArray();
+        }
+        public void Draw_ComponentAdd(int frame)
+        {
+            if(!data.ContainsKey(frame))
+            {
+                ComponentTypes.All
+                    .Select(c => typeof(Draw<>).MakeGenericType(c))
+                    .Select(drawType => drawType.GetMethod("CreateComponentButton"))
+                    .Where(drawMethod => drawMethod != null)
+                    .ToList()
+                    .ForEach(drawMethod => drawMethod.Invoke(null, new object[] { this, frame}));
+            }
+        }
     }
-    [Serializable]
-    public class CircleCollider2DStateData : ScriptableObject
-    {
-        public bool isTrigger;
-        public int layer;
-        public List<Circle> circles;
-        public CircleCollider2DStateData()
-        {
-            isTrigger = false;
-            layer = 0;
-            circles = new List<Circle>();
-        }
-        public CircleCollider2DStateData(bool isTrigger, int layer, List<Circle> circles)
-        {
-            this.isTrigger = isTrigger;
-            this.layer = layer;
-            this.circles = circles;
-        }
-        public CircleCollider2DStateData Copy()
-        {
-            return new CircleCollider2DStateData(isTrigger, layer, circles);
-        }
-        public void Paste(CircleCollider2DStateData circleCollider2DStateData)
-        {
-            isTrigger = circleCollider2DStateData.isTrigger;
-            layer = circleCollider2DStateData.layer;
-            circles = circleCollider2DStateData.circles.Copy();
-        }
-    }
-    [Serializable]
-    public class OverlapStateData : ScriptableObject
-    {
-        public LayerMask layerMask;
-        public List<Circle> circles;
-        public List<Box> boxes;
-        public List<Area> areas;
-    }
-    //We are making all the different data types also scriptable objects
-    //This will help us reduce memory when dealing with many duplicate states
-    //I.e. Run and RunRecall should have the same hitboxes
 }

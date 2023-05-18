@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using UnityEditor;
+using GameData.EditorWindow;
 namespace LinearAlgebra
 {
     public class ParametrisedLine
@@ -90,7 +92,7 @@ namespace LinearAlgebra
 namespace Geometry
 {
     [Serializable]
-    public class Circle
+    public class Circle : SceneGUI
     {
         public Vector3 center;
         public float radius;
@@ -108,6 +110,20 @@ namespace Geometry
         public Circle Copy()
         {
             return new Circle(center, radius);
+        }
+        public void OnSceneGUI(SceneView sceneView)
+        {
+            Handles.DrawSolidDisc(center, Vector3.forward, radius);
+        }
+        public void SubscribeGUI()
+        {
+            SceneView.duringSceneGui -= OnSceneGUI;
+            SceneView.duringSceneGui += OnSceneGUI;
+        }
+        public void UnsubscribeGUI()
+        {
+            SceneView.duringSceneGui -= OnSceneGUI;
+            Debug.Log("Is this happening?");
         }
     }
     [Serializable]
