@@ -23,38 +23,35 @@ namespace GeometryDefinitions
         }
     }
     [Serializable]
-    public class Box
-    {
-        public Vector2 center;
-        public Vector2 size;
-        public float angle;
-        public Box()
-        {
-            center = Vector2.zero;
-            size = Vector2.zero;
-            angle = 0f;
-        }
-        public void CopyToNew(Box copy)
-        {
-            copy.center = center;
-            copy.size = size;
-            copy.angle = angle;
-        }
-    }
-    [Serializable]
     public class Area
     {
-        public Vector2 pointA;
-        public Vector2 pointB;
+        public Vector3 center;
+        public float width;
+        public float height;
         public Area()
         {
-            pointA = Vector2.zero;
-            pointB = Vector2.zero;
+            center = Vector3.zero;
+            width = 0f;
+            height = 0f;
         }
         public void CopyToNew(Area copy)
         {
-            copy.pointA = pointA;
-            copy.pointB = pointB;
+            copy.center = center;
+            copy.width = width;
+            copy.height = height;
+        }
+    }
+    [Serializable]
+    public class Point
+    {
+        public Vector2 point;
+        public Point()
+        {
+            point = Vector2.zero;
+        }
+        public void CopyToNew(Point copy)
+        {
+            copy.point = point;
         }
     }
 }

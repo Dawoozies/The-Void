@@ -19,7 +19,7 @@ namespace ComponentIO
             AssetDatabase.SaveAssets();
             return instance;
         }
-        //NOT FOR RUNTIME LOADING ONLY EDITOR MODE
+        //ONLY EDITOR MODE
         public static T LoadExistingAsset(AnimatorController controller, string stateName)
         {
             string[] guids = AssetDatabase.FindAssets($"{controller.name}_{stateName}_{typeof(T).Name}");

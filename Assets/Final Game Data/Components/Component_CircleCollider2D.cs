@@ -8,7 +8,7 @@ using UnityEditor;
 using ExtensionMethods_AnimatorController;
 using ComponentIO;
 using System.Linq;
-using ExtensionMethods_Color;
+using ComponentEditorUI;
 
 [Serializable]
 public class Component_CircleCollider2D : ScriptableObject
@@ -146,13 +146,16 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
     AnimatorController controller;
     AnimationClip clip;
     bool stateExistsInController;
-    int frame;
+    //int frame;
     string stateName;
     //
     Component_CircleCollider2D componentSelected;
     //
     Component_CircleCollider2D_Data newComponentData;
     SelectionList<Circle> selectedCircles;
+    ListSelectionAndEdit<Circle> circleEdit;
+    //
+    FrameEdit frameEdit;
     //3 Modes
     //Create New Mode - Have a set static component data which you change and then "Assign" to Components
     //  "Assign" just means create a value copy of the data and then push that to the state component
@@ -165,75 +168,38 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
     public static void ShowWindow()
     {
         Component_CircleCollider2D_CreateNew editorWindow = GetWindow<Component_CircleCollider2D_CreateNew>();
-        editorWindow.CreateAnimatorObject();
+        editorWindow.Init();
     }
-    void CreateAnimatorObject()
+    void Init()
     {
         animatorObject = new GameObject("EDITOR_ANIMATOR");
         animator = animatorObject.AddComponent<Animator>();
         spriteRenderer = animatorObject.AddComponent<SpriteRenderer>();
         Selection.activeObject = animatorObject;
+        frameEdit = new FrameEdit();
+        circleEdit = new ListSelectionAndEdit<Circle>();
     }
-    void AnimatorControllerSelection()
+    void ControllerAndStateSelection()
     {
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("CONTROLLER", EditorStyles.largeLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        AnimatorController fieldInput = (AnimatorController)EditorGUILayout.ObjectField(controller, typeof(AnimatorController), false, GUILayout.ExpandWidth(true));
-        if (fieldInput != controller)
+        bool newControllerSelected = ControllerAndStateEdit.ControllerSelect(ref controller);
+        if (newControllerSelected)
         {
-            controller = fieldInput;
             stateExistsInController = false;
             clip = null;
-            stateExistsInController = false;
-            frame = 0;
+            frameEdit.frame = 0;
             componentSelected = null;
         }
         if (controller == null)
             return;
-        animator.runtimeAnimatorController = controller as RuntimeAnimatorController;
-    }
-    void StateSelect()
-    {
-        if (controller == null)
-            return;
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("STATE", EditorStyles.largeLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        string fieldInput = EditorGUILayout.TextField(stateName);
-        if (fieldInput != stateName)
+        animator.runtimeAnimatorController = controller;
+        bool newStateSelected = ControllerAndStateEdit.StateSelect(ref stateName);
+        if (newStateSelected)
         {
-            stateName = fieldInput;
             stateExistsInController = controller.CheckStateIsInController(stateName);
             clip = controller.ClipFromStateHash(Animator.StringToHash(stateName));
-            frame = 0;
+            frameEdit.frame = 0;
             componentSelected = null;
         }
-    }
-    void FrameSelect()
-    {
-        if (!stateExistsInController)
-            return;
-        AnimationMode.StartAnimationMode();
-        GUILayout.BeginHorizontal();
-        if(GUILayout.Button(" < ") && frame > 0)
-        {
-            frame--;
-        }
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label($"FRAME {frame}", EditorStyles.boldLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        if(GUILayout.Button(" > ") && frame < clip.length)
-        {
-            frame++;
-        }
-        GUILayout.EndHorizontal();
     }
     void TryLoadComponentAsset()
     {
@@ -258,41 +224,12 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
     }
     void FrameEdit()
     {
+        frameEdit.FrameSelect(stateExistsInController, clip);
         if (componentSelected == null)
             return;
         if (newComponentData == null)
             return;
-        if(newComponentData.frames == null || newComponentData.frames.Count == 0)
-        {
-            if (GUILayout.Button($"APPLY TO FRAME {frame}"))
-            {
-                newComponentData.frames = new List<int>() { frame };
-            }
-            return;
-        }
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label($"APPLIED TO FRAMES: {newComponentData.GetAppliedFramesLabel()}", EditorStyles.boldLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        if (newComponentData.frames.Contains(frame))
-        {
-            if(GUILayout.Button($"REMOVE FROM FRAME {frame}"))
-            {
-                newComponentData.frames.Remove(frame);
-            }
-        }
-        else
-        {
-            if(GUILayout.Button($"APPLY TO FRAME {frame}"))
-            {
-                newComponentData.frames.Add(frame);
-            }
-        }
-        if(GUILayout.Button("CLEAR ALL APPLIED FRAMES"))
-        {
-            newComponentData.frames.Clear();
-        }
+        frameEdit.AppliedFramesEdit(ref newComponentData.frames);
     }
     void DataEdit()
     {
@@ -311,58 +248,7 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
         newComponentData.isTrigger = EditorGUILayout.Toggle("Is Trigger", newComponentData.isTrigger);
         newComponentData.layer = EditorGUILayout.LayerField("Layer", newComponentData.layer);
         //Circle Stuff
-        GUILayout.Label($"CIRCLE SELECTION MODE {selectedCircles.selectionMode.ToString().ToUpper()}", EditorStyles.boldLabel);
-        GUILayout.BeginHorizontal();
-        foreach (GeometrySelectionMode mode in Enum.GetValues(typeof(GeometrySelectionMode)))
-        {
-            if(GUILayout.Button(mode.ToString()))
-            {
-                selectedCircles.selectionMode = mode;
-            }
-        }
-        if(GUILayout.Button("All"))
-        {
-            selectedCircles.selectionMode = GeometrySelectionMode.Multiple;
-            foreach (Circle circle in newComponentData.circles)
-            {
-                if (selectedCircles.Contains(circle))
-                    continue;
-                selectedCircles.Add(circle);
-            }
-        }
-        GUILayout.EndHorizontal();
-        if (GUILayout.Button("ADD CIRCLE"))
-        {
-            newComponentData.circles.Add(new Circle());
-        }
-        if (newComponentData.circles.Count == 0)
-            return;
-        for (int i = 0; i < newComponentData.circles.Count; i++)
-        {
-            Circle circle = newComponentData.circles[i];
-            string selectedLabel = (selectedCircles.Contains(circle)) ? "[S] " : "" ;
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button($"{selectedLabel}Circle {i}"))
-            {
-                if(selectedCircles.Contains(circle))
-                {
-                    selectedCircles.Remove(circle);
-                }
-                else
-                {
-                    selectedCircles.Add(circle);
-                }
-            }
-            if (GUILayout.Button($"REMOVE {i}"))
-            {
-                if (selectedCircles != null && selectedCircles.Contains(circle))
-                    selectedCircles.Remove(circle);
-                newComponentData.circles.Remove(circle);
-                GUILayout.EndHorizontal();
-                return;
-            }
-            GUILayout.EndHorizontal();
-        }
+        circleEdit.ListEdit(ref selectedCircles, ref newComponentData.circles);
     }
     void DataSave()
     {
@@ -390,9 +276,7 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
     }
     private void OnGUI()
     {
-        AnimatorControllerSelection();
-        StateSelect();
-        FrameSelect();
+        ControllerAndStateSelection();
         TryLoadComponentAsset();
         FrameEdit();
         DataEdit();
@@ -400,52 +284,9 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
     }
     void OnSceneGUI(SceneView sceneView)
     {
-        if (newComponentData == null || newComponentData.circles == null || newComponentData.circles.Count == 0)
+        if (newComponentData == null)
             return;
-        for (int i = 0; i < newComponentData.circles.Count; i++)
-        {
-            Circle circle = newComponentData.circles[i];
-            DrawCircle(circle, selectedCircles.Contains(circle));
-        }
-        if (selectedCircles == null || selectedCircles.selectedItems == null || selectedCircles.selectedItems.Count == 0)
-            return;
-        DrawHandleForSelection(selectedCircles.selectedItems[0]);
-    }
-    void DrawCircle(Circle circle, bool isSelected)
-    {
-        Vector3 worldPos = animatorObject.transform.position + circle.center;
-        float radius = circle.radius;
-        float alpha = 0.35f;
-        if (isSelected)
-            alpha = 1f;
-        Handles.color = newComponentData.fillColor.WithTransparency(alpha);
-        Handles.DrawSolidDisc(worldPos, Vector3.forward, radius);
-        Handles.color = Color.black;
-        Handles.DrawWireDisc(worldPos, Vector3.forward, radius, 4f);
-        Handles.color = newComponentData.lineColor.WithTransparency(alpha);
-        Handles.DrawDottedLine(worldPos, worldPos + Vector3.right * radius, 3f);
-    }
-    void DrawHandleForSelection(Circle circle)
-    {
-        Vector3 worldPos = animatorObject.transform.position + circle.center;
-        float radius = circle.radius;
-        EditorGUI.BeginChangeCheck();
-        Handles.color = newComponentData.lineColor;
-        Vector3 oldArrowPos = worldPos + Vector3.right * radius;
-        Vector3 newArrowPos = Handles.Slider(oldArrowPos, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
-        Handles.color = Color.white;
-        Vector3 oldSquarePos = worldPos;
-        Vector3 newSquarePos = Handles.FreeMoveHandle(oldSquarePos, Quaternion.identity, 0.35f, Vector3.one * 0.1f, Handles.RectangleHandleCap);
-        if(EditorGUI.EndChangeCheck())
-        {
-            foreach (Circle selectionCircle in selectedCircles.selectedItems)
-            {
-                selectionCircle.radius += newArrowPos.x - oldArrowPos.x;
-                if (selectionCircle.radius < 0)
-                    selectionCircle.radius = 0;
-                selectionCircle.center += newSquarePos - oldSquarePos;
-            }
-        }
+        DrawGeometry.DrawCircleList(animatorObject, ref selectedCircles, ref newComponentData.circles, newComponentData.fillColor, newComponentData.lineColor);
     }
     private void Update()
     {
@@ -456,7 +297,7 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
             if (clip == null)
                 return;
             AnimationMode.BeginSampling();
-            AnimationMode.SampleAnimationClip(animatorObject, clip, frame);
+            AnimationMode.SampleAnimationClip(animatorObject, clip, frameEdit.frame);
             AnimationMode.EndSampling();
             SceneView.RepaintAll();
         }
@@ -471,7 +312,7 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     AnimatorController controller;
     AnimationClip clip;
     bool stateExistsInController;
-    int frame;
+    FrameEdit frameEdit;
     string stateName;
     //
     bool useCurrentFrameChoice = true;
@@ -481,81 +322,46 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     Component_CircleCollider2D_Data[] dataAtFrame;
     Component_CircleCollider2D_Data dataSelected;
     SelectionList<Circle> selectedCircles;
+    ListSelectionAndEdit<Circle> circleEdit;
     //
+    bool showAllData;//Basically ignore frame and show all component data
     bool deleteWarning;
     [MenuItem("Window/Component Editors/Component_CircleCollider2D/Edit")]
     public static void ShowWindow()
     {
         Component_CircleCollider2D_Edit editorWindow = GetWindow<Component_CircleCollider2D_Edit>();
-        editorWindow.CreateAnimatorObject();
+        editorWindow.Init();
     }
-    void CreateAnimatorObject()
+    void Init()
     {
         animatorObject = new GameObject("EDITOR_ANIMATOR");
         animator = animatorObject.AddComponent<Animator>();
         spriteRenderer = animatorObject.AddComponent<SpriteRenderer>();
         Selection.activeObject = animatorObject;
+        frameEdit = new FrameEdit();
+        circleEdit = new ListSelectionAndEdit<Circle>();
     }
-    void AnimatorControllerSelection()
+    void ControllerAndStateSelection()
     {
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("CONTROLLER", EditorStyles.largeLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        AnimatorController fieldInput = (AnimatorController)EditorGUILayout.ObjectField(controller, typeof(AnimatorController), false, GUILayout.ExpandWidth(true));
-        if (fieldInput != controller)
+        bool newControllerSelected = ControllerAndStateEdit.ControllerSelect(ref controller);
+        if (newControllerSelected)
         {
-            controller = fieldInput;
             stateExistsInController = false;
             clip = null;
-            stateExistsInController = false;
-            frame = 0;
+            frameEdit.frame = 0;
             componentSelected = null;
         }
         if (controller == null)
             return;
-        animator.runtimeAnimatorController = controller as RuntimeAnimatorController;
-    }
-    void StateSelect()
-    {
-        if (controller == null)
-            return;
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("STATE", EditorStyles.largeLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        string fieldInput = EditorGUILayout.TextField(stateName);
-        if (fieldInput != stateName)
+        animator.runtimeAnimatorController = controller;
+        bool newStateSelected = ControllerAndStateEdit.StateSelect(ref stateName);
+        if (newStateSelected)
         {
-            stateName = fieldInput;
             stateExistsInController = controller.CheckStateIsInController(stateName);
             clip = controller.ClipFromStateHash(Animator.StringToHash(stateName));
-            frame = 0;
+            frameEdit.frame = 0;
             componentSelected = null;
         }
-    }
-    void FrameSelect()
-    {
-        if (!stateExistsInController)
-            return;
-        AnimationMode.StartAnimationMode();
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button(" < ") && frame > 0)
-        {
-            frame--;
-        }
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label($"FRAME {frame}", EditorStyles.boldLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        if (GUILayout.Button(" > ") && frame < clip.length)
-        {
-            frame++;
-        }
-        GUILayout.EndHorizontal();
     }
     void TryLoadComponentAsset()
     {
@@ -580,81 +386,90 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     }
     void FrameEdit()
     {
+        frameEdit.FrameSelect(stateExistsInController, clip);
         if (componentSelected == null)
             return;
         if (dataSelected == null)
             return;
-        if (dataSelected.frames == null || dataSelected.frames.Count == 0)
-        {
-            if (GUILayout.Button($"APPLY TO FRAME {frame}"))
-            {
-                dataSelected.frames = new List<int>() { frame };
-            }
+        frameEdit.AppliedFramesEdit(ref dataSelected.frames);
+    }
+    void DataDeleteChoice()
+    {
+        if (!deleteWarning)
             return;
-        }
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUILayout.Label($"APPLIED TO FRAMES: {dataSelected.GetAppliedFramesLabel()}", EditorStyles.boldLabel);
+        GUILayout.Label("COMPONENT DATA WILL BE DELETED!", EditorStyles.boldLabel);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
-        if (dataSelected.frames.Contains(frame))
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("CONTINUE?", EditorStyles.largeLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        if(GUILayout.Button("YES"))
         {
-            if (GUILayout.Button($"REMOVE FROM FRAME {frame}"))
-            {
-                dataSelected.frames.Remove(frame);
-            }
+            componentSelected.RemoveComponentData(dataSelected);
+            dataSelected = null;
+            deleteWarning = false;
         }
-        else
+        if(GUILayout.Button("NO"))
         {
-            if (GUILayout.Button($"APPLY TO FRAME {frame}"))
-            {
-                dataSelected.frames.Add(frame);
-            }
+            deleteWarning = false;
         }
-        if (GUILayout.Button("CLEAR ALL APPLIED FRAMES"))
+        GUILayout.EndHorizontal();
+    }
+    void ChangeData()
+    {
+        if (dataSelected == null)
+            return;
+        if (deleteWarning)
+            return;
+        if(GUILayout.Button("CHOOSE DIFFERENT DATA"))
         {
-            dataSelected.frames.Clear();
+            if(dataSelected.frames == null || dataSelected.frames.Count == 0)
+            {
+                deleteWarning = true;
+                return;
+            }
+            else
+            {
+                dataSelected = null;
+            }
         }
     }
-    void ComponentDataSelect()
+    void ComponentDataSelectAll()
     {
         if (componentSelected == null)
             return;
         if (componentSelected.componentData == null || componentSelected.componentData.Length == 0)
             return;
-        if (dataSelected != null)
+        showAllData = EditorGUILayout.Toggle("Show All Data", showAllData);
+        if (!showAllData)
+            return;
+        if (dataSelected == null)
         {
-            if (deleteWarning)
+            for (int i = 0; i < componentSelected.componentData.Length; i++)
             {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("COMPONENT DATA WILL BE DELETED! CONTINUE?");
-                if (GUILayout.Button("YES"))
+                Component_CircleCollider2D_Data data = componentSelected.componentData[i];
+                if (GUILayout.Button($"Component_Data: {data.nickname} [ Applied Frames: {data.GetAppliedFramesLabel()} ]"))
                 {
-                    componentSelected.RemoveComponentData(dataSelected);
-                    dataSelected = null;
-                    deleteWarning = false;
-                }
-                if (GUILayout.Button("NO"))
-                {
-                    deleteWarning = false;
-                }
-                GUILayout.EndHorizontal();
-                return;
-            }
-            if (GUILayout.Button("CHOOSE DIFFERENT DATA"))
-            {
-                if (dataSelected.frames == null || dataSelected.frames.Count == 0)
-                {
-                    deleteWarning = true;
-                    return;
-                }
-                else
-                {
-                    dataSelected = null;
+                    dataSelected = data;
                 }
             }
         }
-        dataAtFrame = componentSelected.DataWithFrame(frame);
+    }
+    void ComponentDataSelectByFrame()
+    {
+        if (showAllData)
+            return;
+        if (componentSelected == null)
+            return;
+        if (componentSelected.componentData == null || componentSelected.componentData.Length == 0)
+            return;
+
+        dataAtFrame = componentSelected.DataWithFrame(frameEdit.frame);
         if (dataAtFrame == null || dataAtFrame.Length == 0)
         {
             GUILayout.Label("NO DATA AT FRAME", EditorStyles.boldLabel);
@@ -684,58 +499,7 @@ public class Component_CircleCollider2D_Edit : EditorWindow
         dataSelected.isTrigger = EditorGUILayout.Toggle("Is Trigger", dataSelected.isTrigger);
         dataSelected.layer = EditorGUILayout.LayerField("Layer", dataSelected.layer);
         //CIRCLE STUFF
-        GUILayout.Label($"CIRCLE SELECTION MODE {selectedCircles.selectionMode.ToString().ToUpper()}", EditorStyles.boldLabel);
-        GUILayout.BeginHorizontal();
-        foreach (GeometrySelectionMode mode in Enum.GetValues(typeof(GeometrySelectionMode)))
-        {
-            if (GUILayout.Button(mode.ToString()))
-            {
-                selectedCircles.selectionMode = mode;
-            }
-        }
-        if (GUILayout.Button("All"))
-        {
-            selectedCircles.selectionMode = GeometrySelectionMode.Multiple;
-            foreach (Circle circle in dataSelected.circles)
-            {
-                if (selectedCircles.Contains(circle))
-                    continue;
-                selectedCircles.Add(circle);
-            }
-        }
-        GUILayout.EndHorizontal();
-        if (GUILayout.Button("ADD CIRCLE"))
-        {
-            dataSelected.circles.Add(new Circle());
-        }
-        if (dataSelected.circles.Count == 0)
-            return;
-        for (int i = 0; i < dataSelected.circles.Count; i++)
-        {
-            Circle circle = dataSelected.circles[i];
-            string selectedLabel = (selectedCircles.Contains(circle)) ? "[S] " : "";
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button($"{selectedLabel}Circle {i}"))
-            {
-                if (selectedCircles.Contains(circle))
-                {
-                    selectedCircles.Remove(circle);
-                }
-                else
-                {
-                    selectedCircles.Add(circle);
-                }
-            }
-            if (GUILayout.Button($"REMOVE {i}"))
-            {
-                if (selectedCircles != null && selectedCircles.Contains(circle))
-                    selectedCircles.Remove(circle);
-                dataSelected.circles.Remove(circle);
-                GUILayout.EndHorizontal();
-                return;
-            }
-            GUILayout.EndHorizontal();
-        }
+        circleEdit.ListEdit(ref selectedCircles, ref dataSelected.circles);
         EditorUtility.SetDirty(componentSelected);
     }
     private void OnFocus()
@@ -754,62 +518,22 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     }
     private void OnGUI()
     {
-        AnimatorControllerSelection();
-        StateSelect();
-        FrameSelect();
+        ControllerAndStateSelection();
         TryLoadComponentAsset();
-        ComponentDataSelect();
         FrameEdit();
+        DataDeleteChoice();
+        ChangeData();
+        if (deleteWarning)
+            return;
+        ComponentDataSelectAll();
+        ComponentDataSelectByFrame();
         ComponentDataEdit();
     }
     void OnSceneGUI(SceneView sceneView)
     {
-        if (dataSelected == null || dataSelected == null || dataSelected.circles.Count == 0)
+        if (dataSelected == null)
             return;
-        for (int i = 0; i < dataSelected.circles.Count; i++)
-        {
-            Circle circle = dataSelected.circles[i];
-            DrawCircle(circle, selectedCircles.Contains(circle));
-        }
-        if (selectedCircles == null || selectedCircles.selectedItems == null || selectedCircles.selectedItems.Count == 0)
-            return;
-        DrawHandleForSelection(selectedCircles.selectedItems[0]);
-    }
-    void DrawCircle(Circle circle, bool isSelected)
-    {
-        Vector3 worldPos = animatorObject.transform.position + circle.center;
-        float radius = circle.radius;
-        float alpha = 0.35f;
-        if (isSelected)
-            alpha = 1f;
-        Handles.color = dataSelected.fillColor.WithTransparency(alpha);
-        Handles.DrawSolidDisc(worldPos, Vector3.forward, radius);
-        Handles.color = Color.black;
-        Handles.DrawWireDisc(worldPos, Vector3.forward, radius, 4f);
-        Handles.color = dataSelected.lineColor.WithTransparency(alpha);
-        Handles.DrawDottedLine(worldPos, worldPos + Vector3.right * radius, 3f);
-    }
-    void DrawHandleForSelection(Circle circle)
-    {
-        Vector3 worldPos = animatorObject.transform.position + circle.center;
-        float radius = circle.radius;
-        EditorGUI.BeginChangeCheck();
-        Handles.color = dataSelected.lineColor;
-        Vector3 oldArrowPos = worldPos + Vector3.right * radius;
-        Vector3 newArrowPos = Handles.Slider(oldArrowPos, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
-        Handles.color = Color.white;
-        Vector3 oldSquarePos = worldPos;
-        Vector3 newSquarePos = Handles.FreeMoveHandle(oldSquarePos, Quaternion.identity, 0.35f, Vector3.one * 0.1f, Handles.RectangleHandleCap);
-        if (EditorGUI.EndChangeCheck())
-        {
-            foreach (Circle selectionCircle in selectedCircles.selectedItems)
-            {
-                selectionCircle.radius += newArrowPos.x - oldArrowPos.x;
-                if (selectionCircle.radius < 0)
-                    selectionCircle.radius = 0;
-                selectionCircle.center += newSquarePos - oldSquarePos;
-            }
-        }
+        DrawGeometry.DrawCircleList(animatorObject, ref selectedCircles, ref dataSelected.circles, dataSelected.fillColor, dataSelected.lineColor);
     }
     private void Update()
     {
@@ -820,7 +544,7 @@ public class Component_CircleCollider2D_Edit : EditorWindow
             if (clip == null)
                 return;
             AnimationMode.BeginSampling();
-            AnimationMode.SampleAnimationClip(animatorObject, clip, frame);
+            AnimationMode.SampleAnimationClip(animatorObject, clip, frameEdit.frame);
             AnimationMode.EndSampling();
             SceneView.RepaintAll();
         }
