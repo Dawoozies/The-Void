@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameData.StateData;
+using OLD.GameData.StateData;
 using UnityEditor;
 using UnityEditor.Animations;
 using System.Linq;
 using System;
-namespace GameData.StateData
+namespace OLD.GameData.StateData
 {
     [Serializable]
     public class Components
@@ -30,11 +30,17 @@ namespace GameData.StateData
         {
             components.Add(component);
         }
+        public List<ScriptableObject> GetScriptableObjects()
+        {
+            if (components == null)
+                return null;
+            return components;
+        }
     }
     [Serializable]
     public class StateComponentDictionary
     {
-        List<Components> values;
+        public List<Components> values;
         public StateComponentDictionary()
         {
             values = new List<Components>() { };
@@ -60,13 +66,17 @@ namespace GameData.StateData
         }
         public void Add(int key, ScriptableObject component)
         {
+            Debug.Log("Running Add");
             Components valueReference = ValueWithKey(key);
             if (valueReference != null)
             {
+                Debug.Log("valueReference != null");
                 valueReference.Add(component);
                 return;
             }
+            Debug.Log("valueReference == null");
             valueReference = new Components(key, component);
+            values.Add(valueReference);
         }
         public int ValueCount()
         {
@@ -89,6 +99,10 @@ namespace GameData.StateData
     public interface StateDataCast<T>
     {
         public T GetCastedData();
+    }
+    public interface Draw
+    {
+        public void Draw();
     }
     public static class Create<T> where T : ScriptableObject
     {
@@ -119,14 +133,32 @@ namespace GameData.StateData
     }
     public static class Draw<T> where T : ScriptableObject
     {
+        public static void NewComponentOptions(StateData stateData, int frame)
+        {
+            CreateComponentButton(stateData, frame);
+            LoadComponentButton(stateData, frame);
+        }
         public static void CreateComponentButton(StateData stateData, int frame)
         {
             if (GUILayout.Button($"CREATE NEW {typeof(T).Name}"))
             {
-                //
                 stateData.AddNewComponentToFrame(frame, Create<T>.New($"Component_{typeof(T).Name}"));
                 EditorUtility.SetDirty(stateData);
             }
+        }
+        public static ScriptableObject loadedObject;
+        public static void LoadComponentButton(StateData stateData, int frame)
+        {
+            GUILayout.BeginHorizontal();
+            loadedObject = (ScriptableObject)EditorGUILayout.ObjectField(loadedObject, typeof(ScriptableObject), false, GUILayout.ExpandWidth(true));
+            if(loadedObject != null)
+            {
+                if(GUILayout.Button("LOAD"))
+                {
+
+                }
+            }
+            GUILayout.EndHorizontal();
         }
     }
     public static class Load<T> where T : ScriptableObject

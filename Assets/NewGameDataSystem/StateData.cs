@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Geometry;
+using OLD.Geometry;
 using ExtensionMethods_List;
-using GameData.StateData.IO;
+using OLD.GameData.StateData.IO;
 using System.Linq;
-namespace GameData.StateData
+using System.Reflection;
+namespace OLD.GameData.StateData
 {
     [Serializable]
     public class StateData : ScriptableObject, ScriptableObjectInitialization
@@ -27,6 +28,7 @@ namespace GameData.StateData
         public void AddNewComponentToFrame(int frame, ScriptableObject component)
         {
             data.Add(frame, component);
+            Debug.Log("Running AddNewComponentToFrame");
         }
         public Type[] ComponentsNotAddedAtFrame(int frame)
         {
@@ -38,15 +40,25 @@ namespace GameData.StateData
         }
         public void Draw_ComponentAdd(int frame)
         {
-            if(!data.ContainsKey(frame))
-            {
-                ComponentTypes.All
-                    .Select(c => typeof(Draw<>).MakeGenericType(c))
-                    .Select(drawType => drawType.GetMethod("CreateComponentButton"))
-                    .Where(drawMethod => drawMethod != null)
-                    .ToList()
-                    .ForEach(drawMethod => drawMethod.Invoke(null, new object[] { this, frame}));
-            }
+            ComponentsNotAddedAtFrame(frame)
+                .Select(c => typeof(Draw<>).MakeGenericType(c))
+                .Select(drawType => drawType.GetMethod("NewComponentOptions"))
+                .Where(drawMethod => drawMethod != null)
+                .ToList()
+                .ForEach(drawMethod => drawMethod.Invoke(null, new object[] { this, frame }));
+        }
+        public void Draw_StateDataAtFrame(int frame)
+        {
+            Components componentsAtFrame = ComponentsAtFrame(frame);
+            if (componentsAtFrame == null)
+                return;
+            componentsAtFrame.GetScriptableObjects()
+                .ForEach(scriptableObject => 
+                {
+                    Draw draw = scriptableObject as Draw;
+                    if (draw != null)
+                        draw.Draw();
+                });
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Geometry;
+using OLD.Geometry;
 public class FrameOverlapData : ScriptableObject
 {
     public AnimationClip clip;
@@ -56,13 +56,13 @@ public class OverlapComponent
     public string componentName; //Just for ease of remembering what the overlap component is for
     public Color circleColor;
     public Color radiusColor;
-    public List<Geometry.Circle> circles;
+    public List<Circle> circles;
     public DefinedLayerMask definedLayerMask;
     public int collisionLayer;
     public OverlapComponentType overlapComponentType;
     public AxisTransform axisTransform;
     public List<ParameterComponent> parameterComponents; //Parameters that get changed when overlap happens
-    public Vector3 GetCircleWorldPosition(Transform parentObject, Geometry.Circle circle)
+    public Vector3 GetCircleWorldPosition(Transform parentObject, Circle circle)
     {
         Vector3 circleWorldPosition = Vector3.zero;
         if (axisTransform == AxisTransform.LocalScale)
@@ -96,7 +96,7 @@ public class OverlapComponent
         componentName = copiedOverlapComponent.componentName;
         circleColor = copiedOverlapComponent.circleColor;
         radiusColor = copiedOverlapComponent.radiusColor;
-        circles = new List<Geometry.Circle>();
+        circles = new List<Circle>();
         for (int i = 0; i < copiedOverlapComponent.circles.Count; i++)
         {
             circles.Add(copiedOverlapComponent.circles[i].Copy());
@@ -116,7 +116,7 @@ public class OverlapComponent
         componentName = "";
         circleColor = Color.white;
         radiusColor = Color.white;
-        circles = new List<Geometry.Circle>();
+        circles = new List<Circle>();
         definedLayerMask = 0;
         overlapComponentType = 0;
         axisTransform = 0;

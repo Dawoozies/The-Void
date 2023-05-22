@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.Animations;
-using GameData.StateData;
+using OLD.GameData.StateData;
 using System;
 using System.Linq;
 public class AnimatorWindow : EditorWindow
@@ -38,6 +38,11 @@ public class AnimatorWindow : EditorWindow
             return;
         }
         ComponentAdd();
+        DrawComponents();
+    }
+    void DrawComponents()
+    {
+        stateData.Draw_StateDataAtFrame(frame);
     }
     void ComponentAdd()
     {
@@ -47,7 +52,7 @@ public class AnimatorWindow : EditorWindow
     {
         if(GUILayout.Button("CREATE NEW STATE DATA"))
         {
-            string assignedName = $"{controller.name}_{stateName}_{typeof(StateData).Name}"; 
+            string assignedName = $"{controller.name}_{stateName}_{typeof(StateData).Name}";
             stateData = Create<StateData>.New(assignedName);
         }
             
@@ -141,7 +146,7 @@ public class AnimatorWindow : EditorWindow
             DestroyImmediate(editorAnimatorObject);
         }
         AnimationMode.StopAnimationMode();
-        if (stateData.data == null || stateData.data.ValueCount() <= 0)
+        if (stateData.data == null)
             Delete<StateData>.Asset(stateData);
     }
     private void Update()

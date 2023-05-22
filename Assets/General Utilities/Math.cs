@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEditor;
-using GameData.EditorWindow;
+using OLD.GameData.EditorWindow;
 namespace LinearAlgebra
 {
     public class ParametrisedLine
@@ -89,14 +89,13 @@ namespace LinearAlgebra
         }
     }
 }
-namespace Geometry
+namespace OLD.Geometry
 {
     [Serializable]
     public class Circle : SceneGUI
     {
         public Vector3 center;
         public float radius;
-
         public Circle ()
         {
             center = Vector3.zero;
@@ -114,6 +113,17 @@ namespace Geometry
         public void OnSceneGUI(SceneView sceneView)
         {
             Handles.DrawSolidDisc(center, Vector3.forward, radius);
+            Handles.DrawDottedLine(center, center + Vector3.right*radius, 3f);
+            EditorGUI.BeginChangeCheck();
+            Vector3 oldArrowPosition = center + Vector3.right * radius;
+            Vector3 newArrowPosition = Handles.Slider(oldArrowPosition, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
+            Vector3 oldSquarePosition = center;
+            Vector3 newSquarePosition = Handles.FreeMoveHandle(oldSquarePosition, Quaternion.identity, 0.35f, Vector3.one * 0.1f, Handles.RectangleHandleCap);
+            if(EditorGUI.EndChangeCheck())
+            {
+                radius += newArrowPosition.x - oldArrowPosition.x;
+                center += newSquarePosition - oldSquarePosition;
+            }
         }
         public void SubscribeGUI()
         {

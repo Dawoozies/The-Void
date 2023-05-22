@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Geometry;
+using OLD.Geometry;
 public class Collider2DPool
 {
     public bool initialized;
@@ -28,7 +28,7 @@ public class Collider2DPool
     }
     public void UpdateColliders(Transform parent, OverlapComponent overlapComponent)
     {
-        List<Geometry.Circle> circles = overlapComponent.circles;
+        List<Circle> circles = overlapComponent.circles;
         for (int i = 0; i < colliders.Count; i++)
         {
             if (i < circles.Count)

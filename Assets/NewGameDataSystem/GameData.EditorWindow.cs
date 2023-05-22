@@ -4,18 +4,8 @@ using UnityEngine;
 using System;
 using UnityEditor;
 using UnityEditor.Animations;
-namespace GameData.EditorWindow
+namespace OLD.GameData.EditorWindow
 {
-    public class AnimatorControllerStateEditor
-    {
-        public AnimatorController animatorController;
-        public string stateName;
-        int stateHash;
-        public AnimatorControllerStateEditor()
-        {
-
-        }
-    }
     public class IndexList<T>
     {
         public List<T> items;
@@ -68,7 +58,7 @@ namespace GameData.EditorWindow
         public List<T> items;
         public Action<T> onButtonPress;
         public Func<T> onAddButtonPress;
-        public Func<T, T> itemOut;
+        public Action<T> onRemoveButtonPress;
         public ButtonList(List<T> items)
         {
             this.items = items;
@@ -89,11 +79,10 @@ namespace GameData.EditorWindow
                 if(GUILayout.Button(typeName + " " + i))
                 {
                     onButtonPress?.Invoke(items[i]);
-                    itemOut?.Invoke(items[i]);
                 }
                 if(GUILayout.Button("Remove"))
                 {
-                    items.RemoveAt(i);
+                    onRemoveButtonPress?.Invoke(items[i]);
                     GUILayout.EndHorizontal();
                     return;
                 }

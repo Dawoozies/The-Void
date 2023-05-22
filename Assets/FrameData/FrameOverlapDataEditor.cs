@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
-using Geometry;
+using OLD.Geometry;
 public class FrameOverlapDataEditor : EditorWindow
 {
     AnimationClip inputClip;
@@ -192,10 +192,10 @@ public class FrameOverlapDataEditor : EditorWindow
             if (selectedComponentIndices.Item1 < 0)
                 return;
             int i = selectedComponentIndices.Item1;
-            List<Geometry.Circle> circlesAtIndex = overlapComponentsAtFrame[i].circles;
+            List<Circle> circlesAtIndex = overlapComponentsAtFrame[i].circles;
             if (GUILayout.Button($"Add New Circle To Overlap Component {i}"))
             {
-                overlapData.OverlapComponentsAtFrame(frame)[i].circles.Add(new Geometry.Circle());
+                overlapData.OverlapComponentsAtFrame(frame)[i].circles.Add(new Circle());
                 EditorUtility.SetDirty(overlapData);
                 Repaint();
             }
@@ -231,7 +231,7 @@ public class FrameOverlapDataEditor : EditorWindow
             {
                 //Display Circle Properties
                 int j = selectedComponentIndices.Item2;
-                Geometry.Circle circle = overlapData.OverlapComponentsAtFrame(frame)[i].circles[j];
+                Circle circle = overlapData.OverlapComponentsAtFrame(frame)[i].circles[j];
                 GUILayout.Label($"  Circle {j}", EditorStyles.miniBoldLabel);
                 circle.center = EditorGUILayout.Vector3Field("Center", circle.center);
                 circle.radius = EditorGUILayout.FloatField("Radius", circle.radius);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ExtensionMethods_Animator;
+using OLD.Geometry;
 public class FrameOverlapDataManager : MonoBehaviour
 {
     Animator animator;
@@ -69,11 +70,11 @@ public class FrameOverlapDataManager : MonoBehaviour
         OverlapData currentFrameData = overlapData.overlapDataList[animator.CurrentFrame()];
         foreach (OverlapComponent component in currentFrameData.overlapComponents)
         {
-            List<Geometry.Circle> circles = component.circles;
+            List<Circle> circles = component.circles;
             if (circles == null || circles.Count == 0)
                 continue;
             Gizmos.color = new Color(component.circleColor.r, component.circleColor.g, component.circleColor.b, gizmosTransparency);
-            foreach (Geometry.Circle circle in circles)
+            foreach (Circle circle in circles)
             {
                 Gizmos.DrawSphere(component.GetCircleWorldPosition(transform, circle), circle.radius);
             }

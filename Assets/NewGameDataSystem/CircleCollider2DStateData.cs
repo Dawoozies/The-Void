@@ -1,35 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Geometry;
+using OLD.Geometry;
 using System;
 using ExtensionMethods_List;
 using UnityEditor;
-namespace GameData.StateData
+using OLD.GameData.EditorWindow;
+using UnityEngine.UIElements;
+
+namespace OLD.GameData.StateData
 {
     [Serializable]
-    public class CircleCollider2DStateData : ScriptableObject, ScriptableObjectInitialization, StateDataCast<CircleCollider2DStateData>
+    public class CircleCollider2DStateData : ScriptableObject, ScriptableObjectInitialization, StateDataCast<CircleCollider2DStateData>, Draw
     {
-        public string dataId;
-        public bool isTrigger;
-        public int layer;
-        public List<Circle> circles;
-        public void Paste(CircleCollider2DStateData circleCollider2DStateData)
+        public List<CircleCollider2DCollection> circleCollider2DCollection;
+        private ButtonList<CircleCollider2DCollection> buttonList;
+        private CircleCollider2DCollection collectionToDraw;
+        public void Initialize()
         {
-            isTrigger = circleCollider2DStateData.isTrigger;
-            layer = circleCollider2DStateData.layer;
-            circles = circleCollider2DStateData.circles.Copy();
+            circleCollider2DCollection = new List<CircleCollider2DCollection>() { new CircleCollider2DCollection()};
         }
         public CircleCollider2DStateData GetCastedData()
         {
             return this;
         }
-
-        public void Initialize()
+        public void Draw()
         {
-            isTrigger = false;
-            layer = 0;
-            circles = new List<Circle>();
+            if(buttonList == null)
+            {
+                buttonList = new ButtonList<CircleCollider2DCollection>(circleCollider2DCollection);
+                buttonList.onButtonPress += (collection) =>
+                {
+                    if (collectionToDraw != null && collectionToDraw == collection)
+                    {
+                        collectionToDraw = null;
+                        return;
+                    }
+                    collectionToDraw = collection;
+                };
+                buttonList.onAddButtonPress += () =>
+                {
+                    return new CircleCollider2DCollection();
+                };
+            }
+            buttonList.Draw();
+            if (collectionToDraw != null)
+                collectionToDraw.Draw();
+            EditorUtility.SetDirty(this);
         }
     }
 }
