@@ -26,6 +26,22 @@ namespace ExtensionMethods_AnimatorController
             }
             return false;
         }
+        public static bool CheckStateIsInController(this AnimatorController controller, int stateHash)
+        {
+            if (controller == null)
+                return false;
+            foreach (AnimatorControllerLayer layer in controller.layers)
+            {
+                AnimatorStateMachine stateMachine = layer.stateMachine;
+                foreach (ChildAnimatorState state in stateMachine.states)
+                {
+                    AnimatorState animatorState = state.state;
+                    if(stateHash == animatorState.nameHash)
+                        return true;
+                }
+            }
+            return false;
+        }
         public static AnimationClip ClipFromStateHash(this AnimatorController controller, int stateHash)
         {
             if (controller == null)

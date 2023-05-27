@@ -24,13 +24,31 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RightBumper",
+                    "type": "PassThrough",
+                    "id": "41b6db95-5a3a-4d03-b5cc-0e2f4b7a09d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftBumper",
+                    "type": "PassThrough",
+                    "id": "c553e135-00f2-4db8-ae3d-e70851b7eba2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "a2c5040b-7f27-4287-8c73-9f79d521f2bc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Dodge",
@@ -252,6 +270,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RightTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "788e3b59-b90f-4841-9807-aa4ccb771809",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightBumper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb27c61a-55f4-49da-a67f-82bdb046e46e",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftBumper",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

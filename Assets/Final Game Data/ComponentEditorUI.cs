@@ -206,7 +206,7 @@ namespace ComponentEditorUI
             }
             if (selectedList == null || selectedList.selectedItems == null || selectedList.selectedItems.Count == 0)
                 return;
-            DrawHandleForSelectionCircle(parentObject, ref selectedList, selectedList.selectedItems[0], lineColor);
+            DrawHandleForSelectionCircle(parentObject, ref selectedList, selectedList.selectedItems[0], fillColor, lineColor);
         }
         public static void DrawCircle(GameObject parentObject, Circle circle, bool isSelected, Color fillColor, Color lineColor)
         {
@@ -222,13 +222,13 @@ namespace ComponentEditorUI
             Handles.color = lineColor.WithTransparency(alpha);
             Handles.DrawDottedLine(worldPos, worldPos + Vector3.right * radius, 3f);
         }
-        public static void DrawHandleForSelectionCircle(GameObject parentObject, ref SelectionList<Circle> selectedList, Circle circle, Color lineColor)
+        public static void DrawHandleForSelectionCircle(GameObject parentObject, ref SelectionList<Circle> selectedList, Circle circle, Color fillColor, Color lineColor)
         {
             Vector3 worldPos = parentObject.transform.position + circle.center;
             float radius = circle.radius;
             EditorGUI.BeginChangeCheck();
             //Square render first
-            Handles.color = (Color.white - lineColor).WithTransparency(1f);
+            Handles.color = (Color.white - fillColor).WithTransparency(1f);
             Vector3 oldSquarePos = worldPos;
             Vector3 newSquarePos = Handles.FreeMoveHandle(oldSquarePos, Quaternion.identity, 0.65f, Vector3.one * 0.25f, Handles.RectangleHandleCap);
             //Arrow render last

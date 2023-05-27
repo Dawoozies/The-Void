@@ -28,4 +28,11 @@ namespace ComponentIO
             return AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guids[0]));
         }
     }
+    public static class Load<T> where T : ScriptableObject
+    {
+        public static T[] AllComponents()
+        {
+            return Resources.LoadAll("",(typeof(T))) as T[];
+        }
+    }
 }

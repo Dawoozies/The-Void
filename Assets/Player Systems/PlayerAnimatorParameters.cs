@@ -8,7 +8,7 @@ public class PlayerAnimatorParameters : MonoBehaviour, Listener_AnyAttackInput, 
     Vector2 R_Input => InputManager.ins.R_Input;
     float LeftTrigger_Input => InputManager.ins.LeftTrigger_Input;
     float RightTrigger_Input => InputManager.ins.RightTrigger_Input;
-    int R_Direction => DirectionManager.ins.R_Direction;
+    int R_Direction => Direction.Compute8WayDirection();
     bool EquippedHalberd => PlayerDataManager.ins.EquippedHalberd;
     Animator animator;
     Rigidbody2D rb;

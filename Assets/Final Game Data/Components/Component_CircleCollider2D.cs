@@ -9,11 +9,12 @@ using ExtensionMethods_AnimatorController;
 using ComponentIO;
 using System.Linq;
 using ComponentEditorUI;
-
+using GameManagement;
 [Serializable]
-public class Component_CircleCollider2D : ScriptableObject
+public class Component_CircleCollider2D : ScriptableObject, IComponent
 {
     //Only one Component per state
+    public string controllerName;
     public int stateHash;
     public Component_CircleCollider2D_Data[] componentData;
     public void AddComponentData(Component_CircleCollider2D_Data data)
@@ -23,6 +24,7 @@ public class Component_CircleCollider2D : ScriptableObject
             componentData = new Component_CircleCollider2D_Data[1];
             componentData[0] = new Component_CircleCollider2D_Data();
             data.CopyToNew(componentData[0]);
+            EditorUtility.SetDirty(this);
             return;
         }
             
@@ -55,6 +57,12 @@ public class Component_CircleCollider2D : ScriptableObject
         }
         return dataAtFrame.ToArray();
     }
+
+    public (string, int) GetControllerNameAndStateHash()
+    {
+        return (controllerName, stateHash);
+    }
+
     public void RemoveComponentData(Component_CircleCollider2D_Data dataToRemove)
     {
         if (componentData == null || componentData.Length == 0)
@@ -218,6 +226,7 @@ public class Component_CircleCollider2D_CreateNew : EditorWindow
             if(GUILayout.Button($"CREATE {controller.name}_{stateName}_{typeof(Component_CircleCollider2D).Name}.asset"))
             {
                 componentSelected = Assets<Component_CircleCollider2D>.CreateNewAsset(controller, stateName);
+                componentSelected.controllerName = controller.name;
                 componentSelected.stateHash = Animator.StringToHash(stateName);
             }
         }
@@ -315,8 +324,6 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     FrameEdit frameEdit;
     string stateName;
     //
-    bool useCurrentFrameChoice = true;
-    //
     Component_CircleCollider2D componentSelected;
     //
     Component_CircleCollider2D_Data[] dataAtFrame;
@@ -324,7 +331,7 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     SelectionList<Circle> selectedCircles;
     ListSelectionAndEdit<Circle> circleEdit;
     //
-    bool showAllData;//Basically ignore frame and show all component data
+    int dataFilterMode;//Basically ignore frame and show all component data
     bool deleteWarning;
     [MenuItem("Window/Component Editors/Component_CircleCollider2D/Edit")]
     public static void ShowWindow()
@@ -380,6 +387,7 @@ public class Component_CircleCollider2D_Edit : EditorWindow
             if (GUILayout.Button($"CREATE {controller.name}_{stateName}_{typeof(Component_CircleCollider2D).Name}.asset"))
             {
                 componentSelected = Assets<Component_CircleCollider2D>.CreateNewAsset(controller, stateName);
+                componentSelected.controllerName = controller.name;
                 componentSelected.stateHash = Animator.StringToHash(stateName);
             }
         }
@@ -445,9 +453,6 @@ public class Component_CircleCollider2D_Edit : EditorWindow
             return;
         if (componentSelected.componentData == null || componentSelected.componentData.Length == 0)
             return;
-        showAllData = EditorGUILayout.Toggle("Show All Data", showAllData);
-        if (!showAllData)
-            return;
         if (dataSelected == null)
         {
             for (int i = 0; i < componentSelected.componentData.Length; i++)
@@ -462,8 +467,6 @@ public class Component_CircleCollider2D_Edit : EditorWindow
     }
     void ComponentDataSelectByFrame()
     {
-        if (showAllData)
-            return;
         if (componentSelected == null)
             return;
         if (componentSelected.componentData == null || componentSelected.componentData.Length == 0)
@@ -525,8 +528,16 @@ public class Component_CircleCollider2D_Edit : EditorWindow
         ChangeData();
         if (deleteWarning)
             return;
-        ComponentDataSelectAll();
-        ComponentDataSelectByFrame();
+        dataFilterMode = GUILayout.Toolbar(dataFilterMode, new string[] { "By Frame", "All" });
+        switch(dataFilterMode)
+        {
+            case 0:
+                ComponentDataSelectByFrame();
+                break;
+            case 1:
+                ComponentDataSelectAll();
+                break;
+        }
         ComponentDataEdit();
     }
     void OnSceneGUI(SceneView sceneView)

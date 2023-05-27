@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectionManager : MonoBehaviour
+public static class Direction
 {
-    public static DirectionManager ins;
-    private void Awake()
+    static Vector2 R_Input => InputManager.ins.R_Input;
+    public static int R_Direction;
+    public static int Compute8WayDirection()
     {
-        ins = this;
-    }
-    Vector2 R_Input => InputManager.ins.R_Input;
-    public int R_Direction;
-    private void Update()
-    {
-        R_Direction = Compute8WayDirection(R_Input.x, R_Input.y);
-    }
-    public int Compute8WayDirection(float xCoordinate, float yCoordinate)
-    {
+        float xCoordinate = R_Input.x;
+        float yCoordinate = R_Input.y;
         float angle = Mathf.Atan2(yCoordinate, xCoordinate)*Mathf.Rad2Deg;
         if(-22.5f < angle && angle < 22.5f)
         {

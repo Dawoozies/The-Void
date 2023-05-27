@@ -40,18 +40,13 @@ namespace GeometryDefinitions
             copy.width = width;
             copy.height = height;
         }
-    }
-    [Serializable]
-    public class Point
-    {
-        public Vector2 point;
-        public Point()
+        public Vector3 PointA()
         {
-            point = Vector2.zero;
+            return center - new Vector3(width/2f, height/2f, 0f);
         }
-        public void CopyToNew(Point copy)
+        public Vector3 PointB()
         {
-            copy.point = point;
+            return center + new Vector3(width/2f, height/2f, 0f);
         }
     }
 }

@@ -46,13 +46,31 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""RightBumper"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""41b6db95-5a3a-4d03-b5cc-0e2f4b7a09d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftBumper"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""c553e135-00f2-4db8-ae3d-e70851b7eba2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Jump"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""a2c5040b-7f27-4287-8c73-9f79d521f2bc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Dodge"",
@@ -276,6 +294,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""RightTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""788e3b59-b90f-4841-9807-aa4ccb771809"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightBumper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb27c61a-55f4-49da-a67f-82bdb046e46e"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftBumper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -286,6 +326,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerDefault = asset.FindActionMap("PlayerDefault", throwIfNotFound: true);
         m_PlayerDefault_LeftStick = m_PlayerDefault.FindAction("LeftStick", throwIfNotFound: true);
         m_PlayerDefault_LightAttack = m_PlayerDefault.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerDefault_RightBumper = m_PlayerDefault.FindAction("RightBumper", throwIfNotFound: true);
+        m_PlayerDefault_LeftBumper = m_PlayerDefault.FindAction("LeftBumper", throwIfNotFound: true);
         m_PlayerDefault_Jump = m_PlayerDefault.FindAction("Jump", throwIfNotFound: true);
         m_PlayerDefault_Dodge = m_PlayerDefault.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerDefault_JumpRelease = m_PlayerDefault.FindAction("JumpRelease", throwIfNotFound: true);
@@ -353,6 +395,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayerDefaultActions m_PlayerDefaultActionsCallbackInterface;
     private readonly InputAction m_PlayerDefault_LeftStick;
     private readonly InputAction m_PlayerDefault_LightAttack;
+    private readonly InputAction m_PlayerDefault_RightBumper;
+    private readonly InputAction m_PlayerDefault_LeftBumper;
     private readonly InputAction m_PlayerDefault_Jump;
     private readonly InputAction m_PlayerDefault_Dodge;
     private readonly InputAction m_PlayerDefault_JumpRelease;
@@ -365,6 +409,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public PlayerDefaultActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftStick => m_Wrapper.m_PlayerDefault_LeftStick;
         public InputAction @LightAttack => m_Wrapper.m_PlayerDefault_LightAttack;
+        public InputAction @RightBumper => m_Wrapper.m_PlayerDefault_RightBumper;
+        public InputAction @LeftBumper => m_Wrapper.m_PlayerDefault_LeftBumper;
         public InputAction @Jump => m_Wrapper.m_PlayerDefault_Jump;
         public InputAction @Dodge => m_Wrapper.m_PlayerDefault_Dodge;
         public InputAction @JumpRelease => m_Wrapper.m_PlayerDefault_JumpRelease;
@@ -386,6 +432,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @LightAttack.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLightAttack;
                 @LightAttack.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLightAttack;
                 @LightAttack.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLightAttack;
+                @RightBumper.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightBumper;
+                @RightBumper.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightBumper;
+                @RightBumper.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnRightBumper;
+                @LeftBumper.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftBumper;
+                @LeftBumper.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftBumper;
+                @LeftBumper.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnLeftBumper;
                 @Jump.started -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerDefaultActionsCallbackInterface.OnJump;
@@ -414,6 +466,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @LightAttack.started += instance.OnLightAttack;
                 @LightAttack.performed += instance.OnLightAttack;
                 @LightAttack.canceled += instance.OnLightAttack;
+                @RightBumper.started += instance.OnRightBumper;
+                @RightBumper.performed += instance.OnRightBumper;
+                @RightBumper.canceled += instance.OnRightBumper;
+                @LeftBumper.started += instance.OnLeftBumper;
+                @LeftBumper.performed += instance.OnLeftBumper;
+                @LeftBumper.canceled += instance.OnLeftBumper;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -440,6 +498,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnLeftStick(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
+        void OnRightBumper(InputAction.CallbackContext context);
+        void OnLeftBumper(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnJumpRelease(InputAction.CallbackContext context);

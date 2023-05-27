@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 using UnityEditor;
-using OLD.GameData.EditorWindow;
 namespace LinearAlgebra
 {
     public class ParametrisedLine
@@ -92,7 +91,7 @@ namespace LinearAlgebra
 namespace OLD.Geometry
 {
     [Serializable]
-    public class Circle : SceneGUI
+    public class Circle
     {
         public Vector3 center;
         public float radius;
@@ -109,31 +108,6 @@ namespace OLD.Geometry
         public Circle Copy()
         {
             return new Circle(center, radius);
-        }
-        public void OnSceneGUI(SceneView sceneView)
-        {
-            Handles.DrawSolidDisc(center, Vector3.forward, radius);
-            Handles.DrawDottedLine(center, center + Vector3.right*radius, 3f);
-            EditorGUI.BeginChangeCheck();
-            Vector3 oldArrowPosition = center + Vector3.right * radius;
-            Vector3 newArrowPosition = Handles.Slider(oldArrowPosition, Vector3.right, 0.75f, Handles.ArrowHandleCap, 0.1f);
-            Vector3 oldSquarePosition = center;
-            Vector3 newSquarePosition = Handles.FreeMoveHandle(oldSquarePosition, Quaternion.identity, 0.35f, Vector3.one * 0.1f, Handles.RectangleHandleCap);
-            if(EditorGUI.EndChangeCheck())
-            {
-                radius += newArrowPosition.x - oldArrowPosition.x;
-                center += newSquarePosition - oldSquarePosition;
-            }
-        }
-        public void SubscribeGUI()
-        {
-            SceneView.duringSceneGui -= OnSceneGUI;
-            SceneView.duringSceneGui += OnSceneGUI;
-        }
-        public void UnsubscribeGUI()
-        {
-            SceneView.duringSceneGui -= OnSceneGUI;
-            Debug.Log("Is this happening?");
         }
     }
     [Serializable]
