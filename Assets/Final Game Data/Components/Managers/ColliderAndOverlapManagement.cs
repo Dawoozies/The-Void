@@ -218,7 +218,7 @@ namespace GameManagement
                 RuntimeSceneObject obj = overlaps[i].Item1;
                 Component_Overlap_Data componentData = overlaps[i].Item2;
                 float timeHeld = overlaps[i].Item3;
-                overlaps[i] = (obj, componentData, timeHeld + obj.LocalTickRate(tickDelta)*obj.animatorStateInfo.speed);
+                overlaps[i] = (obj, componentData, timeHeld + obj.objTickRate(tickDelta)*obj.animatorStateInfo.speed);
                 if (overlaps[i].Item3 > componentData.holdTime)
                 {
                     overlaps.RemoveAt(i);

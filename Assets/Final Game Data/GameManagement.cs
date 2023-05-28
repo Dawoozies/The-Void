@@ -7,6 +7,8 @@ using ExtensionMethods_Animator;
 using System;
 using GeometryDefinitions;
 using ExtensionMethods_Bool;
+using UnityEditor.Experimental.GraphView;
+
 namespace GameManagement
 {
     public class GameManagement : MonoBehaviour
@@ -20,7 +22,7 @@ namespace GameManagement
         //
         //Test managed things
         public Player playerObj;
-        public Halberd halberdObj;
+        public List<Halberd> halberds = new List<Halberd>();
         //ColliderBanks
         public ComponentBank<CircleCollider2D> circleCollider2DBank;
         public OverlapManager overlapManager;
@@ -35,7 +37,7 @@ namespace GameManagement
             overlapCache = new Cache<Component_Overlap>();
             overlapCache.SetupRuntimeCache(controllers);
             circleCollider2DBank = new ComponentBank<CircleCollider2D>();
-            circleCollider2DBank.Initialize("MAIN", 50);
+            circleCollider2DBank.Initialize("MAIN", 100);
             //Debugging stuff
             ComponentDebugging.ins.circleColliders = circleCollider2DBank.GetVaultObjects();
             //Overlap stuff
@@ -52,11 +54,16 @@ namespace GameManagement
             playerObj.Init_Rigidbody2D();
             playerObj.ManagedStart();
 
-            halberdObj = new Halberd();
-            halberdObj.Initialize(RuntimeIdentifier.Halberd);
-            halberdObj.Init_Animator(halberdController);
-            halberdObj.Init_Rigidbody2D();
-            halberdObj.ManagedStart();
+            for (int i = 0; i < 8; i++)
+            {
+                Halberd halberd = new Halberd();
+                halberd.Initialize(RuntimeIdentifier.Halberd);
+                halberd.Init_Animator(halberdController);
+                halberd.Init_Rigidbody2D();
+                halberd.ManagedStart();
+                halberds.Add(halberd);
+                halberd.rb.position = new Vector3(-10f + i* 3f, 0f, 0f);
+            }
         }
         private void Update()
         {
@@ -65,13 +72,19 @@ namespace GameManagement
             overlapManager.ManagedUpdate(Time.deltaTime);
             overlapInteractions.ManagedUpdate();
             //Do all weapons after player
-            halberdObj.ManagedUpdate(Time.deltaTime);
+            foreach (Halberd halberd in halberds)
+            {
+                halberd.ManagedUpdate(Time.deltaTime);
+            }
             ComponentDebugging.ins.ManagedUpdate();
         }
         private void FixedUpdate()
         {
             playerObj.ManagedFixedUpdate(Time.fixedDeltaTime);
-            halberdObj.ManagedFixedUpdate(Time.fixedDeltaTime);
+            foreach (Halberd halberd in halberds)
+            {
+                halberd.ManagedFixedUpdate(Time.fixedDeltaTime);
+            }
         }
     }
     public class RuntimeSceneObject
@@ -89,6 +102,7 @@ namespace GameManagement
         public AnimatorController controller;
         public SpriteRenderer spriteRenderer;
         public int stateHash;
+        public int stateHash_previous;
         public AnimatorStateInfo animatorStateInfo;
         public float localTickRateMultiplier = 1f;
         public float time;
@@ -123,26 +137,34 @@ namespace GameManagement
             this.controller = controller;
             animator.runtimeAnimatorController = controller as RuntimeAnimatorController;
         }
-        public float LocalTickRate(float tickRate) { return tickRate * localTickRateMultiplier; }
+        public float objTickRate(float globalTickRate) => globalTickRate * localTickRateMultiplier;
         //By LocalPos its a Local --> World transform
-        Vector3 LocalPosFromSpriteRenderer(Vector3 v) { return new Vector3(spriteRenderer.flipX.DefinedValue(1, -1)*v.x, spriteRenderer.flipY.DefinedValue(1, -1)*v.y, 0f); }
+        Vector3 LocalPosFromSpriteRenderer(Vector3 v) { return new Vector3(spriteRenderer.flipX.DefinedValue(1, -1) * v.x, spriteRenderer.flipY.DefinedValue(1, -1) * v.y, 0f); }
         public Vector3 LocalPosFromTransform(Vector3 v)
         {
             Vector3 u = LocalPosFromSpriteRenderer(v);
             return transform.position + transform.right * u.x + transform.up * u.y;
         }
+        public Vector2 up => transform.up;
+        public Vector2 right => transform.right;
+        public float upSpeed => Vector3.Dot(rb.velocity, up);
+        public float rightSpeed => Vector3.Dot(rb.velocity, right);
+        public Vector2 upVelocity => upSpeed * up;
+        public Vector2 rightVelocity => rightSpeed * right;
+        public Vector2 dirTo(Vector3 pos) => (pos - rb.transform.position).normalized;
         public void AnimatorUpdate(float tickDelta)
         {
             animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (stateHash != animatorStateInfo.shortNameHash)
             {
+                stateHash_previous = stateHash;
                 stateHash = animatorStateInfo.shortNameHash;
                 animator.SetFloat("NormalizedTime", 0f);
                 time = 0f;
                 animatorStateChanged?.Invoke();
                 animatorFrameChanged?.Invoke();
             }
-            time += LocalTickRate(tickDelta) * animatorStateInfo.speed;
+            time += objTickRate(tickDelta) * animatorStateInfo.speed;
             normalizedTime = (float)Mathf.FloorToInt(time) / animator.TotalFrames();
             animator.SetFloat("NormalizedTime", normalizedTime);
             if (frame != Mathf.FloorToInt(time))
@@ -162,135 +184,6 @@ namespace GameManagement
                     time = animator.TotalFrames();
                     frame = Mathf.FloorToInt(time);
                     animatorFrameChanged?.Invoke();
-                }
-            }
-        }
-    }
-    public class Player : RuntimeSceneObject
-    {
-        public Component_CircleCollider2D circleCollider2DComponent;
-        public Component_Overlap overlapComponent;
-        const int colliderRequestAmount = 18;
-        bool hasColliders = false;
-        public bool grounded = true;
-        bool jump => InputManager.ins.JumpDown_Input || InputManager.ins.JumpDown_BufferedInput;
-        float L_Move => 15f*InputManager.ins.L_Input.x;
-        float VelocityUp => Vector3.Dot(rb.velocity, transform.up);
-        float VelocityRight => Vector3.Dot(rb.velocity, transform.right);
-        float fallSpeedMax = -20f;
-        float ascentSpeedMax = 20f;
-        public MainWeaponID mainWeaponID = MainWeaponID.Null;
-        public bool recalling => (mainWeaponID == MainWeaponID.Null && InputManager.ins.LeftBumper_Input);
-        public bool aimingWeapon => InputManager.ins.LeftTrigger_Input > 0.1f && mainWeaponID != MainWeaponID.Null;
-        public void ManagedStart()
-        {
-            spriteRenderer.sortingOrder = 10;
-            animatorStateChanged += () =>
-            {
-                if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "StateSwap")
-                    return;
-                circleCollider2DComponent = GameManagement.ins.circleCollider2DCache.LoadComponent(controller.name, stateHash);
-                overlapComponent = GameManagement.ins.overlapCache.LoadComponent(controller.name, stateHash);
-            };
-            animatorFrameChanged += () =>
-            {
-                if (circleCollider2DComponent != null && circleCollider2DComponent.componentData.Length > 0)
-                {
-                    Component_CircleCollider2D_Data[] circleCollider2DDataAtFrame = circleCollider2DComponent.DataWithFrame(frame);
-                    UpdateLedger.CircleCollider2D(GameManagement.ins.circleCollider2DBank, this, circleCollider2DDataAtFrame);
-                }
-                else
-                {
-                    UpdateLedger.NullComponent(GameManagement.ins.circleCollider2DBank, this);
-                }
-                if (overlapComponent != null && overlapComponent.componentData.Length > 0)
-                {
-                    Component_Overlap_Data[] overlapComponentDataAtFrame = overlapComponent.DataWithFrame(frame);
-                    if (overlapComponentDataAtFrame != null)
-                    {
-                        foreach (Component_Overlap_Data componentData in overlapComponentDataAtFrame)
-                        {
-                            GameManagement.ins.overlapManager.OverlapApply(this, componentData);
-                        }
-                    }
-                }
-            };
-            hasColliders = GameManagement.ins.circleCollider2DBank.RequestLoanForRigidbody2D(this, colliderRequestAmount);
-        }
-        public void ManagedUpdate(float tickDelta)
-        {
-            AnimatorUpdate(tickDelta);
-            animator.SetBool("Grounded", grounded);
-            animator.SetBool("Jump", jump);
-            animator.SetBool("Run", Mathf.Abs(InputManager.ins.L_Input.x) > 0);
-            animator.SetFloat("VelocityUp", VelocityUp);
-            animator.SetFloat("VelocityRight", VelocityRight);
-            animator.SetInteger("MainWeaponID", (int)mainWeaponID);
-            animator.SetBool("Recalling", recalling);
-            animator.SetFloat("LeftTrigger_Input", InputManager.ins.LeftTrigger_Input);
-            animator.SetInteger("R_Direction", Direction.Compute8WayDirection());
-            animator.SetBool("RightBumper_Input", InputManager.ins.RightBumper_Input);
-            if(aimingWeapon)
-            {
-                if (spriteRenderer.flipX && InputManager.ins.R_Input.x > 0)
-                    spriteRenderer.flipX = false;
-                if (!spriteRenderer.flipX && InputManager.ins.R_Input.x < 0)
-                    spriteRenderer.flipX = true;
-            }
-            else
-            {
-                if (spriteRenderer.flipX && InputManager.ins.L_Input.x > 0)
-                    spriteRenderer.flipX = false;
-                if (!spriteRenderer.flipX && InputManager.ins.L_Input.x < 0)
-                    spriteRenderer.flipX = true;
-            }
-        }
-        public void ManagedFixedUpdate(float tickDelta)
-        {
-            rb.velocity = L_Move*transform.right + VelocityUp * transform.up;
-            if(Animator.StringToHash("FALL") == animatorStateInfo.shortNameHash)
-            {
-                rb.AddForce(-transform.up*20f);
-                if(VelocityUp < fallSpeedMax)
-                {
-                    rb.velocity = VelocityRight * transform.right + fallSpeedMax * transform.up;
-                    Debug.Log("Hit fallSpeedMax");
-                }
-            }
-            if(Animator.StringToHash("JUMP") == animatorStateInfo.shortNameHash)
-            {
-                rb.velocity += (Vector2)transform.up*5f;
-                if(VelocityUp > ascentSpeedMax)
-                {
-                    rb.velocity = VelocityRight * transform.right + ascentSpeedMax * transform.up;
-                }
-            }
-            if(Animator.StringToHash("ASCENTSLOW") == animatorStateInfo.shortNameHash)
-            {
-                rb.AddForce(-transform.up * 80f);
-                if (VelocityUp < fallSpeedMax)
-                {
-                    rb.velocity = VelocityRight * transform.right + fallSpeedMax * transform.up;
-                }
-            }
-            if(Animator.StringToHash("RECALL_AIR") == animatorStateInfo.shortNameHash)
-            {
-                if(VelocityUp > 3)
-                {
-                    rb.AddForce(-transform.up * 70f);
-                }
-                if(VelocityUp > 0 && VelocityUp <= 3)
-                {
-                    //Low grav
-                    rb.AddForce(-transform.up * 10f);
-                }
-                if(VelocityUp <= 0)
-                {
-                    rb.AddForce(-transform.up * 20f);
-                }
-                if(VelocityUp < fallSpeedMax)
-                {
-                    rb.velocity = VelocityRight * transform.right + fallSpeedMax * transform.up;
                 }
             }
         }

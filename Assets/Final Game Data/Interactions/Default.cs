@@ -12,10 +12,10 @@ namespace Interactions
             {
                 Player player = obj as Player;
                 Halberd halberd = hitObj as Halberd;
-                if(player != null && halberd != null)
+                if (player != null && halberd != null)
                 {
-                    player.mainWeaponID = MainWeaponID.Halberd;
-                    halberd.inPlayerInventory = true;
+                    if(!player.equipped.Contains(halberd))
+                        player.equipped.Add(halberd);
                 }
             }
             interactionBuffer.Remove((obj, componentData, hitObj));
