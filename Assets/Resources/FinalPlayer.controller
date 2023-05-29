@@ -86,7 +86,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 7
-    m_ConditionEvent: MainWeaponID
+    m_ConditionEvent: InFirstSlotID
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: LeftTrigger_Input
@@ -1594,7 +1594,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 7
-    m_ConditionEvent: MainWeaponID
+    m_ConditionEvent: InFirstSlotID
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: LeftTrigger_Input
@@ -2188,7 +2188,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: MainWeaponID
+    m_ConditionEvent: InFirstSlotID
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5282696636946263719}
@@ -2710,7 +2710,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: MainWeaponID
+    m_ConditionEvent: InFirstSlotID
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2656342492082167349}
@@ -2879,12 +2879,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: MainWeaponID
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: Recalling
     m_Type: 4
     m_DefaultFloat: 0
@@ -2911,6 +2905,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: Catch
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: InFirstSlotID
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -5045,7 +5045,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 7
-    m_ConditionEvent: MainWeaponID
+    m_ConditionEvent: InFirstSlotID
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: LeftTrigger_Input

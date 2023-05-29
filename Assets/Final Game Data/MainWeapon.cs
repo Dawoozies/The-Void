@@ -14,7 +14,7 @@ namespace GameManagement
         public MainWeaponID weaponID = MainWeaponID.Halberd;
         public bool embedded = false;
         public float fallSpeedMax = -15f;
-        public float throwSpeedMax = 40f;
+        public float throwSpeedMax = 60f;
         Player player;
         public Vector3 directionChange;
         public float directionChangeSmoothTime = 0.015f;
@@ -32,8 +32,9 @@ namespace GameManagement
         public float s;
         public float t_prevFrame;
         public float s_prevFrame;
-        Vector3 orbitPos;
-        Vector3 nextOrbitPos;
+        public Vector3 orbitPos;
+        public bool throwStatus;
+        public Vector3 throwDirection;
         public void ManagedStart()
         {
             player = GameManagement.ins.playerObj;
@@ -73,28 +74,11 @@ namespace GameManagement
         {
             AnimatorUpdate(tickDelta);
             animator.SetBool("Embedded", embedded);
-            animator.SetBool("InPlayerInventory", player.inventory.Contains(this) || player.equipped.Contains(this));
+            animator.SetBool("InPlayerInventory", player.equipped.Contains(this));
             animator.SetBool("Recalling", recalling);
+            animator.SetBool("Throw", throwStatus);
+            animator.SetBool("ReadyThrow", player.toBeThrown.Contains(this));
             animator.SetBool("InOrbit", player.equipped.Contains(this));
-            if(Animator.StringToHash("INVENTORY_HALBERD") == animatorStateInfo.shortNameHash)
-            {
-                spriteRenderer.color = Color.clear;
-                rb.velocity = Vector3.zero;
-                rb.transform.position = playerPos;
-            }
-            else
-            {
-                //spriteRenderer.color = Color.white;
-            }
-            if(Animator.StringToHash("EQUIPPED_HALBERD") == animatorStateInfo.shortNameHash)
-            {
-                if(spriteRenderer.color.a <= 0)
-                    spriteRenderer.color = Color.white;
-                if(player.equipped.Contains(this))
-                {
-                    rb.MovePosition(Vector3.SmoothDamp(rb.transform.position, orbitPos, ref posChange, posChangeSmoothTime + parallaxFactor));
-                }
-            }
         }
         public void ManagedFixedUpdate(float tickDelta)
         {
@@ -106,20 +90,20 @@ namespace GameManagement
             transform.up = obj.up;
             Vector3 objPos = obj.rb.transform.position;
             float argument = (2f * Mathf.PI * orbitIndex) / totalCount;
-            float xPos = Mathf.Cos(argument);
-            float yPos = Mathf.Sin(argument);
+            float xPos = Mathf.Cos(argument + t);
+            float yPos = Mathf.Sin(argument + t);
             parallaxFactor = -0.01f* yPos;
             transform.localScale = Vector3.one - 0.125f * yPos *Vector3.one;
             spriteRenderer.color = new Color(1, 1, 1, 1) - new Color(1,1,1,0)*yPos*0.5f;
             spriteRenderer.sortingOrder = obj.spriteRenderer.sortingOrder + Mathf.RoundToInt((transform.localScale.y >= 1).DefinedValue(-1, 1));
             float xDist = rb.transform.position.x - obj.rb.transform.position.x;
             float shift = 0;
-            Debug.Log($"Index {orbitIndex}, Distance from player = {xDist}");
+            //Debug.Log($"Index {orbitIndex}, Distance from player = {xDist}");
             if(Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(xDist))
             {
                 shift = InputManager.ins.L_Input.x;
             }
-            orbitPos = objPos + 1.75f*xPos * (Vector3)obj.right + shift*(Vector3)obj.right;
+            orbitPos = objPos + 1.75f*xPos * (Vector3)obj.right + shift*(Vector3)obj.right + 0.35f*(Vector3)obj.up;
         }
     }
 }

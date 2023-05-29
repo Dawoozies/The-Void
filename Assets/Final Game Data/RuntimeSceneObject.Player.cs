@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace GameManagement
@@ -15,15 +16,16 @@ namespace GameManagement
         bool hasColliders = false;
         public bool grounded = true;
         bool jump => InputManager.ins.JumpDown_Input || InputManager.ins.JumpDown_BufferedInput;
-        float VelocityUp => Vector3.Dot(rb.velocity, transform.up);
-        float VelocityRight => Vector3.Dot(rb.velocity, transform.right);
         public float fallSpeedMax = -20f;
         public float ascentSpeedMax = 20f;
         public bool recalling => (InputManager.ins.LeftBumper_Input);
         public bool aimingWeapon => InputManager.ins.LeftTrigger_Input > 0.1f;
-        public List<RuntimeSceneObject> caught = new List<RuntimeSceneObject>();
-        public List<RuntimeSceneObject> inventory = new List<RuntimeSceneObject>();
         public List<RuntimeSceneObject> equipped = new List<RuntimeSceneObject>();
+        public List<RuntimeSceneObject> toBeThrown = new List<RuntimeSceneObject>();
+        public List<RuntimeSceneObject> extraThrown = new List<RuntimeSceneObject>();
+        public Halberd firstSlotObj;
+        public float orbitParameter;
+        public bool throwing;
         public void ManagedStart()
         {
             spriteRenderer.sortingOrder = 10;
@@ -67,13 +69,12 @@ namespace GameManagement
             animator.SetBool("Grounded", grounded);
             animator.SetBool("Jump", jump);
             animator.SetBool("Run", Mathf.Abs(InputManager.ins.L_Input.x) > 0);
-            animator.SetFloat("VelocityUp", VelocityUp);
-            animator.SetFloat("VelocityRight", VelocityRight);
+            animator.SetFloat("VelocityUp", upSpeed);
+            animator.SetFloat("VelocityRight", rightSpeed);
             animator.SetBool("Recalling", recalling);
             animator.SetFloat("LeftTrigger_Input", InputManager.ins.LeftTrigger_Input);
             animator.SetInteger("R_Direction", Direction.Compute8WayDirection());
             animator.SetBool("RightBumper_Input", InputManager.ins.RightBumper_Input);
-            animator.SetBool("Catch", caught.Count > 0);
             if (aimingWeapon)
             {
                 if (spriteRenderer.flipX && InputManager.ins.R_Input.x > 0)
@@ -93,9 +94,31 @@ namespace GameManagement
                 for (int i = 0; i < equipped.Count; i++)
                 {
                     Halberd halberd = equipped[i] as Halberd;
-                    if(halberd != null)
+                    if (halberd != null)
                     {
-                        halberd.UpdateOrbit(this, i, equipped.Count, tickDelta);
+                        halberd.UpdateOrbit(this, i, equipped.Count, orbitParameter);
+                    }
+                }
+                firstSlotObj = equipped[0] as Halberd;
+                if (firstSlotObj != null)
+                    animator.SetInteger("InFirstSlotID", (int)firstSlotObj.weaponID);
+            }
+            orbitParameter += tickDelta;
+            if(!aimingWeapon && !throwing)
+            {
+                if (toBeThrown.Count > 0)
+                {
+                    Debug.Log("toBeThrown Count = " + toBeThrown.Count);
+                    Debug.Log("equipped Count = " + equipped.Count);
+                    Halberd halberd = toBeThrown[0] as Halberd;
+                    if(!halberd.throwStatus)
+                    {
+                        equipped.Insert(0, toBeThrown[0]);
+                        toBeThrown.RemoveAt(0);
+                    }
+                    else
+                    {
+                        toBeThrown.RemoveAt(0);
                     }
                 }
             }
@@ -111,18 +134,106 @@ namespace GameManagement
         {
             if(obj.ID == RuntimeIdentifier.Player)
             {
-
+                Player player = obj as Player;
+                if (player == null)
+                    return;
+                if(Animator.StringToHash("AIM_HALBERD_DOWN") == stateHash)
+                {
+                    if(player.equipped.Contains(player.firstSlotObj))
+                    {
+                        player.toBeThrown.Add(player.firstSlotObj);
+                        player.equipped.Remove(player.firstSlotObj);
+                    }
+                }
+                if (Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash)
+                {
+                    if (player.equipped.Contains(player.firstSlotObj))
+                    {
+                        player.toBeThrown.Add(player.firstSlotObj);
+                        player.equipped.Remove(player.firstSlotObj);
+                    }
+                }
+                if (Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash)
+                {
+                    if (player.equipped.Contains(player.firstSlotObj))
+                    {
+                        player.toBeThrown.Add(player.firstSlotObj);
+                        player.equipped.Remove(player.firstSlotObj);
+                    }
+                }
+                if (Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash)
+                {
+                    if (player.equipped.Contains(player.firstSlotObj))
+                    {
+                        player.toBeThrown.Add(player.firstSlotObj);
+                        player.equipped.Remove(player.firstSlotObj);
+                    }
+                }
+                if (Animator.StringToHash("AIM_HALBERD_UP") == stateHash)
+                {
+                    if (player.equipped.Contains(player.firstSlotObj))
+                    {
+                        player.toBeThrown.Add(player.firstSlotObj);
+                        player.equipped.Remove(player.firstSlotObj);
+                    }
+                }
+                if (Animator.StringToHash("THROW_HALBERD_DOWN") == stateHash)
+                {
+                    player.throwing = true;
+                }
+                if (Animator.StringToHash("THROW_HALBERD_DIAGDOWN") == stateHash)
+                {
+                    player.throwing = true;
+                }
+                if (Animator.StringToHash("THROW_HALBERD_HORIZONTAL") == stateHash)
+                {
+                    player.throwing = true;
+                }
+                if (Animator.StringToHash("THROW_HALBERD_DIAGUP") == stateHash)
+                {
+                    player.throwing = true;
+                }
+                if (Animator.StringToHash("THROW_HALBERD_UP") == stateHash)
+                {
+                    player.throwing = true;
+                }
             }
             if(obj.ID == RuntimeIdentifier.Halberd)
             {
                 Halberd halberd = obj as Halberd;
                 if (halberd == null)
                     return;
+                if(Animator.StringToHash("RECALL_HALBERD") == stateHash)
+                {
+                    halberd.embedded = false;
+                }
+                if(Animator.StringToHash("INVENTORY_HALBERD") == stateHash)
+                {
+                    halberd.embedded = false;
+                }
                 if (Animator.StringToHash("EQUIPPED_HALBERD") == stateHash)
                 {
-                    //Start orbit
+                    halberd.embedded = false;
+                }
+                if(Animator.StringToHash("LAUNCH_HALBERD") == stateHash)
+                {
+                    halberd.spriteRenderer.color = Color.white;
+                    Debug.Log($"Halberd throw dir {halberd.throwDirection}");
+                    //halberd.rb.velocity += 15f*(Vector2)halberd.throwDirection;
                     Player player = GameManagement.ins.playerObj;
-                    //halberd.StartOrbit(player, 0f);
+                    for (int i = 0; i < player.toBeThrown.Count; i++)
+                    {
+                        Halberd toThrow = player.toBeThrown[i] as Halberd;
+                        Debug.Log($"Halberd {i} Throw Direction = {toThrow.throwDirection}");
+                        float maxCount = player.toBeThrown.Count;
+                        float accuracyMaxBound = i;
+                        Vector2 throwPathDeviation = toThrow.throwDirection;
+                        //Flipping the dot product to add velocity in perpendicular component
+                        throwPathDeviation = Random.Range(-accuracyMaxBound, accuracyMaxBound)*Vector3.Dot(player.right, toThrow.throwDirection) * player.up
+                            + Random.Range(-accuracyMaxBound, accuracyMaxBound)*Vector3.Dot(player.up, toThrow.throwDirection) * player.right;
+                        halberd.rb.velocity = toThrow.throwSpeedMax * (Vector2)toThrow.throwDirection + (i/maxCount) *throwPathDeviation;
+                        halberd.transform.up = halberd.rb.velocity;
+                    }
                 }
             }
         }
@@ -131,7 +242,7 @@ namespace GameManagement
             if(obj.ID == RuntimeIdentifier.Player)
             {
                 Player player = obj as Player;
-                Debug.Log(player.frame);
+                //Debug.Log(player.frame);
                 if (player == null)
                     return;
                 player.rb.velocity = 15f * InputManager.ins.L_Input.x * player.right + player.upVelocity;
@@ -185,6 +296,16 @@ namespace GameManagement
                     if(player.frame == 8)
                     {
                         player.rb.velocity += 10f * player.up;
+                        if(player.toBeThrown.Count > 0)
+                        {
+                            for (int i = 0; i < player.toBeThrown.Count; i++)
+                            {
+                                Halberd halberd = player.toBeThrown[i] as Halberd;
+                                halberd.throwStatus = true;
+                                halberd.throwDirection = -player.up;
+                            }
+                        }
+                        player.throwing = false;
                     }
                 }
                 if(Animator.StringToHash("THROW_HALBERD_DIAGDOWN") == stateHash)
@@ -192,6 +313,16 @@ namespace GameManagement
                     if(player.frame == 8)
                     {
                         player.rb.velocity += ((InputManager.ins.L_Input.y > 0).DefinedValue(0, 1)*InputManager.ins.L_Input.y*10f + 2.5f) * player.up;
+                        if (player.toBeThrown.Count > 0)
+                        {
+                            for (int i = 0; i < player.toBeThrown.Count; i++)
+                            {
+                                Halberd halberd = player.toBeThrown[i] as Halberd;
+                                halberd.throwStatus = true;
+                                halberd.throwDirection = player.right - player.up;
+                            }
+                        }
+                        player.throwing = false;
                     }
                 }
                 if (Animator.StringToHash("THROW_HALBERD_HORIZONTAL") == stateHash)
@@ -199,6 +330,16 @@ namespace GameManagement
                     if (player.frame == 8)
                     {
                         //player.rb.velocity += InputManager.ins.L_Input.y * 15f * player.up;
+                        if (player.toBeThrown.Count > 0)
+                        {
+                            for (int i = 0; i < player.toBeThrown.Count; i++)
+                            {
+                                Halberd halberd = player.toBeThrown[i] as Halberd;
+                                halberd.throwStatus = true;
+                                halberd.throwDirection = player.right;
+                            }
+                        }
+                        player.throwing = false;
                     }
                 }
                 if (Animator.StringToHash("THROW_HALBERD_DIAGUP") == stateHash)
@@ -206,6 +347,16 @@ namespace GameManagement
                     if (player.frame == 8)
                     {
                         //player.rb.velocity += 10f * player.up;
+                        if (player.toBeThrown.Count > 0)
+                        {
+                            for (int i = 0; i < player.toBeThrown.Count; i++)
+                            {
+                                Halberd halberd = player.toBeThrown[i] as Halberd;
+                                halberd.throwStatus = true;
+                                halberd.throwDirection = player.right + player.up;
+                            }
+                        }
+                        player.throwing = false;
                     }
                 }
                 if (Animator.StringToHash("THROW_HALBERD_UP") == stateHash)
@@ -213,6 +364,16 @@ namespace GameManagement
                     if (player.frame == 8)
                     {
                         //player.rb.velocity += 10f * player.up;
+                        if (player.toBeThrown.Count > 0)
+                        {
+                            for (int i = 0; i < player.toBeThrown.Count; i++)
+                            {
+                                Halberd halberd = player.toBeThrown[i] as Halberd;
+                                halberd.throwStatus = true;
+                                halberd.throwDirection = player.up;
+                            }
+                        }
+                        player.throwing = false;
                     }
                 }
             }
@@ -244,15 +405,26 @@ namespace GameManagement
                         halberd.rb.velocity = halberd.rightVelocity - halberd.recallSpeedMax * halberd.up;
                     }
                 }
+                if (Animator.StringToHash("INVENTORY_HALBERD") == stateHash)
+                {
+                    halberd.spriteRenderer.color = Color.clear;
+                    halberd.rb.velocity = Vector3.zero;
+                    halberd.rb.transform.position = GameManagement.ins.playerObj.rb.transform.position;
+                }
                 if (Animator.StringToHash("EQUIPPED_HALBERD") == stateHash)
                 {
-                    Player player = GameManagement.ins.playerObj;
-                    //orbit around player
-                    //halberd.transform.up = player.up;
-                    //halberd.transform.localScale = new Vector3(1 + 0.125f * Mathf.Sin(halberd.t), 1 + 0.125f * Mathf.Sin(halberd.t), 1);
-                    //if(!halberd.beingCaught)
-                    //    halberd.spriteRenderer.color = Color.white + new Color(1f, 1f, 1f, 0f) * 0.35f * Mathf.Sin(halberd.t);
-                    //halberd.NextOrbitPosition(player);
+                    halberd.embedded = false;
+                    halberd.localTickRateMultiplier = 4f;
+                    halberd.spriteRenderer.color = Color.white;
+                    if (GameManagement.ins.playerObj.equipped.Contains(halberd))
+                    {
+                        halberd.rb.MovePosition(Vector3.SmoothDamp(halberd.rb.transform.position, halberd.orbitPos, ref halberd.posChange, halberd.posChangeSmoothTime + halberd.parallaxFactor));
+                    }
+                }
+                if (Animator.StringToHash("READYTHROW_HALBERD") == stateHash)
+                {
+                    halberd.spriteRenderer.color = Color.clear;
+                    halberd.rb.transform.position = GameManagement.ins.playerObj.rb.transform.position;
                 }
             }
         }
