@@ -121,8 +121,6 @@ namespace GameManagement
         }
         public bool RequestLoanForRigidbody2D(RuntimeSceneObject requester, int loanSize)
         {
-            if (requester.rbObj == null)
-                return false;
             if (vault == null || vault.Length == 0)
                 return false;
             List<int> newLedgerEntry = new List<int>();
@@ -137,7 +135,14 @@ namespace GameManagement
                 Collider2D collider = vault[i] as Collider2D;
                 if(collider != null)
                 {
-                    collider.transform.parent = requester.rbColliderParent;
+                    if (requester.rbColliderParent == null)
+                    {
+                        collider.transform.parent = requester.transform;
+                    }
+                    else
+                    {
+                        collider.transform.parent = requester.rbColliderParent;
+                    }
                 }
 
                 if (newLedgerEntry.Count == loanSize)
@@ -176,6 +181,16 @@ namespace GameManagement
                     vaultObject.gameObject.layer = componentData.layer;
                     vaultObject.transform.position = obj.LocalPosFromTransform(circle.center);
                     vaultObject.radius = circle.radius;
+
+
+                    if (GameManagement.ins.spriteMasks.ContainsKey(vaultObject))
+                    {
+                        SpriteMask spriteMask = GameManagement.ins.spriteMasks[vaultObject];
+                        spriteMask.transform.localScale = new Vector3(1, 1, 1) * vaultObject.radius * 2f;
+                        spriteMask.frontSortingOrder = obj.spriteRenderer.sortingOrder + 1;
+                        spriteMask.backSortingOrder = obj.spriteRenderer.sortingOrder;
+                    }
+
                     vaultObject.isTrigger = componentData.isTrigger;
                     ComponentDebugging.ins.DrawCircleCollider(ledgerIndices[assignedCircles], componentData.fillColor);
                     assignedCircles++;
@@ -282,7 +297,7 @@ namespace GameManagement
                         if(bank.ledger[key].Contains(index))
                         {
                             Debug.Log($"Interaction: ({obj.ID}, {componentData.nickname}, {key.ID})");
-                            GameManagement.ins.overlapInteractions.AddInteractionToBuffer((obj, componentData, key));
+                            GameManagement.ins.overlapInteractions.AddInteractionToBuffer((obj, componentData, key, results[j]));
                         }
                     }
                 }
@@ -298,12 +313,12 @@ namespace GameManagement
                 Vector3 pointA = obj.LocalPosFromTransform(area.PointA());
                 Vector3 pointB = obj.LocalPosFromTransform(area.PointB());
                 int resultCount = Physics2D.OverlapArea(pointA, pointB, componentData.ContactFilter(), results);
-                Debug.Log($"Overlap.Areas run, result count: {resultCount}");
+                //Debug.Log($"Overlap.Areas run, result count: {resultCount}");
                 if(resultCount == 0)
                 {
                     if(componentData.useNullResult)
                     {
-                        Debug.Log($"Null Interaction: ({obj.ID}, {componentData.nickname}, null)");
+                        //Debug.Log($"Null Interaction: ({obj.ID}, {componentData.nickname}, null)");
                         GameManagement.ins.overlapInteractions.AddInteractionToBuffer((obj, componentData));
                     }
                     continue;
@@ -317,7 +332,7 @@ namespace GameManagement
                     {
                         if (StaticInteract.StaticCheck(results[j]))
                         {
-                            Debug.Log($"Static Interaction: ({obj.ID}, {componentData.nickname}, {results[j].gameObject.name})");
+                            //Debug.Log($"Static Interaction: ({obj.ID}, {componentData.nickname}, {results[j].gameObject.name})");
                             GameManagement.ins.overlapInteractions.AddInteractionToBuffer((obj, componentData, results[j].gameObject));
                         }
                         continue;
@@ -329,8 +344,8 @@ namespace GameManagement
                     {
                         if (bank.ledger[key].Contains(index))
                         {
-                            Debug.Log($"Interaction: ({obj.ID}, {componentData.nickname}, {key.ID})");
-                            GameManagement.ins.overlapInteractions.AddInteractionToBuffer((obj, componentData, key));
+                            //Debug.Log($"Interaction: ({obj.ID}, {componentData.nickname}, {key.ID})");
+                            GameManagement.ins.overlapInteractions.AddInteractionToBuffer((obj, componentData, key, results[j]));
                         }
                     }
                 }
@@ -339,22 +354,24 @@ namespace GameManagement
     }
     public class OverlapInteractions
     {
-        public List<(RuntimeSceneObject, Component_Overlap_Data, RuntimeSceneObject)> interactionBuffer;
+        public List<(RuntimeSceneObject, Component_Overlap_Data, RuntimeSceneObject, Collider2D)> interactionBuffer;
         public List<(RuntimeSceneObject, Component_Overlap_Data, GameObject)> staticInteractionBuffer;
         public List<(RuntimeSceneObject, Component_Overlap_Data)> nullInteractionBuffer;
         public void Initialize()
         {
-            interactionBuffer = new List<(RuntimeSceneObject, Component_Overlap_Data, RuntimeSceneObject)>();
+            interactionBuffer = new List<(RuntimeSceneObject, Component_Overlap_Data, RuntimeSceneObject, Collider2D)>();
             staticInteractionBuffer = new List<(RuntimeSceneObject, Component_Overlap_Data, GameObject)>();
             nullInteractionBuffer = new List<(RuntimeSceneObject, Component_Overlap_Data)>();
         }
-        public void AddInteractionToBuffer((RuntimeSceneObject, Component_Overlap_Data, RuntimeSceneObject) interactionInfo)
+        public void AddInteractionToBuffer((RuntimeSceneObject, Component_Overlap_Data, RuntimeSceneObject, Collider2D) interactionInfo)
         {
             interactionBuffer.Add(interactionInfo);
+            Debug.Log($"{interactionInfo.Item1.transform.name}{interactionInfo.Item2.nickname}{interactionInfo.Item3.transform.name}");
         }
         public void AddInteractionToBuffer((RuntimeSceneObject, Component_Overlap_Data, GameObject) interactionInfo)
         {
             staticInteractionBuffer.Add(interactionInfo);
+            Debug.Log($"{interactionInfo.Item1.transform.name}{interactionInfo.Item2.nickname}{interactionInfo.Item3.transform.name}");
         }
         public void AddInteractionToBuffer((RuntimeSceneObject, Component_Overlap_Data) interactionInfo)
         {
@@ -369,7 +386,8 @@ namespace GameManagement
                     RuntimeSceneObject obj = interactionBuffer[i].Item1;
                     Component_Overlap_Data componentData = interactionBuffer[i].Item2;
                     RuntimeSceneObject hitObj = interactionBuffer[i].Item3;
-                    Interact.Interactions(obj, componentData, hitObj, ref interactionBuffer);
+                    Collider2D hitcollider = interactionBuffer[i].Item4;
+                    Interact.Interactions(obj, componentData, hitObj, hitcollider, ref interactionBuffer);
                 }
             }
             if(staticInteractionBuffer != null && staticInteractionBuffer.Count > 0)

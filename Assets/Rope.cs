@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using ExtensionMethods_Bool;
+
 namespace GameManagement
 {
     public class Rope : MonoBehaviour
@@ -13,7 +16,10 @@ namespace GameManagement
         public Vector3 B => pointB.position;
         public Vector3 dirToB => (B - A).normalized;
         public float totalDistance => Vector3.Distance(A, B);
-        public float initialT = 1;
+        [Range(0, 10)]
+        public float middleDisplacementFactor;
+        float denominator => Mathf.Sqrt(lineRenderer.positionCount);
+        public float stretch => totalDistance/10;
         void Update()
         {
             int segments = 0;
@@ -27,22 +33,33 @@ namespace GameManagement
                 //Vector3 chainInitialPos = segmentDistance*Vector3.Dot(A, pointA.right)*pointA.right + segmentDistance*Vector3.Dot(A, pointA.up)*pointA.up;
                 Vector3 chainInitialPos = A + (float)i * segmentDistance * dirToB;
                 Vector3 chainPos = chainInitialPos;
-                float yDesiredDisplacement = 0;
+                //float yDesiredDisplacement = 0;
                 //displace by dist from middle
-                float index = i;
-                float middlePos = (float)lineRenderer.positionCount / 2;
-                float endPos = (float)lineRenderer.positionCount;
-                float distToMiddle = Mathf.Abs(i - middlePos);
-                float percentageToMiddle = 0;
-                if (index <= middlePos)
-                    percentageToMiddle = index / middlePos;
-                if (index > middlePos)
-                    percentageToMiddle = index / middlePos - index / endPos;
-                yDesiredDisplacement = percentageToMiddle;
-                chainPos = chainPos + yDesiredDisplacement*GameManagement.ins.gravityDirection;
+                //float index = i;
+                //float middlePos = (float)lineRenderer.positionCount / 2;
+                //float endPos = (float)lineRenderer.positionCount;
+                //float distToMiddle = Mathf.Abs(i - middlePos);
+                //float percentageToMiddle = 0;
+                //if (index <= middlePos)
+                //    percentageToMiddle = index / middlePos;
+                //if (index > middlePos)
+                //    percentageToMiddle = 2-index/middlePos;
+                //yDesiredDisplacement = percentageToMiddle;
+                //float totalLength = segmentDistance * lineRenderer.positionCount;
+                //chainPos = chainPos + middleDisplacementFactor*yDesiredDisplacement*GameManagement.ins.gravityDirection;
+                //chainPos = chainPos + ChainFunction(i) * GameManagement.ins.gravityDirection;
+                //if (chainPos.y > B.y)
+                //    chainPos = B;
+
+                if (i == lineRenderer.positionCount - 1)
+                    chainPos = B;
                 lineRenderer.SetPosition(i, chainPos);
             }
-            Debug.Log($"Segments = {segments}");
+            //Debug.Log($"Segments = {segments}");
+        }
+        float ChainFunction(float x)
+        {
+            return (segmentDistance * lineRenderer.positionCount) * (1 - (1 - x / (stretch*denominator)) * (1 - x / (stretch * denominator)));
         }
     }
 

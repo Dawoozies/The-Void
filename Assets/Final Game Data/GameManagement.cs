@@ -7,7 +7,7 @@ using ExtensionMethods_Animator;
 using System;
 using GeometryDefinitions;
 using ExtensionMethods_Bool;
-using UnityEditor.Experimental.GraphView;
+using System.Linq;
 
 namespace GameManagement
 {
@@ -19,15 +19,30 @@ namespace GameManagement
         public Cache<Component_Overlap> overlapCache; //Only one instance
         public AnimatorController playerController;
         public AnimatorController halberdController;
+        public AnimatorController hangedFrameTorsoController;
+        public AnimatorController hangedFrameLeftArmController;
+        public AnimatorController hangedFrameRightArmController;
+        public AnimatorController hangedFrameHeadController;
         //
         //Test managed things
         public Player playerObj;
-        public List<Halberd> halberds = new List<Halberd>();
+        public List<Weapon> weapons = new List<Weapon>();
+        public Weapon weapon;
+        //Enemies
+        public HangedFrame hangedFrame;
+        public HangedFrame_Torso hangedFrameTorsoObj;
+        public HangedFrame_LeftArm hangedFrameLeftArmObj;
+        public HangedFrame_RightArm hangedFrameRightArmObj;
+        public HangedFrame_Head hangedFrameHeadObj;
+        public Material ropeMaterial;
         //ColliderBanks
         public ComponentBank<CircleCollider2D> circleCollider2DBank;
         public OverlapManager overlapManager;
         public OverlapInteractions overlapInteractions;
         public Vector3 gravityDirection;
+        public Vector3 centerOfCamera;
+        public Sprite spriteForMask;
+        public Dictionary<CircleCollider2D, SpriteMask> spriteMasks = new Dictionary<CircleCollider2D, SpriteMask>();
         private void Awake()
         {
             ins = this;
@@ -38,6 +53,19 @@ namespace GameManagement
             overlapCache.SetupRuntimeCache(controllers);
             circleCollider2DBank = new ComponentBank<CircleCollider2D>();
             circleCollider2DBank.Initialize("MAIN", 100);
+            List<CircleCollider2D> colliders = circleCollider2DBank.vault.ToList();
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                GameObject maskObject = new GameObject($"{typeof(SpriteMask).Name.ToUpper()}_{i}");
+                maskObject.transform.parent = colliders[i].transform;
+                SpriteMask spriteMask = maskObject.AddComponent<SpriteMask>();
+                spriteMask.sprite = spriteForMask;
+                spriteMask.isCustomRangeActive = true;
+                spriteMask.frontSortingLayerID = SortingLayer.NameToID("EmbeddedWeapon");
+                spriteMask.frontSortingOrder = 11;
+                spriteMask.backSortingLayerID = spriteMask.frontSortingLayerID;
+                spriteMasks.Add(colliders[i], spriteMask);
+            }
             //Debugging stuff
             ComponentDebugging.ins.circleColliders = circleCollider2DBank.GetVaultObjects();
             //Overlap stuff
@@ -56,34 +84,66 @@ namespace GameManagement
 
             for (int i = 0; i < 8; i++)
             {
-                Halberd halberd = new Halberd();
-                halberd.Initialize(RuntimeIdentifier.Halberd);
-                halberd.Init_Animator(halberdController);
-                halberd.Init_Rigidbody2D();
-                halberd.ManagedStart();
-                halberds.Add(halberd);
-                halberd.rb.position = new Vector3(-10f + i* 3f, 0f, 0f);
+                Weapon weapon = new Weapon();
+                weapon.Initialize(RuntimeIdentifier.Weapon);
+                weapon.Init_Animator(halberdController);
+                weapon.Init_Rigidbody2D();
+                weapon.ManagedStart();
+                weapons.Add(weapon);
+                weapon.rb.position = new Vector3(-10f + i* 3f, 0f, 0f);
             }
+
+            hangedFrame = new HangedFrame();
+            hangedFrame.Initialize(RuntimeIdentifier.HangedFrame);
+            hangedFrameTorsoObj = new HangedFrame_Torso();
+            hangedFrameTorsoObj.Initialize(RuntimeIdentifier.HangedFrame);
+            hangedFrameTorsoObj.Init_Animator(hangedFrameTorsoController);
+            hangedFrameTorsoObj.ManagedStart();
+            hangedFrameLeftArmObj = new HangedFrame_LeftArm();
+            hangedFrameLeftArmObj.Initialize(RuntimeIdentifier.HangedFrameLeftHand);
+            hangedFrameLeftArmObj.Init_Animator(hangedFrameLeftArmController);
+            hangedFrameLeftArmObj.ManagedStart();
+            hangedFrameRightArmObj = new HangedFrame_RightArm();
+            hangedFrameRightArmObj.Initialize(RuntimeIdentifier.HangedFrameRightHand);
+            hangedFrameRightArmObj.Init_Animator(hangedFrameRightArmController);
+            hangedFrameRightArmObj.ManagedStart();
+            hangedFrameHeadObj = new HangedFrame_Head();
+            hangedFrameHeadObj.Initialize(RuntimeIdentifier.HangedFrame);
+            hangedFrameHeadObj.Init_Animator(hangedFrameHeadController);
+            hangedFrameHeadObj.ManagedStart();
+
+            hangedFrame.lineRenderer = hangedFrame.transform.gameObject.AddComponent<LineRenderer>();
+            hangedFrame.lineRenderer.material = ropeMaterial;
+            hangedFrame.lineRenderer.textureMode = LineTextureMode.Tile;
+            hangedFrame.lineRenderer.sortingLayerName = "EmbeddedWeapon";
+
+            hangedFrame.transform.position = new Vector3(16, 8, 0);
+            hangedFrame.torsoObj = hangedFrameTorsoObj;
+            hangedFrame.leftArmObj = hangedFrameLeftArmObj;
+            hangedFrame.rightArmObj = hangedFrameRightArmObj;
+            hangedFrame.headObj = hangedFrameHeadObj;
+            hangedFrame.ManagedStart();
         }
         private void Update()
         {
             InputManager.ins.ManagedUpdate(Time.deltaTime);
             playerObj.ManagedUpdate(Time.deltaTime);
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                weapons[i].ManagedUpdate(Time.deltaTime);
+            }
+            hangedFrame.ManagedUpdate(Time.deltaTime);
             overlapManager.ManagedUpdate(Time.deltaTime);
             overlapInteractions.ManagedUpdate();
             //Do all weapons after player
-            foreach (Halberd halberd in halberds)
-            {
-                halberd.ManagedUpdate(Time.deltaTime);
-            }
             ComponentDebugging.ins.ManagedUpdate();
         }
         private void FixedUpdate()
         {
             playerObj.ManagedFixedUpdate(Time.fixedDeltaTime);
-            foreach (Halberd halberd in halberds)
+            for (int i = 0; i < weapons.Count; i++)
             {
-                halberd.ManagedFixedUpdate(Time.fixedDeltaTime);
+                weapons[i].ManagedFixedUpdate(Time.fixedDeltaTime);
             }
         }
     }
@@ -102,8 +162,9 @@ namespace GameManagement
         public AnimatorController controller;
         public SpriteRenderer spriteRenderer;
         public int stateHash;
-        public int stateHash_previous;
+        public int previousStateHash;
         public AnimatorStateInfo animatorStateInfo;
+        public AnimatorClipInfo animatorClipInfo;
         public float localTickRateMultiplier = 1f;
         public float time;
         public float normalizedTime;
@@ -155,12 +216,15 @@ namespace GameManagement
         public void AnimatorUpdate(float tickDelta)
         {
             animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            animatorClipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
             if (stateHash != animatorStateInfo.shortNameHash)
             {
-                stateHash_previous = stateHash;
+                previousStateHash = stateHash;
+                Debug.Log(previousStateHash);
                 stateHash = animatorStateInfo.shortNameHash;
                 animator.SetFloat("NormalizedTime", 0f);
                 time = 0f;
+                frame = 0;
                 animatorStateChanged?.Invoke();
                 animatorFrameChanged?.Invoke();
             }
@@ -172,20 +236,21 @@ namespace GameManagement
                 frame = Mathf.FloorToInt(time);
                 animatorFrameChanged?.Invoke();
             }
-            bool loop = animator.GetCurrentAnimatorClipInfo(0)[0].clip.isLooping;
-            if (time > animator.TotalFrames())
+            bool looping = animatorClipInfo.clip.isLooping;
+            if(looping)
             {
-                if (loop)
-                {
+                if(frame >= animator.TotalFrames())
                     time = 0f;
-                }
-                else
-                {
-                    time = animator.TotalFrames();
-                    frame = Mathf.FloorToInt(time);
-                    animatorFrameChanged?.Invoke();
-                }
             }
+            else
+            {
+                if(frame >= animator.TotalFrames() + 1)
+                    time = animator.TotalFrames();
+            }
+        }
+        public void RigidbodyUpdate(float tickDelta)
+        {
+
         }
     }
     public enum RuntimeIdentifier
@@ -193,10 +258,11 @@ namespace GameManagement
         Null = 0, //Null objects may be important as they can be instanced but be initialized later
         Player = 1,
         Projectile = 2,
-        Halberd = 3,
-        Spear = 4,
-        TwinSpearLeft = 5,
-        TwinSpearRight = 6,
+        Weapon = 3,
+        HangedFrame = 4,
+        HangedFrameRightHand = 5,
+        HangedFrameLeftHand = 6,
+        HangedFrameNoose = 7, 
     }
     public enum MainWeaponID
     {

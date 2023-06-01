@@ -1,10 +1,6 @@
 using ExtensionMethods_Bool;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace GameManagement
 {
@@ -20,22 +16,28 @@ namespace GameManagement
         public float ascentSpeedMax = 20f;
         public bool recalling => (InputManager.ins.LeftBumper_Input);
         public bool aimingWeapon => InputManager.ins.LeftTrigger_Input > 0.1f;
-        public List<RuntimeSceneObject> equipped = new List<RuntimeSceneObject>();
-        public List<RuntimeSceneObject> toBeThrown = new List<RuntimeSceneObject>();
-        public List<RuntimeSceneObject> extraThrown = new List<RuntimeSceneObject>();
-        public Halberd firstSlotObj;
+        //public List<RuntimeSceneObject> equipped = new List<RuntimeSceneObject>();
+        //public List<RuntimeSceneObject> toBeThrown = new List<RuntimeSceneObject>();
+        //public List<RuntimeSceneObject> extraThrown = new List<RuntimeSceneObject>();
+        //public Halberd firstSlotObj;
+        //public bool throwing;
+        public List<Weapon> orbitingWeapons = new List<Weapon>();
         public float orbitParameter;
-        public bool throwing;
+        public List<Weapon> readyWeapons = new List<Weapon>();
+        public int throwCount;
         public void ManagedStart()
         {
             spriteRenderer.sortingOrder = 10;
+            spriteRenderer.sortingLayerName = "Player";
+            throwCount = 1;
             animatorStateChanged += () =>
             {
-                if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "StateSwap")
-                    return;
-                circleCollider2DComponent = GameManagement.ins.circleCollider2DCache.LoadComponent(controller.name, stateHash);
-                overlapComponent = GameManagement.ins.overlapCache.LoadComponent(controller.name, stateHash);
-                States.OnStateEnter(this, animatorStateInfo.shortNameHash);
+                if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "StateSwap")
+                {
+                    circleCollider2DComponent = GameManagement.ins.circleCollider2DCache.LoadComponent(controller.name, stateHash);
+                    overlapComponent = GameManagement.ins.overlapCache.LoadComponent(controller.name, stateHash);
+                }
+                StateOnEnter.Handle(this, stateHash, previousStateHash);
             };
             animatorFrameChanged += () =>
             {
@@ -59,7 +61,7 @@ namespace GameManagement
                         }
                     }
                 }
-                States.OnFrame(this, animatorStateInfo.shortNameHash);
+                StateOnFrameUpdate.Handle(this, frame, stateHash, previousStateHash);
             };
             hasColliders = GameManagement.ins.circleCollider2DBank.RequestLoanForRigidbody2D(this, colliderRequestAmount);
         }
@@ -75,177 +77,131 @@ namespace GameManagement
             animator.SetFloat("LeftTrigger_Input", InputManager.ins.LeftTrigger_Input);
             animator.SetInteger("R_Direction", Direction.Compute8WayDirection());
             animator.SetBool("RightBumper_Input", InputManager.ins.RightBumper_Input);
-            if (aimingWeapon)
-            {
-                if (spriteRenderer.flipX && InputManager.ins.R_Input.x > 0)
-                    spriteRenderer.flipX = false;
-                if (!spriteRenderer.flipX && InputManager.ins.R_Input.x < 0)
-                    spriteRenderer.flipX = true;
-            }
-            else
-            {
-                if (spriteRenderer.flipX && InputManager.ins.L_Input.x > 0)
-                    spriteRenderer.flipX = false;
-                if (!spriteRenderer.flipX && InputManager.ins.L_Input.x < 0)
-                    spriteRenderer.flipX = true;
-            }
-            if(equipped.Count > 0)
-            {
-                for (int i = 0; i < equipped.Count; i++)
-                {
-                    Halberd halberd = equipped[i] as Halberd;
-                    if (halberd != null)
-                    {
-                        halberd.UpdateOrbit(this, i, equipped.Count, orbitParameter);
-                    }
-                }
-                firstSlotObj = equipped[0] as Halberd;
-                if (firstSlotObj != null)
-                    animator.SetInteger("InFirstSlotID", (int)firstSlotObj.weaponID);
-            }
             orbitParameter += tickDelta;
-            if(!aimingWeapon && !throwing)
+            if(orbitingWeapons.Count > 0)
             {
-                if (toBeThrown.Count > 0)
+                //Hard code swap orbit type here for testing
+                //When prototype near done then sort out "shop" window for choosing which to use
+                int orbitTypeToUse = 0;
+                switch (orbitTypeToUse)
                 {
-                    Debug.Log("toBeThrown Count = " + toBeThrown.Count);
-                    Debug.Log("equipped Count = " + equipped.Count);
-                    Halberd halberd = toBeThrown[0] as Halberd;
-                    if(!halberd.throwStatus)
-                    {
-                        equipped.Insert(0, toBeThrown[0]);
-                        toBeThrown.RemoveAt(0);
-                    }
-                    else
-                    {
-                        toBeThrown.RemoveAt(0);
-                    }
+                    case 1:
+                        WeaponOrbit.Update_UpLookAtDir(this, InputManager.ins.R_Input, orbitingWeapons, orbitParameter);
+                        break;
+                    case 0:
+                        WeaponOrbit.Update_UpToSetRelativeDir(this, orbitingWeapons, orbitParameter);
+                        break;
                 }
+                
+            }
+            if(readyWeapons.Count > 0)
+            {
+                WeaponThrow.Ready_Default(this, readyWeapons);
             }
         }
         public void ManagedFixedUpdate(float tickDelta)
         {
-
+            RigidbodyUpdate(tickDelta);
         }
     }
-    public static class States
+    public static class StateOnEnter
     {
-        public static void OnStateEnter(RuntimeSceneObject obj, int stateHash)
+        public static void Handle(RuntimeSceneObject obj, int stateHash, int previousStateHash)
         {
             if(obj.ID == RuntimeIdentifier.Player)
             {
                 Player player = obj as Player;
                 if (player == null)
                     return;
-                if(Animator.StringToHash("AIM_HALBERD_DOWN") == stateHash)
+                Vector3 aimDirection =
+                    (Animator.StringToHash("AIM_HALBERD_DOWN")==stateHash).DefinedValue(0, 1)*-player.up
+                    +(Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash).DefinedValue(0,1)*(player.right-player.up)
+                    +(Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash).DefinedValue(0, 1) * player.right
+                    +(Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash).DefinedValue(0, 1) * (player.right + player.up)
+                    +(Animator.StringToHash("AIM_HALBERD_UP") == stateHash).DefinedValue(0, 1) * (player.up);
+                bool aimingStopped =
+                    ((Animator.StringToHash("AIM_HALBERD_DOWN") == previousStateHash)
+                    || (Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == previousStateHash)
+                    || (Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == previousStateHash)
+                    || (Animator.StringToHash("AIM_HALBERD_DIAGUP") == previousStateHash)
+                    || (Animator.StringToHash("AIM_HALBERD_UP") == previousStateHash))
+                    && (player.animatorClipInfo.clip.name != "DirectionSwap");
+                if(aimDirection.magnitude > 0)
                 {
-                    if(player.equipped.Contains(player.firstSlotObj))
+                    if(player.orbitingWeapons.Count > 0)
                     {
-                        player.toBeThrown.Add(player.firstSlotObj);
-                        player.equipped.Remove(player.firstSlotObj);
+                        Debug.LogError($"Orbiting weapons stuff on frame {player.frame}");
+                        for (int i = 0; i < player.throwCount; i++)
+                        {
+                            if (player.orbitingWeapons.Count == 0)
+                                break;
+                            //Debug.LogError("Adding to ready throw");
+                            player.readyWeapons.Add(player.orbitingWeapons[0]);
+                            player.orbitingWeapons.Remove(player.orbitingWeapons[0]);
+                        }
                     }
                 }
-                if (Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash)
+                if (aimingStopped)
                 {
-                    if (player.equipped.Contains(player.firstSlotObj))
+                    //Debug.LogError($"Ready Weapons Count {player.readyWeapons.Count}");
+                    if(player.readyWeapons.Count > 0)
                     {
-                        player.toBeThrown.Add(player.firstSlotObj);
-                        player.equipped.Remove(player.firstSlotObj);
+                        int index = 0;
+                        while(player.readyWeapons.Count > 0)
+                        {
+                            //Debug.LogError($"REMOVING {player.readyWeapons[0].transform.gameObject.name}");
+                            player.orbitingWeapons.Add(player.readyWeapons[0]);
+                            player.readyWeapons.Remove(player.readyWeapons[0]);
+                            if (index > 500)
+                            {
+                                Debug.LogError("INFINITE WHILE LOOP");
+                                break;
+                            }
+                        }
                     }
                 }
-                if (Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash)
-                {
-                    if (player.equipped.Contains(player.firstSlotObj))
-                    {
-                        player.toBeThrown.Add(player.firstSlotObj);
-                        player.equipped.Remove(player.firstSlotObj);
-                    }
-                }
-                if (Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash)
-                {
-                    if (player.equipped.Contains(player.firstSlotObj))
-                    {
-                        player.toBeThrown.Add(player.firstSlotObj);
-                        player.equipped.Remove(player.firstSlotObj);
-                    }
-                }
-                if (Animator.StringToHash("AIM_HALBERD_UP") == stateHash)
-                {
-                    if (player.equipped.Contains(player.firstSlotObj))
-                    {
-                        player.toBeThrown.Add(player.firstSlotObj);
-                        player.equipped.Remove(player.firstSlotObj);
-                    }
-                }
-                if (Animator.StringToHash("THROW_HALBERD_DOWN") == stateHash)
-                {
-                    player.throwing = true;
-                }
-                if (Animator.StringToHash("THROW_HALBERD_DIAGDOWN") == stateHash)
-                {
-                    player.throwing = true;
-                }
-                if (Animator.StringToHash("THROW_HALBERD_HORIZONTAL") == stateHash)
-                {
-                    player.throwing = true;
-                }
-                if (Animator.StringToHash("THROW_HALBERD_DIAGUP") == stateHash)
-                {
-                    player.throwing = true;
-                }
-                if (Animator.StringToHash("THROW_HALBERD_UP") == stateHash)
-                {
-                    player.throwing = true;
-                }
+                Vector3 throwDirection = 
+                    (Animator.StringToHash("THROW_HALBERD_DOWN") == stateHash).DefinedValue(0, 1) * -player.up
+                    + (Animator.StringToHash("THROW_HALBERD_DIAGDOWN") == stateHash).DefinedValue(0, 1) * (player.right - player.up)
+                    + (Animator.StringToHash("THROW_HALBERD_HORIZONTAL") == stateHash).DefinedValue(0, 1) * player.right
+                    + (Animator.StringToHash("THROW_HALBERD_DIAGUP") == stateHash).DefinedValue(0, 1) * (player.right + player.up)
+                    + (Animator.StringToHash("THROW_HALBERD_UP") == stateHash).DefinedValue(0, 1) * (player.up);
             }
-            if(obj.ID == RuntimeIdentifier.Halberd)
+            if(obj.ID == RuntimeIdentifier.Weapon)
             {
-                Halberd halberd = obj as Halberd;
-                if (halberd == null)
+                Weapon weapon = obj as Weapon;
+                if (weapon == null)
                     return;
-                if(Animator.StringToHash("RECALL_HALBERD") == stateHash)
+                if(Animator.StringToHash("RECALL") == stateHash && Animator.StringToHash("RECALLSTART") == previousStateHash)
                 {
-                    halberd.embedded = false;
-                }
-                if(Animator.StringToHash("INVENTORY_HALBERD") == stateHash)
-                {
-                    halberd.embedded = false;
-                }
-                if (Animator.StringToHash("EQUIPPED_HALBERD") == stateHash)
-                {
-                    halberd.embedded = false;
-                }
-                if(Animator.StringToHash("LAUNCH_HALBERD") == stateHash)
-                {
-                    halberd.spriteRenderer.color = Color.white;
-                    Debug.Log($"Halberd throw dir {halberd.throwDirection}");
-                    //halberd.rb.velocity += 15f*(Vector2)halberd.throwDirection;
                     Player player = GameManagement.ins.playerObj;
-                    for (int i = 0; i < player.toBeThrown.Count; i++)
-                    {
-                        Halberd toThrow = player.toBeThrown[i] as Halberd;
-                        Debug.Log($"Halberd {i} Throw Direction = {toThrow.throwDirection}");
-                        float maxCount = player.toBeThrown.Count;
-                        float accuracyMaxBound = i;
-                        Vector2 throwPathDeviation = toThrow.throwDirection;
-                        //Flipping the dot product to add velocity in perpendicular component
-                        throwPathDeviation = Random.Range(-accuracyMaxBound, accuracyMaxBound)*Vector3.Dot(player.right, toThrow.throwDirection) * player.up
-                            + Random.Range(-accuracyMaxBound, accuracyMaxBound)*Vector3.Dot(player.up, toThrow.throwDirection) * player.right;
-                        halberd.rb.velocity = toThrow.throwSpeedMax * (Vector2)toThrow.throwDirection + (i/maxCount) *throwPathDeviation;
-                        halberd.transform.up = halberd.rb.velocity;
-                    }
+                    //weapon.rb.velocity = -40f * weapon.up;
+                    weapon.animator.SetBool("Embedded", false);
                 }
             }
         }
-        public static void OnFrame(RuntimeSceneObject obj, int stateHash)
+    }
+    public static class StateOnFrameUpdate
+    {
+        public static void Handle(RuntimeSceneObject obj, int frame, int stateHash, int previousStateHash)
         {
-            if(obj.ID == RuntimeIdentifier.Player)
+            if (obj.ID == RuntimeIdentifier.Player)
             {
                 Player player = obj as Player;
-                //Debug.Log(player.frame);
                 if (player == null)
                     return;
                 player.rb.velocity = 15f * InputManager.ins.L_Input.x * player.right + player.upVelocity;
+                bool spriteFlipAllowed =
+                    (Animator.StringToHash("RUN") == stateHash)
+                    || (Animator.StringToHash("RECALL_RUN") == stateHash)
+                    || (Animator.StringToHash("CATCH_HALBERD") == stateHash);
+                if (spriteFlipAllowed)
+                {
+                    if (player.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0)
+                        player.spriteRenderer.flipX = false;
+                    if (!player.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0)
+                        player.spriteRenderer.flipX = true;
+                }
                 if (Animator.StringToHash("FALL") == stateHash)
                 {
                     player.rb.AddForce(-player.up * 20f);
@@ -270,161 +226,125 @@ namespace GameManagement
                         player.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
                     }
                 }
-                if (Animator.StringToHash("RECALL_AIR") == stateHash)
+                Vector3 aimDirection =
+                    (Animator.StringToHash("AIM_HALBERD_DOWN") == stateHash).DefinedValue(0, 1) * -player.up
+                    + (Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash).DefinedValue(0, 1) * (player.right - player.up)
+                    + (Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash).DefinedValue(0, 1) * player.right
+                    + (Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash).DefinedValue(0, 1) * (player.right + player.up)
+                    + (Animator.StringToHash("AIM_HALBERD_UP") == stateHash).DefinedValue(0, 1) * (player.up);
+                bool aiming =
+                    Animator.StringToHash("AIM_HALBERD_DOWN") == stateHash
+                    || Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash
+                    || Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash
+                    || Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash
+                    || Animator.StringToHash("AIM_HALBERD_UP") == stateHash;
+                if(aiming)
                 {
-                    if (player.upSpeed > 3)
+                    if (player.spriteRenderer.flipX && InputManager.ins.R_Input.x > 0)
+                        player.spriteRenderer.flipX = false;
+                    if (!player.spriteRenderer.flipX && InputManager.ins.R_Input.x < 0)
+                        player.spriteRenderer.flipX = true;
+                    if (InputManager.ins.RightBumper_Input)
                     {
-                        player.rb.AddForce(-player.up * 70f);
-                    }
-                    if (player.upSpeed > 0 && player.upSpeed <= 3)
-                    {
-                        //Low grav
-                        player.rb.AddForce(-player.up * 10f);
-                    }
-                    if (player.upSpeed <= 0)
-                    {
-                        player.rb.AddForce(-player.up * 20f);
-                    }
-                    if (player.upSpeed < player.fallSpeedMax)
-                    {
-                        player.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
+                        Debug.LogError($"Right bumper input on frame {player.frame}");
+                        if(player.readyWeapons.Count > 0)
+                        {
+                            aimDirection.x *= player.spriteRenderer.flipX.DefinedValue(1, -1);
+                            int throwTypeChoice = 1;
+                            switch (throwTypeChoice)
+                            {
+                                case 1:
+                                    WeaponThrow.Throw_SemiAuto(player, aimDirection, player.readyWeapons);
+                                    break;
+                                case 0:
+                                    WeaponThrow.Throw_Default(player, aimDirection, player.readyWeapons);
+                                    break;
+                            }
+                            
+                            if ((Animator.StringToHash("AIM_HALBERD_DOWN") == stateHash))
+                                player.animator.Play("THROW_HALBERD_DOWN");
+                            if ((Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash))
+                                player.animator.Play("THROW_HALBERD_DIAGDOWN");
+                            if ((Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash))
+                                player.animator.Play("THROW_HALBERD_HORIZONTAL");
+                            if ((Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash))
+                                player.animator.Play("THROW_HALBERD_DIAGUP");
+                            if ((Animator.StringToHash("AIM_HALBERD_UP") == stateHash))
+                                player.animator.Play("THROW_HALBERD_UP");
+                        }
                     }
                 }
-                if(Animator.StringToHash("THROW_HALBERD_DOWN") == stateHash)
+                if (Animator.StringToHash("AIM_HALBERD_DOWN") == stateHash)
                 {
-                    //Frame 8 is where throw actually happens
-                    if(player.frame == 8)
-                    {
-                        player.rb.velocity += 10f * player.up;
-                        if(player.toBeThrown.Count > 0)
-                        {
-                            for (int i = 0; i < player.toBeThrown.Count; i++)
-                            {
-                                Halberd halberd = player.toBeThrown[i] as Halberd;
-                                halberd.throwStatus = true;
-                                halberd.throwDirection = -player.up;
-                            }
-                        }
-                        player.throwing = false;
-                    }
+
                 }
-                if(Animator.StringToHash("THROW_HALBERD_DIAGDOWN") == stateHash)
+                if (Animator.StringToHash("AIM_HALBERD_DIAGDOWN") == stateHash)
                 {
-                    if(player.frame == 8)
-                    {
-                        player.rb.velocity += ((InputManager.ins.L_Input.y > 0).DefinedValue(0, 1)*InputManager.ins.L_Input.y*10f + 2.5f) * player.up;
-                        if (player.toBeThrown.Count > 0)
-                        {
-                            for (int i = 0; i < player.toBeThrown.Count; i++)
-                            {
-                                Halberd halberd = player.toBeThrown[i] as Halberd;
-                                halberd.throwStatus = true;
-                                halberd.throwDirection = player.right - player.up;
-                            }
-                        }
-                        player.throwing = false;
-                    }
+
                 }
-                if (Animator.StringToHash("THROW_HALBERD_HORIZONTAL") == stateHash)
+                if (Animator.StringToHash("AIM_HALBERD_HORIZONTAL") == stateHash)
                 {
-                    if (player.frame == 8)
-                    {
-                        //player.rb.velocity += InputManager.ins.L_Input.y * 15f * player.up;
-                        if (player.toBeThrown.Count > 0)
-                        {
-                            for (int i = 0; i < player.toBeThrown.Count; i++)
-                            {
-                                Halberd halberd = player.toBeThrown[i] as Halberd;
-                                halberd.throwStatus = true;
-                                halberd.throwDirection = player.right;
-                            }
-                        }
-                        player.throwing = false;
-                    }
+
                 }
-                if (Animator.StringToHash("THROW_HALBERD_DIAGUP") == stateHash)
+                if (Animator.StringToHash("AIM_HALBERD_DIAGUP") == stateHash)
                 {
-                    if (player.frame == 8)
-                    {
-                        //player.rb.velocity += 10f * player.up;
-                        if (player.toBeThrown.Count > 0)
-                        {
-                            for (int i = 0; i < player.toBeThrown.Count; i++)
-                            {
-                                Halberd halberd = player.toBeThrown[i] as Halberd;
-                                halberd.throwStatus = true;
-                                halberd.throwDirection = player.right + player.up;
-                            }
-                        }
-                        player.throwing = false;
-                    }
+
                 }
-                if (Animator.StringToHash("THROW_HALBERD_UP") == stateHash)
+                if (Animator.StringToHash("AIM_HALBERD_UP") == stateHash)
                 {
-                    if (player.frame == 8)
-                    {
-                        //player.rb.velocity += 10f * player.up;
-                        if (player.toBeThrown.Count > 0)
-                        {
-                            for (int i = 0; i < player.toBeThrown.Count; i++)
-                            {
-                                Halberd halberd = player.toBeThrown[i] as Halberd;
-                                halberd.throwStatus = true;
-                                halberd.throwDirection = player.up;
-                            }
-                        }
-                        player.throwing = false;
-                    }
+
                 }
             }
-            if(obj.ID == RuntimeIdentifier.Halberd)
+            if(obj.ID == RuntimeIdentifier.Weapon)
             {
-                Halberd halberd = obj as Halberd;
-                if (halberd == null)
+                Weapon weapon = obj as Weapon;
+                if (weapon == null)
                     return;
-                Debug.Log($"Halberd Frame {halberd.frame}");
-                if (Animator.StringToHash("FALL_HALBERD") == stateHash)
+                if (Animator.StringToHash("FALL") == stateHash)
                 {
-                    halberd.rb.AddForce(GameManagement.ins.gravityDirection * 10f);
-                    if (halberd.upSpeed < halberd.fallSpeedMax)
+                    weapon.rb.AddForce(GameManagement.ins.gravityDirection * 80f);
+                    if (weapon.upSpeed < weapon.fallSpeedMax && Animator.StringToHash("RECALL") != previousStateHash)
                     {
-                        halberd.rb.velocity = halberd.rightVelocity + halberd.fallSpeedMax*halberd.up;
+                        weapon.rb.velocity = weapon.rightVelocity + weapon.fallSpeedMax * weapon.up;
                     }
-                    halberd.transform.up = Vector3.SmoothDamp(halberd.transform.up, halberd.rb.velocity, ref halberd.directionChange, halberd.directionChangeSmoothTime);
-                }
-                if (Animator.StringToHash("EMBED_HALBERD") == stateHash)
-                {
-                    halberd.rb.velocity = Vector3.zero;
-                }
-                if (Animator.StringToHash("RECALL_HALBERD") == stateHash)
-                {
-                    halberd.transform.up = Vector3.SmoothDamp(halberd.transform.up, -halberd.dirTo(GameManagement.ins.playerObj.rb.transform.position), ref halberd.directionChange, halberd.directionChangeSmoothTime);
-                    halberd.rb.AddForce(-halberd.up * 50f);
-                    if (halberd.upSpeed < -halberd.recallSpeedMax)
+                    if(weapon.upSpeed < weapon.fallSpeedMax+weapon.recallSpeedMax && Animator.StringToHash("RECALL") == previousStateHash)
                     {
-                        halberd.rb.velocity = halberd.rightVelocity - halberd.recallSpeedMax * halberd.up;
+                        weapon.rb.velocity = weapon.rightVelocity + (weapon.fallSpeedMax + weapon.recallSpeedMax) * weapon.up;
                     }
+                    weapon.transform.up = Vector3.SmoothDamp(weapon.transform.up, weapon.rb.velocity, ref weapon.dirChange, weapon.dirChangeSmoothTime);
                 }
-                if (Animator.StringToHash("INVENTORY_HALBERD") == stateHash)
+                bool embedding = 
+                    Animator.StringToHash("EMBED") == stateHash 
+                    || Animator.StringToHash("EMBEDDED") == stateHash;
+                if(embedding)
                 {
-                    halberd.spriteRenderer.color = Color.clear;
-                    halberd.rb.velocity = Vector3.zero;
-                    halberd.rb.transform.position = GameManagement.ins.playerObj.rb.transform.position;
+                    weapon.spriteRenderer.sortingLayerName = "EmbeddedWeapon";
                 }
-                if (Animator.StringToHash("EQUIPPED_HALBERD") == stateHash)
+                else
                 {
-                    halberd.embedded = false;
-                    halberd.localTickRateMultiplier = 4f;
-                    halberd.spriteRenderer.color = Color.white;
-                    if (GameManagement.ins.playerObj.equipped.Contains(halberd))
+                    if (weapon.rb.transform.parent != null)
+                        weapon.rb.transform.parent = null;
+                    if (weapon.spriteRenderer.sortingLayerName == "EmbeddedWeapon")
+                        weapon.spriteRenderer.sortingLayerName = "Player";
+                }
+                if (Animator.StringToHash("EMBED") == stateHash)
+                {
+                    weapon.rb.velocity = Vector3.zero;
+                }
+                if(Animator.StringToHash("RECALL") == stateHash)
+                {
+                    weapon.transform.up = Vector3.SmoothDamp(weapon.transform.up, -weapon.dirTo(GameManagement.ins.playerObj.rb.transform.position), ref weapon.dirChange, weapon.dirChangeSmoothTime);
+
+                    weapon.rb.AddForce(weapon.dirTo(GameManagement.ins.playerObj.rb.transform.position) * 150f);
+                    if (weapon.upSpeed < weapon.recallSpeedMax)
                     {
-                        halberd.rb.MovePosition(Vector3.SmoothDamp(halberd.rb.transform.position, halberd.orbitPos, ref halberd.posChange, halberd.posChangeSmoothTime + halberd.parallaxFactor));
+                        weapon.rb.velocity = weapon.rightVelocity/2f + weapon.recallSpeedMax * weapon.up;
                     }
                 }
-                if (Animator.StringToHash("READYTHROW_HALBERD") == stateHash)
+                if(Animator.StringToHash("READYTHROW") == stateHash)
                 {
-                    halberd.spriteRenderer.color = Color.clear;
-                    halberd.rb.transform.position = GameManagement.ins.playerObj.rb.transform.position;
+                    Player player = GameManagement.ins.playerObj;
+                    weapon.rb.transform.position = player.transform.position;
                 }
             }
         }

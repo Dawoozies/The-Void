@@ -14,7 +14,6 @@ namespace Interactions
                 if (player != null)
                 {
                     player.grounded = false;
-                    //Debug.Log("grounded = false");
                 }
             }
             nullInteractionBuffer.Remove((obj, componentData));

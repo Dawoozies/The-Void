@@ -14,6 +14,7 @@ namespace Interactions
         }
         public static void Interactions(RuntimeSceneObject obj, Component_Overlap_Data componentData, GameObject hitObj, ref List<(RuntimeSceneObject, Component_Overlap_Data, GameObject)> staticInteractionBuffer)
         {
+            
             if (obj.ID == RuntimeIdentifier.Player && componentData.nickname == "Groundbox" && hitObj.layer == LayerMask.NameToLayer("Ground"))
             {
                 Player player = obj as Player;
@@ -23,13 +24,11 @@ namespace Interactions
                     //Debug.Log("grounded = true");
                 }
             }
-            if(obj.ID == RuntimeIdentifier.Halberd && componentData.nickname == "EmbeddingArea" && hitObj.layer == LayerMask.NameToLayer("Ground"))
+            if(obj.ID == RuntimeIdentifier.Weapon && componentData.nickname == "EmbeddingArea" && hitObj.layer == LayerMask.NameToLayer("Ground"))
             {
-                Halberd halberd = obj as Halberd;
-                if(halberd != null)
-                {
-                    halberd.embedded = true;
-                }
+                Weapon weapon = obj as Weapon;
+                if(weapon != null)
+                    weapon.animator.SetBool("Embedded", true);
             }
             staticInteractionBuffer.Remove((obj, componentData, hitObj));
         }
