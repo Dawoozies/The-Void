@@ -11451,12 +11451,6 @@ MonoBehaviour:
   - {fileID: 9100000, guid: e9d70311833a065469c64dd312623fb6, type: 2}
   - {fileID: 9100000, guid: 5725ca1452fdcbc40ab7039f4f7052e2, type: 2}
   - {fileID: 9100000, guid: 54f6c7689b2b87c4cb2504e4056a6268, type: 2}
-  playerController: {fileID: 9100000, guid: 69cd56f628c0e6146a692c22fae60d1c, type: 2}
-  halberdController: {fileID: 9100000, guid: 2d679c85b63f31440993b6d83cd629d4, type: 2}
-  hangedFrameTorsoController: {fileID: 9100000, guid: e9d70311833a065469c64dd312623fb6, type: 2}
-  hangedFrameLeftArmController: {fileID: 9100000, guid: 5725ca1452fdcbc40ab7039f4f7052e2, type: 2}
-  hangedFrameRightArmController: {fileID: 9100000, guid: 54f6c7689b2b87c4cb2504e4056a6268, type: 2}
-  hangedFrameHeadController: {fileID: 9100000, guid: 5ce70c041958569458953c0e28baadc1, type: 2}
   ropeMaterial: {fileID: 2100000, guid: 0b8b491aca744114eb710726d082d53e, type: 2}
   gravityDirection: {x: 0, y: -1, z: 0}
   centerOfCamera: {x: 0, y: 0, z: 0}

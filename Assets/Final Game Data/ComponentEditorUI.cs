@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GeometryDefinitions;
 using UnityEditor.Animations;
 using UnityEditor;
-using ExtensionMethods_AnimatorController;
-using ComponentIO;
-using System.Linq;
 using ExtensionMethods_Color;
 namespace ComponentEditorUI
 {

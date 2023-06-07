@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 327b0bb5972fb6f46b5e5ab4f77e68bf
+guid: 9caae2f041fbd0e4c9ee020875221d29
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,18 +36,18 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 4
-  spritePivot: {x: 0, y: 0.5}
-  spritePixelsToUnits: 100
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 470
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -103,18 +103,106 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Halberd_PosesNew_0
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 360
+        width: 411
+        height: 1764
+      alignment: 9
+      pivot: {x: 0.413085, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa7f00dfad809a42bf833c7e69b0dc6
+      internalID: -1391645930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_PosesNew_1
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 87
+        width: 304
+        height: 2308
+      alignment: 9
+      pivot: {x: 0.4130436, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e59b54a6c9f91bc42a436334a8387399
+      internalID: -120680966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_PosesNew_2
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 712
+        width: 575
+        height: 1058
+      alignment: 9
+      pivot: {x: 0.41351074, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30a13589b10f94845819db0c7174f370
+      internalID: 918964962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halberd_PosesNew_3
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 360
+        width: 411
+        height: 1764
+      alignment: 9
+      pivot: {x: 0.413085, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df049ab0ecbe6e240987dc0cda9d1fd4
+      internalID: 1975291730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Halberd_PosesNew_3: 1975291730
+      Halberd_PosesNew_0: -1391645930
+      Halberd_PosesNew_1: -120680966
+      Halberd_PosesNew_2: 918964962
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

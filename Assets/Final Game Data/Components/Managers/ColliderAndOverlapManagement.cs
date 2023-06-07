@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
 using System;
-using ComponentIO;
 using GeometryDefinitions;
 using Interactions;
 
@@ -24,11 +22,11 @@ namespace GameManagement
         {
             runtimeCache = new Dictionary<(string, int), T>();
         }
-        public void SetupRuntimeCache(AnimatorController[] controllers)
+        public void SetupRuntimeCache(RuntimeAnimatorController[] controllers)
         {
             object[] components = Resources.LoadAll("", typeof(T));
             List<T> alreadyAssigned = new List<T>();
-            foreach (AnimatorController controller in controllers)
+            foreach (RuntimeAnimatorController controller in controllers)
             {
                 foreach (T component in components)
                 {

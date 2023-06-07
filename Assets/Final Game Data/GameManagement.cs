@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
-using ExtensionMethods_AnimatorController;
 using ExtensionMethods_Animator;
 using System;
 using GeometryDefinitions;
@@ -14,15 +12,10 @@ namespace GameManagement
     public class GameManagement : MonoBehaviour
     {
         public static GameManagement ins;
-        public AnimatorController[] controllers;
+        public RuntimeAnimatorController[] controllers; //this will be set manually
+        //Make caches linked with banks/ledgers
         public Cache<Component_CircleCollider2D> circleCollider2DCache; //Only make one instance
         public Cache<Component_Overlap> overlapCache; //Only one instance
-        public AnimatorController playerController;
-        public AnimatorController halberdController;
-        public AnimatorController hangedFrameTorsoController;
-        public AnimatorController hangedFrameLeftArmController;
-        public AnimatorController hangedFrameRightArmController;
-        public AnimatorController hangedFrameHeadController;
         //
         //Test managed things
         public Player playerObj;
@@ -43,6 +36,15 @@ namespace GameManagement
         public Vector3 centerOfCamera;
         public Sprite spriteForMask;
         public Dictionary<CircleCollider2D, SpriteMask> spriteMasks = new Dictionary<CircleCollider2D, SpriteMask>();
+        RuntimeAnimatorController GetControllerByName(string controllerName)
+        {
+            foreach (RuntimeAnimatorController controller in controllers)
+            {
+                if (controller.name == controllerName)
+                    return controller;
+            }
+            return null;
+        }
         private void Awake()
         {
             ins = this;
@@ -78,7 +80,7 @@ namespace GameManagement
         {
             playerObj = new Player();
             playerObj.Initialize(RuntimeIdentifier.Player);
-            playerObj.Init_Animator(playerController);
+            playerObj.Init_Animator(GetControllerByName("FinalPlayer"));
             playerObj.Init_Rigidbody2D();
             playerObj.ManagedStart();
 
@@ -86,7 +88,7 @@ namespace GameManagement
             {
                 Weapon weapon = new Weapon();
                 weapon.Initialize(RuntimeIdentifier.Weapon);
-                weapon.Init_Animator(halberdController);
+                weapon.Init_Animator(GetControllerByName("FinalHalberd"));
                 weapon.Init_Rigidbody2D();
                 weapon.ManagedStart();
                 weapons.Add(weapon);
@@ -95,23 +97,25 @@ namespace GameManagement
 
             hangedFrame = new HangedFrame();
             hangedFrame.Initialize(RuntimeIdentifier.HangedFrame);
+            hangedFrame.Init_Animator(GetControllerByName("HangedFrame"));
             hangedFrameTorsoObj = new HangedFrame_Torso();
             hangedFrameTorsoObj.Initialize(RuntimeIdentifier.HangedFrame);
-            hangedFrameTorsoObj.Init_Animator(hangedFrameTorsoController);
+            hangedFrameTorsoObj.Init_Animator(GetControllerByName("HangedFrame_Torso"));
             hangedFrameTorsoObj.ManagedStart();
             hangedFrameLeftArmObj = new HangedFrame_LeftArm();
             hangedFrameLeftArmObj.Initialize(RuntimeIdentifier.HangedFrameLeftHand);
-            hangedFrameLeftArmObj.Init_Animator(hangedFrameLeftArmController);
+            hangedFrameLeftArmObj.Init_Animator(GetControllerByName("HangedFrame_LeftArm"));
             hangedFrameLeftArmObj.ManagedStart();
             hangedFrameRightArmObj = new HangedFrame_RightArm();
             hangedFrameRightArmObj.Initialize(RuntimeIdentifier.HangedFrameRightHand);
-            hangedFrameRightArmObj.Init_Animator(hangedFrameRightArmController);
+            hangedFrameRightArmObj.Init_Animator(GetControllerByName("HangedFrame_RightArm"));
             hangedFrameRightArmObj.ManagedStart();
             hangedFrameHeadObj = new HangedFrame_Head();
             hangedFrameHeadObj.Initialize(RuntimeIdentifier.HangedFrame);
-            hangedFrameHeadObj.Init_Animator(hangedFrameHeadController);
+            hangedFrameHeadObj.Init_Animator(GetControllerByName("HangedFrame_Head"));
             hangedFrameHeadObj.ManagedStart();
 
+            //Remember dont use line renderer just do sprite renderer with tiled + pivot all the way to left
             hangedFrame.lineRenderer = hangedFrame.transform.gameObject.AddComponent<LineRenderer>();
             hangedFrame.lineRenderer.material = ropeMaterial;
             hangedFrame.lineRenderer.textureMode = LineTextureMode.Tile;
@@ -159,7 +163,7 @@ namespace GameManagement
         public Rigidbody2D rb;
         //
         public Animator animator;
-        public AnimatorController controller;
+        public RuntimeAnimatorController controller;
         public SpriteRenderer spriteRenderer;
         public int stateHash;
         public int previousStateHash;
@@ -191,12 +195,12 @@ namespace GameManagement
             rbColliderParent = new GameObject($"ColliderParent:{ID}").transform;
             rbColliderParent.parent = rbTransform;
         }
-        public void Init_Animator(AnimatorController controller)
+        public void Init_Animator(RuntimeAnimatorController controller)
         {
             spriteRenderer = obj.AddComponent<SpriteRenderer>();
             animator = obj.AddComponent<Animator>();
             this.controller = controller;
-            animator.runtimeAnimatorController = controller as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = controller;
         }
         public float objTickRate(float globalTickRate) => globalTickRate * localTickRateMultiplier;
         //By LocalPos its a Local --> World transform
