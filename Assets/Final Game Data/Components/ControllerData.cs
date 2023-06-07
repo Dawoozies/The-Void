@@ -11,12 +11,14 @@ public class ControllerData : ScriptableObject
     public DirectedCircleCollider[] directedCircleColliders;
     public DirectedCircleOverlap[] directedCircleOverlaps;
     public CircleSpriteMask[] circleSpriteMasks;
+    public DirectedPoint[] directedPoints;
     public ControllerData()
     {
         controllerName = string.Empty;
         directedCircleColliders = new DirectedCircleCollider[] { };
         directedCircleOverlaps = new DirectedCircleOverlap[] { };
         circleSpriteMasks = new CircleSpriteMask[] { };
+        directedPoints = new DirectedPoint[] { };
     }
     public DirectedCircleCollider[] GetAllDirectedCircleColliderData(string layerName, string stateName)
     {
@@ -48,26 +50,15 @@ public class ControllerData : ScriptableObject
         }
         return stateDatas.ToArray();
     }
-    public string GetStateDataInfo(string layerName, string stateName)
+    public DirectedPoint[] GetAllDirectedPointData(string layerName, string stateName)
     {
-        string info = string.Empty;
-        if(directedCircleColliders != null)
+        List<DirectedPoint> stateDatas = new List<DirectedPoint>();
+        foreach (DirectedPoint directedPoint in directedPoints)
         {
-            foreach (DirectedCircleCollider directedCircleCollider in directedCircleColliders)
-            {
-                if (directedCircleCollider.layerName == layerName && directedCircleCollider.stateName == stateName)
-                    info += directedCircleCollider.ReturnInfo();
-            }
+            if (directedPoint.layerName == layerName && directedPoint.stateName == stateName)
+                stateDatas.Add(directedPoint);
         }
-        if(directedCircleOverlaps != null)
-        {
-            foreach (DirectedCircleOverlap directedCircleOverlap in directedCircleOverlaps)
-            {
-                if (directedCircleOverlap.layerName == layerName && directedCircleOverlap.stateName == stateName)
-                    info += directedCircleOverlap.ReturnInfo();
-            }
-        }
-        return info;
+        return stateDatas.ToArray();
     }
 }
 [Serializable]
@@ -97,18 +88,6 @@ public class DirectedCircleCollider
         radii = new List<float>();
         upDirections = new List<Vector2>();
         rightDirections = new List<Vector2>();
-    }
-    public string ReturnInfo()
-    {
-        string info = string.Empty;
-        info += $"[ DIRECTED CIRCLE COLLIDER ]";
-        info += $"nickname: {nickname}\n";
-        info += $"layerName: {layerName}\n";
-        info += $"stateName: {stateName}\n";
-        info += $"isTrigger: {isTrigger}\n";
-        info += $"collisionLayer: {collisionLayer} = {LayerMask.LayerToName(collisionLayer)}\n";
-        info += "\n";
-        return info;
     }
     public static DirectedCircleCollider CreateNew(string layerName, string stateName)
     {
@@ -196,17 +175,6 @@ public class DirectedCircleOverlap
         radii = new List<float>();
         upDirections = new List<Vector2>();
         rightDirections = new List<Vector2>();
-    }
-    public string ReturnInfo()
-    {
-        string info = string.Empty;
-        info += $"[ DIRECTED CIRCLE OVERLAP ]";
-        info += $"nickname: {nickname}\n";
-        info += $"layerName: {layerName}\n";
-        info += $"stateName: {stateName}\n";
-        info += $"useNullResult: {useNullResult}\n";
-        info += $"holdForNormalizedTime: {holdForNormalizedTime}\n";
-        return info;
     }
     public static DirectedCircleOverlap CreateNew(string layerName, string stateName)
     {
@@ -347,6 +315,83 @@ public class CircleSpriteMask
             }
         }
         controllerData.circleSpriteMasks = newData;
+    }
+}
+[Serializable]
+public class DirectedPoint
+{
+    public string nickname;
+    public string layerName;
+    public string stateName;
+    public List<int> assignedFrames;
+    public Color color;
+    public List<Vector2> centers;
+    public List<Vector2> upDirections;
+    public List<Vector2> rightDirections;
+    public DirectedPoint()
+    {
+        nickname = string.Empty;
+        layerName = string.Empty;
+        stateName = string.Empty;
+        assignedFrames = new List<int>();
+        color = Color.white;
+        centers = new List<Vector2>();
+        upDirections = new List<Vector2>();
+        rightDirections = new List<Vector2>();
+    }
+    public static DirectedPoint CreateNew(string layerName, string stateName)
+    {
+        DirectedPoint directedPoint = new DirectedPoint();
+        directedPoint.nickname = "New Directed Point";
+        directedPoint.layerName = layerName;
+        directedPoint.stateName = stateName;
+        directedPoint.assignedFrames = new List<int>();
+        directedPoint.color = Color.white;
+        directedPoint.centers = new List<Vector2>();
+        directedPoint.upDirections = new List<Vector2>();
+        directedPoint.rightDirections = new List<Vector2>();
+        return directedPoint;
+    }
+    public static void AddNew(ControllerData controllerData, DirectedPoint stateDataToAdd)
+    {
+        if(controllerData.directedPoints == null || controllerData.directedPoints.Length == 0)
+        {
+            controllerData.directedPoints = new DirectedPoint[] { stateDataToAdd };
+            return;
+        }
+        DirectedPoint[] newData = new DirectedPoint[controllerData.directedPoints.Length + 1];
+        for (int i = 0; i < newData.Length; i++)
+        {
+            if(i == newData.Length - 1)
+            {
+                newData[i] = stateDataToAdd;
+            }
+            else
+            {
+                newData[i] = controllerData.directedPoints[i];
+            }
+        }
+        controllerData.directedPoints = newData;
+    }
+    public static void RemoveAt(ControllerData controllerData, int index)
+    {
+        if(controllerData.directedPoints == null || controllerData.directedPoints.Length == 0)
+        {
+            return;
+        }
+        DirectedPoint[] newData = new DirectedPoint[controllerData.directedPoints.Length - 1];
+        for (int i = 0; i < controllerData.directedPoints.Length; i++)
+        {
+            if(i < index)
+            {
+                newData[i] = controllerData.directedPoints[i];
+            }
+            else if(i > index)
+            {
+                newData[i - 1] = controllerData.directedPoints[i];
+            }
+        }
+        controllerData.directedPoints = newData;
     }
 }
 public static class ResourcesUtility

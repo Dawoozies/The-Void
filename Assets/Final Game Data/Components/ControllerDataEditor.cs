@@ -25,9 +25,11 @@ public class ControllerDataEditor : EditorWindow
     DirectedCircleCollider[] allDirectedCircleColliders;
     DirectedCircleOverlap[] allDirectedCircleOverlaps;
     CircleSpriteMask[] allCircleSpriteMasks;
+    DirectedPoint[] allDirectedPoints;
     DirectedCircleCollider directedCircleColliderSelected;
     DirectedCircleOverlap directedCircleOverlapSelected;
     CircleSpriteMask circleSpriteMaskSelected;
+    DirectedPoint directedPointSelected;
     List<int> selectedCenters = new List<int>();
     List<int> selectedRadii = new List<int>();
     List<int> selectedUpDirections = new List<int>();
@@ -184,7 +186,7 @@ public class ControllerDataEditor : EditorWindow
     {
         if (stateSelected == null)
             return;
-        if (directedCircleColliderSelected != null || directedCircleOverlapSelected != null || circleSpriteMaskSelected != null)
+        if (directedCircleColliderSelected != null || directedCircleOverlapSelected != null || circleSpriteMaskSelected != null || directedPointSelected != null)
             return;
         if(GUILayout.Button("CHOOSE ANOTHER STATE"))
         {
@@ -194,6 +196,7 @@ public class ControllerDataEditor : EditorWindow
         allDirectedCircleColliders = controllerDataSelected.GetAllDirectedCircleColliderData(layerSelected.name, stateSelected.name);
         allDirectedCircleOverlaps = controllerDataSelected.GetAllDirectedCircleOverlapData(layerSelected.name, stateSelected.name);
         allCircleSpriteMasks = controllerDataSelected.GetAllCircleSpriteMaskData(layerSelected.name, stateSelected.name);
+        allDirectedPoints = controllerDataSelected.GetAllDirectedPointData(layerSelected.name, stateSelected.name);
         if (GUILayout.Button("CREATE NEW DIRECTED CIRCLE COLLIDER DATA"))
         {
             DirectedCircleCollider.AddNew(controllerDataSelected, DirectedCircleCollider.CreateNew(layerSelected.name, stateSelected.name));
@@ -205,6 +208,10 @@ public class ControllerDataEditor : EditorWindow
         if (GUILayout.Button("CREATE NEW CIRCLE SPRITE MASK DATA"))
         {
             CircleSpriteMask.AddNew(controllerDataSelected, CircleSpriteMask.CreateNew(layerSelected.name, stateSelected.name));
+        }
+        if(GUILayout.Button("CREATE NEW DIRECTED POINT DATA"))
+        {
+            DirectedPoint.AddNew(controllerDataSelected, DirectedPoint.CreateNew(layerSelected.name, stateSelected.name));
         }
         EditorUtility.SetDirty(controllerDataSelected);
     }
@@ -310,6 +317,40 @@ public class ControllerDataEditor : EditorWindow
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
     }
+    void DirectedPointSelection()
+    {
+        if(allDirectedPoints == null || allDirectedPoints.Length == 0)
+            return;
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label($"Directed Point Data", EditorStyles.whiteBoldLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        if (directedPointSelected == null)
+        {
+            for (int i = 0; i < allDirectedPoints.Length; i++)
+            {
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button(allDirectedPoints[i].nickname))
+                    directedPointSelected = allDirectedPoints[i];
+                if (GUILayout.Button("DELETE"))
+                    DirectedPoint.RemoveAt(controllerDataSelected, i);
+                GUILayout.EndHorizontal();
+            }
+            return;
+        }
+        if (GUILayout.Button("CHOOSE ANOTHER DATA TYPE"))
+        {
+            directedPointSelected = null;
+            ClearSelection();
+            return;
+        }
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label($"DIRECTED POINT DATA SELECTED: {directedPointSelected.nickname}", EditorStyles.whiteLargeLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+    }
     void ClearSelection()
     {
         selectedCenters.Clear();
@@ -327,12 +368,14 @@ public class ControllerDataEditor : EditorWindow
         LayerSelection();
         StateSelection();
         StateDataChoice();
-        if(directedCircleOverlapSelected == null && circleSpriteMaskSelected == null)
+        if(directedCircleOverlapSelected == null && circleSpriteMaskSelected == null && directedPointSelected == null)
             DirectedCircleColliderSelection();
-        if (directedCircleColliderSelected == null && circleSpriteMaskSelected == null)
+        if (directedCircleColliderSelected == null && circleSpriteMaskSelected == null && directedPointSelected == null)
             DirectedCircleOverlapSelection();
-        if(directedCircleColliderSelected == null && directedCircleOverlapSelected == null)
+        if(directedCircleColliderSelected == null && directedCircleOverlapSelected == null && directedPointSelected == null)
             CircleSpriteMaskSelection();
+        if(directedCircleColliderSelected == null && directedCircleOverlapSelected == null && circleSpriteMaskSelected == null)
+            DirectedPointSelection();
         FrameSelection();
         
         if (directedCircleColliderSelected != null)
@@ -370,6 +413,15 @@ public class ControllerDataEditor : EditorWindow
             StateDataEditing.CenterSelection(circleSpriteMaskSelected.nickname, ref circleSpriteMaskSelected.centers, ref selectedCenters);
             StateDataEditing.RadiusSelection(circleSpriteMaskSelected.nickname, ref circleSpriteMaskSelected.radii, ref selectedRadii);
         }
+        if(directedPointSelected != null)
+        {
+            StateDataEditing.AssignedFramesLabel(directedPointSelected.assignedFrames);
+            StateDataEditing.AssignedFramesEdit(frame, ref directedPointSelected.assignedFrames);
+            StateDataEditing.MainDataEdit(ref directedPointSelected.nickname, ref directedPointSelected.layerName, ref directedPointSelected.stateName, ref directedPointSelected.color);
+            StateDataEditing.CenterSelection(directedPointSelected.nickname, ref directedPointSelected.centers, ref selectedCenters);
+            StateDataEditing.UpDirectionSelection(directedPointSelected.nickname, ref directedPointSelected.upDirections, ref selectedUpDirections);
+            StateDataEditing.RightDirectionSelection(directedPointSelected.nickname, ref directedPointSelected.rightDirections, ref selectedRightDirections);
+        }
         GUILayout.EndScrollView();
         EditorUtility.SetDirty(controllerDataSelected);
     }
@@ -391,7 +443,7 @@ public class ControllerDataEditor : EditorWindow
     }
     public void FrameSelection()
     {
-        if (directedCircleColliderSelected == null && directedCircleOverlapSelected == null && circleSpriteMaskSelected == null)
+        if (directedCircleColliderSelected == null && directedCircleOverlapSelected == null && circleSpriteMaskSelected == null && directedPointSelected == null)
         {
             frame = 0;
             return;
@@ -455,6 +507,15 @@ public class ControllerDataEditor : EditorWindow
             {
                 StateDataHandles.CenterHandle(animator.transform, ref circleSpriteMaskSelected.centers, selectedCenters, circleSpriteMaskSelected.color);
                 StateDataHandles.RadiusHandle(animator.transform, circleSpriteMaskSelected.centers, ref circleSpriteMaskSelected.radii, selectedRadii, circleSpriteMaskSelected.color);
+            }
+        }
+        if(directedPointSelected != null)
+        {
+            if(directedPointSelected.centers.Count > 0)
+            {
+                StateDataHandles.PointHandle(animator.transform, ref directedPointSelected.centers, selectedCenters, directedPointSelected.color);
+                StateDataHandles.UpDirectionHandle(animator.transform, directedPointSelected.centers, ref directedPointSelected.upDirections, selectedUpDirections);
+                StateDataHandles.RightDirectionHandle(animator.transform, directedPointSelected.centers, ref directedPointSelected.rightDirections, selectedRightDirections);
             }
         }
     }
@@ -573,14 +634,23 @@ public static class StateDataEditing
                 //Going to need to check all indices which are currently selected
                 //find out which ones are greater than the one we are deleting
                 //and then subtract one from them
-                for (int j = 0; j < selection.Count; j++)
+                List<Vector2> newCenters = new List<Vector2>();
+                List<int> newSelections = new List<int>();
+                for (int j = 0; j < centers.Count; j++)
                 {
-                    if (selection[j] == i)
-                        selection.RemoveAt(j);
-                    if (selection.Count > 0 && selection[j] > i)
-                        selection[j]--;
+                    if (j == i)
+                        continue;
+                    newCenters.Add(centers[j]);
+                    if (selection.Contains(j))
+                    {
+                        if (j > i)
+                            newSelections.Add(j - 1);
+                        else
+                            newSelections.Add(j);
+                    }
                 }
-                centers.RemoveAt(i);
+                centers = newCenters;
+                selection = newSelections;
             }
             GUILayout.EndHorizontal();
         }
@@ -619,14 +689,23 @@ public static class StateDataEditing
                 //Going to need to check all indices which are currently selected
                 //find out which ones are greater than the one we are deleting
                 //and then subtract one from them
-                for (int j = 0; j < selection.Count; j++)
+                List<float> newRadii = new List<float>();
+                List<int> newSelections = new List<int>();
+                for (int j = 0; j < radii.Count; j++)
                 {
-                    if (selection[j] == i)
-                        selection.RemoveAt(j);
-                    if (selection.Count > 0 && selection[j] > i)
-                        selection[j]--;
+                    if (j == i)
+                        continue;
+                    newRadii.Add(radii[j]);
+                    if (selection.Contains(j))
+                    {
+                        if (j > i)
+                            newSelections.Add(j - 1);
+                        else
+                            newSelections.Add(j);
+                    }
                 }
-                radii.RemoveAt(i);
+                radii = newRadii;
+                selection = newSelections;
             }
             GUILayout.EndHorizontal();
         }
@@ -662,17 +741,23 @@ public static class StateDataEditing
             upDirections[i] = EditorGUILayout.Vector2Field($"{nickname} Up Direction {i}", upDirections[i]);
             if (GUILayout.Button("Delete"))
             {
-                //Going to need to check all indices which are currently selected
-                //find out which ones are greater than the one we are deleting
-                //and then subtract one from them
-                for (int j = 0; j < selection.Count; j++)
+                List<Vector2> newUpDirections = new List<Vector2>();
+                List<int> newSelections = new List<int>();
+                for (int j = 0; j < upDirections.Count; j++)
                 {
-                    if (selection[j] == i)
-                        selection.RemoveAt(j);
-                    if (selection.Count > 0 && selection[j] > i)
-                        selection[j]--;
+                    if (j == i)
+                        continue;
+                    newUpDirections.Add(upDirections[j]);
+                    if (selection.Contains(j))
+                    {
+                        if (j > i)
+                            newSelections.Add(j - 1);
+                        else
+                            newSelections.Add(j);
+                    }
                 }
-                upDirections.RemoveAt(i);
+                upDirections = newUpDirections;
+                selection = newSelections;
             }
             GUILayout.EndHorizontal();
         }
@@ -708,17 +793,23 @@ public static class StateDataEditing
             rightDirections[i] = EditorGUILayout.Vector2Field($"{nickname} Right Direction {i}", rightDirections[i]);
             if (GUILayout.Button("Delete"))
             {
-                //Going to need to check all indices which are currently selected
-                //find out which ones are greater than the one we are deleting
-                //and then subtract one from them
-                for (int j = 0; j < selection.Count; j++)
+                List<Vector2> newRightDirections = new List<Vector2>();
+                List<int> newSelections = new List<int>();
+                for (int j = 0; j < rightDirections.Count; j++)
                 {
-                    if (selection[j] == i)
-                        selection.RemoveAt(j);
-                    if (selection.Count > 0 && selection[j] > i)
-                        selection[j]--;
+                    if (j == i)
+                        continue;
+                    newRightDirections.Add(rightDirections[j]);
+                    if (selection.Contains(j))
+                    {
+                        if (j > i)
+                            newSelections.Add(j - 1);
+                        else
+                            newSelections.Add(j);
+                    }
                 }
-                rightDirections.RemoveAt(i);
+                rightDirections = newRightDirections;
+                selection = newSelections;
             }
             GUILayout.EndHorizontal();
         }
@@ -836,6 +927,30 @@ public static class StateDataHandles
                 Vector3 delta = newCirclePos - oldCirclePos;
                 rightDirections[selectedRightDirections[i]] += (Vector2)delta;
                 rightDirections[selectedRightDirections[i]] = rightDirections[selectedRightDirections[i]].normalized;
+            }
+        }
+    }
+    public static void PointHandle(Transform parentObj, ref List<Vector2> centers, List<int> selectedCenters, Color color)
+    {
+        if (centers == null || centers.Count == 0)
+            return;
+        if (selectedCenters == null || selectedCenters.Count == 0)
+            return;
+        for (int i = 0; i < selectedCenters.Count; i++)
+        {
+            if (selectedCenters[i] >= centers.Count)
+                continue;
+            Vector3 worldPos = parentObj.position + (Vector3)centers[selectedCenters[i]];
+            EditorGUI.BeginChangeCheck();
+            Handles.color = color.WithAlpha(1f);
+            Vector3 oldSquarePos = worldPos;
+            Vector3 newSquarePos = Handles.FreeMoveHandle(oldSquarePos, Quaternion.identity, 0.65f, Vector3.one * 0.25f, Handles.RectangleHandleCap);
+            Handles.DrawLine(worldPos - Vector3.right, worldPos + Vector3.right, 3f);
+            Handles.DrawLine(worldPos - Vector3.up, worldPos + Vector3.up, 3f);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Vector3 delta = newSquarePos - oldSquarePos;
+                centers[selectedCenters[i]] += (Vector2)delta;
             }
         }
     }
