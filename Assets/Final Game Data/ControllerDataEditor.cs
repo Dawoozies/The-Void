@@ -1,18 +1,15 @@
 #if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.Animations;
 using System;
-using System.Linq;
 using Unity.VisualScripting;
-using System.Reflection;
 
 public class ControllerDataEditor : EditorWindow
 {
     List<AnimatorController> allControllers;
-    ControllerData[] allControllerData;  
+    ControllerData[] allControllerData;
     Animator animator;
     AnimatorController controllerSelected;
     AnimatorControllerLayer layerSelected;
@@ -34,6 +31,22 @@ public class ControllerDataEditor : EditorWindow
     List<int> selectedRadii = new List<int>();
     List<int> selectedUpDirections = new List<int>();
     List<int> selectedRightDirections = new List<int>();
+    DataSelection dataSelection 
+    {
+        get 
+        { 
+            DataSelection selectionValue = DataSelection.None;
+            if (directedCircleColliderSelected != null)
+                selectionValue |= DataSelection.DirectedCircleCollider;
+            if (directedCircleOverlapSelected != null)
+                selectionValue |= DataSelection.DirectedCircleOverlap;
+            if (circleSpriteMaskSelected != null)
+                selectionValue |= DataSelection.CircleSpriteMask;
+            if (directedPointSelected != null)
+                selectionValue |= DataSelection.DirectedPoint;
+            return selectionValue;
+        }
+    }
     [MenuItem("Window/ControllerDataEditor")]
     public static void ShowWindow()
     {
@@ -84,7 +97,8 @@ public class ControllerDataEditor : EditorWindow
     {
         if (controllerSelected == null)
             return;
-        if (allControllerData == null || allControllerData.Length == 0)
+        //Only in the case no controller data exists at all
+        if(allControllerData == null || allControllerData.Length == 0)
         {
             //Create new controller data
             GUILayout.BeginHorizontal();
@@ -97,21 +111,30 @@ public class ControllerDataEditor : EditorWindow
                 ResourcesUtility.CreateNewControllerData(controllerSelected.name);
                 allControllerData = ResourcesUtility.LoadAllControllerDataInResources();
             }
+            return;
         }
-        else
+        if(controllerDataSelected == null)
         {
-            if (controllerDataSelected == null)
+            foreach (ControllerData controllerData in allControllerData)
             {
-                foreach (ControllerData controllerData in allControllerData)
+                if (controllerData.controllerName == controllerSelected.name)
                 {
-                    if (controllerData.controllerName == controllerSelected.name)
-                    {
-                        controllerDataSelected = controllerData;
-                        return;
-                    }
+                    controllerDataSelected = controllerData;
+                    return;
                 }
             }
 
+            //Create new controller data
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("No controller data exists yet. Create new?", EditorStyles.boldLabel);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            if (GUILayout.Button("CREATE NEW CONTROLLER DATA"))
+            {
+                ResourcesUtility.CreateNewControllerData(controllerSelected.name);
+                allControllerData = ResourcesUtility.LoadAllControllerDataInResources();
+            }
         }
     }
     void LayerSelection()
@@ -186,7 +209,7 @@ public class ControllerDataEditor : EditorWindow
     {
         if (stateSelected == null)
             return;
-        if (directedCircleColliderSelected != null || directedCircleOverlapSelected != null || circleSpriteMaskSelected != null || directedPointSelected != null)
+        if (dataSelection != DataSelection.None)
             return;
         if(GUILayout.Button("CHOOSE ANOTHER STATE"))
         {
@@ -217,6 +240,8 @@ public class ControllerDataEditor : EditorWindow
     }
     void DirectedCircleColliderSelection()
     {
+        if (stateSelected == null)
+            return;
         if (allDirectedCircleColliders == null || allDirectedCircleColliders.Length == 0)
             return;
         GUILayout.BeginHorizontal();
@@ -251,6 +276,8 @@ public class ControllerDataEditor : EditorWindow
     }
     void DirectedCircleOverlapSelection()
     {
+        if (stateSelected == null)
+            return;
         if (allDirectedCircleOverlaps == null || allDirectedCircleOverlaps.Length == 0)
             return;
         GUILayout.BeginHorizontal();
@@ -285,6 +312,8 @@ public class ControllerDataEditor : EditorWindow
     }
     void CircleSpriteMaskSelection()
     {
+        if (stateSelected == null)
+            return;
         if (allCircleSpriteMasks == null || allCircleSpriteMasks.Length == 0)
             return;
         GUILayout.BeginHorizontal();
@@ -319,7 +348,9 @@ public class ControllerDataEditor : EditorWindow
     }
     void DirectedPointSelection()
     {
-        if(allDirectedPoints == null || allDirectedPoints.Length == 0)
+        if (stateSelected == null)
+            return;
+        if (allDirectedPoints == null || allDirectedPoints.Length == 0)
             return;
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
@@ -368,13 +399,14 @@ public class ControllerDataEditor : EditorWindow
         LayerSelection();
         StateSelection();
         StateDataChoice();
-        if(directedCircleOverlapSelected == null && circleSpriteMaskSelected == null && directedPointSelected == null)
+
+        if(dataSelection.CheckComplementOfFlag(DataSelection.DirectedCircleCollider))
             DirectedCircleColliderSelection();
-        if (directedCircleColliderSelected == null && circleSpriteMaskSelected == null && directedPointSelected == null)
+        if (dataSelection.CheckComplementOfFlag(DataSelection.DirectedCircleOverlap))
             DirectedCircleOverlapSelection();
-        if(directedCircleColliderSelected == null && directedCircleOverlapSelected == null && directedPointSelected == null)
+        if(dataSelection.CheckComplementOfFlag(DataSelection.CircleSpriteMask))
             CircleSpriteMaskSelection();
-        if(directedCircleColliderSelected == null && directedCircleOverlapSelected == null && circleSpriteMaskSelected == null)
+        if(dataSelection.CheckComplementOfFlag(DataSelection.DirectedPoint))
             DirectedPointSelection();
         FrameSelection();
         
@@ -443,7 +475,7 @@ public class ControllerDataEditor : EditorWindow
     }
     public void FrameSelection()
     {
-        if (directedCircleColliderSelected == null && directedCircleOverlapSelected == null && circleSpriteMaskSelected == null && directedPointSelected == null)
+        if (dataSelection == DataSelection.None)
         {
             frame = 0;
             return;
@@ -719,7 +751,7 @@ public static class StateDataEditing
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Add Up Direction"))
         {
-            upDirections.Add(Vector2.one);
+            upDirections.Add(Vector2.up);
         }
         for (int i = 0; i < upDirections.Count; i++)
         {
@@ -771,7 +803,7 @@ public static class StateDataEditing
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Add Right Direction"))
         {
-            rightDirections.Add(Vector2.one);
+            rightDirections.Add(Vector2.right);
         }
         for (int i = 0; i < rightDirections.Count; i++)
         {
@@ -954,5 +986,14 @@ public static class StateDataHandles
             }
         }
     }
+}
+[Flags]
+public enum DataSelection
+{
+    None = 0,
+    DirectedCircleCollider = 1,
+    DirectedCircleOverlap = 2,
+    CircleSpriteMask = 4,
+    DirectedPoint = 8,
 }
 #endif

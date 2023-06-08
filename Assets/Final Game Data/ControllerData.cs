@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using UnityEngine;
 [Serializable]
 public class ControllerData : ScriptableObject
@@ -339,6 +336,7 @@ public class DirectedPoint
         upDirections = new List<Vector2>();
         rightDirections = new List<Vector2>();
     }
+
     public static DirectedPoint CreateNew(string layerName, string stateName)
     {
         DirectedPoint directedPoint = new DirectedPoint();

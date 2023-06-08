@@ -5436,14 +5436,13 @@ GameObject:
   - component: {fileID: 429240612}
   - component: {fileID: 429240611}
   - component: {fileID: 429240610}
-  - component: {fileID: 429240609}
   m_Layer: 0
   m_Name: ComponentDebugCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &429240608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5467,224 +5466,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &429240609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429240607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a0564d0f42037408bc74da6255304e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderDebugAlpha: 0
-  overlapDebugAlpha: 0
-  circleDebugObjects:
-  - {fileID: 1789352839}
-  - {fileID: 699348239}
-  - {fileID: 433010035}
-  - {fileID: 310387894}
-  - {fileID: 428558367}
-  - {fileID: 2001265432}
-  - {fileID: 2038323028}
-  - {fileID: 1899972585}
-  - {fileID: 418306156}
-  - {fileID: 807912426}
-  - {fileID: 330526551}
-  - {fileID: 18683046}
-  - {fileID: 486976764}
-  - {fileID: 1878624724}
-  - {fileID: 297828231}
-  - {fileID: 904215636}
-  - {fileID: 1202103652}
-  - {fileID: 811189198}
-  - {fileID: 23379121}
-  - {fileID: 1714585702}
-  - {fileID: 59674847}
-  - {fileID: 420807470}
-  - {fileID: 683274526}
-  - {fileID: 1867600147}
-  - {fileID: 1712296404}
-  - {fileID: 1292866143}
-  - {fileID: 41466615}
-  - {fileID: 2001720091}
-  - {fileID: 836983057}
-  - {fileID: 310098025}
-  - {fileID: 686535986}
-  - {fileID: 576489166}
-  - {fileID: 1723375745}
-  - {fileID: 1438507754}
-  - {fileID: 1772905023}
-  - {fileID: 1534323328}
-  - {fileID: 331619920}
-  - {fileID: 1705713858}
-  - {fileID: 1230992965}
-  - {fileID: 1626669379}
-  - {fileID: 1531296642}
-  - {fileID: 664891201}
-  - {fileID: 197413110}
-  - {fileID: 1109340805}
-  - {fileID: 446484613}
-  - {fileID: 272076766}
-  - {fileID: 1267748934}
-  - {fileID: 1070396139}
-  - {fileID: 201376823}
-  - {fileID: 774810178}
-  - {fileID: 1293971966}
-  - {fileID: 1372202267}
-  - {fileID: 1823007312}
-  - {fileID: 2118511620}
-  - {fileID: 347150566}
-  - {fileID: 280345929}
-  - {fileID: 1997323884}
-  - {fileID: 995764378}
-  - {fileID: 1706829700}
-  - {fileID: 1912777633}
-  - {fileID: 1556224788}
-  - {fileID: 1591741208}
-  - {fileID: 594971624}
-  - {fileID: 683726274}
-  - {fileID: 2067735525}
-  - {fileID: 1523902451}
-  - {fileID: 1921988170}
-  - {fileID: 1908690179}
-  - {fileID: 639696223}
-  - {fileID: 546380886}
-  - {fileID: 891739598}
-  - {fileID: 676331425}
-  - {fileID: 241240795}
-  - {fileID: 1414020427}
-  - {fileID: 1495833483}
-  - {fileID: 1550802152}
-  - {fileID: 1900377817}
-  - {fileID: 1244199095}
-  - {fileID: 246513278}
-  - {fileID: 1579049772}
-  - {fileID: 1960440296}
-  - {fileID: 1003479639}
-  - {fileID: 1949604206}
-  - {fileID: 207933752}
-  - {fileID: 1081210121}
-  - {fileID: 372974064}
-  - {fileID: 1918982457}
-  - {fileID: 1433609548}
-  - {fileID: 155970278}
-  - {fileID: 20754511}
-  - {fileID: 1839813506}
-  - {fileID: 1458651823}
-  - {fileID: 462585261}
-  - {fileID: 2139254641}
-  - {fileID: 40312973}
-  - {fileID: 70857464}
-  - {fileID: 888799711}
-  - {fileID: 1692610433}
-  - {fileID: 1745734322}
-  - {fileID: 843077236}
-  circleColliders: []
-  overlapCircleDebugObjects:
-  - {fileID: 991584076}
-  - {fileID: 1375701938}
-  - {fileID: 785945144}
-  - {fileID: 540132383}
-  - {fileID: 1963192726}
-  - {fileID: 456957067}
-  - {fileID: 1372317066}
-  - {fileID: 1447064823}
-  - {fileID: 921376583}
-  - {fileID: 424312568}
-  - {fileID: 800397108}
-  - {fileID: 704198213}
-  - {fileID: 1194136704}
-  - {fileID: 505748889}
-  - {fileID: 1564175906}
-  - {fileID: 674811978}
-  - {fileID: 235596664}
-  - {fileID: 1194368423}
-  - {fileID: 790318516}
-  - {fileID: 396764755}
-  - {fileID: 521850170}
-  - {fileID: 1282709236}
-  - {fileID: 765633773}
-  - {fileID: 458390728}
-  - {fileID: 1442887597}
-  - {fileID: 1459021871}
-  - {fileID: 1890115020}
-  - {fileID: 732747365}
-  - {fileID: 1336536045}
-  - {fileID: 212163491}
-  - {fileID: 1712830735}
-  - {fileID: 617092394}
-  - {fileID: 884932130}
-  - {fileID: 1030420058}
-  - {fileID: 1232174475}
-  - {fileID: 1094335366}
-  - {fileID: 1107913353}
-  - {fileID: 1870884228}
-  - {fileID: 2104407465}
-  - {fileID: 1790779837}
-  - {fileID: 1112407370}
-  - {fileID: 1195030706}
-  - {fileID: 1411935640}
-  - {fileID: 1161673912}
-  - {fileID: 2089758642}
-  - {fileID: 103982703}
-  - {fileID: 1710136652}
-  - {fileID: 95913874}
-  - {fileID: 1366652487}
-  - {fileID: 1073453204}
-  overlapAreaDebugObjects:
-  - {fileID: 1787300166}
-  - {fileID: 544832905}
-  - {fileID: 1786227801}
-  - {fileID: 1923130929}
-  - {fileID: 1965548441}
-  - {fileID: 1803827224}
-  - {fileID: 1003778921}
-  - {fileID: 1411015497}
-  - {fileID: 937769756}
-  - {fileID: 1134720073}
-  - {fileID: 611941146}
-  - {fileID: 1028377333}
-  - {fileID: 1549081823}
-  - {fileID: 2076418041}
-  - {fileID: 914748881}
-  - {fileID: 963318408}
-  - {fileID: 1436440065}
-  - {fileID: 1366531857}
-  - {fileID: 2125347319}
-  - {fileID: 20817056}
-  - {fileID: 812028409}
-  - {fileID: 1076751334}
-  - {fileID: 2007046591}
-  - {fileID: 748927294}
-  - {fileID: 1572184529}
-  - {fileID: 327452668}
-  - {fileID: 175780971}
-  - {fileID: 1183251507}
-  - {fileID: 1931979552}
-  - {fileID: 1091247499}
-  - {fileID: 1899475194}
-  - {fileID: 1920531848}
-  - {fileID: 1117655064}
-  - {fileID: 192380778}
-  - {fileID: 674590512}
-  - {fileID: 2043225058}
-  - {fileID: 1557315168}
-  - {fileID: 96781478}
-  - {fileID: 471443099}
-  - {fileID: 1937426574}
-  - {fileID: 1562418665}
-  - {fileID: 1588133277}
-  - {fileID: 703122568}
-  - {fileID: 853775095}
-  - {fileID: 1246312539}
-  - {fileID: 57576245}
-  - {fileID: 605548777}
-  - {fileID: 241095062}
-  - {fileID: 1224740316}
-  - {fileID: 194353529}
 --- !u!114 &429240610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11424,8 +11205,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 885214844}
-  - component: {fileID: 885214843}
   - component: {fileID: 885214845}
+  - component: {fileID: 885214846}
   m_Layer: 0
   m_Name: FinalGameManager
   m_TagString: Untagged
@@ -11433,28 +11214,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &885214843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885214842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff6ae5f328411384cb664e31b9a8f302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllers:
-  - {fileID: 9100000, guid: 69cd56f628c0e6146a692c22fae60d1c, type: 2}
-  - {fileID: 9100000, guid: 2d679c85b63f31440993b6d83cd629d4, type: 2}
-  - {fileID: 9100000, guid: e9d70311833a065469c64dd312623fb6, type: 2}
-  - {fileID: 9100000, guid: 5725ca1452fdcbc40ab7039f4f7052e2, type: 2}
-  - {fileID: 9100000, guid: 54f6c7689b2b87c4cb2504e4056a6268, type: 2}
-  ropeMaterial: {fileID: 2100000, guid: 0b8b491aca744114eb710726d082d53e, type: 2}
-  gravityDirection: {x: 0, y: -1, z: 0}
-  centerOfCamera: {x: 0, y: 0, z: 0}
-  spriteForMask: {fileID: 8177471321811730583, guid: 87aaca0a643d54397ba969dab4fc8875, type: 3}
 --- !u!4 &885214844
 Transform:
   m_ObjectHideFlags: 0
@@ -11492,6 +11251,20 @@ MonoBehaviour:
   RightBumper_BufferedInput: 0
   LeftBumper_Input: 0
   LeftBumper_BufferedInput: 0
+--- !u!114 &885214846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885214842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13342aed17fec62459b58ed2d16b5c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllers:
+  - {fileID: 9100000, guid: 69cd56f628c0e6146a692c22fae60d1c, type: 2}
 --- !u!1 &888799709
 GameObject:
   m_ObjectHideFlags: 0
