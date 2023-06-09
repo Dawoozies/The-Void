@@ -17,42 +17,42 @@ public class ControllerData : ScriptableObject
         circleSpriteMasks = new CircleSpriteMask[] { };
         directedPoints = new DirectedPoint[] { };
     }
-    public DirectedCircleCollider[] GetAllDirectedCircleColliderData(string layerName, string stateName)
+    public DirectedCircleCollider[] GetAllDirectedCircleColliderData(string stateName)
     {
-        List<DirectedCircleCollider> stateDatas = new List<DirectedCircleCollider>();
+        List<DirectedCircleCollider> stateDatas = new();
         foreach (DirectedCircleCollider directedCircleCollider in directedCircleColliders)
         {
-            if (directedCircleCollider.layerName == layerName && directedCircleCollider.stateName == stateName)
+            if (directedCircleCollider.stateName == stateName)
                 stateDatas.Add(directedCircleCollider);
         }
         return stateDatas.ToArray();
     }
-    public DirectedCircleOverlap[] GetAllDirectedCircleOverlapData(string layerName, string stateName)
+    public DirectedCircleOverlap[] GetAllDirectedCircleOverlapData(string stateName)
     {
-        List<DirectedCircleOverlap> stateDatas = new List<DirectedCircleOverlap>();
+        List<DirectedCircleOverlap> stateDatas = new();
         foreach (DirectedCircleOverlap directedCircleOverlap in directedCircleOverlaps)
         {
-            if (directedCircleOverlap.layerName == layerName && directedCircleOverlap.stateName == stateName)
+            if (directedCircleOverlap.stateName == stateName)
                 stateDatas.Add(directedCircleOverlap);
         }
         return stateDatas.ToArray();
     }
-    public CircleSpriteMask[] GetAllCircleSpriteMaskData(string layerName, string stateName)
+    public CircleSpriteMask[] GetAllCircleSpriteMaskData(string stateName)
     {
-        List<CircleSpriteMask> stateDatas = new List<CircleSpriteMask>();
+        List<CircleSpriteMask> stateDatas = new();
         foreach (CircleSpriteMask circleSpriteMask in circleSpriteMasks)
         {
-            if(circleSpriteMask.layerName == layerName && circleSpriteMask.stateName == stateName)
+            if(circleSpriteMask.stateName == stateName)
                 stateDatas.Add(circleSpriteMask);
         }
         return stateDatas.ToArray();
     }
-    public DirectedPoint[] GetAllDirectedPointData(string layerName, string stateName)
+    public DirectedPoint[] GetAllDirectedPointData(string stateName)
     {
-        List<DirectedPoint> stateDatas = new List<DirectedPoint>();
+        List<DirectedPoint> stateDatas = new();
         foreach (DirectedPoint directedPoint in directedPoints)
         {
-            if (directedPoint.layerName == layerName && directedPoint.stateName == stateName)
+            if (directedPoint.stateName == stateName)
                 stateDatas.Add(directedPoint);
         }
         return stateDatas.ToArray();
@@ -62,7 +62,6 @@ public class ControllerData : ScriptableObject
 public class DirectedCircleCollider
 {
     public string nickname;
-    public string layerName;
     public string stateName;
     public List<int> assignedFrames;
     public Color color;
@@ -75,7 +74,6 @@ public class DirectedCircleCollider
     public DirectedCircleCollider()
     {
         nickname = string.Empty;
-        layerName = string.Empty;
         stateName = string.Empty;
         assignedFrames = new List<int>();
         color = Color.white;
@@ -86,19 +84,20 @@ public class DirectedCircleCollider
         upDirections = new List<Vector2>();
         rightDirections = new List<Vector2>();
     }
-    public static DirectedCircleCollider CreateNew(string layerName, string stateName)
+    public static DirectedCircleCollider CreateNew(string stateName)
     {
-        DirectedCircleCollider directedCircleCollider = new DirectedCircleCollider();
-        directedCircleCollider.nickname = "New Directed Circle Collider";
-        directedCircleCollider.layerName = layerName;
-        directedCircleCollider.stateName = stateName;
-        directedCircleCollider.assignedFrames = new List<int>();
-        directedCircleCollider.isTrigger = false;
-        directedCircleCollider.collisionLayer = 0;
-        directedCircleCollider.centers = new List<Vector2>();
-        directedCircleCollider.radii = new List<float>();
-        directedCircleCollider.upDirections = new List<Vector2>();
-        directedCircleCollider.rightDirections = new List<Vector2>();
+        DirectedCircleCollider directedCircleCollider = new()
+        {
+            nickname = "New Directed Circle Collider",
+            stateName = stateName,
+            assignedFrames = new List<int>(),
+            isTrigger = false,
+            collisionLayer = 0,
+            centers = new List<Vector2>(),
+            radii = new List<float>(),
+            upDirections = new List<Vector2>(),
+            rightDirections = new List<Vector2>()
+        };
         return directedCircleCollider;
     }
     public static void AddNew(ControllerData controllerData, DirectedCircleCollider stateDataToAdd)
@@ -147,7 +146,6 @@ public class DirectedCircleCollider
 public class DirectedCircleOverlap
 {
     public string nickname;
-    public string layerName;
     public string stateName;
     public List<int> assignedFrames;
     public Color color;
@@ -161,7 +159,6 @@ public class DirectedCircleOverlap
     public DirectedCircleOverlap()
     {
         nickname = string.Empty;
-        layerName = string.Empty;
         stateName = string.Empty;
         assignedFrames = new List<int>();
         color = Color.white;
@@ -173,20 +170,21 @@ public class DirectedCircleOverlap
         upDirections = new List<Vector2>();
         rightDirections = new List<Vector2>();
     }
-    public static DirectedCircleOverlap CreateNew(string layerName, string stateName)
+    public static DirectedCircleOverlap CreateNew(string stateName)
     {
-        DirectedCircleOverlap directedCircleOverlap = new DirectedCircleOverlap();
-        directedCircleOverlap.nickname = "New Directed Circle Overlap";
-        directedCircleOverlap.layerName = layerName;
-        directedCircleOverlap.stateName = stateName;
-        directedCircleOverlap.assignedFrames = new List<int>();
-        directedCircleOverlap.useNullResult = false;
-        directedCircleOverlap.targetLayers = 0;
-        directedCircleOverlap.holdForNormalizedTime = 0f;
-        directedCircleOverlap.centers = new List<Vector2>();
-        directedCircleOverlap.radii = new List<float>();
-        directedCircleOverlap.upDirections = new List<Vector2>();
-        directedCircleOverlap.rightDirections = new List<Vector2>();
+        DirectedCircleOverlap directedCircleOverlap = new()
+        {
+            nickname = "New Directed Circle Overlap",
+            stateName = stateName,
+            assignedFrames = new List<int>(),
+            useNullResult = false,
+            targetLayers = 0,
+            holdForNormalizedTime = 0f,
+            centers = new List<Vector2>(),
+            radii = new List<float>(),
+            upDirections = new List<Vector2>(),
+            rightDirections = new List<Vector2>()
+        };
         return directedCircleOverlap;
     }
     public static void AddNew(ControllerData controllerData, DirectedCircleOverlap stateDataToAdd)
@@ -235,7 +233,6 @@ public class DirectedCircleOverlap
 public class CircleSpriteMask
 {
     public string nickname;
-    public string layerName;
     public string stateName;
     public List<int> assignedFrames;
     public Color color;
@@ -247,7 +244,6 @@ public class CircleSpriteMask
     public CircleSpriteMask()
     {
         nickname = string.Empty;
-        layerName = string.Empty;
         stateName = string.Empty;
         assignedFrames = new List<int>();
         color = Color.white;
@@ -257,19 +253,20 @@ public class CircleSpriteMask
         centers = new List<Vector2>();
         radii = new List<float>();
     }
-    public static CircleSpriteMask CreateNew(string layerName, string stateName)
+    public static CircleSpriteMask CreateNew(string stateName)
     {
-        CircleSpriteMask circleSpriteMask = new CircleSpriteMask();
-        circleSpriteMask.nickname = "New Circle Sprite Mask";
-        circleSpriteMask.layerName = layerName;
-        circleSpriteMask.stateName = stateName;
-        circleSpriteMask.assignedFrames = new List<int>();
-        circleSpriteMask.color = Color.white;
-        circleSpriteMask.isCustomRangeActive = false;
-        circleSpriteMask.sortingLayer = "Default";
-        circleSpriteMask.sortingOrder = 0;
-        circleSpriteMask.centers = new List<Vector2>();
-        circleSpriteMask.radii = new List<float>();
+        CircleSpriteMask circleSpriteMask = new()
+        {
+            nickname = "New Circle Sprite Mask",
+            stateName = stateName,
+            assignedFrames = new List<int>(),
+            color = Color.white,
+            isCustomRangeActive = false,
+            sortingLayer = "Default",
+            sortingOrder = 0,
+            centers = new List<Vector2>(),
+            radii = new List<float>()
+        };
         return circleSpriteMask;
     }
     public static void AddNew(ControllerData controllerData, CircleSpriteMask stateDataToAdd)
@@ -318,7 +315,6 @@ public class CircleSpriteMask
 public class DirectedPoint
 {
     public string nickname;
-    public string layerName;
     public string stateName;
     public List<int> assignedFrames;
     public Color color;
@@ -328,7 +324,6 @@ public class DirectedPoint
     public DirectedPoint()
     {
         nickname = string.Empty;
-        layerName = string.Empty;
         stateName = string.Empty;
         assignedFrames = new List<int>();
         color = Color.white;
@@ -337,17 +332,18 @@ public class DirectedPoint
         rightDirections = new List<Vector2>();
     }
 
-    public static DirectedPoint CreateNew(string layerName, string stateName)
+    public static DirectedPoint CreateNew(string stateName)
     {
-        DirectedPoint directedPoint = new DirectedPoint();
-        directedPoint.nickname = "New Directed Point";
-        directedPoint.layerName = layerName;
-        directedPoint.stateName = stateName;
-        directedPoint.assignedFrames = new List<int>();
-        directedPoint.color = Color.white;
-        directedPoint.centers = new List<Vector2>();
-        directedPoint.upDirections = new List<Vector2>();
-        directedPoint.rightDirections = new List<Vector2>();
+        DirectedPoint directedPoint = new()
+        {
+            nickname = "New Directed Point",
+            stateName = stateName,
+            assignedFrames = new List<int>(),
+            color = Color.white,
+            centers = new List<Vector2>(),
+            upDirections = new List<Vector2>(),
+            rightDirections = new List<Vector2>()
+        };
         return directedPoint;
     }
     public static void AddNew(ControllerData controllerData, DirectedPoint stateDataToAdd)

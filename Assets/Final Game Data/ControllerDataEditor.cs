@@ -27,11 +27,11 @@ public class ControllerDataEditor : EditorWindow
     DirectedCircleOverlap directedCircleOverlapSelected;
     CircleSpriteMask circleSpriteMaskSelected;
     DirectedPoint directedPointSelected;
-    List<int> selectedCenters = new List<int>();
-    List<int> selectedRadii = new List<int>();
-    List<int> selectedUpDirections = new List<int>();
-    List<int> selectedRightDirections = new List<int>();
-    DataSelection dataSelection 
+    List<int> selectedCenters = new();
+    List<int> selectedRadii = new();
+    List<int> selectedUpDirections = new();
+    List<int> selectedRightDirections = new();
+    DataSelection DataSelection 
     {
         get 
         { 
@@ -209,32 +209,32 @@ public class ControllerDataEditor : EditorWindow
     {
         if (stateSelected == null)
             return;
-        if (dataSelection != DataSelection.None)
+        if (DataSelection != DataSelection.None)
             return;
         if(GUILayout.Button("CHOOSE ANOTHER STATE"))
         {
             stateSelected = null;
             return;
         }
-        allDirectedCircleColliders = controllerDataSelected.GetAllDirectedCircleColliderData(layerSelected.name, stateSelected.name);
-        allDirectedCircleOverlaps = controllerDataSelected.GetAllDirectedCircleOverlapData(layerSelected.name, stateSelected.name);
-        allCircleSpriteMasks = controllerDataSelected.GetAllCircleSpriteMaskData(layerSelected.name, stateSelected.name);
-        allDirectedPoints = controllerDataSelected.GetAllDirectedPointData(layerSelected.name, stateSelected.name);
+        allDirectedCircleColliders = controllerDataSelected.GetAllDirectedCircleColliderData(stateSelected.name);
+        allDirectedCircleOverlaps = controllerDataSelected.GetAllDirectedCircleOverlapData(stateSelected.name);
+        allCircleSpriteMasks = controllerDataSelected.GetAllCircleSpriteMaskData(stateSelected.name);
+        allDirectedPoints = controllerDataSelected.GetAllDirectedPointData(stateSelected.name);
         if (GUILayout.Button("CREATE NEW DIRECTED CIRCLE COLLIDER DATA"))
         {
-            DirectedCircleCollider.AddNew(controllerDataSelected, DirectedCircleCollider.CreateNew(layerSelected.name, stateSelected.name));
+            DirectedCircleCollider.AddNew(controllerDataSelected, DirectedCircleCollider.CreateNew(stateSelected.name));
         }
         if (GUILayout.Button("CREATE NEW DIRECTED CIRCLE OVERLAP DATA"))
         {
-            DirectedCircleOverlap.AddNew(controllerDataSelected, DirectedCircleOverlap.CreateNew(layerSelected.name, stateSelected.name));
+            DirectedCircleOverlap.AddNew(controllerDataSelected, DirectedCircleOverlap.CreateNew(stateSelected.name));
         }
         if (GUILayout.Button("CREATE NEW CIRCLE SPRITE MASK DATA"))
         {
-            CircleSpriteMask.AddNew(controllerDataSelected, CircleSpriteMask.CreateNew(layerSelected.name, stateSelected.name));
+            CircleSpriteMask.AddNew(controllerDataSelected, CircleSpriteMask.CreateNew(stateSelected.name));
         }
         if(GUILayout.Button("CREATE NEW DIRECTED POINT DATA"))
         {
-            DirectedPoint.AddNew(controllerDataSelected, DirectedPoint.CreateNew(layerSelected.name, stateSelected.name));
+            DirectedPoint.AddNew(controllerDataSelected, DirectedPoint.CreateNew(stateSelected.name));
         }
         EditorUtility.SetDirty(controllerDataSelected);
     }
@@ -400,13 +400,13 @@ public class ControllerDataEditor : EditorWindow
         StateSelection();
         StateDataChoice();
 
-        if(dataSelection.CheckComplementOfFlag(DataSelection.DirectedCircleCollider))
+        if(DataSelection.CheckComplementOfFlag(DataSelection.DirectedCircleCollider))
             DirectedCircleColliderSelection();
-        if (dataSelection.CheckComplementOfFlag(DataSelection.DirectedCircleOverlap))
+        if (DataSelection.CheckComplementOfFlag(DataSelection.DirectedCircleOverlap))
             DirectedCircleOverlapSelection();
-        if(dataSelection.CheckComplementOfFlag(DataSelection.CircleSpriteMask))
+        if(DataSelection.CheckComplementOfFlag(DataSelection.CircleSpriteMask))
             CircleSpriteMaskSelection();
-        if(dataSelection.CheckComplementOfFlag(DataSelection.DirectedPoint))
+        if(DataSelection.CheckComplementOfFlag(DataSelection.DirectedPoint))
             DirectedPointSelection();
         FrameSelection();
         
@@ -416,7 +416,7 @@ public class ControllerDataEditor : EditorWindow
             //pass through methods as ref please
             StateDataEditing.AssignedFramesLabel(directedCircleColliderSelected.assignedFrames);
             StateDataEditing.AssignedFramesEdit(frame, ref directedCircleColliderSelected.assignedFrames);
-            StateDataEditing.MainDataEdit(ref directedCircleColliderSelected.nickname, ref directedCircleColliderSelected.layerName, ref directedCircleColliderSelected.stateName, ref directedCircleColliderSelected.color);
+            StateDataEditing.MainDataEdit(ref directedCircleColliderSelected.nickname, ref directedCircleColliderSelected.stateName, ref directedCircleColliderSelected.color);
             StateDataEditing.ColliderDataEdit(ref directedCircleColliderSelected.isTrigger, ref directedCircleColliderSelected.collisionLayer);
             StateDataEditing.CenterSelection(directedCircleColliderSelected.nickname, ref directedCircleColliderSelected.centers, ref selectedCenters);
             StateDataEditing.RadiusSelection(directedCircleColliderSelected.nickname, ref directedCircleColliderSelected.radii, ref selectedRadii);
@@ -429,7 +429,7 @@ public class ControllerDataEditor : EditorWindow
             //pass through methods as ref please
             StateDataEditing.AssignedFramesLabel(directedCircleOverlapSelected.assignedFrames);
             StateDataEditing.AssignedFramesEdit(frame, ref directedCircleOverlapSelected.assignedFrames);
-            StateDataEditing.MainDataEdit(ref directedCircleOverlapSelected.nickname, ref directedCircleOverlapSelected.layerName, ref directedCircleOverlapSelected.stateName, ref directedCircleOverlapSelected.color);
+            StateDataEditing.MainDataEdit(ref directedCircleOverlapSelected.nickname, ref directedCircleOverlapSelected.stateName, ref directedCircleOverlapSelected.color);
             StateDataEditing.OverlapDataEdit(ref directedCircleOverlapSelected.useNullResult, ref directedCircleOverlapSelected.targetLayers, ref directedCircleOverlapSelected.holdForNormalizedTime);
             StateDataEditing.CenterSelection(directedCircleOverlapSelected.nickname, ref directedCircleOverlapSelected.centers, ref selectedCenters);
             StateDataEditing.RadiusSelection(directedCircleOverlapSelected.nickname, ref directedCircleOverlapSelected.radii, ref selectedRadii);
@@ -440,7 +440,7 @@ public class ControllerDataEditor : EditorWindow
         {
             StateDataEditing.AssignedFramesLabel(circleSpriteMaskSelected.assignedFrames);
             StateDataEditing.AssignedFramesEdit(frame, ref circleSpriteMaskSelected.assignedFrames);
-            StateDataEditing.MainDataEdit(ref circleSpriteMaskSelected.nickname, ref circleSpriteMaskSelected.layerName, ref circleSpriteMaskSelected.stateName, ref circleSpriteMaskSelected.color);
+            StateDataEditing.MainDataEdit(ref circleSpriteMaskSelected.nickname, ref circleSpriteMaskSelected.stateName, ref circleSpriteMaskSelected.color);
             StateDataEditing.SpriteMaskDataEdit(ref circleSpriteMaskSelected.isCustomRangeActive, ref circleSpriteMaskSelected.sortingLayer, ref circleSpriteMaskSelected.sortingOrder);
             StateDataEditing.CenterSelection(circleSpriteMaskSelected.nickname, ref circleSpriteMaskSelected.centers, ref selectedCenters);
             StateDataEditing.RadiusSelection(circleSpriteMaskSelected.nickname, ref circleSpriteMaskSelected.radii, ref selectedRadii);
@@ -449,7 +449,7 @@ public class ControllerDataEditor : EditorWindow
         {
             StateDataEditing.AssignedFramesLabel(directedPointSelected.assignedFrames);
             StateDataEditing.AssignedFramesEdit(frame, ref directedPointSelected.assignedFrames);
-            StateDataEditing.MainDataEdit(ref directedPointSelected.nickname, ref directedPointSelected.layerName, ref directedPointSelected.stateName, ref directedPointSelected.color);
+            StateDataEditing.MainDataEdit(ref directedPointSelected.nickname, ref directedPointSelected.stateName, ref directedPointSelected.color);
             StateDataEditing.CenterSelection(directedPointSelected.nickname, ref directedPointSelected.centers, ref selectedCenters);
             StateDataEditing.UpDirectionSelection(directedPointSelected.nickname, ref directedPointSelected.upDirections, ref selectedUpDirections);
             StateDataEditing.RightDirectionSelection(directedPointSelected.nickname, ref directedPointSelected.rightDirections, ref selectedRightDirections);
@@ -475,7 +475,7 @@ public class ControllerDataEditor : EditorWindow
     }
     public void FrameSelection()
     {
-        if (dataSelection == DataSelection.None)
+        if (DataSelection == DataSelection.None)
         {
             frame = 0;
             return;
@@ -512,7 +512,7 @@ public class ControllerDataEditor : EditorWindow
             return;
         if(directedCircleColliderSelected != null)
         {
-            StateDataHandles.DrawCircles(animator.transform, directedCircleColliderSelected.centers, directedCircleColliderSelected.radii, selectedCenters, selectedRadii, directedCircleColliderSelected.color);
+            StateDataHandles.DrawCircles(animator.transform, directedCircleColliderSelected.centers, directedCircleColliderSelected.radii, selectedCenters, directedCircleColliderSelected.color);
             if(directedCircleColliderSelected.centers.Count > 0)
             {
                 StateDataHandles.CenterHandle(animator.transform, ref directedCircleColliderSelected.centers, selectedCenters, directedCircleColliderSelected.color);
@@ -523,7 +523,7 @@ public class ControllerDataEditor : EditorWindow
         }
         if(directedCircleOverlapSelected != null)
         {
-            StateDataHandles.DrawCircles(animator.transform, directedCircleOverlapSelected.centers, directedCircleOverlapSelected.radii, selectedCenters, selectedRadii, directedCircleOverlapSelected.color);
+            StateDataHandles.DrawCircles(animator.transform, directedCircleOverlapSelected.centers, directedCircleOverlapSelected.radii, selectedCenters, directedCircleOverlapSelected.color);
             if(directedCircleOverlapSelected.centers.Count > 0)
             {
                 StateDataHandles.CenterHandle(animator.transform, ref directedCircleOverlapSelected.centers, selectedCenters, directedCircleOverlapSelected.color);
@@ -534,7 +534,7 @@ public class ControllerDataEditor : EditorWindow
         }
         if(circleSpriteMaskSelected != null)
         {
-            StateDataHandles.DrawCircles(animator.transform, circleSpriteMaskSelected.centers, circleSpriteMaskSelected.radii, selectedCenters, selectedRadii, circleSpriteMaskSelected.color);
+            StateDataHandles.DrawCircles(animator.transform, circleSpriteMaskSelected.centers, circleSpriteMaskSelected.radii, selectedCenters, circleSpriteMaskSelected.color);
             if(circleSpriteMaskSelected.centers.Count > 0)
             {
                 StateDataHandles.CenterHandle(animator.transform, ref circleSpriteMaskSelected.centers, selectedCenters, circleSpriteMaskSelected.color);
@@ -614,10 +614,9 @@ public static class StateDataEditing
         LayerMask tempMask = EditorGUILayout.MaskField(label, UnityEditorInternal.InternalEditorUtility.LayerMaskToConcatenatedLayersMask(layerMask), UnityEditorInternal.InternalEditorUtility.layers);
         return UnityEditorInternal.InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask);
     }
-    public static void MainDataEdit(ref string nickname, ref string layerName, ref string stateName, ref Color color)
+    public static void MainDataEdit(ref string nickname, ref string stateName, ref Color color)
     {
         nickname = EditorGUILayout.DelayedTextField("Nickname: ", nickname);
-        layerName = EditorGUILayout.DelayedTextField("Layer Name: ", layerName);
         stateName = EditorGUILayout.DelayedTextField("State Name: ", stateName);
         color = EditorGUILayout.ColorField("Color: ", color);
     }
@@ -666,8 +665,8 @@ public static class StateDataEditing
                 //Going to need to check all indices which are currently selected
                 //find out which ones are greater than the one we are deleting
                 //and then subtract one from them
-                List<Vector2> newCenters = new List<Vector2>();
-                List<int> newSelections = new List<int>();
+                List<Vector2> newCenters = new();
+                List<int> newSelections = new();
                 for (int j = 0; j < centers.Count; j++)
                 {
                     if (j == i)
@@ -721,8 +720,8 @@ public static class StateDataEditing
                 //Going to need to check all indices which are currently selected
                 //find out which ones are greater than the one we are deleting
                 //and then subtract one from them
-                List<float> newRadii = new List<float>();
-                List<int> newSelections = new List<int>();
+                List<float> newRadii = new();
+                List<int> newSelections = new();
                 for (int j = 0; j < radii.Count; j++)
                 {
                     if (j == i)
@@ -855,7 +854,7 @@ public static class StateDataEditing
 }
 public static class StateDataHandles
 {
-    public static void DrawCircles(Transform parentObj, List<Vector2> centers, List<float> radii, List<int> selectedCenters, List<int> selectedRadii, Color color)
+    public static void DrawCircles(Transform parentObj, List<Vector2> centers, List<float> radii, List<int> selectedCenters, Color color)
     {
         for (int i = 0; i < centers.Count; i++)
         {
