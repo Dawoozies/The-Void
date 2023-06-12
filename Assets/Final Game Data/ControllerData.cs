@@ -406,3 +406,26 @@ public static class ResourcesUtility
     }
     #endif
 }
+public static class ControllerDataUtility
+{
+    public static DirectedCircleCollider[] GetDirectedCircleColliders(ControllerData controllerData, int stateHash)
+    {
+        List<DirectedCircleCollider> stateDatas = new();
+        for (int i = 0; i < controllerData.directedCircleColliders.Length; i++)
+        {
+            if (Animator.StringToHash(controllerData.directedCircleColliders[i].stateName) == stateHash)
+                stateDatas.Add(controllerData.directedCircleColliders[i]);
+        }
+        return stateDatas.ToArray();
+    }
+    public static DirectedCircleOverlap[] GetDirectedCircleOverlaps(ControllerData controllerData, int stateHash)
+    {
+        List<DirectedCircleOverlap> stateDatas = new();
+        for (int i = 0; i < controllerData.directedCircleOverlaps.Length; i++)
+        {
+            if (Animator.StringToHash(controllerData.directedCircleOverlaps[i].stateName) == stateHash)
+                stateDatas.Add(controllerData.directedCircleOverlaps[i]);
+        }
+        return stateDatas.ToArray();
+    }
+}

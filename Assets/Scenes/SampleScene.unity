@@ -11265,6 +11265,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllers:
   - {fileID: 9100000, guid: 69cd56f628c0e6146a692c22fae60d1c, type: 2}
+  circleCollider2DParent: {fileID: 0}
+  spriteRendererParent: {fileID: 0}
+  sprites:
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  showDirectedCircleColliders: 0
 --- !u!1 &888799709
 GameObject:
   m_ObjectHideFlags: 0

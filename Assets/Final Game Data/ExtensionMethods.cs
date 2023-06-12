@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RuntimeObjects;
 public static class ExtensionMethods
 {
     public static bool HasFlag(this RuntimeObjectStructure obj, RuntimeObjectStructure checkFlag)
