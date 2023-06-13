@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Pool;
 using RuntimeObjects;
 using System;
+using RuntimeContainers;
+
 public class GameManager : MonoBehaviour
 {
 
@@ -12,10 +14,21 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, RuntimeAnimatorController> allControllers; //Key = controller.name
     public Dictionary<string, ControllerData> allControllerData; //Key = controller.name
     public Dictionary<string, RuntimeObject> allRuntimeObjects; //Key = whatever input was on creation / Key = runtimeObject.id
-    //Collider2D Pool
-    public Transform circleCollider2DParent;
-    public ObjectPool<CircleCollider2D> circleCollider2DPool;
-    public Dictionary<CircleCollider2D, string> circleCollider2DLedger;
+    //DirectedCircleCollider Pool
+    public Transform directedCircleCollider2DParent;
+    public ObjectPool<DirectedCircleColliderContainer> directedCircleColliderContainerPool;
+    public Dictionary<DirectedCircleColliderContainer, string> directedCircleColliderContainerLedger;
+    public string TryFindDirectedCircleColliderContainerValue(CircleCollider2D collider)
+    {
+        if(directedCircleColliderContainerLedger == null || directedCircleColliderContainerLedger.Count == 0)
+            return string.Empty;
+        foreach (KeyValuePair<DirectedCircleColliderContainer, string> pair in directedCircleColliderContainerLedger)
+        {
+            if (pair.Key.collider == collider)
+                return pair.Value;
+        }
+        return string.Empty;
+    }
     //SpriteRenderer Pool
     public Transform spriteRendererParent;
     public ObjectPool<SpriteRenderer> spriteRendererPool;
@@ -23,16 +36,12 @@ public class GameManager : MonoBehaviour
 
     public Sprite[] sprites;
     public Dictionary<string, Sprite> allSprites;
-
-    //Debugs
-    public Action onDirectedCircleCollidersDebug;
-    public bool showDirectedCircleColliders;
     private void Awake()
     {
         ins = this;
         Setup_ControllerData();
         Setup_ControllerDictionary();
-        Setup_CircleCollider2DPool();
+        Setup_DirectedCircleCollider2DPool();
         Setup_Sprites();
         Setup_SpriteRendererPool();
     }
@@ -78,32 +87,33 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    void Setup_CircleCollider2DPool()
+    void Setup_DirectedCircleCollider2DPool()
     {
-        circleCollider2DParent = new GameObject("Circle Collider 2D Pool").transform;
-        circleCollider2DLedger = new();
-        circleCollider2DPool = new ObjectPool<CircleCollider2D>(
-            () => 
+        directedCircleCollider2DParent = new GameObject("Directed Circle Collider Container Pool").transform;
+        directedCircleColliderContainerLedger = new();
+        directedCircleColliderContainerPool = new ObjectPool<DirectedCircleColliderContainer>(
+            () =>
             {
-                CircleCollider2D member = new GameObject("Circle Collider 2D").AddComponent<CircleCollider2D>();
-                member.transform.SetParent(circleCollider2DParent);
-                circleCollider2DLedger.Add(member, string.Empty);
+                DirectedCircleColliderContainer member = new DirectedCircleColliderContainer();
+                member.collider = new GameObject("Directed Circle Collider 2D").AddComponent<CircleCollider2D>();
+                member.collider.transform.SetParent(directedCircleCollider2DParent);
+                directedCircleColliderContainerLedger.Add(member, string.Empty);
                 return member;
             },
-            (CircleCollider2D member) =>
+            (DirectedCircleColliderContainer member) =>
             {
-                member.gameObject.SetActive(true);
+                member.collider.gameObject.SetActive(true);
             },
-            (CircleCollider2D member) =>
+            (DirectedCircleColliderContainer member) =>
             {
-                member.transform.SetParent(circleCollider2DParent);
-                member.gameObject.SetActive(false);
-                circleCollider2DLedger[member] = string.Empty;
+                member.collider.transform.SetParent(directedCircleCollider2DParent);
+                member.collider.gameObject.SetActive(false);
+                directedCircleColliderContainerLedger[member] = string.Empty;
             },
-            (CircleCollider2D member) =>
+            (DirectedCircleColliderContainer member) =>
             {
-                circleCollider2DLedger.Remove(member);
-                Destroy(member.gameObject);
+                directedCircleColliderContainerLedger.Remove(member);
+                Destroy(member.collider.gameObject);
             },
             false,
             100,
@@ -155,13 +165,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         allRuntimeObjects = new Dictionary<string, RuntimeObject>();
-        //allRuntimeObjects.Add("Player", new RuntimeObject("Player"));
-        //RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Player"], allControllers["FinalPlayer"]);
-        //RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Player"]);
         allRuntimeObjects.Add("Player", new Player("Player"));
         RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Player"], allControllers["FinalPlayer"]);
         RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Player"]);
+        RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Player"]);
         //Then call all ManagedStart methods :))
         foreach (string key in allRuntimeObjects.Keys)
         {
@@ -170,11 +178,16 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        RuntimeAnimator.Update(allRuntimeObjects["Player"], Time.deltaTime);
         foreach (string key in allRuntimeObjects.Keys)
         {
-            allRuntimeObjects[key].managedUpdate?.Invoke(Time.deltaTime);
+            allRuntimeObjects[key].managedUpdate?.Invoke(allRuntimeObjects[key], Time.deltaTime);
         }
-        onDirectedCircleCollidersDebug?.Invoke();
+    }
+    private void FixedUpdate()
+    {
+        foreach (string key in allRuntimeObjects.Keys)
+        {
+            allRuntimeObjects[key].managedFixedUpdate?.Invoke(allRuntimeObjects[key], Time.fixedDeltaTime);
+        }
     }
 }

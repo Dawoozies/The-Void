@@ -71,6 +71,24 @@ public class DirectedCircleCollider
     public List<float> radii;
     public List<Vector2> upDirections;
     public List<Vector2> rightDirections;
+    public float GetRadiusAtIndex(int centerIndex)
+    {
+        if (radii == null || radii.Count == 0 || centerIndex >= radii.Count)
+            return 0f;
+        return radii[centerIndex];
+    }
+    public Vector2 GetUpDirAtIndex(int centerIndex)
+    {
+        if (upDirections == null || upDirections.Count == 0 || centerIndex >= upDirections.Count)
+            return Vector2.up;
+        return upDirections[centerIndex];
+    }
+    public Vector2 GetRightDirAtIndex(int centerIndex)
+    {
+        if(rightDirections == null || rightDirections.Count == 0 || centerIndex >= rightDirections.Count)
+            return Vector2.right;
+        return rightDirections[centerIndex];
+    }
     public DirectedCircleCollider()
     {
         nickname = string.Empty;
@@ -156,6 +174,30 @@ public class DirectedCircleOverlap
     public List<float> radii;
     public List<Vector2> upDirections;
     public List<Vector2> rightDirections;
+    ContactFilter2D contactFilter2D;
+    public ContactFilter2D GetContactFilter()
+    {
+        contactFilter2D.SetLayerMask(targetLayers);
+        return contactFilter2D;
+    }
+    public float GetRadiusAtIndex(int centerIndex)
+    {
+        if (radii == null || radii.Count == 0 || centerIndex >= radii.Count)
+            return 0f;
+        return radii[centerIndex];
+    }
+    public Vector2 GetUpDirAtIndex(int centerIndex)
+    {
+        if (upDirections == null || upDirections.Count == 0 || centerIndex >= upDirections.Count)
+            return Vector2.up;
+        return upDirections[centerIndex];
+    }
+    public Vector2 GetRightDirAtIndex(int centerIndex)
+    {
+        if (rightDirections == null || rightDirections.Count == 0 || centerIndex >= rightDirections.Count)
+            return Vector2.right;
+        return rightDirections[centerIndex];
+    }
     public DirectedCircleOverlap()
     {
         nickname = string.Empty;

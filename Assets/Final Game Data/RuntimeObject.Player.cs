@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateHandlers.Player;
+using OverlapHandlers.Player;
 namespace RuntimeObjects
 {
     public class Player : RuntimeObject
     {
-        //before we do this we have to finish
-
+        public float fallSpeedMax = 20f;
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;
-            managedUpdate += ManagedUpdate;
+            managedUpdate += RuntimeAnimator.Update;
+            managedUpdate += RuntimeRigidbody.Update;
+            //managedFixedUpdate += RuntimeRigidbody.Update;
         }
         public void ManagedStart()
         {
-
-        }
-        public void ManagedUpdate(float tickDelta)
-        {
-
+            animator.onStateEnter += StateOnEnter.Handle;
+            animator.onFrameUpdate += StateOnFrameUpdate.Handle;
+            directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
+            directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
         }
     }
 }

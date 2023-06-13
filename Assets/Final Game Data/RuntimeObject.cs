@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using ExtensionMethods_Bool;
+using ExtensionMethods_Animator;
+using RuntimeContainers;
 namespace RuntimeObjects
 {
     [Flags]
@@ -17,6 +17,11 @@ namespace RuntimeObjects
         CircleSpriteMask = 16,
         DirectedPoint = 32,
     }
+    public enum OverlapResultType
+    {
+        RuntimeObject = 0,
+        NonRuntimeObject = 1,
+    }
     public class RuntimeObject
     {
         public string id;
@@ -24,12 +29,13 @@ namespace RuntimeObjects
         public Transform obj;
         public float localTickRateMultiplier;
         public Action managedStart;
-        public Action<float> managedUpdate;
+        public Action<RuntimeObject, float> managedUpdate;
+        public Action<RuntimeObject, float> managedFixedUpdate;
         public RuntimeObjectStructure objStructure;
         public RuntimeAnimator animator;
         public RuntimeRigidbody rigidbody;
         public RuntimeDirectedCircleColliders directedCircleColliders;
-        public RuntimeDirectedCircleOverlaps directeCircleOverlaps;
+        public RuntimeDirectedCircleOverlaps directedCircleOverlaps;
         public float TickRate(float globalTickRate) => globalTickRate * localTickRateMultiplier;
         public Vector2 up => obj.up;
         public Vector2 right => obj.right;
@@ -58,8 +64,8 @@ namespace RuntimeObjects
         public float time;
         public int frame;
         public float normalizedTime;
-        public Action<RuntimeObject, int> onStateEnter;
-        public Action<RuntimeObject, int> onFrameUpdate;
+        public Action<RuntimeObject, int, int, int> onStateEnter; //State hash + Previous state hash
+        public Action<RuntimeObject, int, int, int> onFrameUpdate; //Frame + State hash + Previous state hash
         public Action<RuntimeObject, ControllerData, int> onStateEnterData;
         public Action<RuntimeObject, ControllerData, int> onFrameUpdateData;
         public static void CreateAndAttach(RuntimeObject obj, RuntimeAnimatorController controller)
@@ -88,8 +94,8 @@ namespace RuntimeObjects
                 runtimeAnimator.frame = 0;
                 runtimeAnimator.onStateEnterData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.stateHash);
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
-                runtimeAnimator.onStateEnter?.Invoke(obj, runtimeAnimator.stateHash);
-                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame);
+                runtimeAnimator.onStateEnter?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
+                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
             }
             runtimeAnimator.time += obj.TickRate(tickDelta) * runtimeAnimator.StateInfo.speed;
             runtimeAnimator.normalizedTime = (float)Mathf.FloorToInt(runtimeAnimator.time) / runtimeAnimator.ClipInfo.clip.length;
@@ -98,12 +104,18 @@ namespace RuntimeObjects
             {
                 runtimeAnimator.frame = Mathf.FloorToInt(runtimeAnimator.time);
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
-                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame);
+                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash); 
             }
             bool looping = runtimeAnimator.ClipInfo.clip.isLooping;
-            if (runtimeAnimator.frame >= runtimeAnimator.ClipInfo.clip.length || (!looping && runtimeAnimator.frame >= runtimeAnimator.ClipInfo.clip.length + 1))
+            if(looping)
             {
-                runtimeAnimator.time = looping ? 0 : runtimeAnimator.ClipInfo.clip.length;
+                if (runtimeAnimator.frame >= runtimeAnimator.animator.TotalFrames())
+                    runtimeAnimator.time = 0f;
+            }
+            else
+            {
+                if (runtimeAnimator.frame >= runtimeAnimator.animator.TotalFrames()+1)
+                    runtimeAnimator.time = runtimeAnimator.animator.TotalFrames();
             }
         }
     }
@@ -112,18 +124,18 @@ namespace RuntimeObjects
         public Transform rbObj;
         public Rigidbody2D rb;
         public Transform rbColliderParent;
-        Vector2 upVelocity;
-        float upMagnitude;
-        Vector2 previousUpVelocity;
-        float previousUpMagnitude;
-        Vector2 rightVelocity;
-        float rightMagnitude;
-        Vector2 previousRightVelocity;
-        float previousRightMagnitude;
+        public Vector2 upVelocity;
+        public float upMagnitude;
+        public Vector2 previousUpVelocity;
+        public float previousUpMagnitude;
+        public Vector2 rightVelocity;
+        public float rightMagnitude;
+        public Vector2 previousRightVelocity;
+        public float previousRightMagnitude;
         //important info, previousVelocity, velocity
         //Dealing with directed velocity
         //do vel build up and then update
-        public System.Action<RuntimeObject, Vector2, Vector2, float, float> onVelocityUpdate;
+        //public System.Action<RuntimeObject, Vector2, Vector2, float, float> onVelocityUpdate;
         public static void CreateAndAttach(RuntimeObject obj)
         {
             RuntimeRigidbody runtimeRigidbody = new RuntimeRigidbody();
@@ -154,8 +166,8 @@ namespace RuntimeObjects
             runtimeRigidbody.rightMagnitude = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.right);
             runtimeRigidbody.rightVelocity = runtimeRigidbody.rightMagnitude * obj.right;
             runtimeRigidbody.rightMagnitude = Mathf.Abs(runtimeRigidbody.rightMagnitude);
-            //Update
-            runtimeRigidbody.onVelocityUpdate?.Invoke(obj, runtimeRigidbody.upVelocity, runtimeRigidbody.rightVelocity, runtimeRigidbody.upMagnitude, runtimeRigidbody.rightMagnitude);
+
+            //runtimeRigidbody.onVelocityUpdate?.Invoke(obj, runtimeRigidbody.upVelocity, runtimeRigidbody.rightVelocity, runtimeRigidbody.upMagnitude, runtimeRigidbody.rightMagnitude);
         }
     }
     public class RuntimeDirectedCircleColliders
@@ -164,6 +176,7 @@ namespace RuntimeObjects
         Transform colliderParent;
         DirectedCircleCollider[] directedCircleColliders;
         private List<CircleCollider2D> existingColliders;
+        private List<DirectedCircleColliderContainer> existingContainers;
         public static void CreateAndAttach(RuntimeObject obj)
         {
             if (!obj.objStructure.HasFlag(RuntimeObjectStructure.Animator))
@@ -180,10 +193,10 @@ namespace RuntimeObjects
                 runtimeDirectedCircleColliders.colliderParent = new GameObject($"ColliderParent:{obj.id}").transform;
             }
             runtimeDirectedCircleColliders.existingColliders = new();
+            runtimeDirectedCircleColliders.existingContainers = new();
             obj.directedCircleColliders = runtimeDirectedCircleColliders;
             obj.animator.onStateEnterData += runtimeDirectedCircleColliders.OnStateEnterData;
             obj.animator.onFrameUpdateData += runtimeDirectedCircleColliders.OnFrameUpdateData;
-            GameManager.ins.onDirectedCircleCollidersDebug += runtimeDirectedCircleColliders.OnDebugUpdate;
         }
         public void OnStateEnterData(RuntimeObject obj, ControllerData controllerData, int stateHash)
         {
@@ -202,18 +215,17 @@ namespace RuntimeObjects
                     //We dont want to use the size of existingCollider as it will be changed during these loops
                     if(_centerIndex >= colliderParent.childCount)
                     {
-                        //then we need to get a new circle collider from the pool
-                        CircleCollider2D poolMember = GameManager.ins.circleCollider2DPool.Get();
-                        poolMember.transform.SetParent(colliderParent);
-                        //This line important for overlaps/interactions
-                        GameManager.ins.circleCollider2DLedger[poolMember] = obj.id;
-                        existingColliders.Add(poolMember);
+                        DirectedCircleColliderContainer poolMember = GameManager.ins.directedCircleColliderContainerPool.Get();
+                        poolMember.collider.transform.SetParent(colliderParent);
+                        poolMember.up = directedCircleColliders[_dataIndex].GetUpDirAtIndex(_centerIndex);
+                        poolMember.right = directedCircleColliders[_dataIndex].GetRightDirAtIndex(_centerIndex);
+                        GameManager.ins.directedCircleColliderContainerLedger[poolMember] = obj.id;
+                        existingContainers.Add(poolMember);
                     }
-                    //Right before we increase collidersRequired we should actually do the collider property set
-                    existingColliders[collidersRequired].transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
-                    existingColliders[collidersRequired].radius = directedCircleColliders[_dataIndex].radii[_centerIndex];
-                    existingColliders[collidersRequired].isTrigger = directedCircleColliders[_dataIndex].isTrigger;
-                    existingColliders[collidersRequired].gameObject.layer = directedCircleColliders[_dataIndex].collisionLayer;
+                    existingContainers[collidersRequired].collider.transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
+                    existingContainers[collidersRequired].collider.radius = directedCircleColliders[_dataIndex].GetRadiusAtIndex(_centerIndex);
+                    existingContainers[collidersRequired].collider.isTrigger = directedCircleColliders[_dataIndex].isTrigger;
+                    existingContainers[collidersRequired].collider.gameObject.layer = directedCircleColliders[_dataIndex].collisionLayer;
                     collidersRequired++;
                 }
             }
@@ -224,9 +236,9 @@ namespace RuntimeObjects
                 //Then we have excess unused colliders which we should return to the pool
                 while (colliderParent.childCount > collidersRequired)
                 {
-                    GameManager.ins.circleCollider2DPool.Release(existingColliders[existingColliders.Count - 1]);
-                    existingColliders.RemoveAt(existingColliders.Count - 1);
-                    if(existingColliders.Count == 0)
+                    GameManager.ins.directedCircleColliderContainerPool.Release(existingContainers[existingContainers.Count - 1]);
+                    existingContainers.RemoveAt(existingContainers.Count - 1);
+                    if(existingContainers.Count == 0)
                     {
                         break;
                     }
@@ -244,15 +256,17 @@ namespace RuntimeObjects
                 {
                     if(_centerIndex >= colliderParent.childCount)
                     {
-                        CircleCollider2D poolMember = GameManager.ins.circleCollider2DPool.Get();
-                        poolMember.transform.SetParent(colliderParent);
-                        GameManager.ins.circleCollider2DLedger[poolMember] = obj.id;
-                        existingColliders.Add(poolMember);
+                        DirectedCircleColliderContainer poolMember = GameManager.ins.directedCircleColliderContainerPool.Get();
+                        poolMember.collider.transform.SetParent(colliderParent);
+                        poolMember.up = directedCircleColliders[_dataIndex].GetUpDirAtIndex(_centerIndex);
+                        poolMember.right = directedCircleColliders[_dataIndex].GetRightDirAtIndex(_centerIndex);
+                        GameManager.ins.directedCircleColliderContainerLedger[poolMember] = obj.id;
+                        existingContainers.Add(poolMember);
                     }
-                    existingColliders[collidersRequired].transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
-                    existingColliders[collidersRequired].radius = directedCircleColliders[_dataIndex].radii[_centerIndex];
-                    existingColliders[collidersRequired].isTrigger = directedCircleColliders[_dataIndex].isTrigger;
-                    existingColliders[collidersRequired].gameObject.layer = directedCircleColliders[_dataIndex].collisionLayer;
+                    existingContainers[collidersRequired].collider.transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
+                    existingContainers[collidersRequired].collider.radius = directedCircleColliders[_dataIndex].GetRadiusAtIndex(_centerIndex);
+                    existingContainers[collidersRequired].collider.isTrigger = directedCircleColliders[_dataIndex].isTrigger;
+                    existingContainers[collidersRequired].collider.gameObject.layer = directedCircleColliders[_dataIndex].collisionLayer;
                     collidersRequired++;
                 }
             }
@@ -261,30 +275,37 @@ namespace RuntimeObjects
                 //Then we have excess unused colliders which we should return to the pool
                 while (colliderParent.childCount > collidersRequired)
                 {
-                    GameManager.ins.circleCollider2DPool.Release(existingColliders[existingColliders.Count - 1]);
-                    existingColliders.RemoveAt(existingColliders.Count - 1);
-                    if (existingColliders.Count == 0)
+                    GameManager.ins.directedCircleColliderContainerPool.Release(existingContainers[existingContainers.Count - 1]);
+                    existingContainers.RemoveAt(existingContainers.Count - 1);
+                    if (existingContainers.Count == 0)
                     {
                         break;
                     }
                 }
             }
         }
-        public void OnDebugUpdate()
-        {
-
-        }
     }
     public class RuntimeDirectedCircleOverlaps
     {
         DirectedCircleOverlap[] directedCircleOverlaps;
+        int overlapResultsCount;
+        List<Collider2D> overlapResults;
+        //Overlap result type
+        //Runtime ID if result type is RuntimeObject
+        //Obj doing overlap, obj which was overlapped
+
+        public Action<RuntimeObject, RuntimeObject> onRuntimeObjectOverlap;
+        public Action<RuntimeObject, Collider2D> onNonRuntimeObjectOverlap;
         public static void CreateAndAttach(RuntimeObject obj)
         {
             if (!obj.objStructure.HasFlag(RuntimeObjectStructure.Animator))
                 return;
-            RuntimeDirectedCircleOverlaps runtimeDirectedCirclOverlaps = new();
+            RuntimeDirectedCircleOverlaps runtimeDirectedCircleOverlaps = new();
+            runtimeDirectedCircleOverlaps.overlapResults = new();
             obj.objStructure |= RuntimeObjectStructure.DirectedCircleOverlap;
-            obj.animator.onStateEnterData += runtimeDirectedCirclOverlaps.OnStateEnterData;
+            obj.animator.onStateEnterData += runtimeDirectedCircleOverlaps.OnStateEnterData;
+            obj.animator.onFrameUpdateData += runtimeDirectedCircleOverlaps.OnFrameUpdateData;
+            obj.directedCircleOverlaps = runtimeDirectedCircleOverlaps;
         }
         public void OnStateEnterData(RuntimeObject obj, ControllerData controllerData, int stateHash)
         {
@@ -292,7 +313,36 @@ namespace RuntimeObjects
         }
         public void OnFrameUpdateData(RuntimeObject obj, ControllerData controllerData, int frame)
         {
-            
+            for (int dataIndex = 0; dataIndex < directedCircleOverlaps.Length; dataIndex++)
+            {
+                if (!directedCircleOverlaps[dataIndex].assignedFrames.Contains(frame))
+                    continue;
+                for (int centerIndex = 0; centerIndex < directedCircleOverlaps[dataIndex].centers.Count; centerIndex++)
+                {
+                    overlapResultsCount = Physics2D.OverlapCircle(
+                        obj.RelativePos(directedCircleOverlaps[dataIndex].centers[centerIndex]),
+                        directedCircleOverlaps[dataIndex].radii[centerIndex],
+                        directedCircleOverlaps[dataIndex].GetContactFilter(),
+                        overlapResults
+                        );
+                }
+            }
+            for (int i = 0; i < overlapResultsCount; i++)
+            {
+                //if not circle collider 2d then immediately its nonruntimeobject
+                CircleCollider2D circleCollider = overlapResults[i] as CircleCollider2D;
+                OverlapResultType resultType = OverlapResultType.RuntimeObject;
+                if (circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == string.Empty)
+                {
+                    resultType = OverlapResultType.NonRuntimeObject;
+                    onNonRuntimeObjectOverlap?.Invoke(obj, overlapResults[i]);
+                }
+                if(circleCollider != null)
+                {
+                    string id = GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider);
+                    onRuntimeObjectOverlap?.Invoke(obj, GameManager.ins.allRuntimeObjects[id]);
+                }
+            }
         }
     }
 }
