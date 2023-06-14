@@ -4,6 +4,8 @@ using UnityEngine;
 using ExtensionMethods_Bool;
 using ExtensionMethods_Animator;
 using RuntimeContainers;
+using System.Security.Cryptography;
+
 namespace RuntimeObjects
 {
     [Flags]
@@ -16,11 +18,6 @@ namespace RuntimeObjects
         DirectedCircleOverlap = 8,
         CircleSpriteMask = 16,
         DirectedPoint = 32,
-    }
-    public enum OverlapResultType
-    {
-        RuntimeObject = 0,
-        NonRuntimeObject = 1,
     }
     public class RuntimeObject
     {
@@ -124,14 +121,15 @@ namespace RuntimeObjects
         public Transform rbObj;
         public Rigidbody2D rb;
         public Transform rbColliderParent;
+        //Current Up
         public Vector2 upVelocity;
+        public float upSpeed;
         public float upMagnitude;
-        public Vector2 previousUpVelocity;
-        public float previousUpMagnitude;
+        //Current Right
         public Vector2 rightVelocity;
+        public float rightSpeed;
         public float rightMagnitude;
-        public Vector2 previousRightVelocity;
-        public float previousRightMagnitude;
+
         //important info, previousVelocity, velocity
         //Dealing with directed velocity
         //do vel build up and then update
@@ -154,18 +152,13 @@ namespace RuntimeObjects
         public static void Update(RuntimeObject obj, float tickDelta)
         {
             RuntimeRigidbody runtimeRigidbody = obj.rigidbody;
-            //Grab previous velocities
-            runtimeRigidbody.previousUpMagnitude = runtimeRigidbody.upMagnitude;
-            runtimeRigidbody.previousUpVelocity = runtimeRigidbody.upVelocity;
-            runtimeRigidbody.previousRightMagnitude = runtimeRigidbody.rightMagnitude;
-            runtimeRigidbody.previousRightVelocity = runtimeRigidbody.rightVelocity;
             //Calculate current velocities
-            runtimeRigidbody.upMagnitude = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.up);
-            runtimeRigidbody.upVelocity = runtimeRigidbody.upMagnitude * obj.up;
-            runtimeRigidbody.upMagnitude = Mathf.Abs(runtimeRigidbody.upMagnitude);
-            runtimeRigidbody.rightMagnitude = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.right);
-            runtimeRigidbody.rightVelocity = runtimeRigidbody.rightMagnitude * obj.right;
-            runtimeRigidbody.rightMagnitude = Mathf.Abs(runtimeRigidbody.rightMagnitude);
+            runtimeRigidbody.upSpeed = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.up);
+            runtimeRigidbody.upVelocity = runtimeRigidbody.upSpeed * obj.up;
+            runtimeRigidbody.upMagnitude = Mathf.Abs(runtimeRigidbody.upSpeed);
+            runtimeRigidbody.rightSpeed = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.right);
+            runtimeRigidbody.rightVelocity = runtimeRigidbody.rightSpeed * obj.right;
+            runtimeRigidbody.rightMagnitude = Mathf.Abs(runtimeRigidbody.rightSpeed);
 
             //runtimeRigidbody.onVelocityUpdate?.Invoke(obj, runtimeRigidbody.upVelocity, runtimeRigidbody.rightVelocity, runtimeRigidbody.upMagnitude, runtimeRigidbody.rightMagnitude);
         }
@@ -287,21 +280,24 @@ namespace RuntimeObjects
     }
     public class RuntimeDirectedCircleOverlaps
     {
-        DirectedCircleOverlap[] directedCircleOverlaps;
+        DirectedCircleOverlap[] atState;
+        List<DirectedCircleOverlap> atFrame;
         int overlapResultsCount;
         List<Collider2D> overlapResults;
         //Overlap result type
         //Runtime ID if result type is RuntimeObject
         //Obj doing overlap, obj which was overlapped
 
-        public Action<RuntimeObject, RuntimeObject> onRuntimeObjectOverlap;
-        public Action<RuntimeObject, Collider2D> onNonRuntimeObjectOverlap;
+        public Action<string, RuntimeObject, RuntimeObject> onRuntimeObjectOverlap;
+        public Action<string, RuntimeObject, Collider2D> onNonRuntimeObjectOverlap;
+        public Action<string, RuntimeObject> onNullOverlap;
         public static void CreateAndAttach(RuntimeObject obj)
         {
             if (!obj.objStructure.HasFlag(RuntimeObjectStructure.Animator))
                 return;
             RuntimeDirectedCircleOverlaps runtimeDirectedCircleOverlaps = new();
             runtimeDirectedCircleOverlaps.overlapResults = new();
+            runtimeDirectedCircleOverlaps.atFrame = new();
             obj.objStructure |= RuntimeObjectStructure.DirectedCircleOverlap;
             obj.animator.onStateEnterData += runtimeDirectedCircleOverlaps.OnStateEnterData;
             obj.animator.onFrameUpdateData += runtimeDirectedCircleOverlaps.OnFrameUpdateData;
@@ -309,40 +305,53 @@ namespace RuntimeObjects
         }
         public void OnStateEnterData(RuntimeObject obj, ControllerData controllerData, int stateHash)
         {
-            directedCircleOverlaps = ControllerDataUtility.GetDirectedCircleOverlaps(controllerData, stateHash);
+            //Definitely this should be here
+            //We should only change to diff directedCircleOverlap on state change
+            atState = ControllerDataUtility.GetDirectedCircleOverlaps(controllerData, stateHash);
         }
         public void OnFrameUpdateData(RuntimeObject obj, ControllerData controllerData, int frame)
         {
-            for (int dataIndex = 0; dataIndex < directedCircleOverlaps.Length; dataIndex++)
+            //This stuff should be in a proper update
+            for (int dataIndex = 0; dataIndex < atState.Length; dataIndex++)
             {
-                if (!directedCircleOverlaps[dataIndex].assignedFrames.Contains(frame))
+                if (!atState[dataIndex].assignedFrames.Contains(frame))
                     continue;
-                for (int centerIndex = 0; centerIndex < directedCircleOverlaps[dataIndex].centers.Count; centerIndex++)
-                {
-                    overlapResultsCount = Physics2D.OverlapCircle(
-                        obj.RelativePos(directedCircleOverlaps[dataIndex].centers[centerIndex]),
-                        directedCircleOverlaps[dataIndex].radii[centerIndex],
-                        directedCircleOverlaps[dataIndex].GetContactFilter(),
-                        overlapResults
-                        );
-                }
+                atFrame.Add(atState[dataIndex]);
             }
-            for (int i = 0; i < overlapResultsCount; i++)
+        }
+        public static void Update(RuntimeObject obj, float timeDelta)
+        {
+            RuntimeDirectedCircleOverlaps directedCircleOverlaps = obj.directedCircleOverlaps;
+            for(int dataIndex = 0; dataIndex < directedCircleOverlaps.atFrame.Count; dataIndex++)
             {
-                //if not circle collider 2d then immediately its nonruntimeobject
-                CircleCollider2D circleCollider = overlapResults[i] as CircleCollider2D;
-                OverlapResultType resultType = OverlapResultType.RuntimeObject;
-                if (circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == string.Empty)
+                for (int centerIndex = 0; centerIndex < directedCircleOverlaps.atFrame[dataIndex].centers.Count; centerIndex++)
                 {
-                    resultType = OverlapResultType.NonRuntimeObject;
-                    onNonRuntimeObjectOverlap?.Invoke(obj, overlapResults[i]);
-                }
-                if(circleCollider != null)
-                {
-                    string id = GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider);
-                    onRuntimeObjectOverlap?.Invoke(obj, GameManager.ins.allRuntimeObjects[id]);
+                    directedCircleOverlaps.overlapResultsCount = Physics2D.OverlapCircle(
+                        obj.RelativePos(directedCircleOverlaps.atFrame[dataIndex].centers[centerIndex]),
+                        directedCircleOverlaps.atFrame[dataIndex].radii[centerIndex],
+                        directedCircleOverlaps.atFrame[dataIndex].GetContactFilter(),
+                        directedCircleOverlaps.overlapResults
+                        );
+                    for (int i = 0; i < directedCircleOverlaps.overlapResultsCount; i++)
+                    {
+                        CircleCollider2D circleCollider = directedCircleOverlaps.overlapResults[i] as CircleCollider2D;
+                        if(circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == string.Empty)
+                            directedCircleOverlaps.onNonRuntimeObjectOverlap?.Invoke(directedCircleOverlaps.atFrame[dataIndex].nickname, obj, directedCircleOverlaps.overlapResults[i]);
+                        if(circleCollider != null)
+                        {
+                            string id = GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider);
+                            directedCircleOverlaps.onRuntimeObjectOverlap?.Invoke(directedCircleOverlaps.atFrame[dataIndex].nickname, obj, GameManager.ins.allRuntimeObjects[id]);
+                        }
+                    }
+                    if(directedCircleOverlaps.atFrame[dataIndex].useNullResult && directedCircleOverlaps.overlapResultsCount == 0)
+                    {
+                        directedCircleOverlaps.onNullOverlap?.Invoke(directedCircleOverlaps.atFrame[dataIndex].nickname, obj);
+                    }
                 }
             }
+            //After running update clear list
+            if(directedCircleOverlaps.overlapResultsCount > 0)
+                directedCircleOverlaps.overlapResults.Clear();
         }
     }
 }
