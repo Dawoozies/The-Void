@@ -470,4 +470,24 @@ public static class ControllerDataUtility
         }
         return stateDatas.ToArray();
     }
+    public static CircleSpriteMask[] GetCircleSpriteMasks(ControllerData controllerData, int stateHash)
+    {
+        List<CircleSpriteMask> stateDatas = new();
+        for (int i = 0; i < controllerData.circleSpriteMasks.Length; i++)
+        {
+            if (Animator.StringToHash(controllerData.circleSpriteMasks[i].stateName) == stateHash)
+                stateDatas.Add(controllerData.circleSpriteMasks[i]);
+        }
+        return stateDatas.ToArray();
+    }
+    public static DirectedPoint[] GetDirectedPoints(ControllerData controllerData, int stateHash)
+    {
+        List<DirectedPoint> stateDatas = new();
+        for (int i = 0; i < controllerData.directedPoints.Length; i++)
+        {
+            if (Animator.StringToHash(controllerData.directedPoints[i].stateName) == stateHash)
+                stateDatas.Add(controllerData.directedPoints[i]);
+        }
+        return stateDatas.ToArray();
+    }
 }

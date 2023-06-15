@@ -162,14 +162,29 @@ public class GameManager : MonoBehaviour
             500
             );
     }
-    private void Start()
+    void RuntimeObjectCreate_Player()
     {
-        allRuntimeObjects = new Dictionary<string, RuntimeObject>();
         allRuntimeObjects.Add("Player", new Player("Player"));
         RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Player"], allControllers["FinalPlayer"]);
         RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Player"]);
+        //RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Player"]);
+    }
+    void RuntimeObjectCreate_HangedFrame()
+    {
+        //Main HangedFrame Object
+        allRuntimeObjects.Add("HangedFrame", new HangedFrame("HangedFrame"));
+        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["HangedFrame"], allControllers["HangedFrame"]);
+        RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
+        RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
+        //RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
+    }
+    private void Start()
+    {
+        allRuntimeObjects = new Dictionary<string, RuntimeObject>();
+        RuntimeObjectCreate_Player();
+        RuntimeObjectCreate_HangedFrame();
         //Then call all ManagedStart methods :))
         foreach (string key in allRuntimeObjects.Keys)
         {
