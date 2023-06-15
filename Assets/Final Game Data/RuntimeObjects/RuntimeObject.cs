@@ -383,6 +383,9 @@ namespace RuntimeObjects
             RuntimeDirectedPoints runtimeDirectedPoints = new();
             runtimeDirectedPoints.atFrame = new();
             obj.objStructure |= RuntimeObjectStructure.DirectedPoint;
+            obj.animator.onStateEnterData += runtimeDirectedPoints.OnStateEnterData;
+            obj.animator.onFrameUpdateData += runtimeDirectedPoints.OnFrameUpdateData;
+            obj.directedPoints = runtimeDirectedPoints;
         }
         public void OnStateEnterData(RuntimeObject obj, ControllerData controllerData, int stateHash)
         {

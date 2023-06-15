@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
         RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Player"]);
-        //RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Player"]);
+        RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Player"]);
     }
     void RuntimeObjectCreate_HangedFrame()
     {
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         RuntimeAnimator.CreateAndAttach(allRuntimeObjects["HangedFrame"], allControllers["HangedFrame"]);
         RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
         RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
-        //RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
+        RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
     }
     private void Start()
     {
