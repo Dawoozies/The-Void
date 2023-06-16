@@ -12,6 +12,8 @@ namespace RuntimeObjects
         public HangedFrameSubObject torso;
         public HangedFrameSubObject leftArm;
         public HangedFrameSubObject leftHand;
+        public HangedFrameSubObject rightArm;
+        public HangedFrameSubObject rightHand;
         public HangedFrame(string id) : base(id)
         {
             managedStart += ManagedStart;
@@ -39,11 +41,25 @@ namespace RuntimeObjects
             RuntimeDirectedCircleColliders.CreateAndAttach(leftHand);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(leftHand);
             RuntimeDirectedPoints.CreateAndAttach(leftHand);
+            rightArm = new HangedFrameSubObject("HangedFrameRightArm");
+            GameManager.ins.allRuntimeObjects.Add("HangedFrameRightArm", rightArm);
+            RuntimeAnimator.CreateAndAttach(rightArm, GameManager.ins.allControllers["HangedFrameRightArm"]);
+            RuntimeDirectedCircleColliders.CreateAndAttach(rightArm);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(rightArm);
+            RuntimeDirectedPoints.CreateAndAttach(rightArm);
+            rightHand = new HangedFrameSubObject("HangedFrameRightHand");
+            GameManager.ins.allRuntimeObjects.Add("HangedFrameRightHand", rightHand);
+            RuntimeAnimator.CreateAndAttach(rightHand, GameManager.ins.allControllers["HangedFrameRightHand"]);
+            RuntimeDirectedCircleColliders.CreateAndAttach(rightHand);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(rightHand);
+            RuntimeDirectedPoints.CreateAndAttach(rightHand);
 
             torso.obj.SetParent(obj);
             head.obj.SetParent(torso.obj);
             leftArm.obj.SetParent(torso.obj);
             leftHand.obj.SetParent(leftArm.obj);
+            rightArm.obj.SetParent(torso.obj);
+            rightHand.obj.SetParent(rightArm.obj);
         }
         public void ManagedStart()
         {
@@ -71,12 +87,23 @@ namespace RuntimeObjects
                 {
                     leftArm.obj.localPosition = RelativePos(torso.directedPoints.atFrame["LeftArmAnchor"].centers[0]);
                 }
+                if (torso.directedPoints.atFrame.ContainsKey("RightArmAnchor"))
+                {
+                    rightArm.obj.localPosition = RelativePos(torso.directedPoints.atFrame["RightArmAnchor"].centers[0]);
+                }
             }
             if (leftArm.objStructure.HasFlag(RuntimeObjectStructure.DirectedPoint))
             {
                 if (leftArm.directedPoints.atFrame.ContainsKey("LeftHandAnchor"))
                 {
                     leftHand.obj.localPosition = RelativePos(leftArm.directedPoints.atFrame["LeftHandAnchor"].centers[0]);
+                }
+            }
+            if (rightArm.objStructure.HasFlag(RuntimeObjectStructure.DirectedPoint))
+            {
+                if (rightArm.directedPoints.atFrame.ContainsKey("RightHandAnchor"))
+                {
+                    rightHand.obj.localPosition = RelativePos(rightArm.directedPoints.atFrame["RightHandAnchor"].centers[0]);
                 }
             }
         }
