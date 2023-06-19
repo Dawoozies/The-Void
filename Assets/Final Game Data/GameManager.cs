@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
     void RuntimeObjectCreate_Player()
     {
         allRuntimeObjects.Add("Player", new Player("Player"));
-        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Player"], allControllers["FinalPlayer"]);
+        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Player"], allControllers["Player"]);
         RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Player"]);

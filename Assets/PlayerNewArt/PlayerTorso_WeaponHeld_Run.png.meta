@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c5d51a85da4913c4d9827e1c2952033d
+guid: 5f1f356c61df7be4d864bc7e1bd96346
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,85 +105,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerLegs_Jump_0
+      name: PlayerTorso_WeaponHeld_Run_3
       rect:
         serializedVersion: 2
-        x: 268
-        y: 241
-        width: 931
-        height: 919
+        x: 3549
+        y: 1685
+        width: 683
+        height: 629
       alignment: 9
-      pivot: {x: 0.619371, y: 0.940401}
+      pivot: {x: 0.49007925, y: 0.090620615}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebd2986b5b3e94e4ab16b35058419911
-      internalID: -1634590356
+      spriteID: 94a6e86b1e9b4b44daa94069c9b2487a
+      internalID: 997865801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_Jump_1
+      name: PlayerTorso_WeaponHeld_Run_0
       rect:
         serializedVersion: 2
-        x: 1421
-        y: 329
-        width: 953
-        height: 845
+        x: 128
+        y: 1717
+        width: 851
+        height: 569
       alignment: 9
-      pivot: {x: 0.595729, y: 0.95148695}
+      pivot: {x: 0.42568094, y: 0.06730107}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5e05a4d6aedb7b40841da594cddb9ea
-      internalID: 1141481508
+      spriteID: 272cc33402b64134cb35587f74316022
+      internalID: -683223423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_Jump_2
+      name: PlayerTorso_WeaponHeld_Run_1
       rect:
         serializedVersion: 2
-        x: 2894
-        y: 257
-        width: 616
-        height: 902
+        x: 1288
+        y: 1677
+        width: 816
+        height: 569
       alignment: 9
-      pivot: {x: 0.34651402, y: 0.9781244}
+      pivot: {x: 0.43356577, y: 0.071270615}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1df98a87048fc04da273cbe300511e9
-      internalID: -514995758
+      spriteID: 1d6acba8991ccab4794887fc847bce36
+      internalID: -1116174833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_Jump_3
+      name: PlayerTorso_WeaponHeld_Run_2
       rect:
         serializedVersion: 2
-        x: 4183
+        x: 2417
+        y: 1670
+        width: 683
+        height: 599
+      alignment: 9
+      pivot: {x: 0.5165362, y: 0.122910134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b09770fdea5ee84bafa6132634c56c6
+      internalID: 1071527964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_WeaponHeld_Run_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 150
+        width: 678
+        height: 629
+      alignment: 9
+      pivot: {x: 0.4600218, y: 0.06548296}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35acb6a2eb4158a4b8637c779d77199d
+      internalID: -1331754049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_WeaponHeld_Run_7
+      rect:
+        serializedVersion: 2
+        x: 3460
+        y: 207
+        width: 851
+        height: 569
+      alignment: 9
+      pivot: {x: 0.42999732, y: 0.08121613}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c987c634de5f4104280c6f6b6d81db3a
+      internalID: -735160171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_WeaponHeld_Run_5
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 100
+        width: 683
+        height: 599
+      alignment: 9
+      pivot: {x: 0.5330716, y: 0.13045155}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5271b55aa5ef068498e77a8036ba6fe0
+      internalID: -2134958307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_WeaponHeld_Run_6
+      rect:
+        serializedVersion: 2
+        x: 2432
         y: 130
-        width: 560
-        height: 900
+        width: 821
+        height: 569
       alignment: 9
-      pivot: {x: 0.25119105, y: 0.96628577}
+      pivot: {x: 0.45322937, y: 0.06333092}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a9788eea76c9e4a9a3eacd0c2acab1
-      internalID: 1361428479
+      spriteID: 0a4c16f4080b16e40995441ad51f33c8
+      internalID: 531601581
       vertices: []
       indices: 
       edges: []
@@ -199,10 +283,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerLegs_Jump_3: 1361428479
-      PlayerLegs_Jump_2: -514995758
-      PlayerLegs_Jump_0: -1634590356
-      PlayerLegs_Jump_1: 1141481508
+      PlayerTorso_WeaponHeld_Run_8: -1117935173
+      PlayerTorso_WeaponHeld_Run_14: 602719374
+      PlayerTorso_WeaponHeld_Run_1: -1116174833
+      PlayerTorso_WeaponHeld_Run_22: 1573062185
+      PlayerTorso_WeaponHeld_Run_5: -2134958307
+      PlayerTorso_WeaponHeld_Run_6: 531601581
+      PlayerTorso_WeaponHeld_Run_9: 1793846653
+      PlayerTorso_WeaponHeld_Run_17: -173579628
+      PlayerTorso_WeaponHeld_Run_3: 997865801
+      PlayerTorso_WeaponHeld_Run_0: -683223423
+      PlayerTorso_WeaponHeld_Run_10: 1234152049
+      PlayerTorso_WeaponHeld_Run_11: -854504850
+      PlayerTorso_WeaponHeld_Run_20: -1385428964
+      PlayerTorso_WeaponHeld_Run_7: -735160171
+      PlayerTorso_WeaponHeld_Run_12: 886777277
+      PlayerTorso_WeaponHeld_Run_4: -1331754049
+      PlayerTorso_WeaponHeld_Run_2: 1071527964
+      PlayerTorso_WeaponHeld_Run_15: 1017652873
+      PlayerTorso_WeaponHeld_Run_21: -1156721480
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

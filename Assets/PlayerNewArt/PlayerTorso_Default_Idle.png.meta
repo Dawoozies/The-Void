@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d39951870833194aaa8e4fc17cafb88
+guid: c25e5361c0711a146b2fd59245717b1a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -103,7 +103,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PlayerTorso_Default_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 440
+        width: 687
+        height: 833
+      alignment: 9
+      pivot: {x: 0.56, y: 0.37}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d56787960b864a64e9c1953433db7bf6
+      internalID: 1202245468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_Default_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 440
+        width: 687
+        height: 833
+      alignment: 9
+      pivot: {x: 0.56, y: 0.37}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479c1354dd2da254688ac5d1417a7547
+      internalID: -1846805229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_Default_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 439
+        width: 687
+        height: 833
+      alignment: 9
+      pivot: {x: 0.56, y: 0.37}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c192a4cfc07991f4b99875468a895af6
+      internalID: -1981570025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_Default_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 438
+        width: 686
+        height: 833
+      alignment: 9
+      pivot: {x: 0.56, y: 0.37}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 866b58a012b2753438901a987cec220a
+      internalID: 91686553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +198,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PlayerTorso_Default_Idle_0: 1202245468
+      PlayerTorso_Default_Idle_1: -1846805229
+      PlayerTorso_Default_Idle_2: -1981570025
+      PlayerTorso_Default_Idle_3: 91686553
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

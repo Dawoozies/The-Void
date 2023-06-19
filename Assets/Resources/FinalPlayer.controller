@@ -560,7 +560,7 @@ AnimatorStateTransition:
     m_ConditionEvent: LeftTrigger_Input
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -2311907943540249456}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -6260,7 +6260,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Recalling
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 3295714715996214013}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0

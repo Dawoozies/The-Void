@@ -62,8 +62,8 @@ namespace RuntimeObjects
         public float time;
         public int frame;
         public float normalizedTime;
-        //public Action<RuntimeObject, int, int, int> onStateEnter; //State hash + Previous state hash
-        //public Action<RuntimeObject, int, int, int> onFrameUpdate; //Frame + State hash + Previous state hash
+        public Action<RuntimeObject, int, int, int> onStateEnter; //State hash + Previous state hash
+        public Action<RuntimeObject, int, int, int> onFrameUpdate; //Frame + State hash + Previous state hash
         public Action<RuntimeObject, ControllerData, int> onStateEnterData;
         public Action<RuntimeObject, ControllerData, int> onFrameUpdateData;
         public static void CreateAndAttach(RuntimeObject obj, RuntimeAnimatorController controller)
@@ -93,8 +93,8 @@ namespace RuntimeObjects
                 runtimeAnimator.frame = 0;
                 runtimeAnimator.onStateEnterData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.stateHash);
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
-                //runtimeAnimator.onStateEnter?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
-                //runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
+                runtimeAnimator.onStateEnter?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
+                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
             }
             runtimeAnimator.time += obj.TickRate(tickDelta) * runtimeAnimator.StateInfo.speed;
             runtimeAnimator.normalizedTime = (float)Mathf.FloorToInt(runtimeAnimator.time) / runtimeAnimator.ClipInfo.clip.length;
@@ -103,7 +103,7 @@ namespace RuntimeObjects
             {
                 runtimeAnimator.frame = Mathf.FloorToInt(runtimeAnimator.time);
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
-                //runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash); 
+                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash); 
             }
             bool looping = runtimeAnimator.ClipInfo.clip.isLooping;
             if(looping)

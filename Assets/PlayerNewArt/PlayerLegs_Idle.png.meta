@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d39951870833194aaa8e4fc17cafb88
+guid: dd3bb1433f4b12a4c994e85b84ba5852
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -103,7 +103,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PlayerLegs_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 92
+        width: 577
+        height: 715
+      alignment: 9
+      pivot: {x: 0.6, y: 0.92}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86d5a2585447a5741b02240e7f138da5
+      internalID: -1162011569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 91
+        width: 577
+        height: 715
+      alignment: 9
+      pivot: {x: 0.6, y: 0.92}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb3ee56199832cb4f995bf156297b514
+      internalID: -582372161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 1487
+        y: 91
+        width: 577
+        height: 715
+      alignment: 9
+      pivot: {x: 0.6, y: 0.92}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bb2de32ecf6d3645aca0fa9e8106b00
+      internalID: 593786537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 91
+        width: 578
+        height: 715
+      alignment: 9
+      pivot: {x: 0.6, y: 0.92}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27989d1c3e58ec2478b12030d715af4f
+      internalID: -734667113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +198,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PlayerLegs_Idle_2: 593786537
+      PlayerLegs_Idle_1: -582372161
+      PlayerLegs_Idle_3: -734667113
+      PlayerLegs_Idle_0: -1162011569
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
