@@ -19,26 +19,27 @@ namespace OverlapHandlers.Player
         {
             if(dataName == "Groundbox")
             {
-                if(hitCollider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                    GameManager.ins.allRuntimeObjects["Player"].animator.animator.SetBool("Grounded", true);
+                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                if(player != null)
+                {
+                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        player.grounded = true;
+                }
             }
-            //RuntimeObjects.Player player = obj as RuntimeObjects.Player;
-            //if(dataName == "Groundbox")
-            //{
-            //    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            //        player.animator.animator.SetBool("Grounded", true);
-            //}
         }
     }
     public static class OnNullResult
     {
         public static void Handle(string dataName, RuntimeObject obj)
         {
-            //RuntimeObjects.Player player = obj as RuntimeObjects.Player;
-            //if(dataName == "Groundbox")
-            //    player.animator.animator.SetBool("Grounded", false);
-            if(dataName == "Groundbox")
-                GameManager.ins.allRuntimeObjects["Player"].animator.animator.SetBool("Grounded", false);
+            if (dataName == "Groundbox")
+            {
+                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                if (player != null)
+                {
+                    player.grounded = false;
+                }
+            }
         }
     }
 }

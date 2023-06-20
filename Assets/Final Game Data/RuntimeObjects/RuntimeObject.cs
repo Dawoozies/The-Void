@@ -4,8 +4,6 @@ using UnityEngine;
 using ExtensionMethods_Bool;
 using ExtensionMethods_Animator;
 using RuntimeContainers;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-
 namespace RuntimeObjects
 {
     [Flags]
@@ -62,6 +60,7 @@ namespace RuntimeObjects
         public float time;
         public int frame;
         public float normalizedTime;
+        public float trueTimeSpentInState;
         public Action<RuntimeObject, int, int, int> onStateEnter; //State hash + Previous state hash
         public Action<RuntimeObject, int, int, int> onFrameUpdate; //Frame + State hash + Previous state hash
         public Action<RuntimeObject, ControllerData, int> onStateEnterData;
@@ -81,6 +80,7 @@ namespace RuntimeObjects
             
             if (runtimeAnimator.stateHash != runtimeAnimator.StateInfo.shortNameHash)
             {
+                runtimeAnimator.trueTimeSpentInState = 0;
                 //If there is some collision issue in the future please check to see
                 //If it is an abuse of state swapping causing it
                 if (runtimeAnimator.ClipInfo.clip.name == "StateSwap")
@@ -96,6 +96,7 @@ namespace RuntimeObjects
                 runtimeAnimator.onStateEnter?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
                 runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
             }
+            runtimeAnimator.trueTimeSpentInState += Time.deltaTime;
             runtimeAnimator.time += obj.TickRate(tickDelta) * runtimeAnimator.StateInfo.speed;
             runtimeAnimator.normalizedTime = (float)Mathf.FloorToInt(runtimeAnimator.time) / runtimeAnimator.ClipInfo.clip.length;
             runtimeAnimator.animator.SetFloat("NormalizedTime", runtimeAnimator.normalizedTime);
@@ -110,7 +111,6 @@ namespace RuntimeObjects
             {
                 if (runtimeAnimator.frame >= runtimeAnimator.animator.TotalFrames())
                 {
-                    
                     runtimeAnimator.time = 0f;
                 }
                     

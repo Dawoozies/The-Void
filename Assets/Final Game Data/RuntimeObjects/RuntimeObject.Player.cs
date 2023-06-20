@@ -10,6 +10,9 @@ namespace RuntimeObjects
         public PlayerTorso torso;
         public float fallSpeedMax = -30f;
         public float ascentSpeedMax = 20f;
+        public float landingLag = 0.125f;
+        public float runSpeed = 15f;
+        public bool grounded;
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;
@@ -31,7 +34,7 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
-            managedFixedUpdate += RuntimeRigidbody.Update;
+            managedUpdate += RuntimeRigidbody.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
             //managedUpdate += (RuntimeObject obj, float tickDelta) =>
             //{
@@ -43,10 +46,7 @@ namespace RuntimeObjects
             //    animator.animator.SetInteger("R_Direction", Direction.Compute8WayDirection());
             //    animator.animator.SetBool("RightBumper_Input", InputManager.ins.RightBumper_Input);
             //};
-            managedUpdate += (RuntimeObject obj, float tickDelta) =>
-            {
-                animator.animator.SetBool("Run", InputManager.ins.L_Input.x != 0f);
-            };
+            managedUpdate += StateHandlers.Player.Handler.Update;
             managedFixedUpdate += StateHandlers.Player.Handler.PhysicsUpdate;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
