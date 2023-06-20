@@ -6,10 +6,10 @@ namespace RuntimeObjects
 {
     public class Player : RuntimeObject
     {
-        //public float fallSpeedMax = -20f;
-        //public float ascentSpeedMax = 20f;
         public PlayerLegs legs;
         public PlayerTorso torso;
+        public float fallSpeedMax = -30f;
+        public float ascentSpeedMax = 20f;
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;
@@ -31,7 +31,7 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
-            managedUpdate += RuntimeRigidbody.Update;
+            managedFixedUpdate += RuntimeRigidbody.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
             //managedUpdate += (RuntimeObject obj, float tickDelta) =>
             //{
@@ -43,12 +43,18 @@ namespace RuntimeObjects
             //    animator.animator.SetInteger("R_Direction", Direction.Compute8WayDirection());
             //    animator.animator.SetBool("RightBumper_Input", InputManager.ins.RightBumper_Input);
             //};
-            managedUpdate += StateHandlers.Player.Handler.Update;
+            managedUpdate += (RuntimeObject obj, float tickDelta) =>
+            {
+                animator.animator.SetBool("Run", InputManager.ins.L_Input.x != 0f);
+            };
+            managedFixedUpdate += StateHandlers.Player.Handler.PhysicsUpdate;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
             animator.onStateEnter += StateHandlers.Player.Handler.OnStateEnter;
             animator.onFrameUpdate += StateHandlers.Player.Handler.OnFrameUpdate;
+
+            animator.spriteRenderer.color = Color.clear;
         }
     }
     public class PlayerLegs : RuntimeObject
@@ -61,7 +67,6 @@ namespace RuntimeObjects
         {
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
-            managedUpdate += StateHandlers.Player.Handler.Update;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
@@ -79,7 +84,6 @@ namespace RuntimeObjects
         {
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
-            managedUpdate += StateHandlers.Player.Handler.Update;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;

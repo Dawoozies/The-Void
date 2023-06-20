@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9e50223f50ee3024792d8698699f84d4
+guid: 8501a43398a5da643a47726f8278a6a8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,85 +105,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerTorso_Default_Jump_0
+      name: PlayerTorso_Default_MovementPoses1_0
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1842
+        width: 936
+        height: 638
+      alignment: 9
+      pivot: {x: 0.43104878, y: 0.13330518}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c7aa210013dfe34988b365c8c43ce3c
+      internalID: 546364550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_Default_MovementPoses1_1
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 1744
+        width: 927
+        height: 589
+      alignment: 9
+      pivot: {x: 0.2977873, y: 0.1488236}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9ed59d040bab5e46bc00abd150ba0c5
+      internalID: -1397840329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_Default_MovementPoses1_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 787
-        height: 711
+        y: 555
+        width: 822
+        height: 656
       alignment: 9
-      pivot: {x: 0.5148629, y: 0.26556486}
+      pivot: {x: 0.59432596, y: 0.10826846}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b1d873184205fd45a4bb2df89b0a9c8
-      internalID: 1789608732
+      spriteID: 911edad481b88b643870274e55728465
+      internalID: -1764529753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_Default_Jump_1
+      name: PlayerTorso_Default_MovementPoses1_3
       rect:
         serializedVersion: 2
-        x: 1311
-        y: 208
-        width: 712
-        height: 676
+        x: 1288
+        y: 451
+        width: 770
+        height: 678
       alignment: 9
-      pivot: {x: 0.31725183, y: 0.055509668}
+      pivot: {x: 0.48273832, y: 0.22226952}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a203714370d6c2148a441fe7e1262e6a
-      internalID: 151062187
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerTorso_Default_Jump_2
-      rect:
-        serializedVersion: 2
-        x: 2357
-        y: 210
-        width: 765
-        height: 594
-      alignment: 9
-      pivot: {x: 0.389531, y: 0.06415522}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3da82884f3aa67e4bb7997a2d27eb791
-      internalID: -396616678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerTorso_Default_Jump_3
-      rect:
-        serializedVersion: 2
-        x: 3496
-        y: 25
-        width: 706
-        height: 680
-      alignment: 9
-      pivot: {x: 0.5361, y: 0.06404236}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b7d7e371b0e3fc9419dea36f9eaa82bf
-      internalID: 1890373464
+      spriteID: a36235d765ee8d442bf6463a1a2c3a04
+      internalID: 1888055823
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerTorso_Default_Jump_3: 1890373464
-      PlayerTorso_Default_Jump_1: 151062187
-      PlayerTorso_Default_Jump_0: 1789608732
-      PlayerTorso_Default_Jump_2: -396616678
+      PlayerTorso_Default_MovementPoses1_0: 546364550
+      PlayerTorso_Default_MovementPoses1_3: 1888055823
+      PlayerTorso_Default_MovementPoses1_1: -1397840329
+      PlayerTorso_Default_MovementPoses1_2: -1764529753
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
