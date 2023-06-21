@@ -62,10 +62,6 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_JumpAscentSlow");
                     }
                 }
-                if(Animator.StringToHash("Player_DoubleJump") == player.animator.stateHash)
-                {
-                    Debug.LogError($"Double jump Update frame = {player.animator.frame}");
-                }
             }
         }
         public static void PhysicsUpdate(RuntimeObject obj, float tickDelta)
@@ -183,12 +179,13 @@ namespace StateHandlers.Player
                     //If weapon held do play one with weapon held
                     player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose1");
                 }
-                if(Animator.StringToHash("Player_DoubleJump") == player.animator.stateHash)
+                if(Animator.StringToHash("Player_DoubleJumpStart") == player.animator.stateHash)
                 {
                     player.rigidbody.rb.velocity = Vector2.zero;
                     Debug.LogError("Double jump onStateEnter");
-                    player.legs.animator.animator.Play("PlayerLegs_DoubleJump");
-                    player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJump");
+                    player.legs.animator.animator.Play("PlayerLegs_DoubleJumpStartPose");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpStartPose");
+                    player.obj.up = InputManager.ins.L_Input;
                 }
             }
         }

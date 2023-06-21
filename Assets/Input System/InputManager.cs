@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
                     if(player.jumpsLeft > 0 && inputActions.ReadValueAsButton())
                     {
                         player.jumpsLeft--;
-                        player.animator.animator.Play("Player_DoubleJump");
+                        player.animator.animator.Play("Player_DoubleJumpStart");
                     }
                 }
             }
