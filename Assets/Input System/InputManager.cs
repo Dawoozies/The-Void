@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RuntimeObjects;
 public class InputManager : MonoBehaviour
 {
     public static InputManager ins;
@@ -26,6 +27,21 @@ public class InputManager : MonoBehaviour
             JumpDown_Input = inputActions.ReadValueAsButton();
             if(JumpDown_Input)
                 JumpDownBuffer.Input(0.2f);
+            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+            if (player != null)
+            {
+                bool canDoubleJump =
+                Animator.StringToHash("Player_JumpAscentSlow") == player.animator.stateHash
+                || Animator.StringToHash("Player_Fall") == player.animator.stateHash;
+                if (canDoubleJump)
+                {
+                    if(player.jumpsLeft > 0 && inputActions.ReadValueAsButton())
+                    {
+                        player.jumpsLeft--;
+                        player.animator.animator.Play("Player_DoubleJump");
+                    }
+                }
+            }
         };
         inputActions.PlayerDefault.RightBumper.performed += (inputActions) =>
         {

@@ -35,6 +35,12 @@ namespace RuntimeObjects
         public float TickRate(float globalTickRate) => globalTickRate * localTickRateMultiplier;
         public Vector2 up => obj.up;
         public Vector2 right => obj.right;
+        public float upSpeed => Vector2.Dot(rigidbody.rb.velocity, up);
+        public Vector2 upVelocity => upSpeed * up;
+        public float upMagnitude => upVelocity.magnitude;
+        public float rightSpeed => Vector2.Dot(rigidbody.rb.velocity, right);
+        public Vector2 rightVelocity => rightSpeed * right;
+        public float rightMagnitude => rightVelocity.magnitude;
         public Vector2 RelativePos(Vector2 v)
         {
             return (Vector2)obj.position + animator.spriteRenderer.flipX.DefinedValue(1, -1) * v.x * right
@@ -132,13 +138,13 @@ namespace RuntimeObjects
         public Rigidbody2D rb;
         public Transform rbColliderParent;
         //Current Up
-        public Vector2 upVelocity;
-        public float upSpeed;
-        public float upMagnitude;
+        //public Vector2 upVelocity;
+        //public float upSpeed;
+        //public float upMagnitude;
         //Current Right
-        public Vector2 rightVelocity;
-        public float rightSpeed;
-        public float rightMagnitude;
+        //public Vector2 rightVelocity;
+        //public float rightSpeed;
+        //public float rightMagnitude;
 
         //important info, previousVelocity, velocity
         //Dealing with directed velocity
@@ -159,19 +165,19 @@ namespace RuntimeObjects
             runtimeRigidbody.rb.freezeRotation = true;
             obj.rigidbody = runtimeRigidbody;
         }
-        public static void Update(RuntimeObject obj, float tickDelta)
-        {
-            RuntimeRigidbody runtimeRigidbody = obj.rigidbody;
-            //Calculate current velocities
-            runtimeRigidbody.upSpeed = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.up);
-            runtimeRigidbody.upVelocity = runtimeRigidbody.upSpeed * obj.up;
-            runtimeRigidbody.upMagnitude = Mathf.Abs(runtimeRigidbody.upSpeed);
-            runtimeRigidbody.rightSpeed = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.right);
-            runtimeRigidbody.rightVelocity = runtimeRigidbody.rightSpeed * obj.right;
-            runtimeRigidbody.rightMagnitude = Mathf.Abs(runtimeRigidbody.rightSpeed);
+        //public static void Update(RuntimeObject obj, float tickDelta)
+        //{
+        //    RuntimeRigidbody runtimeRigidbody = obj.rigidbody;
+        //    //Calculate current velocities
+        //    runtimeRigidbody.upSpeed = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.up);
+        //    runtimeRigidbody.upVelocity = runtimeRigidbody.upSpeed * obj.up;
+        //    runtimeRigidbody.upMagnitude = Mathf.Abs(runtimeRigidbody.upSpeed);
+        //    runtimeRigidbody.rightSpeed = Vector2.Dot(runtimeRigidbody.rb.velocity, obj.right);
+        //    runtimeRigidbody.rightVelocity = runtimeRigidbody.rightSpeed * obj.right;
+        //    runtimeRigidbody.rightMagnitude = Mathf.Abs(runtimeRigidbody.rightSpeed);
 
             //runtimeRigidbody.onVelocityUpdate?.Invoke(obj, runtimeRigidbody.upVelocity, runtimeRigidbody.rightVelocity, runtimeRigidbody.upMagnitude, runtimeRigidbody.rightMagnitude);
-        }
+        //}
     }
     public class RuntimeDirectedCircleColliders
     {

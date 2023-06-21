@@ -193,6 +193,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        InputManager.ins.ManagedUpdate(Time.deltaTime);
         foreach (string key in allRuntimeObjects.Keys)
         {
             allRuntimeObjects[key].managedUpdate?.Invoke(allRuntimeObjects[key], Time.deltaTime);
