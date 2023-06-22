@@ -131,6 +131,10 @@ namespace RuntimeObjects
             }
             
         }
+        public bool CurrentState(string stateName)
+        {
+            return Animator.StringToHash(stateName) == stateHash;
+        }
     }
     public class RuntimeRigidbody
     {

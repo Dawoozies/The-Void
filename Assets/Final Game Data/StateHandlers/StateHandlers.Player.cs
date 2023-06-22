@@ -21,16 +21,12 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_Run");
                     if (!player.grounded)
                         player.animator.animator.Play("Player_Fall");
-                    if(InputManager.ins.JumpDown_Input || InputManager.ins.JumpDown_BufferedInput)
-                        player.animator.animator.Play("Player_JumpAscent");
                     //transitions at bottom most important
                 }
                 if (Animator.StringToHash("Player_Run") == player.animator.stateHash)
                 {
                     if (InputManager.ins.L_Input.x == 0f)
                         player.animator.animator.Play("Player_Idle");
-                    if (InputManager.ins.JumpDown_Input || InputManager.ins.JumpDown_BufferedInput)
-                        player.animator.animator.Play("Player_JumpAscent");
 
                     if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
                         player.legs.animator.spriteRenderer.flipX = false;
@@ -62,6 +58,13 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_JumpAscentSlow");
                     }
                 }
+                if(Animator.StringToHash("Player_DoubleJumpStart") == player.animator.stateHash)
+                {
+                    if(player.animator.trueTimeSpentInState >= player.doubleJumpStartTime)
+                    {
+                        player.animator.animator.Play("Player_DoubleJumpAscent");
+                    }
+                }
             }
         }
         public static void PhysicsUpdate(RuntimeObject obj, float tickDelta)
@@ -69,7 +72,10 @@ namespace StateHandlers.Player
             RuntimeObjects.Player player = obj as RuntimeObjects.Player;
             if(player != null)
             {
-                player.rigidbody.rb.velocity = player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
+                bool noLMove =
+                    player.animator.CurrentState("Player_DoubleJumpStart")
+                    || player.animator.CurrentState("Player_DoubleJumpAscent");
+                player.rigidbody.rb.velocity = noLMove.DefinedValue(1f,0f)*player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
                 if (Animator.StringToHash("Player_Fall") == player.animator.stateHash)
                 {
                     player.rigidbody.rb.AddForce(-player.up * 30f);
@@ -117,6 +123,17 @@ namespace StateHandlers.Player
                         player.rigidbody.rb.AddForce(-player.up * 30f);
                         player.animator.animator.Play("Player_Fall");
                     }
+                }
+                if(player.animator.CurrentState("Player_DoubleJumpAscent"))
+                {
+                    if(player.animator.trueTimeSpentInState < player.jumpVelocityAddTime)
+                    {
+                        player.rigidbody.rb.velocity += player.up * 5f;
+                        if (player.upSpeed > player.ascentSpeedMax)
+                            player.rigidbody.rb.velocity = player.ascentSpeedMax * player.up;
+                    }
+                    //if (player.animator.trueTimeSpentInState > player.jumpVelocityAddTime)
+                        //player.rigidbody.rb.velocity = Vector2.zero;
                 }
             }
         }
@@ -187,6 +204,13 @@ namespace StateHandlers.Player
                     player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpStartPose");
                     player.obj.up = InputManager.ins.L_Input;
                 }
+                if(Animator.StringToHash("Player_DoubleJumpAscent") == player.animator.stateHash)
+                {
+                    Debug.LogError("Double jump ascent onStateEnter");
+                    player.legs.animator.animator.Play("PlayerLegs_DoubleJumpAscentPose");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpAscentPose");
+                    player.rigidbody.rbObj.position = player.RelativePos(player.doubleJumpShift);
+                }
             }
         }
         public static void OnFrameUpdate(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -201,6 +225,16 @@ namespace StateHandlers.Player
                 if (Animator.StringToHash("Player_Run") == player.animator.stateHash)
                 {
                     player.torso.obj.position = player.legs.obj.position;
+                }
+                if(player.animator.CurrentState("Player_DoubleJumpAscent"))
+                {
+                    if(player.legs.directedPoints.atFrame != null && player.legs.directedPoints.atFrame.Count > 0)
+                    {
+                        foreach (string key in player.legs.directedPoints.atFrame.Keys)
+                        {
+                            Debug.LogError($"Directed point {key} at frame {player.legs.animator.frame}");
+                        }
+                    }
                 }
             }
         }

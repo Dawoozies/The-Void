@@ -16,8 +16,10 @@ namespace RuntimeObjects
         public float jumpVelocityAddTime = 0.175f;
         public float jumpApexRightSpeed = 2f;
         public float jumpApexTime = 0.35f;
-        public int maxJumps = 3;
+        public int maxJumps = 4;
         public int jumpsLeft;
+        public float doubleJumpStartTime = 0.1f;
+        public Vector2 doubleJumpShift = new Vector2(0.85f, 1f);
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;

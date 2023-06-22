@@ -30,9 +30,20 @@ public class InputManager : MonoBehaviour
             RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
             if (player != null)
             {
+                bool canJump =
+                    player.animator.CurrentState("Player_Idle")
+                    || player.animator.CurrentState("Player_Run");
+                if(canJump)
+                {
+                    if(player.jumpsLeft > 0 && inputActions.ReadValueAsButton())
+                    {
+                        player.jumpsLeft--;
+                        player.animator.animator.Play("Player_JumpAscent");
+                    }
+                }
                 bool canDoubleJump =
-                Animator.StringToHash("Player_JumpAscentSlow") == player.animator.stateHash
-                || Animator.StringToHash("Player_Fall") == player.animator.stateHash;
+                player.animator.CurrentState("Player_JumpAscentSlow")
+                || player.animator.CurrentState("Player_Fall");
                 if (canDoubleJump)
                 {
                     if(player.jumpsLeft > 0 && inputActions.ReadValueAsButton())
@@ -78,6 +89,22 @@ public class InputManager : MonoBehaviour
         RightBumper_BufferedInput = RightBumperBuffer.isActive;
         LeftBumperBuffer.Update(timeDelta);
         LeftBumper_BufferedInput = LeftBumperBuffer.isActive;
+
+        RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+        if (player != null)
+        {
+            bool canJump =
+                player.animator.CurrentState("Player_Idle")
+                || player.animator.CurrentState("Player_Run");
+            if (canJump)
+            {
+                if (player.jumpsLeft > 0 && JumpDown_BufferedInput)
+                {
+                    player.jumpsLeft--;
+                    player.animator.animator.Play("Player_JumpAscent");
+                }
+            }
+        }
     }
 }
 public class InputButtonBuffer
