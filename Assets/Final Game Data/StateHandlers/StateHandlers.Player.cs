@@ -76,7 +76,7 @@ namespace StateHandlers.Player
                     if (player.animator.trueTimeSpentInState > player.doubleJumpVelocityAddTime)
                     {
                         if(player.jumpsLeft != 1)
-                            player.animator.animator.Play("Player_JumpAscentSlow");
+                            player.animator.animator.Play("Player_DoubleJumpAscentSlow");
                         if (player.jumpsLeft == 1)
                             player.animator.animator.Play("Player_Backflip");
                     }
@@ -92,6 +92,7 @@ namespace StateHandlers.Player
                 bool noLMove =
                     player.animator.CurrentState("Player_DoubleJumpStart")
                     || player.animator.CurrentState("Player_DoubleJumpAscent")
+                    || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
                     || player.animator.CurrentState("Player_Backflip");
                 if(!noLMove)
                     player.rigidbody.rb.velocity = player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
@@ -154,16 +155,28 @@ namespace StateHandlers.Player
                             player.rigidbody.rb.velocity = player.ascentSpeedMax * player.up;
                     }
                 }
+                if(player.animator.CurrentState("Player_DoubleJumpAscentSlow"))
+                {
+                    if(player.upSpeed > 0f)
+                        player.rigidbody.rb.velocity += -player.up * 100f * tickDelta;
+                    if(player.upSpeed < 12f)
+                    {
+                        player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose2");
+                        player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose2");
+                    }
+                    if (player.upSpeed <= 0f)
+                        player.animator.animator.Play("Player_Fall");
+                }
                 if(player.animator.CurrentState("Player_Backflip"))
                 {
                     player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
                     //Debug.LogError($"Up Speed = {player.upSpeed}");
                     int backflipPose = 1;
-                    if (player.upSpeed > 12f)
+                    if (player.upSpeed > 12)
                         backflipPose = 1;
-                    if (6 < player.upSpeed && player.upSpeed <= 12f)
+                    if (6 < player.upSpeed && player.upSpeed <= 12)
                         backflipPose = 2;
-                    if(0 < player.upSpeed && player.upSpeed <= 6 )
+                    if(0 < player.upSpeed && player.upSpeed <= 6)
                         backflipPose = 3;
                     if(-12 < player.upSpeed && player.upSpeed <= 0)
                         backflipPose = 4;
@@ -171,8 +184,11 @@ namespace StateHandlers.Player
                         backflipPose = 5;
                     if(player.upSpeed <= -18)
                         backflipPose = 6;
+                    //Debug.LogError($"Backflip Pose {backflipPose}");
                     player.legs.animator.animator.Play($"PlayerLegs_BackflipPose{backflipPose}");
                     player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose{backflipPose}");
+                    if (player.upSpeed < -24)
+                        player.animator.animator.Play("Player_Fall");
                 }
             }
         }
@@ -235,7 +251,6 @@ namespace StateHandlers.Player
                 {
                     //the up direction may not always be the default up
                     //but for prototype purposes it is
-                    player.obj.up = Vector2.up;
                     player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose1");
                     //If weapon held do play one with weapon held
                     player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose1");
@@ -256,6 +271,12 @@ namespace StateHandlers.Player
                     player.legs.animator.animator.Play("PlayerLegs_DoubleJumpAscentPose");
                     player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpAscentPose");
                     player.rigidbody.rbObj.position = player.RelativePos(player.doubleJumpShift);
+                }
+                if(player.animator.CurrentState("Player_DoubleJumpAscentSlow"))
+                {
+                    player.obj.up = Vector2.up;
+                    player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose1");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose1");
                 }
                 if(player.animator.CurrentState("Player_Backflip"))
                 {
