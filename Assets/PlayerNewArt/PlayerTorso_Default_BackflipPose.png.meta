@@ -108,48 +108,6 @@ TextureImporter:
       name: PlayerTorso_Default_BackflipPose_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2014
-        width: 736
-        height: 608
-      alignment: 9
-      pivot: {x: 0.5177501, y: 0.1519121}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dff43ae83254a0e42912699ecea2c4da
-      internalID: -1275639604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_2
-      rect:
-        serializedVersion: 2
-        x: 753
-        y: 1731
-        width: 702
-        height: 891
-      alignment: 9
-      pivot: {x: 0.794034, y: 0.5557164}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd17297abe4d2c4448121bd522afe13d
-      internalID: 1234237172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_3
-      rect:
-        serializedVersion: 2
         x: 1565
         y: 1886
         width: 784
@@ -168,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_4
+      name: PlayerTorso_Default_BackflipPose_2
       rect:
         serializedVersion: 2
         x: 0
@@ -189,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_5
+      name: PlayerTorso_Default_BackflipPose_3
       rect:
         serializedVersion: 2
         x: 871
@@ -210,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_6
+      name: PlayerTorso_Default_BackflipPose_4
       rect:
         serializedVersion: 2
         x: 1662
@@ -231,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_7
+      name: PlayerTorso_Default_BackflipPose_5
       rect:
         serializedVersion: 2
         x: 69
@@ -252,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_Default_BackflipPose_8
+      name: PlayerTorso_Default_BackflipPose_6
       rect:
         serializedVersion: 2
         x: 1021
@@ -283,14 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerTorso_Default_BackflipPose_7: 1426593824
-      PlayerTorso_Default_BackflipPose_3: 2082160327
-      PlayerTorso_Default_BackflipPose_1: -1275639604
-      PlayerTorso_Default_BackflipPose_2: 1234237172
-      PlayerTorso_Default_BackflipPose_6: 1570827868
-      PlayerTorso_Default_BackflipPose_4: -1270430149
-      PlayerTorso_Default_BackflipPose_8: -1471372155
-      PlayerTorso_Default_BackflipPose_5: -1308829745
+      PlayerTorso_Default_BackflipPose_3: -1308829745
+      PlayerTorso_Default_BackflipPose_1: 2082160327
+      PlayerTorso_Default_BackflipPose_2: -1270430149
+      PlayerTorso_Default_BackflipPose_4: 1570827868
+      PlayerTorso_Default_BackflipPose_6: -1471372155
+      PlayerTorso_Default_BackflipPose_5: 1426593824
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

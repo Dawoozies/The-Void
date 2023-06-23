@@ -25,7 +25,6 @@ namespace OverlapHandlers.Player
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
                         player.grounded = true;
-                        player.jumpsLeft = player.maxJumps;
                     }
                 }
             }

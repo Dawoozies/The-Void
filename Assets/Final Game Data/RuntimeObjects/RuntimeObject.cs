@@ -46,6 +46,11 @@ namespace RuntimeObjects
             return (Vector2)obj.position + animator.spriteRenderer.flipX.DefinedValue(1, -1) * v.x * right
                 + animator.spriteRenderer.flipY.DefinedValue(1, -1) * v.y * up;
         }
+        public Vector2 RelativeDir(Vector2 v)
+        {
+            return animator.spriteRenderer.flipX.DefinedValue(1,-1)*v.x*right
+                + animator.spriteRenderer.flipY.DefinedValue(1,-1)*v.y*up;
+        }
         public RuntimeObject(string id)
         {
             this.id = id;

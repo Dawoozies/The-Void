@@ -108,48 +108,6 @@ TextureImporter:
       name: PlayerLegs_BackflipPose_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2012
-        width: 593
-        height: 849
-      alignment: 9
-      pivot: {x: 0.23094483, y: 0.7926723}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4febbec09b07dd42b9b99d7d8762dc3
-      internalID: 2140307366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_2
-      rect:
-        serializedVersion: 2
-        x: 694
-        y: 1250
-        width: 1254
-        height: 1611
-      alignment: 9
-      pivot: {x: 0.06824339, y: 0.84744346}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5bd8598ff4856e94aa6f2b045092c166
-      internalID: 86861017
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_3
-      rect:
-        serializedVersion: 2
         x: 2039
         y: 2244
         width: 901
@@ -168,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_4
+      name: PlayerLegs_BackflipPose_2
       rect:
         serializedVersion: 2
         x: 3025
@@ -189,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_5
+      name: PlayerLegs_BackflipPose_3
       rect:
         serializedVersion: 2
         x: 0
@@ -210,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_6
+      name: PlayerLegs_BackflipPose_4
       rect:
         serializedVersion: 2
         x: 835
@@ -231,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_8
+      name: PlayerLegs_BackflipPose_6
       rect:
         serializedVersion: 2
         x: 2707
@@ -252,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerLegs_BackflipPose_7
+      name: PlayerLegs_BackflipPose_5
       rect:
         serializedVersion: 2
         x: 1612
@@ -295,22 +253,21 @@ TextureImporter:
       PlayerLegs_BackflipPose_9: -950279620
       PlayerLegs_BackflipPose_42: 6836892
       PlayerLegs_BackflipPose_31: -747446489
-      PlayerLegs_BackflipPose_4: -1853027807
-      PlayerLegs_BackflipPose_2: 86861017
+      PlayerLegs_BackflipPose_4: -1245844092
+      PlayerLegs_BackflipPose_2: -1853027807
       PlayerLegs_BackflipPose_36: -716106032
       PlayerLegs_BackflipPose_10: 883687405
       PlayerLegs_BackflipPose_40: -1322233811
       PlayerLegs_BackflipPose_12: 1295530335
-      PlayerLegs_BackflipPose_8: 2073968675
-      PlayerLegs_BackflipPose_3: 628282943
+      PlayerLegs_BackflipPose_3: 1766950066
       PlayerLegs_BackflipPose_27: -1878563173
       PlayerLegs_BackflipPose_23: 1993753372
       PlayerLegs_BackflipPose_21: 1730895070
       PlayerLegs_BackflipPose_26: 1340124184
       PlayerLegs_BackflipPose_13: -1654269571
-      PlayerLegs_BackflipPose_6: -1245844092
-      PlayerLegs_BackflipPose_1: 2140307366
-      PlayerLegs_BackflipPose_5: 1766950066
+      PlayerLegs_BackflipPose_6: 2073968675
+      PlayerLegs_BackflipPose_1: 628282943
+      PlayerLegs_BackflipPose_5: -1330843015
       PlayerLegs_BackflipPose_16: -2003129746
       PlayerLegs_BackflipPose_24: 184928432
       PlayerLegs_BackflipPose_25: 616305837
@@ -323,7 +280,6 @@ TextureImporter:
       PlayerLegs_BackflipPose_44: 1655502631
       PlayerLegs_BackflipPose_15: 108619028
       PlayerLegs_BackflipPose_32: 1008350816
-      PlayerLegs_BackflipPose_7: -1330843015
       PlayerLegs_BackflipPose_39: -2040239882
   spritePackingTag: 
   pSDRemoveMatte: 0

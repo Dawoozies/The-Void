@@ -27,32 +27,7 @@ public class InputManager : MonoBehaviour
             JumpDown_Input = inputActions.ReadValueAsButton();
             if(JumpDown_Input)
                 JumpDownBuffer.Input(0.2f);
-            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
-            if (player != null)
-            {
-                bool canJump =
-                    player.animator.CurrentState("Player_Idle")
-                    || player.animator.CurrentState("Player_Run");
-                if(canJump)
-                {
-                    if(player.jumpsLeft > 0 && inputActions.ReadValueAsButton())
-                    {
-                        player.jumpsLeft--;
-                        player.animator.animator.Play("Player_JumpAscent");
-                    }
-                }
-                bool canDoubleJump =
-                player.animator.CurrentState("Player_JumpAscentSlow")
-                || player.animator.CurrentState("Player_Fall");
-                if (canDoubleJump)
-                {
-                    if(player.jumpsLeft > 0 && inputActions.ReadValueAsButton())
-                    {
-                        player.jumpsLeft--;
-                        player.animator.animator.Play("Player_DoubleJumpStart");
-                    }
-                }
-            }
+            StateHandlers.Player.Handler.OnJumpPerformed(JumpDown_Input);
         };
         inputActions.PlayerDefault.RightBumper.performed += (inputActions) =>
         {
@@ -89,22 +64,6 @@ public class InputManager : MonoBehaviour
         RightBumper_BufferedInput = RightBumperBuffer.isActive;
         LeftBumperBuffer.Update(timeDelta);
         LeftBumper_BufferedInput = LeftBumperBuffer.isActive;
-
-        RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
-        if (player != null)
-        {
-            bool canJump =
-                player.animator.CurrentState("Player_Idle")
-                || player.animator.CurrentState("Player_Run");
-            if (canJump)
-            {
-                if (player.jumpsLeft > 0 && JumpDown_BufferedInput)
-                {
-                    player.jumpsLeft--;
-                    player.animator.animator.Play("Player_JumpAscent");
-                }
-            }
-        }
     }
 }
 public class InputButtonBuffer
