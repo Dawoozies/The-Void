@@ -28,6 +28,21 @@ namespace OverlapHandlers.Player
                     }
                 }
             }
+            if(dataName == "AirRollLandBox")
+            {
+                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                if(player != null)
+                {
+                    if(player.animator.CurrentState("Player_AirRollDescent"))
+                    {
+                        if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        {
+                            //Debug.LogError("Air roll land area hit ground!");
+                            player.animator.animator.Play("Player_AirRollLand");
+                        }
+                    }
+                }
+            }
         }
     }
     public static class OnNullResult

@@ -67,15 +67,26 @@ namespace StateHandlers.Player
                 if(player.animator.CurrentState("Player_DoubleJumpStart"))
                 {
                     if(player.animator.trueTimeSpentInState >= player.doubleJumpStartTime)
-                    {
                         player.animator.animator.Play("Player_DoubleJumpAscent");
-                    }
                 }
                 if(player.animator.CurrentState("Player_DoubleJumpAscent"))
                 {
                     if (player.animator.trueTimeSpentInState > player.doubleJumpVelocityAddTime)
                     {
                         player.animator.animator.Play("Player_DoubleJumpAscentSlow");
+                    }
+                }
+                if(player.animator.CurrentState("Player_AirRollStart"))
+                {
+                    if (player.animator.trueTimeSpentInState >= player.airRollStartTime)
+                        player.animator.animator.Play("Player_AirRollDescent");
+                }
+                if(player.animator.CurrentState("Player_AirRollLand"))
+                {
+                    //Debug.LogError("Air roll land first update");
+                    if(player.animator.trueTimeSpentInState > player.airRollLandBufferTime)
+                    {
+                        //if we go above the buffer time then player will default out into standing up
                     }
                 }
             }
@@ -90,7 +101,9 @@ namespace StateHandlers.Player
                     player.animator.CurrentState("Player_DoubleJumpStart")
                     || player.animator.CurrentState("Player_DoubleJumpAscent")
                     || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
-                    || player.animator.CurrentState("Player_Backflip");
+                    || player.animator.CurrentState("Player_AirRollStart")
+                    || player.animator.CurrentState("Player_AirRollDescent")
+                    || player.animator.CurrentState("Player_AirRollLand");
                 if(!noLMove)
                     player.rigidbody.rb.velocity = player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
                 if (player.animator.CurrentState("Player_Fall"))
@@ -169,6 +182,7 @@ namespace StateHandlers.Player
                         pose = 6;
                     if (player.upSpeed <= -10)
                         pose = 7;
+                    Debug.Log($"pose = {pose}");
                     switch (player.jumpType)
                     {
 
@@ -249,27 +263,27 @@ namespace StateHandlers.Player
                             break;
                     }
                 }
-                if(player.animator.CurrentState("Player_Backflip"))
+                if(player.animator.CurrentState("Player_AirRollDescent"))
                 {
-                    player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
-                    //Debug.LogError($"Up Speed = {player.upSpeed}");
-                    int pose = 1;
-                    if (player.upSpeed > 12)
-                        pose = 1;
-                    if (6 < player.upSpeed && player.upSpeed <= 12)
-                        pose = 2;
-                    if(0 < player.upSpeed && player.upSpeed <= 6)
-                        pose = 3;
-                    if(-12 < player.upSpeed && player.upSpeed <= 0)
-                        pose = 4;
-                    if(-18 < player.upSpeed && player.upSpeed <= -12)
-                        pose = 5;
-                    if(player.upSpeed <= -18)
-                        pose = 6;
-                    player.legs.animator.animator.Play($"PlayerLegs_BackflipPose{pose}");
-                    player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose{pose}");
-                    if (player.upSpeed < -24)
-                        player.animator.animator.Play("Player_Fall");
+                    player.rigidbody.rb.velocity += -Vector2.up * 90f * tickDelta;
+                    //player.rigidbody.rb.velocity += Vector2.right * 50f * tickDelta * InputManager.ins.L_Input.x;
+                    //Debug.LogError($"Player Up Velocity = {player.upSpeed} || Player True Up Velocity = {player.rigidbody.rb.velocity.y}");
+                    //Since we are changing the up direction at every step the up velocity is always positive
+                    if(player.rigidbody.rb.velocity.y < player.airRollDescentSpeedMax)
+                    {
+                        player.rigidbody.rb.velocity = player.rigidbody.rb.velocity.x * Vector2.right + player.airRollDescentSpeedMax * Vector2.up;
+                    }
+                    //Debug.LogError($"Player Y Velocity = {player.rigidbody.rb.velocity.y}");
+                    if (player.rigidbody.rb.velocity.y > player.airRollBraceDescentSpeed)
+                    {
+                        player.legs.animator.animator.Play("PlayerLegs_RollPose2");
+                        player.torso.animator.animator.Play("PlayerTorso_Default_RollPose2");
+                    }
+                    else
+                    {
+                        player.legs.animator.animator.Play("PlayerLegs_RollPose4");
+                        player.torso.animator.animator.Play("PlayerTorso_Default_RollPose4");
+                    }
                 }
             }
         }
@@ -342,7 +356,7 @@ namespace StateHandlers.Player
                     //Debug.LogError("Double jump onStateEnter");
                     player.legs.animator.animator.Play("PlayerLegs_DoubleJumpStartPose");
                     player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpStartPose");
-                    player.obj.up = new Vector3(InputManager.ins.L_Input.x, Mathf.Abs(InputManager.ins.L_Input.y), 0f);
+                    player.obj.up = new Vector3(InputManager.ins.L_Input.x, InputManager.ins.L_Input.y, 0f);
                     player.jumpsLeft--;
                 }
                 if(player.animator.CurrentState("Player_DoubleJumpAscent"))
@@ -380,6 +394,30 @@ namespace StateHandlers.Player
                             break;
                     }
                 }
+                if(player.animator.CurrentState("Player_AirRollStart"))
+                {
+                    player.legs.animator.animator.Play("PlayerLegs_DoubleJumpStartPose");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpStartPose");
+                    player.obj.up = InputManager.ins.L_Input;
+                }
+                if(player.animator.CurrentState("Player_AirRollDescent"))
+                {
+                    if(Mathf.Approximately(InputManager.ins.L_Input.y, 0f))
+                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 10f;
+                    else if(Mathf.Approximately(InputManager.ins.L_Input.x, 0f))
+                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.up)*Vector2.up + InputManager.ins.L_Input.y * Vector2.up * 10f;
+                    else
+                        player.rigidbody.rb.velocity = InputManager.ins.L_Input * 20f;
+                    player.legs.animator.animator.Play("PlayerLegs_DoubleJumpAscentPose");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpAscentPose");
+                    player.rigidbody.rbObj.position = player.RelativePos(player.doubleJumpShift);
+                }
+                if(player.animator.CurrentState("Player_AirRollLand"))
+                {
+                    player.legs.animator.animator.Play("PlayerLegs_RollPose4");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_RollPose4");
+                    player.obj.up = Vector2.up;
+                }
             }
         }
         public static void OnFrameUpdate(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -394,6 +432,19 @@ namespace StateHandlers.Player
                 if (player.animator.CurrentState("Player_Run"))
                 {
                     player.torso.obj.position = player.legs.obj.position;
+                }
+                if(player.animator.CurrentState("Player_AirRollDescent"))
+                {
+                    if(player.rigidbody.rb.velocity.y <= player.airRollBraceDescentSpeed)
+                    {
+                        //Debug.LogError("Rotation should be happenin");
+                        float dir = player.legs.animator.spriteRenderer.flipX.DefinedValue(-1, 1);
+                        player.obj.up = new Vector2(Mathf.Cos(dir * 12f * player.animator.trueTimeSpentInState), Mathf.Sin(dir * 12f * player.animator.trueTimeSpentInState));
+                    }
+                    else
+                    {
+                        player.obj.up = player.rigidbody.rb.velocity;
+                    }
                 }
             }
         }
@@ -420,28 +471,40 @@ namespace StateHandlers.Player
                 || player.animator.CurrentState("Player_DoubleJumpAscentSlow");
                 if (canJumpInAir && jumpInput)
                 {
-                    if(player.jumpsLeft > 0)
+                    //if input y down at all then air roll
+                    //if no input y then:
+                    // case1 no input x then double jump
+                    // case2 input x non zero then air roll
+                    //if input y up then double jump no matter what
+                    if (InputManager.ins.L_Input.y < 0)
+                        player.animator.animator.Play("Player_AirRollStart");
+                    if (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && !Mathf.Approximately(InputManager.ins.L_Input.x, 0))
+                        player.animator.animator.Play("Player_AirRollStart");
+                    if(InputManager.ins.L_Input.y > 0 || (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && Mathf.Approximately(InputManager.ins.L_Input.x, 0)))
                     {
-                        if (player.jumpsLeft == 3)
-                        {
-                            player.jumpType = "Double Jump";
-                        }
-                        if (player.jumpsLeft == 2)
-                        {
-                            if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
-                                player.jumpType = "Front Flip";
-                            else
-                                player.jumpType = "Back Flip";
-                        }
-                        if (player.jumpsLeft == 1)
-                        {
-                            if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
-                                player.jumpType = "Front Spin";
-                            else
-                                player.jumpType = "Back Spin";
-                        }
                         if (player.jumpsLeft > 0)
-                            player.animator.animator.Play("Player_DoubleJumpStart");
+                        {
+                            if (player.jumpsLeft == 3)
+                            {
+                                player.jumpType = "Double Jump";
+                            }
+                            if (player.jumpsLeft == 2)
+                            {
+                                if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
+                                    player.jumpType = "Front Flip";
+                                else
+                                    player.jumpType = "Back Flip";
+                            }
+                            if (player.jumpsLeft == 1)
+                            {
+                                if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
+                                    player.jumpType = "Front Spin";
+                                else
+                                    player.jumpType = "Back Spin";
+                            }
+                            if (player.jumpsLeft > 0)
+                                player.animator.animator.Play("Player_DoubleJumpStart");
+                        }
                     }
                 }
             }
