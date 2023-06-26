@@ -12,7 +12,7 @@ public static class ExtensionMethods
 #if UNITY_EDITOR
     public static bool CheckComplementOfFlag(this DataSelection obj, DataSelection basisToIgnore)
     {
-        Debug.Log("Check complement of flag");
+        //Debug.Log("Check complement of flag");
         foreach (DataSelection enumValue in Enum.GetValues(typeof(DataSelection)))
         {
             if (enumValue == DataSelection.None)
@@ -22,7 +22,7 @@ public static class ExtensionMethods
             if ((obj & enumValue) == enumValue)
                 return false;
         }
-        Debug.Log("Return true");
+        //Debug.Log("Return true");
         return true;
     }
 #endif

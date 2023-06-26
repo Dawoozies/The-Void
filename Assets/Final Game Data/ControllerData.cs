@@ -139,25 +139,17 @@ public class DirectedCircleCollider
         }
         controllerData.directedCircleColliders = newData;
     }
-    public static void RemoveAt(ControllerData controllerData, int index)
+    public static void Remove(ControllerData controllerData, DirectedCircleCollider toRemove)
     {
-        if(controllerData.directedCircleColliders == null || controllerData.directedCircleColliders.Length == 0)
-        {
+        if (controllerData.directedCircleColliders == null || controllerData.directedCircleColliders.Length == 0)
             return;
-        }
-        DirectedCircleCollider[] newData = new DirectedCircleCollider[controllerData.directedCircleColliders.Length - 1];
-        for (int i = 0; i < controllerData.directedCircleColliders.Length; i++)
+        List<DirectedCircleCollider> list = new();
+        foreach (DirectedCircleCollider directedCircleCollider in controllerData.directedCircleColliders)
         {
-            if(i < index)
-            {
-                newData[i] = controllerData.directedCircleColliders[i];
-            }
-            else if(i > index)
-            {
-                newData[i - 1] = controllerData.directedCircleColliders[i];
-            }
+            if (directedCircleCollider != toRemove)
+                list.Add(directedCircleCollider);
         }
-        controllerData.directedCircleColliders = newData;
+        controllerData.directedCircleColliders = list.ToArray();
     }
 }
 [Serializable]
@@ -250,25 +242,19 @@ public class DirectedCircleOverlap
         }
         controllerData.directedCircleOverlaps = newData;
     }
-    public static void RemoveAt(ControllerData controllerData, int index)
+    public static void Remove(ControllerData controllerData, DirectedCircleOverlap toRemove)
     {
         if(controllerData.directedCircleOverlaps == null || controllerData.directedCircleOverlaps.Length == 0)
         {
             return;
         }
-        DirectedCircleOverlap[] newData = new DirectedCircleOverlap[controllerData.directedCircleOverlaps.Length - 1];
-        for (int i = 0; i < controllerData.directedCircleOverlaps.Length; i++)
+        List<DirectedCircleOverlap> list = new();
+        foreach (DirectedCircleOverlap directedCircleOverlap in controllerData.directedCircleOverlaps)
         {
-            if(i < index)
-            {
-                newData[i] = controllerData.directedCircleOverlaps[i];
-            }
-            else if(i > index)
-            {
-                newData[i - 1] = controllerData.directedCircleOverlaps[i];
-            }
+            if (directedCircleOverlap != toRemove)
+                list.Add(directedCircleOverlap);
         }
-        controllerData.directedCircleOverlaps = newData;
+        controllerData.directedCircleOverlaps = list.ToArray();
     }
 }
 [Serializable]
@@ -332,25 +318,19 @@ public class CircleSpriteMask
         }
         controllerData.circleSpriteMasks = newData;
     }
-    public static void RemoveAt(ControllerData controllerData, int index)
+    public static void Remove(ControllerData controllerData, CircleSpriteMask toRemove)
     {
-        if(controllerData.circleSpriteMasks == null || controllerData.circleSpriteMasks.Length == 0)
+        if (controllerData.circleSpriteMasks == null || controllerData.circleSpriteMasks.Length == 0)
         {
             return;
         }
-        CircleSpriteMask[] newData = new CircleSpriteMask[controllerData.circleSpriteMasks.Length - 1];
-        for (int i = 0; i < controllerData.circleSpriteMasks.Length; i++)
+        List<CircleSpriteMask> list = new();
+        foreach (CircleSpriteMask circleSpriteMask in controllerData.circleSpriteMasks)
         {
-            if(i < index)
-            {
-                newData[i] = controllerData.circleSpriteMasks[i];
-            }
-            else if(i > index)
-            {
-                newData[i - 1] = controllerData.circleSpriteMasks[i];
-            }
+            if (circleSpriteMask != toRemove)
+                list.Add(circleSpriteMask);
         }
-        controllerData.circleSpriteMasks = newData;
+        controllerData.circleSpriteMasks = list.ToArray();
     }
 }
 [Serializable]
@@ -409,25 +389,19 @@ public class DirectedPoint
         }
         controllerData.directedPoints = newData;
     }
-    public static void RemoveAt(ControllerData controllerData, int index)
+    public static void Remove(ControllerData controllerData, DirectedPoint toRemove)
     {
-        if(controllerData.directedPoints == null || controllerData.directedPoints.Length == 0)
+        if (controllerData.directedPoints == null || controllerData.directedPoints.Length == 0)
         {
             return;
         }
-        DirectedPoint[] newData = new DirectedPoint[controllerData.directedPoints.Length - 1];
-        for (int i = 0; i < controllerData.directedPoints.Length; i++)
+        List<DirectedPoint> list = new();
+        foreach (DirectedPoint directedPoint in controllerData.directedPoints)
         {
-            if(i < index)
-            {
-                newData[i] = controllerData.directedPoints[i];
-            }
-            else if(i > index)
-            {
-                newData[i - 1] = controllerData.directedPoints[i];
-            }
+            if (directedPoint != toRemove)
+                list.Add(directedPoint);
         }
-        controllerData.directedPoints = newData;
+        controllerData.directedPoints = list.ToArray();
     }
 }
 public static class ResourcesUtility

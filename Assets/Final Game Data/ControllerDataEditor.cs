@@ -257,7 +257,7 @@ public class ControllerDataEditor : EditorWindow
                 if (GUILayout.Button(allDirectedCircleColliders[i].nickname))
                     directedCircleColliderSelected = allDirectedCircleColliders[i];
                 if(GUILayout.Button("DELETE"))
-                    DirectedCircleCollider.RemoveAt(controllerDataSelected, i);
+                    DirectedCircleCollider.Remove(controllerDataSelected, allDirectedCircleColliders[i]);
                 GUILayout.EndHorizontal();
             }
             return;
@@ -293,9 +293,7 @@ public class ControllerDataEditor : EditorWindow
                 if (GUILayout.Button(allDirectedCircleOverlaps[i].nickname))
                     directedCircleOverlapSelected = allDirectedCircleOverlaps[i];
                 if (GUILayout.Button("DELETE"))
-                {
-                    DirectedCircleOverlap.RemoveAt(controllerDataSelected, i);
-                }
+                    DirectedCircleOverlap.Remove(controllerDataSelected, allDirectedCircleOverlaps[i]);
 
                 GUILayout.EndHorizontal();
             }
@@ -332,7 +330,7 @@ public class ControllerDataEditor : EditorWindow
                 if (GUILayout.Button(allCircleSpriteMasks[i].nickname))
                     circleSpriteMaskSelected = allCircleSpriteMasks[i];
                 if (GUILayout.Button("DELETE"))
-                    CircleSpriteMask.RemoveAt(controllerDataSelected, i);
+                    CircleSpriteMask.Remove(controllerDataSelected, allCircleSpriteMasks[i]);
                 GUILayout.EndHorizontal();
             }
             return;
@@ -368,7 +366,7 @@ public class ControllerDataEditor : EditorWindow
                 if (GUILayout.Button(allDirectedPoints[i].nickname))
                     directedPointSelected = allDirectedPoints[i];
                 if (GUILayout.Button("DELETE"))
-                    DirectedPoint.RemoveAt(controllerDataSelected, i);
+                    DirectedPoint.Remove(controllerDataSelected, allDirectedPoints[i]);
                 GUILayout.EndHorizontal();
             }
             return;
