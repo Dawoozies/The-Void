@@ -167,27 +167,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PlayerTorso_Default_BackspinPose_4
-      rect:
-        serializedVersion: 2
-        x: 1105
-        y: 37
-        width: 652
-        height: 775
-      alignment: 9
-      pivot: {x: 0.16952252, y: 0.71600604}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2662addffb4805048a09703fa5906be4
-      internalID: -1639102641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []

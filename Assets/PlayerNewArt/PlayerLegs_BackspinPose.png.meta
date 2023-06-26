@@ -167,27 +167,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PlayerLegs_BackspinPose_4
-      rect:
-        serializedVersion: 2
-        x: 941
-        y: 50
-        width: 735
-        height: 970
-      alignment: 9
-      pivot: {x: 0.78242207, y: 0.16936958}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e5888488cf66c74418f383948dc28ea8
-      internalID: -9419377
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []

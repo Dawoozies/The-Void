@@ -75,10 +75,7 @@ namespace StateHandlers.Player
                 {
                     if (player.animator.trueTimeSpentInState > player.doubleJumpVelocityAddTime)
                     {
-                        if(player.jumpsLeft != 1)
-                            player.animator.animator.Play("Player_DoubleJumpAscentSlow");
-                        if (player.jumpsLeft == 1)
-                            player.animator.animator.Play("Player_Backflip");
+                        player.animator.animator.Play("Player_DoubleJumpAscentSlow");
                     }
                 }
             }
@@ -157,36 +154,120 @@ namespace StateHandlers.Player
                 }
                 if(player.animator.CurrentState("Player_DoubleJumpAscentSlow"))
                 {
-                    if(player.upSpeed > 0f)
-                        player.rigidbody.rb.velocity += -player.up * 100f * tickDelta;
-                    if(player.upSpeed < 12f)
+                    int pose = 1;
+                    if (player.upSpeed > 15)
+                        pose = 1;
+                    if (10 < player.upSpeed && player.upSpeed <= 15)
+                        pose = 2;
+                    if (5 < player.upSpeed && player.upSpeed <= 10)
+                        pose = 3;
+                    if (0 < player.upSpeed && player.upSpeed <= 5)
+                        pose = 4;
+                    if (-5 < player.upSpeed && player.upSpeed <= 0)
+                        pose = 5;
+                    if (-10 < player.upSpeed && player.upSpeed <= -5)
+                        pose = 6;
+                    if (player.upSpeed <= -10)
+                        pose = 7;
+                    switch (player.jumpType)
                     {
-                        player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose2");
-                        player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose2");
+
+                        case "Double Jump":
+                            player.rigidbody.rb.velocity += -player.up * 100f * tickDelta;
+                            if(player.upSpeed < 12f)
+                            {
+                                player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose2");
+                                player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose2");
+                            }
+                            if (player.upSpeed < -4f)
+                                player.animator.animator.Play("Player_Fall");
+                            break;
+                        case "Front Flip":
+                            player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
+                            if(pose == 6 || pose == 7)
+                            {
+                                player.legs.animator.animator.Play("PlayerLegs_BackflipPose6");
+                                player.torso.animator.animator.Play("PlayerTorso_Default_BackflipPose6");
+                            }
+                            else
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_FrontflipPose{pose}");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_FrontflipPose{pose}");
+                            }
+                            if (player.upSpeed < -24)
+                                player.animator.animator.Play("Player_Fall");
+                            break;
+                        case "Back Flip":
+                            player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
+                            if(pose == 7)
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_BackflipPose6");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose6");
+                            }
+                            else
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_BackflipPose{pose}");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose{pose}");
+                            }
+                            if (player.upSpeed < -24)
+                                player.animator.animator.Play("Player_Fall");
+                            break;
+                        case "Front Spin":
+                            player.rigidbody.rb.velocity += -player.up * 55f * tickDelta;
+                            if(pose == 1 || pose == 2 || pose == 3)
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_FrontspinPose{pose}");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_FrontspinPose{pose}");
+                            }
+                            if (pose == 4 || pose == 5 || pose == 6)
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_FrontflipPose{pose - 1}");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_FrontflipPose{pose - 1}");
+                            }
+                            if(pose == 7)
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_BackflipPose6");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose6");
+                            }
+                            if (player.upSpeed < -24)
+                                player.animator.animator.Play("Player_Fall");
+                            break;
+                        case "Back Spin":
+                            player.rigidbody.rb.velocity += -player.up * 55f * tickDelta;
+                            if (pose == 1 || pose == 2 || pose == 3)
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_BackspinPose{pose}");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_BackspinPose{pose}");
+                            }
+                            else
+                            {
+                                player.legs.animator.animator.Play($"PlayerLegs_BackflipPose{pose - 1}");
+                                player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose{pose - 1}");
+                            }
+                            if (player.upSpeed < -24)
+                                player.animator.animator.Play("Player_Fall");
+                            break;
                     }
-                    if (player.upSpeed <= 0f)
-                        player.animator.animator.Play("Player_Fall");
                 }
                 if(player.animator.CurrentState("Player_Backflip"))
                 {
                     player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
                     //Debug.LogError($"Up Speed = {player.upSpeed}");
-                    int backflipPose = 1;
+                    int pose = 1;
                     if (player.upSpeed > 12)
-                        backflipPose = 1;
+                        pose = 1;
                     if (6 < player.upSpeed && player.upSpeed <= 12)
-                        backflipPose = 2;
+                        pose = 2;
                     if(0 < player.upSpeed && player.upSpeed <= 6)
-                        backflipPose = 3;
+                        pose = 3;
                     if(-12 < player.upSpeed && player.upSpeed <= 0)
-                        backflipPose = 4;
+                        pose = 4;
                     if(-18 < player.upSpeed && player.upSpeed <= -12)
-                        backflipPose = 5;
+                        pose = 5;
                     if(player.upSpeed <= -18)
-                        backflipPose = 6;
-                    //Debug.LogError($"Backflip Pose {backflipPose}");
-                    player.legs.animator.animator.Play($"PlayerLegs_BackflipPose{backflipPose}");
-                    player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose{backflipPose}");
+                        pose = 6;
+                    player.legs.animator.animator.Play($"PlayerLegs_BackflipPose{pose}");
+                    player.torso.animator.animator.Play($"PlayerTorso_Default_BackflipPose{pose}");
                     if (player.upSpeed < -24)
                         player.animator.animator.Play("Player_Fall");
                 }
@@ -261,7 +342,7 @@ namespace StateHandlers.Player
                     //Debug.LogError("Double jump onStateEnter");
                     player.legs.animator.animator.Play("PlayerLegs_DoubleJumpStartPose");
                     player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpStartPose");
-                    player.obj.up = InputManager.ins.L_Input;
+                    player.obj.up = new Vector3(InputManager.ins.L_Input.x, Mathf.Abs(InputManager.ins.L_Input.y), 0f);
                     player.jumpsLeft--;
                 }
                 if(player.animator.CurrentState("Player_DoubleJumpAscent"))
@@ -275,14 +356,29 @@ namespace StateHandlers.Player
                 if(player.animator.CurrentState("Player_DoubleJumpAscentSlow"))
                 {
                     player.obj.up = Vector2.up;
-                    player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose1");
-                    player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose1");
-                }
-                if(player.animator.CurrentState("Player_Backflip"))
-                {
-                    player.obj.up = Vector2.up;
-                    player.legs.animator.animator.Play("PlayerLegs_BackflipPose1");
-                    player.torso.animator.animator.Play("PlayerTorso_Default_BackflipPose1");
+                    switch (player.jumpType)
+                    {
+                        case "Double Jump":
+                            player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose1");
+                            player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose1");
+                            break;
+                        case "Front Flip":
+                            player.legs.animator.animator.Play("PlayerLegs_FrontflipPose1");
+                            player.torso.animator.animator.Play("PlayerTorso_Default_FrontflipPose1");
+                            break;
+                        case "Back Flip":
+                            player.legs.animator.animator.Play("PlayerLegs_BackflipPose1");
+                            player.torso.animator.animator.Play("PlayerTorso_Default_BackflipPose1");
+                            break;
+                        case "Front Spin":
+                            player.legs.animator.animator.Play("PlayerLegs_FrontspinPose1");
+                            player.torso.animator.animator.Play("PlayerTorso_Default_FrontspinPose1");
+                            break;
+                        case "Back Spin":
+                            player.legs.animator.animator.Play("PlayerLegs_BackspinPose1");
+                            player.torso.animator.animator.Play("PlayerTorso_Default_BackspinPose1");
+                            break;
+                    }
                 }
             }
         }
@@ -319,12 +415,33 @@ namespace StateHandlers.Player
                 }
                 bool canJumpInAir =
                 player.animator.CurrentState("Player_JumpAscentSlow")
-                || player.animator.CurrentState("Player_Fall");
+                || player.animator.CurrentState("Player_Fall")
+                || player.animator.CurrentState("Player_DoubleJumpAscent")
+                || player.animator.CurrentState("Player_DoubleJumpAscentSlow");
                 if (canJumpInAir && jumpInput)
                 {
                     if(player.jumpsLeft > 0)
                     {
-                        player.animator.animator.Play("Player_DoubleJumpStart");
+                        if (player.jumpsLeft == 3)
+                        {
+                            player.jumpType = "Double Jump";
+                        }
+                        if (player.jumpsLeft == 2)
+                        {
+                            if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
+                                player.jumpType = "Front Flip";
+                            else
+                                player.jumpType = "Back Flip";
+                        }
+                        if (player.jumpsLeft == 1)
+                        {
+                            if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
+                                player.jumpType = "Front Spin";
+                            else
+                                player.jumpType = "Back Spin";
+                        }
+                        if (player.jumpsLeft > 0)
+                            player.animator.animator.Play("Player_DoubleJumpStart");
                     }
                 }
             }

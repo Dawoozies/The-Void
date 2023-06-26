@@ -1,0 +1,274 @@
+fileFormatVersion: 2
+guid: 39ef972dbcba39149bb9aa2aa5686e91
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 500
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerLegs_FrontFlipPose_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 1559
+        width: 613
+        height: 718
+      alignment: 9
+      pivot: {x: 0.9215343, y: 0.49999982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60fb24c44e3b48d4aa5804f181f255f8
+      internalID: -173825936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_FrontFlipPose_2
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 1559
+        width: 662
+        height: 538
+      alignment: 9
+      pivot: {x: 0.52153546, y: 0.15882233}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf57b8c13b060fa41a85ceba50dbdfb4
+      internalID: -2040858833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_FrontFlipPose_3
+      rect:
+        serializedVersion: 2
+        x: 1796
+        y: 1365
+        width: 731
+        height: 891
+      alignment: 9
+      pivot: {x: 0.09531587, y: 0.63400537}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0168bec1a8cbede4a8e4c0388d18aa1f
+      internalID: -313893408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_FrontFlipPose_4
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 411
+        width: 714
+        height: 807
+      alignment: 9
+      pivot: {x: 0.15556571, y: 0.86215585}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6998fca6372e593499b0cb2edeec64e0
+      internalID: 874177341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerLegs_FrontFlipPose_5
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 171
+        width: 768
+        height: 1188
+      alignment: 9
+      pivot: {x: 0.15193875, y: 0.6875076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1908192174eb25d449fb5f67211d0a90
+      internalID: 774974108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PlayerLegs_FrontFlipPose_14: -1236743748
+      PlayerLegs_FrontFlipPose_49: 318885869
+      PlayerLegs_FrontFlipPose_24: 181924127
+      PlayerLegs_FrontFlipPose_28: -45000094
+      PlayerLegs_FrontFlipPose_21: 748685333
+      PlayerLegs_FrontFlipPose_44: -1601310042
+      PlayerLegs_FrontFlipPose_38: 1149901368
+      PlayerLegs_FrontFlipPose_19: 1702650817
+      PlayerLegs_FrontFlipPose_32: -825687090
+      PlayerLegs_FrontFlipPose_36: -1610949734
+      PlayerLegs_FrontFlipPose_20: -1687388239
+      PlayerLegs_FrontFlipPose_10: 646958174
+      PlayerLegs_FrontFlipPose_9: -1919688325
+      PlayerLegs_FrontFlipPose_23: 508883307
+      PlayerLegs_FrontFlipPose_25: -407934147
+      PlayerLegs_FrontFlipPose_33: -1092843383
+      PlayerLegs_FrontFlipPose_3: -313893408
+      PlayerLegs_FrontFlipPose_22: 1952721151
+      PlayerLegs_FrontFlipPose_41: -801353317
+      PlayerLegs_FrontFlipPose_46: 139501897
+      PlayerLegs_FrontFlipPose_45: 1307675382
+      PlayerLegs_FrontFlipPose_2: -2040858833
+      PlayerLegs_FrontFlipPose_18: 1959632126
+      PlayerLegs_FrontFlipPose_47: -2052206850
+      PlayerLegs_FrontFlipPose_31: -1914997074
+      PlayerLegs_FrontFlipPose_4: 874177341
+      PlayerLegs_FrontFlipPose_34: -658954455
+      PlayerLegs_FrontFlipPose_29: -1655844122
+      PlayerLegs_FrontFlipPose_48: 1331293612
+      PlayerLegs_FrontFlipPose_17: 2011293444
+      PlayerLegs_FrontFlipPose_35: 1828423588
+      PlayerLegs_FrontFlipPose_13: -1715771831
+      PlayerLegs_FrontFlipPose_40: 167281598
+      PlayerLegs_FrontFlipPose_15: -1652964040
+      PlayerLegs_FrontFlipPose_16: 66453645
+      PlayerLegs_FrontFlipPose_37: 1145809378
+      PlayerLegs_FrontFlipPose_26: -811147248
+      PlayerLegs_FrontFlipPose_42: -1391777153
+      PlayerLegs_FrontFlipPose_43: 931506148
+      PlayerLegs_FrontFlipPose_27: -564377723
+      PlayerLegs_FrontFlipPose_1: -173825936
+      PlayerLegs_FrontFlipPose_8: 281092540
+      PlayerLegs_FrontFlipPose_5: 774974108
+      PlayerLegs_FrontFlipPose_30: 440102354
+      PlayerLegs_FrontFlipPose_11: -1608000571
+      PlayerLegs_FrontFlipPose_39: -483432705
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

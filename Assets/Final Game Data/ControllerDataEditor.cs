@@ -293,7 +293,10 @@ public class ControllerDataEditor : EditorWindow
                 if (GUILayout.Button(allDirectedCircleOverlaps[i].nickname))
                     directedCircleOverlapSelected = allDirectedCircleOverlaps[i];
                 if (GUILayout.Button("DELETE"))
+                {
                     DirectedCircleOverlap.RemoveAt(controllerDataSelected, i);
+                }
+
                 GUILayout.EndHorizontal();
             }
             return;
@@ -470,6 +473,7 @@ public class ControllerDataEditor : EditorWindow
             EditorUtility.SetDirty(controllerDataSelected);
             AssetDatabase.SaveAssets();
         }
+
         if (animator != null)
             DestroyImmediate(animator.gameObject);
     }

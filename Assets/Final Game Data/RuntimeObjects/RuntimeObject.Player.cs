@@ -21,6 +21,7 @@ namespace RuntimeObjects
         public float doubleJumpStartTime = 0.15f;
         public float doubleJumpVelocityAddTime = 0.1f;
         public Vector2 doubleJumpShift = new Vector2(0.15f, 1.35f);
+        public string jumpType = "Jump";
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;
