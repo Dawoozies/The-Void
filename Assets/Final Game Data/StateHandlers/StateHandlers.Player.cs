@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
 using ExtensionMethods_Bool;
-using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 
 namespace StateHandlers.Player
 {
@@ -30,19 +28,56 @@ namespace StateHandlers.Player
                 }
                 if (player.animator.CurrentState("Player_Run"))
                 {
+                    if(InputManager.ins.LeftTrigger_Input > 0.1f)
+                    {
+                        if(!player.torso.animator.CurrentState("PlayerTorso_WeaponHeld_Run"))
+                            player.torso.animator.animator.Play("PlayerTorso_WeaponHeld_Run");
+                        else
+                            player.torso.animator.time = player.legs.animator.time;
+                    }
+                    else
+                    {
+                        if (!player.torso.animator.CurrentState("PlayerTorso_Default_Run"))
+                            player.torso.animator.animator.Play("PlayerTorso_Default_Run");
+                        else
+                            player.torso.animator.time = player.legs.animator.time;
+
+                        player.torso.obj.up = Vector2.up;
+                    }
                     if (player.jumpsLeft > 0 && InputManager.ins.JumpDown_BufferedInput)
                         player.animator.animator.Play("Player_JumpAscent");
                     if (InputManager.ins.L_Input.x == 0f)
                         player.animator.animator.Play("Player_Idle");
-
-                    if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
-                        player.legs.animator.spriteRenderer.flipX = false;
-                    if(!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
-                        player.legs.animator.spriteRenderer.flipX = true;
-                    if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
-                        player.torso.animator.spriteRenderer.flipX = false;
-                    if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
-                        player.torso.animator.spriteRenderer.flipX = true;
+                    if(player.torso.animator.CurrentState("PlayerTorso_WeaponHeld_Run"))
+                    {
+                        if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
+                            player.legs.animator.spriteRenderer.flipX = false;
+                        if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
+                            player.legs.animator.spriteRenderer.flipX = true;
+                        if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x > 0f)
+                            player.torso.animator.spriteRenderer.flipX = false;
+                        if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x < 0f)
+                            player.torso.animator.spriteRenderer.flipX = true;
+                        if (-8f*InputManager.ins.R_Input.x < InputManager.ins.R_Input.y && InputManager.ins.R_Input.y < 8f*InputManager.ins.R_Input.x)
+                        {
+                            player.torso.obj.right = InputManager.ins.R_Input;
+                        }
+                        if(8f*InputManager.ins.R_Input.x < InputManager.ins.R_Input.y && InputManager.ins.R_Input.y < -8f*InputManager.ins.R_Input.x)
+                        {
+                            player.torso.obj.right = new Vector2(Mathf.Abs(InputManager.ins.R_Input.x), -InputManager.ins.R_Input.y);
+                        }
+                    }
+                    else
+                    {
+                        if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
+                            player.legs.animator.spriteRenderer.flipX = false;
+                        if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
+                            player.legs.animator.spriteRenderer.flipX = true;
+                        if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
+                            player.torso.animator.spriteRenderer.flipX = false;
+                        if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
+                            player.torso.animator.spriteRenderer.flipX = true;
+                    }
                 }
                 if(player.animator.CurrentState("Player_Fall"))
                 {
@@ -459,7 +494,7 @@ namespace StateHandlers.Player
                 {
                     if(Mathf.Approximately(InputManager.ins.L_Input.y, 0f))
                     {
-                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 17f;
+                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 20f;
                         //Debug.LogError("Directly across");
                     }
                     else if(Mathf.Approximately(InputManager.ins.L_Input.x, 0f))
@@ -470,16 +505,7 @@ namespace StateHandlers.Player
                     else
                     {
                         //Debug.LogError($"In direction {InputManager.ins.L_Input}");
-                        player.rigidbody.rb.velocity = InputManager.ins.L_Input * 17f;
-                    }
-                    if(Mathf.Abs(InputManager.ins.L_Input.y) > Mathf.Abs(InputManager.ins.L_Input.x))
-                    {
-                        //then we want to move down more than we want to move right
-                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 17f;
-                    }
-                    if(Mathf.Abs(InputManager.ins.L_Input.x) > Mathf.Abs(InputManager.ins.L_Input.y))
-                    {
-                        //then we want to move right more than we want to move down
+                        player.rigidbody.rb.velocity = InputManager.ins.L_Input * 20f;
                     }
                         
                     player.legs.animator.animator.Play("PlayerLegs_DoubleJumpAscentPose");

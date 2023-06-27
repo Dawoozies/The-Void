@@ -126,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_ThrowPose1
+      name: PlayerTorso_WeaponHeld_ThrowPose1
       rect:
         serializedVersion: 2
         x: 1179
@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_ThrowPose2
+      name: PlayerTorso_WeaponHeld_ThrowPose2
       rect:
         serializedVersion: 2
         x: 2231
@@ -168,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_ThrowPose3
+      name: PlayerTorso_WeaponHeld_ThrowPose3
       rect:
         serializedVersion: 2
         x: 78
@@ -189,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTorso_ThrowPose4
+      name: PlayerTorso_WeaponHeld_ThrowPose4
       rect:
         serializedVersion: 2
         x: 1866
@@ -220,12 +220,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerTorso_ThrowPose1: -1887596495
-      PlayerTorso_ThrowPose3: 393152612
+      PlayerTorso_WeaponHeld_ThrowPose4: -267688939
       PlayerTorso_Recall_AirPose1: -207394768
-      PlayerTorso_ThrowPose4: -267688939
+      PlayerTorso_WeaponHeld_ThrowPose2: -1858787643
+      PlayerTorso_WeaponHeld_ThrowPose1: -1887596495
+      PlayerTorso_WeaponHeld_ThrowPose3: 393152612
       PlayerTorso_Weapon_Poses_0: -1514174613
-      PlayerTorso_ThrowPose2: -1858787643
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
