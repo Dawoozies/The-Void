@@ -4,6 +4,7 @@ using UnityEngine;
 using RuntimeObjects;
 using ExtensionMethods_Bool;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 namespace StateHandlers.Player
 {
@@ -87,6 +88,46 @@ namespace StateHandlers.Player
                     if(player.animator.trueTimeSpentInState > player.airRollLandBufferTime)
                     {
                         //if we go above the buffer time then player will default out into standing up
+                        //Debug.LogError("Input Buffer Time Ended");
+                        //Late land
+                        player.animator.animator.Play("Player_Land");
+                    }
+                    else
+                    {
+                        if(InputManager.ins.L_Input.y < 0)
+                        {
+                            //Then we are pointing down
+                            //Then we check if our y input is larger in magnitude than our x input
+                            //Early land
+                            if(Mathf.Abs(InputManager.ins.L_Input.y) > Mathf.Abs(InputManager.ins.L_Input.x))
+                            {
+                                //Debug.LogError("Want to hard land");
+                                player.animator.animator.Play("Player_Land");
+                            }
+                        }
+                        if(InputManager.ins.L_Input.x != 0f)
+                        {
+                            if(Mathf.Abs(InputManager.ins.L_Input.x) > Mathf.Abs(InputManager.ins.L_Input.y))
+                            {
+                                //Debug.LogError("Want to slide along ground");
+                                player.animator.animator.Play("Player_Slide");
+                            }
+                        }
+                    }
+                }
+                if(player.animator.CurrentState("Player_Slide"))
+                {
+                    if (player.legs.animator.spriteRenderer.flipX && player.rigidbody.rb.velocity.x > 0f)
+                        player.legs.animator.spriteRenderer.flipX = false;
+                    if (!player.legs.animator.spriteRenderer.flipX && player.rigidbody.rb.velocity.x < 0f)
+                        player.legs.animator.spriteRenderer.flipX = true;
+                    if (player.torso.animator.spriteRenderer.flipX && player.rigidbody.rb.velocity.x > 0f)
+                        player.torso.animator.spriteRenderer.flipX = false; 
+                    if (!player.torso.animator.spriteRenderer.flipX && player.rigidbody.rb.velocity.x < 0f)
+                        player.torso.animator.spriteRenderer.flipX = true;
+                    if (player.animator.trueTimeSpentInState > player.slideMaxTime)
+                    {
+                        player.animator.animator.Play("Player_Land");
                     }
                 }
             }
@@ -103,7 +144,9 @@ namespace StateHandlers.Player
                     || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
                     || player.animator.CurrentState("Player_AirRollStart")
                     || player.animator.CurrentState("Player_AirRollDescent")
-                    || player.animator.CurrentState("Player_AirRollLand");
+                    || player.animator.CurrentState("Player_AirRollLandInputBuffer")
+                    || player.animator.CurrentState("Player_Slide")
+                    || player.animator.CurrentState("Player_Land");
                 if(!noLMove)
                     player.rigidbody.rb.velocity = player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
                 if (player.animator.CurrentState("Player_Fall"))
@@ -285,6 +328,18 @@ namespace StateHandlers.Player
                         player.torso.animator.animator.Play("PlayerTorso_Default_RollPose4");
                     }
                 }
+                if(player.animator.CurrentState("Player_Slide"))
+                {
+                    if(!player.grounded)
+                    {
+                        //Debug.LogError("Sliding and not grounded");
+                        player.rigidbody.rb.velocity += -Vector2.up * 90f * tickDelta;
+                    }
+                    if(Mathf.Abs(player.rigidbody.rb.velocity.x) < player.slideMinSpeed)
+                    {
+                        player.animator.animator.Play("Player_Land");
+                    }
+                }
             }
         }
         public static void OnStateEnter(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -403,11 +458,30 @@ namespace StateHandlers.Player
                 if(player.animator.CurrentState("Player_AirRollDescent"))
                 {
                     if(Mathf.Approximately(InputManager.ins.L_Input.y, 0f))
-                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 10f;
+                    {
+                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 17f;
+                        //Debug.LogError("Directly across");
+                    }
                     else if(Mathf.Approximately(InputManager.ins.L_Input.x, 0f))
-                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.up)*Vector2.up + InputManager.ins.L_Input.y * Vector2.up * 10f;
+                    {
+                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.up) * Vector2.up + InputManager.ins.L_Input.y * Vector2.up * 15f;
+                        //Debug.LogError("Directly down");
+                    }
                     else
-                        player.rigidbody.rb.velocity = InputManager.ins.L_Input * 20f;
+                    {
+                        //Debug.LogError($"In direction {InputManager.ins.L_Input}");
+                        player.rigidbody.rb.velocity = InputManager.ins.L_Input * 17f;
+                    }
+                    if(Mathf.Abs(InputManager.ins.L_Input.y) > Mathf.Abs(InputManager.ins.L_Input.x))
+                    {
+                        //then we want to move down more than we want to move right
+                        player.rigidbody.rb.velocity = Vector2.Dot(player.rigidbody.rb.velocity, Vector2.right) * Vector2.right + InputManager.ins.L_Input.x * Vector2.right * 17f;
+                    }
+                    if(Mathf.Abs(InputManager.ins.L_Input.x) > Mathf.Abs(InputManager.ins.L_Input.y))
+                    {
+                        //then we want to move right more than we want to move down
+                    }
+                        
                     player.legs.animator.animator.Play("PlayerLegs_DoubleJumpAscentPose");
                     player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpAscentPose");
                     player.rigidbody.rbObj.position = player.RelativePos(player.doubleJumpShift);
@@ -417,6 +491,11 @@ namespace StateHandlers.Player
                     player.legs.animator.animator.Play("PlayerLegs_RollPose4");
                     player.torso.animator.animator.Play("PlayerTorso_Default_RollPose4");
                     player.obj.up = Vector2.up;
+                }
+                if(player.animator.CurrentState("Player_Slide"))
+                {
+                    player.legs.animator.animator.Play("PlayerLegs_SlidePose1");
+                    player.torso.animator.animator.Play("PlayerTorso_Default_SlidePose1");
                 }
             }
         }
@@ -468,7 +547,8 @@ namespace StateHandlers.Player
                 player.animator.CurrentState("Player_JumpAscentSlow")
                 || player.animator.CurrentState("Player_Fall")
                 || player.animator.CurrentState("Player_DoubleJumpAscent")
-                || player.animator.CurrentState("Player_DoubleJumpAscentSlow");
+                || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
+                || player.animator.CurrentState("Player_AirRollDescent");
                 if (canJumpInAir && jumpInput)
                 {
                     //if input y down at all then air roll
@@ -476,10 +556,13 @@ namespace StateHandlers.Player
                     // case1 no input x then double jump
                     // case2 input x non zero then air roll
                     //if input y up then double jump no matter what
-                    if (InputManager.ins.L_Input.y < 0)
-                        player.animator.animator.Play("Player_AirRollStart");
-                    if (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && !Mathf.Approximately(InputManager.ins.L_Input.x, 0))
-                        player.animator.animator.Play("Player_AirRollStart");
+                    if(!player.animator.CurrentState("Player_AirRollDescent"))
+                    {
+                        if (InputManager.ins.L_Input.y < 0)
+                            player.animator.animator.Play("Player_AirRollStart");
+                        if (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && !Mathf.Approximately(InputManager.ins.L_Input.x, 0))
+                            player.animator.animator.Play("Player_AirRollStart");
+                    }
                     if(InputManager.ins.L_Input.y > 0 || (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && Mathf.Approximately(InputManager.ins.L_Input.x, 0)))
                     {
                         if (player.jumpsLeft > 0)

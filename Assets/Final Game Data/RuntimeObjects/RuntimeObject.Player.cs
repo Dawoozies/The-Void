@@ -26,6 +26,8 @@ namespace RuntimeObjects
         public float airRollBraceDescentSpeed = -20f;
         public float airRollDescentSpeedMax = -30f;
         public float airRollLandBufferTime = 0.2f;
+        public float slideMaxTime = 0.35f;
+        public float slideMinSpeed = 15f; //should be equal to run speed
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;
