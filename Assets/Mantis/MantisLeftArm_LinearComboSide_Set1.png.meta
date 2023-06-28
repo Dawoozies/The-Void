@@ -1,0 +1,321 @@
+fileFormatVersion: 2
+guid: d8dea4bee36220c46b4f1164a3eaf4c1
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1030
+        width: 602
+        height: 644
+      alignment: 9
+      pivot: {x: 0.45462042, y: 0.92066604}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba0559191e2852b41891977df82a79c5
+      internalID: -2143258492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose2
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 1442
+        width: 696
+        height: 232
+      alignment: 9
+      pivot: {x: 0.073277354, y: 0.51238805}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d147945e31e8f4eb7cee0cd61f1cff
+      internalID: 177900598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose3
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 1407
+        width: 850
+        height: 267
+      alignment: 9
+      pivot: {x: 0.07940157, y: 0.43968493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0ef24b7f117f241ad322e8150f55af
+      internalID: -1547668034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose4
+      rect:
+        serializedVersion: 2
+        x: 2140
+        y: 1287
+        width: 1174
+        height: 387
+      alignment: 9
+      pivot: {x: 0.4532427, y: 0.68192863}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c81d21479cb1cee4e9bdc60c6f1ee26d
+      internalID: -1579857675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 537
+        width: 1549
+        height: 493
+      alignment: 9
+      pivot: {x: 0.9469488, y: 0.7609098}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69ddc6ecc3c7f5744baaccf4d202376c
+      internalID: -1106165221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose6
+      rect:
+        serializedVersion: 2
+        x: 1583
+        y: 745
+        width: 1566
+        height: 307
+      alignment: 9
+      pivot: {x: 0.9340441, y: 0.516431}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53fcfa10f57ab6848a5c04f630b06841
+      internalID: 850941477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 185
+        width: 1560
+        height: 349
+      alignment: 9
+      pivot: {x: 0.92864484, y: 0.5252109}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e256b2025aa5554e8b4507361991dd8
+      internalID: -1793683185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose8
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 87
+        width: 1043
+        height: 434
+      alignment: 9
+      pivot: {x: 0.9211257, y: 0.538191}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f81e99b5ab513343abeae7b097264fa
+      internalID: 297732321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboSide_Pose9
+      rect:
+        serializedVersion: 2
+        x: 2674
+        y: 0
+        width: 640
+        height: 721
+      alignment: 9
+      pivot: {x: 0.3683502, y: 0.886977}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4152484e2871d449639b684feec6d3
+      internalID: 1015813180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MantisLeftArm_LinearComboSide_Pose1: -2143258492
+      MantisLeftArm_LinearComboSide_Pose8: 297732321
+      MantisLeftArm_LinearComboSide_Pose7: -1793683185
+      MantisLeftArm_LinearComboSide_Pose9: 1015813180
+      MantisLeftArm_LinearComboSide_Pose5: -1106165221
+      MantisLeftArm_LinearComboSide_Pose4: -1579857675
+      MantisLeftArm_LinearComboSide_Pose2: 177900598
+      MantisLeftArm_LinearComboSide_Pose6: 850941477
+      MantisLeftArm_LinearComboSide_Pose3: -1547668034
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

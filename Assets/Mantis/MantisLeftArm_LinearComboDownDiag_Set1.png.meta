@@ -1,0 +1,321 @@
+fileFormatVersion: 2
+guid: c5d2a19d464f93e4a948a57c836fd3e5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1350
+        width: 604
+        height: 672
+      alignment: 9
+      pivot: {x: 0.4499601, y: 0.9186256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cd69791135bc774a977394f5801a4da
+      internalID: 426174695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose2
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 1362
+        width: 490
+        height: 660
+      alignment: 9
+      pivot: {x: 0.112557426, y: 0.22323701}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a93779e5df6be4db9522e9e178c114
+      internalID: -75147951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose3
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 1367
+        width: 612
+        height: 655
+      alignment: 9
+      pivot: {x: 0.063792706, y: 0.119696185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e49ca8f456c838e43819f0084b6457f4
+      internalID: 1189545552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose4
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 1113
+        width: 766
+        height: 909
+      alignment: 9
+      pivot: {x: 0.36094263, y: 0.57232296}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3d383fd5d7e08f44bdfa5723bb0109b
+      internalID: -128890060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose5
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 905
+        width: 1471
+        height: 1117
+      alignment: 9
+      pivot: {x: 0.7469679, y: 0.9277699}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9008968d7033247b4140f4dec6f55e
+      internalID: -1660972157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 1185
+        height: 1083
+      alignment: 9
+      pivot: {x: 0.9189906, y: 0.91526484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f541361979e2a514e99a6892d08eb453
+      internalID: -775137937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose7
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 7
+        width: 1193
+        height: 1105
+      alignment: 9
+      pivot: {x: 0.91693753, y: 0.92722535}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf9069cb64cd58d4c8c5a0d15a55fb51
+      internalID: -220737389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose8
+      rect:
+        serializedVersion: 2
+        x: 2396
+        y: 244
+        width: 827
+        height: 661
+      alignment: 9
+      pivot: {x: 0.9133224, y: 0.9064232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b5671c87cf29843b3d17053b3302c1
+      internalID: -728909759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisLeftArm_LinearComboDownDiag_Pose9
+      rect:
+        serializedVersion: 2
+        x: 3284
+        y: 209
+        width: 665
+        height: 696
+      alignment: 9
+      pivot: {x: 0.36842325, y: 0.9212591}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e13fc5bd5dc089b4c815e597d547bee1
+      internalID: -449422558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MantisLeftArm_LinearComboDownDiag_Pose8: -728909759
+      MantisLeftArm_LinearComboDownDiag_Pose2: -75147951
+      MantisLeftArm_LinearComboDownDiag_Pose3: 1189545552
+      MantisLeftArm_LinearComboDownDiag_Pose7: -220737389
+      MantisLeftArm_LinearComboDownDiag_Pose6: -775137937
+      MantisLeftArm_LinearComboDownDiag_Pose4: -128890060
+      MantisLeftArm_LinearComboDownDiag_Pose9: -449422558
+      MantisLeftArm_LinearComboDownDiag_Pose1: 426174695
+      MantisLeftArm_LinearComboDownDiag_Pose5: -1660972157
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

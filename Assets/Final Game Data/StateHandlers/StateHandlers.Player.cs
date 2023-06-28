@@ -50,14 +50,7 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_Idle");
                     if(player.torso.animator.CurrentState("PlayerTorso_WeaponHeld_Run"))
                     {
-                        if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
-                            player.legs.animator.spriteRenderer.flipX = false;
-                        if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
-                            player.legs.animator.spriteRenderer.flipX = true;
-                        if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x > 0f)
-                            player.torso.animator.spriteRenderer.flipX = false;
-                        if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x < 0f)
-                            player.torso.animator.spriteRenderer.flipX = true;
+
                         if (-8f*InputManager.ins.R_Input.x < InputManager.ins.R_Input.y && InputManager.ins.R_Input.y < 8f*InputManager.ins.R_Input.x)
                         {
                             player.torso.obj.right = InputManager.ins.R_Input;
@@ -163,6 +156,30 @@ namespace StateHandlers.Player
                     if (player.animator.trueTimeSpentInState > player.slideMaxTime)
                     {
                         player.animator.animator.Play("Player_Land");
+                    }
+                }
+                bool spriteFlipping =
+                    player.animator.CurrentState("Player_Run")
+                    || player.animator.CurrentState("Player_Slide");
+                bool torsoAiming = 
+                    player.animator.CurrentState("PlayerTorso_WeaponHeld_Run")
+                    || player.animator.CurrentState("PlayerTorso_WeaponHeld_InAirPose1");
+                if(spriteFlipping)
+                {
+                    if (torsoAiming)
+                    {
+                        if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
+                            player.legs.animator.spriteRenderer.flipX = false;
+                        if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
+                            player.legs.animator.spriteRenderer.flipX = true;
+                        if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x > 0f)
+                            player.torso.animator.spriteRenderer.flipX = false;
+                        if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x < 0f)
+                            player.torso.animator.spriteRenderer.flipX = true;
+                    }
+                    else
+                    {
+
                     }
                 }
             }
