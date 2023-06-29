@@ -180,11 +180,20 @@ public class GameManager : MonoBehaviour
         RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
         RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
     }
+    void RuntimeObjectCreate_Mantis()
+    {
+        allRuntimeObjects.Add("Mantis", new Mantis("Mantis"));
+        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Mantis"], allControllers["Mantis"]);
+        RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Mantis"]);
+        RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Mantis"]);
+        RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Mantis"]);
+    }
     private void Start()
     {
         allRuntimeObjects = new Dictionary<string, RuntimeObject>();
         RuntimeObjectCreate_Player();
-        RuntimeObjectCreate_HangedFrame();
+        //RuntimeObjectCreate_HangedFrame();
+        RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))
         foreach (string key in allRuntimeObjects.Keys)
         {
