@@ -10,12 +10,12 @@ namespace RuntimeObjects
     public enum RuntimeObjectStructure
     {
         Default = 0,
-        Animator = 1,
-        Rigidbody = 2,
-        DirectedCircleCollider = 4,
-        DirectedCircleOverlap = 8,
-        CircleSpriteMask = 16,
-        DirectedPoint = 32,
+        Animator = 1 << 0,
+        Rigidbody = 1 << 1,
+        DirectedCircleCollider = 1 << 2,
+        DirectedCircleOverlap = 1 << 3,
+        CircleSpriteMask = 1 << 4,
+        DirectedPoint = 1 << 5,
     }
     public class RuntimeObject
     {
@@ -392,7 +392,7 @@ namespace RuntimeObjects
     {
         DirectedPoint[] atState;
         int frame;
-        public Dictionary<string, DirectedPoint> atFrame;
+        List<DirectedPoint> atFrame;
         public static void CreateAndAttach(RuntimeObject obj)
         {
             RuntimeDirectedPoints runtimeDirectedPoints = new();
@@ -409,6 +409,7 @@ namespace RuntimeObjects
         }
         public void OnFrameUpdateData(RuntimeObject obj, ControllerData controllerData, int frame)
         {
+            //If frame is same as previous and atFrame has not been added to yet / is not empty
             if (frame == this.frame && atFrame.Count > 0)
                 return;
             atFrame.Clear();
@@ -416,9 +417,22 @@ namespace RuntimeObjects
             {
                 if (!atState[dataIndex].assignedFrames.Contains(frame))
                     continue;
-                atFrame.Add(atState[dataIndex].nickname, atState[dataIndex]);
+                atFrame.Add(atState[dataIndex]);
             }
+            //This stuff should be in a proper update
+            //Otherwise get all the data that is at this new frame
             this.frame = frame;
+        }
+        public DirectedPoint GetDirectedPoint(string nickname)
+        {
+            if (atFrame == null || atFrame.Count == 0)
+                return null;
+            for (int i = 0; i < atFrame.Count; i++)
+            {
+                if (atFrame[i].nickname == nickname)
+                    return atFrame[i];
+            }
+            return null;
         }
     }
 }

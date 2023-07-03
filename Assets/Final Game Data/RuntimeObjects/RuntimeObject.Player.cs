@@ -55,6 +55,8 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
+            //The overlap system actually works quite well
+            //so maybe we should copy how it works
             animator.onStateEnter += StateHandlers.Player.Handler.OnStateEnter;
             animator.onFrameUpdate += StateHandlers.Player.Handler.OnFrameUpdate;
 
@@ -74,7 +76,7 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform);
+            obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform); 
             animator.spriteRenderer.sortingOrder = 4;
         }
     }

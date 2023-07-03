@@ -7,6 +7,7 @@ namespace RuntimeObjects
     {
         public MantisLegs legs;
         public MantisTorso torso;
+        public MantisLeftArm leftArm;
         public Mantis(string id) : base(id)
         {
             managedStart += ManagedStart;
@@ -22,33 +23,61 @@ namespace RuntimeObjects
             RuntimeDirectedCircleColliders.CreateAndAttach(torso);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(torso);
             RuntimeDirectedPoints.CreateAndAttach(torso);
+            leftArm = new MantisLeftArm("MantisLeftArm");
+            GameManager.ins.allRuntimeObjects.Add("MantisLeftArm", leftArm);
+            RuntimeAnimator.CreateAndAttach(leftArm, GameManager.ins.allControllers["MantisLeftArm"]);
+            RuntimeDirectedCircleColliders.CreateAndAttach(leftArm);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(leftArm);
+            RuntimeDirectedPoints.CreateAndAttach(leftArm);
         }
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
-            managedUpdate += RuntimeDirectedCircleOverlaps.Update; 
+            animator.onStateEnter += StateHandlers.Mantis.Handler.OnStateEnter;
+
+            animator.spriteRenderer.color = Color.clear;
         }
     }
     public class MantisLegs : RuntimeObject
     {
         public MantisLegs(string id) : base(id)
         {
-
+            managedStart += ManagedStart;
         }
         public void ManagedStart()
         {
-
+            managedUpdate += RuntimeAnimator.Update;
+            animator.onStateEnter += StateHandlers.Mantis.Handler.OnStateEnter;
+            animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
+            obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
+            animator.spriteRenderer.sortingOrder = 4;
         }
     }
     public class MantisTorso : RuntimeObject
     {
         public MantisTorso(string id) : base(id)
         {
-
+            managedStart += ManagedStart;
         }
         public void ManagedStart()
         {
-
+            managedUpdate += RuntimeAnimator.Update;
+            animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
+            obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
+            animator.spriteRenderer.sortingOrder = 5;
+        }
+    }
+    public class MantisLeftArm : RuntimeObject
+    {
+        public MantisLeftArm(string id) : base(id)
+        {
+            managedStart += ManagedStart;
+        }
+        public void ManagedStart()
+        {
+            managedUpdate += RuntimeAnimator.Update;
+            obj.SetParent(GameManager.ins.allRuntimeObjects["MantisTorso"].animator.animator.transform);
+            animator.spriteRenderer.sortingOrder = 6;
         }
     }
 }

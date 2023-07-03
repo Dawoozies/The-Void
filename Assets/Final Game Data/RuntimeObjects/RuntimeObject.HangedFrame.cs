@@ -69,43 +69,6 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            managedUpdate += TESTMoveTorsoToAnchor;
-        }
-        public void TESTMoveTorsoToAnchor(RuntimeObject obj, float tickDelta)
-        {
-            if (objStructure.HasFlag(RuntimeObjectStructure.DirectedPoint))
-            {
-                //Debug.Log("HangedFrame has DirectedPoint");
-                if(directedPoints.atFrame.ContainsKey("TorsoAnchor"))
-                {
-                    torso.obj.localPosition = RelativePos(directedPoints.atFrame["TorsoAnchor"].centers[0]);
-                }
-            }
-            if(torso.objStructure.HasFlag(RuntimeObjectStructure.DirectedPoint))
-            {
-                if(torso.directedPoints.atFrame.ContainsKey("LeftArmAnchor"))
-                {
-                    leftArm.obj.localPosition = RelativePos(torso.directedPoints.atFrame["LeftArmAnchor"].centers[0]);
-                }
-                if (torso.directedPoints.atFrame.ContainsKey("RightArmAnchor"))
-                {
-                    rightArm.obj.localPosition = RelativePos(torso.directedPoints.atFrame["RightArmAnchor"].centers[0]);
-                }
-            }
-            if (leftArm.objStructure.HasFlag(RuntimeObjectStructure.DirectedPoint))
-            {
-                if (leftArm.directedPoints.atFrame.ContainsKey("LeftHandAnchor"))
-                {
-                    leftHand.obj.localPosition = RelativePos(leftArm.directedPoints.atFrame["LeftHandAnchor"].centers[0]);
-                }
-            }
-            if (rightArm.objStructure.HasFlag(RuntimeObjectStructure.DirectedPoint))
-            {
-                if (rightArm.directedPoints.atFrame.ContainsKey("RightHandAnchor"))
-                {
-                    rightHand.obj.localPosition = RelativePos(rightArm.directedPoints.atFrame["RightHandAnchor"].centers[0]);
-                }
-            }
         }
     }
     public class HangedFrameSubObject : RuntimeObject

@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboDown_Pose1
+      name: MantisLeftArm_Idle_Pose1
       rect:
         serializedVersion: 2
         x: 0
@@ -328,8 +328,8 @@ TextureImporter:
       MantisLeftArm_LinearComboDown_Set1_18: -499738856
       MantisLeftArm_LinearComboDown_Set1_26: 113350446
       MantisLeftArm_LinearComboDown_Pose5: -1362858359
-      MantisLeftArm_LinearComboDown_Pose1: -1889178243
       MantisLeftArm_LinearComboDown_Set1_9: 1009642045
+      MantisLeftArm_Idle_Pose1: -1889178243
       MantisLeftArm_LinearComboDown_Set1_3: 338448143
       MantisLeftArm_LinearComboDown_Set1_29: -1415591951
       MantisLeftArm_LinearComboDown_Set1_11: -1831594401

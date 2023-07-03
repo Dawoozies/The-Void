@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         allRuntimeObjects = new Dictionary<string, RuntimeObject>();
-        RuntimeObjectCreate_Player();
+        //RuntimeObjectCreate_Player();
         //RuntimeObjectCreate_HangedFrame();
         RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))

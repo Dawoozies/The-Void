@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose1
+      name: MantisLeftArm_Aim_Pose1
       rect:
         serializedVersion: 2
         x: 0
@@ -126,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose2
+      name: MantisLeftArm_Aim_Pose2
       rect:
         serializedVersion: 2
         x: 603
@@ -134,7 +134,7 @@ TextureImporter:
         width: 696
         height: 232
       alignment: 9
-      pivot: {x: 0.073277354, y: 0.51238805}
+      pivot: {x: -0.15, y: 0.51238805}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose3
+      name: MantisLeftArm_Aim_Pose3
       rect:
         serializedVersion: 2
         x: 1312
@@ -155,7 +155,7 @@ TextureImporter:
         width: 850
         height: 267
       alignment: 9
-      pivot: {x: 0.07940157, y: 0.43968493}
+      pivot: {x: -0.175, y: 0.43968493}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose4
+      name: MantisLeftArm_HorizontalAttack_Pose1
       rect:
         serializedVersion: 2
         x: 2140
@@ -176,7 +176,7 @@ TextureImporter:
         width: 1174
         height: 387
       alignment: 9
-      pivot: {x: 0.4532427, y: 0.68192863}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose5
+      name: MantisLeftArm_HorizontalAttack_Pose2
       rect:
         serializedVersion: 2
         x: 0
@@ -210,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose6
+      name: MantisLeftArm_HorizontalAttack_Pose3
       rect:
         serializedVersion: 2
         x: 1583
@@ -231,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose7
+      name: MantisLeftArm_HorizontalAttack_Pose4
       rect:
         serializedVersion: 2
         x: 0
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose8
+      name: MantisLeftArm_HorizontalRetract_Pose1
       rect:
         serializedVersion: 2
         x: 1581
@@ -273,7 +273,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose9
+      name: MantisLeftArm_HorizontalRetract_Pose2
       rect:
         serializedVersion: 2
         x: 2674
@@ -304,15 +304,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MantisLeftArm_LinearComboSide_Pose1: -2143258492
-      MantisLeftArm_LinearComboSide_Pose8: 297732321
-      MantisLeftArm_LinearComboSide_Pose7: -1793683185
-      MantisLeftArm_LinearComboSide_Pose9: 1015813180
-      MantisLeftArm_LinearComboSide_Pose5: -1106165221
-      MantisLeftArm_LinearComboSide_Pose4: -1579857675
-      MantisLeftArm_LinearComboSide_Pose2: 177900598
-      MantisLeftArm_LinearComboSide_Pose6: 850941477
-      MantisLeftArm_LinearComboSide_Pose3: -1547668034
+      MantisLeftArm_HorizontalAttack_Pose4: -1793683185
+      MantisLeftArm_HorizontalAttack_Pose2: -1106165221
+      MantisLeftArm_Aim_Pose2: 177900598
+      MantisLeftArm_HorizontalRetract_Pose1: 297732321
+      MantisLeftArm_Aim_Pose3: -1547668034
+      MantisLeftArm_Aim_Pose1: -2143258492
+      MantisLeftArm_HorizontalRetract_Pose2: 1015813180
+      MantisLeftArm_HorizontalAttack_Pose1: -1579857675
+      MantisLeftArm_HorizontalAttack_Pose3: 850941477
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
