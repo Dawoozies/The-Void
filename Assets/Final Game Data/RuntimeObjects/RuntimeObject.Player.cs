@@ -77,7 +77,7 @@ namespace RuntimeObjects
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
             obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform); 
-            animator.spriteRenderer.sortingOrder = 4;
+            animator.spriteRenderer.sortingOrder = 10;
         }
     }
     public class PlayerTorso : RuntimeObject
@@ -94,7 +94,7 @@ namespace RuntimeObjects
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
             obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform);
-            animator.spriteRenderer.sortingOrder = 5;
+            animator.spriteRenderer.sortingOrder = 11;
         }
     }
 }

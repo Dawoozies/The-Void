@@ -8,6 +8,10 @@ namespace RuntimeObjects
         public MantisLegs legs;
         public MantisTorso torso;
         public MantisLeftArm leftArm;
+        public float aimTime = 0.26667f;
+        public float linearStrikeWaitTime = 0.25f;
+        public float retractTime = 0.14f;
+        public bool useLinearStrikeSpin = true;
         public Mantis(string id) : base(id)
         {
             managedStart += ManagedStart;
@@ -33,8 +37,9 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
+            managedUpdate += StateHandlers.Mantis.Handler.Update;
             animator.onStateEnter += StateHandlers.Mantis.Handler.OnStateEnter;
-
+            animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
             animator.spriteRenderer.color = Color.clear;
         }
     }
@@ -50,6 +55,7 @@ namespace RuntimeObjects
             animator.onStateEnter += StateHandlers.Mantis.Handler.OnStateEnter;
             animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
             obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
+            obj.localPosition = new Vector3(0, -11, 0);
             animator.spriteRenderer.sortingOrder = 4;
         }
     }

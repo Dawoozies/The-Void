@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose10
+      name: MantisLeftArm_LinearStrikeSpin_Pose1
       rect:
         serializedVersion: 2
         x: 0
@@ -126,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose11
+      name: MantisLeftArm_LinearStrikeSpin_Pose2
       rect:
         serializedVersion: 2
         x: 1494
@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose12
+      name: MantisLeftArm_LinearStrikeSpin_Pose3
       rect:
         serializedVersion: 2
         x: 0
@@ -168,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose13
+      name: MantisLeftArm_LinearStrikeSpin_Pose4
       rect:
         serializedVersion: 2
         x: 1655
@@ -189,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose14
+      name: MantisLeftArm_LinearStrikeSpin_Pose5
       rect:
         serializedVersion: 2
         x: 0
@@ -210,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose15
+      name: MantisLeftArm_LinearStrikeSpin_Pose6
       rect:
         serializedVersion: 2
         x: 1101
@@ -231,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MantisLeftArm_LinearComboSide_Pose16
+      name: MantisLeftArm_LinearStrikeSpin_Pose7
       rect:
         serializedVersion: 2
         x: 1115
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MantisLeftArm_LinearComboSide_Pose10: -600232917
-      MantisLeftArm_LinearComboSide_Pose14: 1000226865
-      MantisLeftArm_LinearComboSide_Pose16: -1500653251
-      MantisLeftArm_LinearComboSide_Pose12: 1058990786
-      MantisLeftArm_LinearComboSide_Pose15: -2096724587
-      MantisLeftArm_LinearComboSide_Pose13: -1452330516
-      MantisLeftArm_LinearComboSide_Pose11: -1995964036
+      MantisLeftArm_LinearStrikeSpin_Pose5: 1000226865
+      MantisLeftArm_LinearStrikeSpin_Pose3: 1058990786
+      MantisLeftArm_LinearStrikeSpin_Pose6: -2096724587
+      MantisLeftArm_LinearStrikeSpin_Pose7: -1500653251
+      MantisLeftArm_LinearStrikeSpin_Pose1: -600232917
+      MantisLeftArm_LinearStrikeSpin_Pose2: -1995964036
+      MantisLeftArm_LinearStrikeSpin_Pose4: -1452330516
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

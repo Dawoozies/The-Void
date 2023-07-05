@@ -96,7 +96,7 @@ namespace RuntimeObjects
                 //If it is an abuse of state swapping causing it
                 if (runtimeAnimator.ClipInfo.clip.name == "StateSwap")
                     return;
-                Debug.Log($"Swapping to {runtimeAnimator.ClipInfo.clip.name}");
+                //Debug.Log($"Swapping to {runtimeAnimator.ClipInfo.clip.name}");
                 runtimeAnimator.previousStateHash = runtimeAnimator.stateHash;
                 runtimeAnimator.stateHash = runtimeAnimator.StateInfo.shortNameHash;
                 runtimeAnimator.animator.SetFloat("NormalizedTime", 0f);
@@ -114,6 +114,7 @@ namespace RuntimeObjects
             if (runtimeAnimator.frame != Mathf.FloorToInt(runtimeAnimator.time))
             {
                 runtimeAnimator.frame = Mathf.FloorToInt(runtimeAnimator.time);
+
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
                 runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash); 
             }

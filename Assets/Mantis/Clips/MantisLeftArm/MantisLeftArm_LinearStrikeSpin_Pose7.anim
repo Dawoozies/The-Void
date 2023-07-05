@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MantisLeftArm_HorizontalAttack_Pose3
+  m_Name: MantisLeftArm_LinearStrikeSpin_Pose7
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 850941477, guid: d8dea4bee36220c46b4f1164a3eaf4c1, type: 3}
+      value: {fileID: -1500653251, guid: 98190e0a1d1522e48afe3e705743b052, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 850941477, guid: d8dea4bee36220c46b4f1164a3eaf4c1, type: 3}
+    - {fileID: -1500653251, guid: 98190e0a1d1522e48afe3e705743b052, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

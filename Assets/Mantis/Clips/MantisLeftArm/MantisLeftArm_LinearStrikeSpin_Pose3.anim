@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MantisLegs_Attack1
+  m_Name: MantisLeftArm_LinearStrikeSpin_Pose3
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,17 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1067875231, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - time: 1
-      value: {fileID: -2037657775, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - time: 5
-      value: {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - time: 6
-      value: {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - time: 7
-      value: {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - time: 8
-      value: {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
+      value: {fileID: 1058990786, guid: 98190e0a1d1522e48afe3e705743b052, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,18 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1067875231, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - {fileID: -2037657775, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-    - {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
+    - {fileID: 1058990786, guid: 98190e0a1d1522e48afe3e705743b052, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 9
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
