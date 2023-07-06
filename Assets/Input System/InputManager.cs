@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
+using BehaviourRecord.Player;
 public class InputManager : MonoBehaviour
 {
     public static InputManager ins;
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
                 JumpDownBuffer.Input(0.2f);
             StateHandlers.Player.Handler.OnJumpPerformed(JumpDown_Input);
             StateHandlers.Mantis.Handler.OnJumpPerformed(JumpDown_Input);
+            Record.OnJumpPerformed(JumpDown_Input);
         };
         inputActions.PlayerDefault.RightBumper.performed += (inputActions) =>
         {
@@ -51,6 +53,7 @@ public class InputManager : MonoBehaviour
     public InputButtonBuffer JumpDownBuffer = new InputButtonBuffer();
     public bool JumpDown_Input;
     public bool JumpDown_BufferedInput;
+    const float JUMP_BUFFER_TIME = 0.2f;
     public InputButtonBuffer RightBumperBuffer = new InputButtonBuffer();
     public bool RightBumper_Input;
     public bool RightBumper_BufferedInput;

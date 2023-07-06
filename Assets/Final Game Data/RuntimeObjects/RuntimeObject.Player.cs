@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OverlapHandlers.Player;
+using BehaviourRecord.Player;
 namespace RuntimeObjects
 {
     public class Player : RuntimeObject
@@ -31,32 +32,29 @@ namespace RuntimeObjects
         public Player(string id) : base(id)
         {
             managedStart += ManagedStart;
-            legs = new PlayerLegs("PlayerLegs");
+            legs = new PlayerLegs();
             GameManager.ins.allRuntimeObjects.Add("PlayerLegs", legs);
             RuntimeAnimator.CreateAndAttach(legs, GameManager.ins.allControllers["PlayerLegs"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(legs);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(legs);
             RuntimeDirectedPoints.CreateAndAttach(legs);
-            torso = new PlayerTorso("PlayerTorso");
+            torso = new PlayerTorso();
             GameManager.ins.allRuntimeObjects.Add("PlayerTorso", torso);
             RuntimeAnimator.CreateAndAttach(torso, GameManager.ins.allControllers["PlayerTorso"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(torso);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(torso);
             RuntimeDirectedPoints.CreateAndAttach(torso);
-            //legs.obj.SetParent(animator.animator.transform);
-            //torso.obj.SetParent(animator.animator.transform);
         }
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
             managedUpdate += StateHandlers.Player.Handler.Update;
+            managedUpdate += Record.Update;
             managedFixedUpdate += StateHandlers.Player.Handler.PhysicsUpdate;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            //The overlap system actually works quite well
-            //so maybe we should copy how it works
             animator.onStateEnter += StateHandlers.Player.Handler.OnStateEnter;
             animator.onFrameUpdate += StateHandlers.Player.Handler.OnFrameUpdate;
 
@@ -65,7 +63,7 @@ namespace RuntimeObjects
     }
     public class PlayerLegs : RuntimeObject
     {
-        public PlayerLegs(string id) : base(id)
+        public PlayerLegs() : base("PlayerLegs")
         {
             managedStart += ManagedStart;
         }
@@ -82,7 +80,7 @@ namespace RuntimeObjects
     }
     public class PlayerTorso : RuntimeObject
     {
-        public PlayerTorso(string id) : base(id)
+        public PlayerTorso() : base("PlayerTorso")
         {
             managedStart += ManagedStart;
         }

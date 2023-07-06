@@ -12,22 +12,23 @@ namespace RuntimeObjects
         public float linearStrikeWaitTime = 0.25f;
         public float retractTime = 0.14f;
         public bool useLinearStrikeSpin = true;
+        public string strikeDirection = "Side";
         public Mantis(string id) : base(id)
         {
             managedStart += ManagedStart;
-            legs = new MantisLegs("MantisLegs");
+            legs = new MantisLegs();
             GameManager.ins.allRuntimeObjects.Add("MantisLegs", legs);
             RuntimeAnimator.CreateAndAttach(legs, GameManager.ins.allControllers["MantisLegs"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(legs);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(legs);
             RuntimeDirectedPoints.CreateAndAttach(legs);
-            torso = new MantisTorso("MantisTorso");
+            torso = new MantisTorso();
             GameManager.ins.allRuntimeObjects.Add("MantisTorso", torso);
             RuntimeAnimator.CreateAndAttach(torso, GameManager.ins.allControllers["MantisTorso"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(torso);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(torso);
             RuntimeDirectedPoints.CreateAndAttach(torso);
-            leftArm = new MantisLeftArm("MantisLeftArm");
+            leftArm = new MantisLeftArm();
             GameManager.ins.allRuntimeObjects.Add("MantisLeftArm", leftArm);
             RuntimeAnimator.CreateAndAttach(leftArm, GameManager.ins.allControllers["MantisLeftArm"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(leftArm);
@@ -45,7 +46,7 @@ namespace RuntimeObjects
     }
     public class MantisLegs : RuntimeObject
     {
-        public MantisLegs(string id) : base(id)
+        public MantisLegs() : base("MantisLegs")
         {
             managedStart += ManagedStart;
         }
@@ -61,7 +62,7 @@ namespace RuntimeObjects
     }
     public class MantisTorso : RuntimeObject
     {
-        public MantisTorso(string id) : base(id)
+        public MantisTorso() : base("MantisTorso")
         {
             managedStart += ManagedStart;
         }
@@ -75,7 +76,7 @@ namespace RuntimeObjects
     }
     public class MantisLeftArm : RuntimeObject
     {
-        public MantisLeftArm(string id) : base(id)
+        public MantisLeftArm() : base("MantisLeftArm")
         {
             managedStart += ManagedStart;
         }

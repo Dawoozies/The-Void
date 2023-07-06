@@ -8,6 +8,7 @@ namespace StateHandlers.Player
 {
     public static class Handler
     {
+
         //By the time we get here all runtime data has been set and updated
         public static void Update(RuntimeObject obj, float tickDelta)
         {

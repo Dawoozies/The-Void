@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1102 &-9103639661163683841
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpStrike_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 8987ccf1329b43e4e954fcefba136442, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1102 &-9028220605336236121
 AnimatorState:
   serializedVersion: 6
@@ -21,6 +47,136 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 1
   m_Motion: {fileID: 7400000, guid: 32fad649a0e8fa64dac3cfb9ef22e70b, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-8695082904325264325
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagStrike_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: b4d8705b095ac5a4caaf0957aa86137b, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-8598376855028984357
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagStart_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 225f81a80be34d74cb52a4904436355b, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-7877834189047165583
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideStart_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: def77da8bc84b784392f21156589bfb9, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-7430949605944516992
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpStart_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: f8348c15541b1954a942b07595c15e25, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-6842804570427864134
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideStart_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: af8d208ec2a2c0d4d882cbbe51b62e98, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -52,6 +208,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: NormalizedTime
+--- !u!1102 &-5439384703420188462
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideRetract_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 0f2a6f1d273145b4db00e358014d4962, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1102 &-5344955791076779726
 AnimatorState:
   serializedVersion: 6
@@ -73,6 +255,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 1
   m_Motion: {fileID: 7400000, guid: 11f64bb42cdb0974c8d453220c9d1a95, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-4701865143110868884
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagRetract_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 53d901bee7d6c3643b8f280871a25b30, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -104,6 +312,136 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: NormalizedTime
+--- !u!1102 &-4442238010906076826
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagStart_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 91b01069b476f8241a997491bd7473de, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-4175055935628430803
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideStrike_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 144c76f0b200b364aa88a6307e4fb45e, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-3585572596126510034
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagStrike_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: f72f590b1ddc7064687efcc7ea2dcfc8, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-3109449446623066113
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagStrike_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: e0b2daaee4eef234db6d614a0731a1d9, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-2632565247573260612
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideStart_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: d69fb8a083ede1a40a489cd0c9a8fe1d, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1102 &-1459155416778699198
 AnimatorState:
   serializedVersion: 6
@@ -130,6 +468,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: NormalizedTime
+--- !u!1102 &-1129614115988735796
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpRetract_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: f8dad74ed3440e64288e8f71e4502a7f, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1102 &-804622293892952420
 AnimatorState:
   serializedVersion: 6
@@ -151,6 +515,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 1
   m_Motion: {fileID: 7400000, guid: 3425861166113f84fbf594c577865e51, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &-374042191388166702
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideStrike_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 6b96a01db19394249951f414cb83e496, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -184,6 +574,58 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1102 &424993221661623978
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpStart_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 6a8bef4cafa965c44a57245094a0dbd0, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &580040042437506133
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpStrike_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 1c89e6732d4c8474884950a26fd2bf83, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1107 &662328515058694306
 AnimatorStateMachine:
   serializedVersion: 6
@@ -217,6 +659,102 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 5533888215165541297}
     m_Position: {x: 460, y: 170, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6842804570427864134}
+    m_Position: {x: 40, y: 330, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -2632565247573260612}
+    m_Position: {x: 40, y: 380, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7877834189047165583}
+    m_Position: {x: 40, y: 430, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -374042191388166702}
+    m_Position: {x: 250, y: 330, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4175055935628430803}
+    m_Position: {x: 250, y: 380, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 901508076729632292}
+    m_Position: {x: 250, y: 430, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 5478381277302581679}
+    m_Position: {x: 460, y: 330, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5439384703420188462}
+    m_Position: {x: 460, y: 380, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3641818484348682172}
+    m_Position: {x: 40, y: 500, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8598376855028984357}
+    m_Position: {x: 40, y: 550, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3627974876494115018}
+    m_Position: {x: 40, y: 600, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8695082904325264325}
+    m_Position: {x: 250, y: 500, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 4030036346419771351}
+    m_Position: {x: 250, y: 550, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3844378520836860128}
+    m_Position: {x: 250, y: 600, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2176962342380045937}
+    m_Position: {x: 460, y: 500, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 5734210194335011699}
+    m_Position: {x: 460, y: 550, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1396719495507055681}
+    m_Position: {x: 40, y: 670, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3995182072439381407}
+    m_Position: {x: 40, y: 720, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4442238010906076826}
+    m_Position: {x: 40, y: 770, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3109449446623066113}
+    m_Position: {x: 250, y: 670, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 9177175646784093116}
+    m_Position: {x: 250, y: 720, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3585572596126510034}
+    m_Position: {x: 250, y: 770, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4701865143110868884}
+    m_Position: {x: 460, y: 670, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8918935089636889333}
+    m_Position: {x: 460, y: 720, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1143944407418753646}
+    m_Position: {x: 40, y: 850, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 424993221661623978}
+    m_Position: {x: 40, y: 900, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7430949605944516992}
+    m_Position: {x: 40, y: 950, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1941664107650481235}
+    m_Position: {x: 250, y: 850, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 580040042437506133}
+    m_Position: {x: 250, y: 900, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -9103639661163683841}
+    m_Position: {x: 250, y: 950, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 7449355985417981767}
+    m_Position: {x: 460, y: 850, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1129614115988735796}
+    m_Position: {x: 460, y: 900, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -227,6 +765,266 @@ AnimatorStateMachine:
   m_ExitPosition: {x: -140, y: 70, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -804622293892952420}
+--- !u!1102 &901508076729632292
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideStrike_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: bbde45895ae4b2b45a64f2642988a06a, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &1143944407418753646
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpStart_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: f7bc98ed301097e478b7e1daffc27cad, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &1396719495507055681
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagStart_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 49c1663f4e18c5e49887e3da2b9e985f, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &1941664107650481235
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpStrike_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 67f721f3b1bf3d742b6e6ac0b56d380f, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &2176962342380045937
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagRetract_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 4f4407523eee4c54a8be5013d13b302a, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &3627974876494115018
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagStart_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: bc99c2bc88ea81c4f84273a5c68814ff, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &3641818484348682172
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagStart_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 55eb4371043c8074bb372cb6945131b5, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &3844378520836860128
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagStrike_Pose3
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 5c0386543ece0cc4fa83311304a299c7, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &3995182072439381407
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagStart_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: a87a8effae1aa3d4c8b4e1ef1b83e16f, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &4030036346419771351
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagStrike_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 7e8abe57b503c784e906831d8d23f3f1, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1102 &4891936838877594224
 AnimatorState:
   serializedVersion: 6
@@ -253,6 +1051,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: NormalizedTime
+--- !u!1102 &5478381277302581679
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_SideRetract_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: d95212c4854f5914189e2a0eb1547527, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
 --- !u!1102 &5533888215165541297
 AnimatorState:
   serializedVersion: 6
@@ -274,6 +1098,110 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 1
   m_Motion: {fileID: 7400000, guid: f3162b9e8dc7a4f4cb64cacd73fda51d, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &5734210194335011699
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_DownDiagRetract_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 9c367569bb31e254c92b6359036dc200, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &7449355985417981767
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpRetract_Pose1
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: be3e009e3f1ab844eb5a22210a9d5ea2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &8918935089636889333
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagRetract_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: d7fdb5366c3ffe24ba55e4470d4263d2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: NormalizedTime
+--- !u!1102 &9177175646784093116
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisLegs_UpDiagStrike_Pose2
+  m_Speed: 30
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 1
+  m_Motion: {fileID: 7400000, guid: 8faa37a3c9a7d2947bb02c2e0c4b9aff, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

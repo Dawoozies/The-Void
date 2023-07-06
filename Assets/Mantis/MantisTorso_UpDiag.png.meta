@@ -1,0 +1,299 @@
+fileFormatVersion: 2
+guid: 6c7fea0f44b5fde4599ec3c704cf0aa3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagStart_Pose1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 3313
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.5491883, y: 0.5432926}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a67a309417e677e4ca1820ca4a67534b
+      internalID: 553583675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagStart_Pose2
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 3313
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.5409902, y: 0.51924103}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26192bcd3021f504693c9ec136d492b6
+      internalID: 1006379508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagStart_Pose3
+      rect:
+        serializedVersion: 2
+        x: 2593
+        y: 3313
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.5409902, y: 0.52565485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ab6697305696614bad4d728688fbb9e
+      internalID: 145948248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagStrike_Pose1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1657
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.5348417, y: 0.5144309}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caadd8d4107e22441b74ef91083f4d2a
+      internalID: 789952520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagStrike_Pose2
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 1657
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.301197, y: 0.57375777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b062162511d5e54d99ea67cf2090e02
+      internalID: 1437326000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagStrike_Pose3
+      rect:
+        serializedVersion: 2
+        x: 2593
+        y: 1657
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.3073455, y: 0.57055086}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d342d3101045a0a448cff1bf386b54e6
+      internalID: -1999255409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagRetract_Pose1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.36883107, y: 0.5769646}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb83cecc1e238b3459ceafa0d46e3627
+      internalID: 935013499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MantisTorso_UpDiagRetract_Pose2
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 1
+        width: 1294
+        height: 1654
+      alignment: 9
+      pivot: {x: 0.5655844, y: 0.55130976}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa70e3bfe96bef48b2e4bbce126a2f9
+      internalID: 1477933668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MantisTorso_UpDiagRetract_Pose2: 1477933668
+      MantisTorso_UpDiagRetract_Pose1: 935013499
+      MantisTorso_UpDiagStrike_Pose2: 1437326000
+      MantisTorso_UpDiagStrike_Pose1: 789952520
+      MantisTorso_UpDiagStart_Pose3: 145948248
+      MantisTorso_UpDiagStart_Pose1: 553583675
+      MantisTorso_UpDiagStrike_Pose3: -1999255409
+      MantisTorso_UpDiagStart_Pose2: 1006379508
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
