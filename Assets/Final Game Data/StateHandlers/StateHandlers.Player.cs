@@ -89,9 +89,11 @@ namespace StateHandlers.Player
                 }
                 if(player.animator.CurrentState("Player_JumpAscent"))
                 {
+
                     if(!InputManager.ins.JumpDown_Input)
                     {
-                        player.animator.animator.Play("Player_JumpAscentSlow");
+                        if(player.animator.trueTimeSpentInState > 0.17f)
+                            player.animator.animator.Play("Player_JumpAscentSlow");
                     }
                 }
                 if(player.animator.CurrentState("Player_DoubleJumpStart"))
@@ -177,10 +179,6 @@ namespace StateHandlers.Player
                             player.torso.animator.spriteRenderer.flipX = false;
                         if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x < 0f)
                             player.torso.animator.spriteRenderer.flipX = true;
-                    }
-                    else
-                    {
-
                     }
                 }
             }

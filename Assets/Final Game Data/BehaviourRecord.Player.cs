@@ -15,13 +15,12 @@ namespace BehaviourRecord.Player
             //Debug.LogError($"{obj.id} Record Update");
             RuntimeObjects.Player player = obj as RuntimeObjects.Player;
             if (player == null)
-                Debug.LogError("Player null tf");
+                Debug.LogError("Player null you have probably subscribed this to a non player managedUpdate");
             if (player.grounded)
                 groundedTime += tickDelta;
             else
                 groundedTime = 0f;
-            Debug.Log($"Grounded Time = {groundedTime}");
-            if(jumpInput)
+            if (jumpInput)
                 jumpInputBufferTime -= tickDelta;
             if (jumpInputBufferTime < 0f)
             {
