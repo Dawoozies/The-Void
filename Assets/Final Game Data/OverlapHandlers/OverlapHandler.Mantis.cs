@@ -14,6 +14,7 @@ namespace OverlapHandler.Mantis
                 PlayerTorso playerTorso = hitObj as PlayerTorso;
                 if(playerLegs != null || playerTorso != null) 
                 {
+                    //We need to compute damage directions here
                     MantisLeftArm leftArm = obj as MantisLeftArm;
 
                     if (leftArm != null)

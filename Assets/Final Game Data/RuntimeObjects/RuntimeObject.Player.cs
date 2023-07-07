@@ -47,6 +47,7 @@ namespace RuntimeObjects
         }
         public void ManagedStart()
         {
+            managedUpdate += RuntimePlayerDamage.Update; //Update damage for player
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
             managedUpdate += StateHandlers.Player.Handler.Update;
@@ -57,7 +58,7 @@ namespace RuntimeObjects
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
             animator.onStateEnter += StateHandlers.Player.Handler.OnStateEnter;
             animator.onFrameUpdate += StateHandlers.Player.Handler.OnFrameUpdate;
-
+            RuntimePlayerDamage.onDamageProcessed += StateHandlers.Player.Handler.OnDamageProcessed;
             animator.spriteRenderer.color = Color.clear;
         }
     }

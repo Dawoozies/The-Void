@@ -439,13 +439,34 @@ namespace RuntimeObjects
     public static class RuntimePlayerDamage
     {
         public static int stockLeft;
-        public static int playerPercentage;
-        public static List<PlayerDamageContainer> damageToProcess;
+        public static float playerPercentage;
+        static List<PlayerDamageContainer> damageToProcess;
+        static float updateTime;
+        const float UPDATE_TIME = 0.1f;
+        public static Action<List<PlayerDamageContainer>> onDamageProcessed;
+        public static void Update(RuntimeObject obj, float tickDelta)
+        {
+            if (damageToProcess == null || damageToProcess.Count == 0)
+                return;
+            updateTime += tickDelta;
+            if(updateTime >= UPDATE_TIME)
+            {
+                updateTime = 0;
+                onDamageProcessed?.Invoke(damageToProcess);
+                //Debug.LogError($"Processing damage. Count = {damageToProcess.Count}");
+                for (int i = 0; i < damageToProcess.Count; i++)
+                {
+                    playerPercentage += damageToProcess[i].percentage;
+                }
+                //Debug.LogError($"Player Percentage = {playerPercentage}");
+                damageToProcess.Clear();
+            }
+        }
         public static void ApplyDamage(string stateName, float dmg)
         {
             if (damageToProcess == null || damageToProcess.Count == 0)
             {
-                Debug.LogError($"{stateName} apply damage {dmg}");
+                //Debug.LogError($"{stateName} apply damage {dmg}");
                 damageToProcess = new() { new(stateName, dmg) };
                 return;
             }
@@ -455,7 +476,7 @@ namespace RuntimeObjects
                     return;
             }
             damageToProcess.Add(new(stateName, dmg));
-            Debug.LogError($"{stateName} apply damage {dmg}");
+            //Debug.LogError($"{stateName} apply damage {dmg}");
         }
     }
 }

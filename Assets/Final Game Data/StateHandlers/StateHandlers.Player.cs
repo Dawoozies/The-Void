@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
 using ExtensionMethods_Bool;
-
+using RuntimeContainers;
 namespace StateHandlers.Player
 {
     public static class Handler
@@ -237,7 +237,6 @@ namespace StateHandlers.Player
                     {
                         player.rigidbody.rb.velocity = (player.runSpeed + player.jumpApexRightSpeed) * InputManager.ins.L_Input.x * player.right + player.upVelocity;
                     }
-                    //Debug.LogError($"Velocity Up = {player.upVelocity}");
                     if (player.animator.trueTimeSpentInState > player.jumpApexTime)
                     {
                         player.animator.animator.Play("Player_Fall");
@@ -276,7 +275,6 @@ namespace StateHandlers.Player
                         pose = 6;
                     if (player.upSpeed <= -10)
                         pose = 7;
-                    //Debug.Log($"pose = {pose}");
                     switch (player.jumpType)
                     {
 
@@ -539,6 +537,11 @@ namespace StateHandlers.Player
                     player.legs.animator.animator.Play("PlayerLegs_SlidePose1");
                     player.torso.animator.animator.Play("PlayerTorso_Default_SlidePose1");
                 }
+                if(player.animator.CurrentState("Player_Damaged"))
+                {
+                    player.legs.animator.animator.Play("PlayerLegs_Damaged_Pose1");
+                    player.torso.animator.animator.Play("PlayerTorso_Damaged_Pose1");
+                }
             }
         }
         public static void OnFrameUpdate(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -633,6 +636,12 @@ namespace StateHandlers.Player
                     }
                 }
             }
+        }
+        public static void OnDamageProcessed(List<PlayerDamageContainer> damageToProcess)
+        {
+            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+            if (!player.animator.CurrentState("Player_Damaged"))
+                player.animator.animator.Play("Player_Damaged");
         }
     }
 }
