@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OverlapHandler.Mantis;
 namespace RuntimeObjects
 {
     public class Mantis : RuntimeObject
@@ -83,6 +84,8 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
+            managedUpdate += RuntimeDirectedCircleOverlaps.Update;
+            directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             obj.SetParent(GameManager.ins.allRuntimeObjects["MantisTorso"].animator.animator.transform);
             animator.spriteRenderer.sortingOrder = 6;
         }

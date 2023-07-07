@@ -370,7 +370,7 @@ namespace RuntimeObjects
                     for (int i = 0; i < directedCircleOverlaps.overlapResultsCount; i++)
                     {
                         CircleCollider2D circleCollider = directedCircleOverlaps.overlapResults[i] as CircleCollider2D;
-                        if(circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == string.Empty)
+                        if(circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == string.Empty) 
                             directedCircleOverlaps.onNonRuntimeObjectOverlap?.Invoke(directedCircleOverlaps.atFrame[dataIndex].nickname, obj, directedCircleOverlaps.overlapResults[i]);
                         if(circleCollider != null)
                         {
@@ -434,6 +434,28 @@ namespace RuntimeObjects
                     return atFrame[i];
             }
             return null;
+        }
+    }
+    public static class RuntimePlayerDamage
+    {
+        public static int stockLeft;
+        public static int playerPercentage;
+        public static List<PlayerDamageContainer> damageToProcess;
+        public static void ApplyDamage(string stateName, float dmg)
+        {
+            if (damageToProcess == null || damageToProcess.Count == 0)
+            {
+                Debug.LogError($"{stateName} apply damage {dmg}");
+                damageToProcess = new() { new(stateName, dmg) };
+                return;
+            }
+            for (int i = 0; i < damageToProcess.Count; i++)
+            {
+                if (damageToProcess[i].stateName == stateName)
+                    return;
+            }
+            damageToProcess.Add(new(stateName, dmg));
+            Debug.LogError($"{stateName} apply damage {dmg}");
         }
     }
 }

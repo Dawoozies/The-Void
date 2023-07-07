@@ -276,7 +276,7 @@ namespace StateHandlers.Player
                         pose = 6;
                     if (player.upSpeed <= -10)
                         pose = 7;
-                    Debug.Log($"pose = {pose}");
+                    //Debug.Log($"pose = {pose}");
                     switch (player.jumpType)
                     {
 
