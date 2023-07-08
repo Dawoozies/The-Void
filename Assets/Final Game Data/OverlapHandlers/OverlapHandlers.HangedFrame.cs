@@ -6,7 +6,7 @@ namespace OverlapHandlers.HangedFrame
 {
     public static class OnRuntimeObjectOverlap
     {
-        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj)
+        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj, Vector2 overlapUp, Vector2 overlapRight)
         {
 
         }

@@ -16,12 +16,16 @@ namespace RuntimeContainers
     {
         public string stateName; //Animation state which dealt this damage
         public float percentage; //How much percentage damage to apply
-        public Vector2 up;
-        public Vector2 right;
-        public PlayerDamageContainer(string stateName, float percentage)
+        public Vector2 up; //"Up" direction for damage
+        public Vector2 right; //"Right" direction for damage
+        public bool killDamage;
+        public PlayerDamageContainer(string stateName, float percentage, Vector2 up, Vector2 right, bool killDamage)
         {
             this.stateName = stateName;
             this.percentage = percentage;
+            this.up = up;
+            this.right = right;
+            this.killDamage = killDamage;
         }
     }
 }

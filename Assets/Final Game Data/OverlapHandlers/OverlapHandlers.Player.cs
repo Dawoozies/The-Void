@@ -7,7 +7,7 @@ namespace OverlapHandlers.Player
     public static class OnRuntimeObjectOverlap
     {
         //RuntimeOverlap: obj.id --> hitObj.id
-        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj)
+        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj, Vector2 overlapUp, Vector2 overlapRight)
         {
 
         }
@@ -45,6 +45,11 @@ namespace OverlapHandlers.Player
                         }
                     }
                 }
+            }
+            if(dataName == "WallSlamDetection")
+            {
+                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                //Debug.LogError($"Slammed into wall with velocity {player.rigidbody.rb.velocity}");
             }
         }
     }

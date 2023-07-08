@@ -8,7 +8,7 @@ namespace StateHandlers.Player
 {
     public static class Handler
     {
-
+        const float HIT_STUN_MAX = 0.125f;
         //By the time we get here all runtime data has been set and updated
         public static void Update(RuntimeObject obj, float tickDelta)
         {
@@ -539,8 +539,7 @@ namespace StateHandlers.Player
                 }
                 if(player.animator.CurrentState("Player_Damaged"))
                 {
-                    player.legs.animator.animator.Play("PlayerLegs_Damaged_Pose1");
-                    player.torso.animator.animator.Play("PlayerTorso_Damaged_Pose1");
+
                 }
             }
         }
@@ -639,7 +638,22 @@ namespace StateHandlers.Player
         }
         public static void OnDamageProcessed(List<PlayerDamageContainer> damageToProcess)
         {
-            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player; 
+            for (int i = 0; i < damageToProcess.Count; i++)
+            {
+                float dotResultUp = Vector2.Dot(damageToProcess[i].up, player.rigidbody.rb.velocity);
+                float dotResultRight = Vector2.Dot(damageToProcess[i].right, player.rigidbody.rb.velocity);
+                if(dotResultUp > dotResultRight)
+                {
+                    player.rigidbody.rb.velocity = 
+                        player.rigidbody.rb.velocity.magnitude * damageToProcess[i].up;
+                }
+                else
+                {
+                    player.rigidbody.rb.velocity = 
+                        player.rigidbody.rb.velocity.magnitude * damageToProcess[i].right;
+                }
+            }
             if (!player.animator.CurrentState("Player_Damaged"))
                 player.animator.animator.Play("Player_Damaged");
         }

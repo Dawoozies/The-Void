@@ -315,7 +315,7 @@ namespace RuntimeObjects
         //Runtime ID if result type is RuntimeObject
         //Obj doing overlap, obj which was overlapped
 
-        public Action<string, RuntimeObject, RuntimeObject> onRuntimeObjectOverlap;
+        public Action<string, RuntimeObject, RuntimeObject, Vector2, Vector2> onRuntimeObjectOverlap;
         public Action<string, RuntimeObject, Collider2D> onNonRuntimeObjectOverlap;
         public Action<string, RuntimeObject> onNullOverlap;
         public static void CreateAndAttach(RuntimeObject obj)
@@ -375,7 +375,19 @@ namespace RuntimeObjects
                         if(circleCollider != null)
                         {
                             string id = GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider);
-                            directedCircleOverlaps.onRuntimeObjectOverlap?.Invoke(directedCircleOverlaps.atFrame[dataIndex].nickname, obj, GameManager.ins.allRuntimeObjects[id]);
+                            Vector2 overlapUp = Vector2.zero;
+                            Vector2 overlapRight = Vector2.zero;
+                            if (directedCircleOverlaps.atFrame[dataIndex].upDirections != null && directedCircleOverlaps.atFrame[dataIndex].upDirections.Count > 0)
+                                overlapUp = obj.RelativeDir(directedCircleOverlaps.atFrame[dataIndex].upDirections[centerIndex]);
+                            if (directedCircleOverlaps.atFrame[dataIndex].rightDirections != null && directedCircleOverlaps.atFrame[dataIndex].rightDirections.Count > 0)
+                                overlapRight = obj.RelativeDir(directedCircleOverlaps.atFrame[dataIndex].rightDirections[centerIndex]);
+                            directedCircleOverlaps.onRuntimeObjectOverlap?.Invoke(
+                                directedCircleOverlaps.atFrame[dataIndex].nickname, 
+                                obj, 
+                                GameManager.ins.allRuntimeObjects[id],
+                                overlapUp,
+                                overlapRight
+                                );
                         }
                     }
                     if(directedCircleOverlaps.atFrame[dataIndex].useNullResult && directedCircleOverlaps.overlapResultsCount == 0)
@@ -462,12 +474,12 @@ namespace RuntimeObjects
                 damageToProcess.Clear();
             }
         }
-        public static void ApplyDamage(string stateName, float dmg)
+        public static void ApplyDamage(string stateName, float dmg, Vector2 up, Vector2 right, bool killDamage)
         {
             if (damageToProcess == null || damageToProcess.Count == 0)
             {
                 //Debug.LogError($"{stateName} apply damage {dmg}");
-                damageToProcess = new() { new(stateName, dmg) };
+                damageToProcess = new() { new(stateName, dmg, up, right, killDamage) };
                 return;
             }
             for (int i = 0; i < damageToProcess.Count; i++)
@@ -475,7 +487,7 @@ namespace RuntimeObjects
                 if (damageToProcess[i].stateName == stateName)
                     return;
             }
-            damageToProcess.Add(new(stateName, dmg));
+            damageToProcess.Add(new(stateName, dmg, up, right, killDamage));
             //Debug.LogError($"{stateName} apply damage {dmg}");
         }
     }

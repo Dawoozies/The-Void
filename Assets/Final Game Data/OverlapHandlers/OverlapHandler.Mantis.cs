@@ -6,7 +6,7 @@ namespace OverlapHandler.Mantis
 {
     public static class OnRuntimeObjectOverlap
     {
-        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj)
+        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj, Vector2 overlapUp, Vector2 overlapRight)
         {
             if(dataName == "DamageZone")
             {
@@ -14,20 +14,19 @@ namespace OverlapHandler.Mantis
                 PlayerTorso playerTorso = hitObj as PlayerTorso;
                 if(playerLegs != null || playerTorso != null) 
                 {
-                    //We need to compute damage directions here
                     MantisLeftArm leftArm = obj as MantisLeftArm;
 
                     if (leftArm != null)
-                        Handle_MantisLeftArm_Damage(leftArm);
+                        Handle_MantisLeftArm_Damage(leftArm, overlapUp, overlapRight);
                 }
             }
         }
-        static void Handle_MantisLeftArm_Damage(MantisLeftArm leftArm)
+        static void Handle_MantisLeftArm_Damage(MantisLeftArm leftArm, Vector2 overlapUp, Vector2 overlapRight)
         {
             if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrike_Pose1"))
-                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrike_Pose1", 2f);
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrike_Pose1", 2f, overlapUp, overlapRight, false);
             if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrike_Pose2"))
-                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrike_Pose2", 3f);
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrike_Pose2", 3f, overlapUp, overlapRight, false);
         }
     }
 }
