@@ -2716,14 +2716,14 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 0872ed5187bf9e94694b7387dd574507, type: 2}
   - {fileID: 9100000, guid: d37d22e3f2f8d2741be34b2d3b8c54c8, type: 2}
   - {fileID: 9100000, guid: 339b234c9ed2a3540a68c513a1111cf8, type: 2}
-  - {fileID: 9100000, guid: 146af4d4fb695ed4385f33bc3ebc29ed, type: 2}
-  - {fileID: 9100000, guid: 6635c55e901a7364faad90032aa1a4c9, type: 2}
-  - {fileID: 9100000, guid: 625cb40a3ab851849870d833175e552b, type: 2}
-  - {fileID: 9100000, guid: 296c253d0dd4fae49a1ce2cb037db9e7, type: 2}
   - {fileID: 9100000, guid: ded8dfcf122510c458715643d3d70cb6, type: 2}
   - {fileID: 9100000, guid: 6a6a2834588548742b4a54f1ff523852, type: 2}
   - {fileID: 9100000, guid: 35b85647b0c94984fa704caedbef1c2f, type: 2}
   - {fileID: 9100000, guid: 7c3afa50ee70cbd4cab9ff54dcfe9c1e, type: 2}
+  - {fileID: 9100000, guid: 146af4d4fb695ed4385f33bc3ebc29ed, type: 2}
+  - {fileID: 9100000, guid: 625cb40a3ab851849870d833175e552b, type: 2}
+  - {fileID: 9100000, guid: 296c253d0dd4fae49a1ce2cb037db9e7, type: 2}
+  - {fileID: 9100000, guid: 6635c55e901a7364faad90032aa1a4c9, type: 2}
   directedCircleCollider2DParent: {fileID: 0}
   spriteRendererParent: {fileID: 0}
   sprites:

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using OverlapHandler.Mantis;
+using StateHandlers.Mantis;
+using OverlapHandlers.Mantis;
 namespace RuntimeObjects
 {
     public class Mantis : RuntimeObject
@@ -39,9 +40,9 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
-            managedUpdate += StateHandlers.Mantis.Handler.Update;
-            animator.onStateEnter += StateHandlers.Mantis.Handler.OnStateEnter;
-            animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
+            managedUpdate += Handler.Update;
+            animator.onStateEnter += Handler.OnStateEnter;
+            animator.onFrameUpdate += Handler.OnFrameUpdate;
             animator.spriteRenderer.color = Color.clear;
         }
     }
@@ -54,8 +55,8 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
-            animator.onStateEnter += StateHandlers.Mantis.Handler.OnStateEnter;
-            animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
+            animator.onStateEnter += Handler.OnStateEnter;
+            animator.onFrameUpdate += Handler.OnFrameUpdate;
             obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
             obj.localPosition = new Vector3(0, -11, 0);
             animator.spriteRenderer.sortingOrder = 4;
@@ -70,7 +71,7 @@ namespace RuntimeObjects
         public void ManagedStart()
         {
             managedUpdate += RuntimeAnimator.Update;
-            animator.onFrameUpdate += StateHandlers.Mantis.Handler.OnFrameUpdate;
+            animator.onFrameUpdate += Handler.OnFrameUpdate;
             obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
             animator.spriteRenderer.sortingOrder = 5;
         }

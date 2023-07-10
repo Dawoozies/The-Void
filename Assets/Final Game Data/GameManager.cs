@@ -173,7 +173,9 @@ public class GameManager : MonoBehaviour
     }
     void RuntimeObjectCreate_Weapon()
     {
-
+        allRuntimeObjects.Add("Weapon", new Weapon("Weapon"));
+        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Weapon"], allControllers["Weapon"]);
+        RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Weapon"]);
     }
     void RuntimeObjectCreate_HangedFrame()
     {
@@ -196,6 +198,7 @@ public class GameManager : MonoBehaviour
     {
         allRuntimeObjects = new Dictionary<string, RuntimeObject>();
         RuntimeObjectCreate_Player();
+        RuntimeObjectCreate_Weapon();
         //RuntimeObjectCreate_HangedFrame();
         RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))

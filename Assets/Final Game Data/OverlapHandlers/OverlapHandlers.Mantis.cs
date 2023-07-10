@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
-namespace OverlapHandler.Mantis
+namespace OverlapHandlers.Mantis
 {
     public static class OnRuntimeObjectOverlap
     {
