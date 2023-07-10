@@ -29,49 +29,10 @@ namespace StateHandlers.Player
                 }
                 if (player.animator.CurrentState("Player_Run"))
                 {
-                    if(InputManager.ins.LeftTrigger_Input > 0.1f)
-                    {
-                        if(!player.torso.animator.CurrentState("PlayerTorso_WeaponHeld_Run"))
-                            player.torso.animator.animator.Play("PlayerTorso_WeaponHeld_Run");
-                        else
-                            player.torso.animator.time = player.legs.animator.time;
-                    }
-                    else
-                    {
-                        if (!player.torso.animator.CurrentState("PlayerTorso_Default_Run"))
-                            player.torso.animator.animator.Play("PlayerTorso_Default_Run");
-                        else
-                            player.torso.animator.time = player.legs.animator.time;
-
-                        player.torso.obj.up = Vector2.up;
-                    }
                     if (player.jumpsLeft > 0 && InputManager.ins.JumpDown_BufferedInput)
                         player.animator.animator.Play("Player_JumpAscent");
                     if (InputManager.ins.L_Input.x == 0f)
                         player.animator.animator.Play("Player_Idle");
-                    if(player.torso.animator.CurrentState("PlayerTorso_WeaponHeld_Run"))
-                    {
-
-                        if (-8f*InputManager.ins.R_Input.x < InputManager.ins.R_Input.y && InputManager.ins.R_Input.y < 8f*InputManager.ins.R_Input.x)
-                        {
-                            player.torso.obj.right = InputManager.ins.R_Input;
-                        }
-                        if(8f*InputManager.ins.R_Input.x < InputManager.ins.R_Input.y && InputManager.ins.R_Input.y < -8f*InputManager.ins.R_Input.x)
-                        {
-                            player.torso.obj.right = new Vector2(Mathf.Abs(InputManager.ins.R_Input.x), -InputManager.ins.R_Input.y);
-                        }
-                    }
-                    else
-                    {
-                        if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
-                            player.legs.animator.spriteRenderer.flipX = false;
-                        if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
-                            player.legs.animator.spriteRenderer.flipX = true;
-                        if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
-                            player.torso.animator.spriteRenderer.flipX = false;
-                        if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
-                            player.torso.animator.spriteRenderer.flipX = true;
-                    }
                 }
                 if(player.animator.CurrentState("Player_Fall"))
                 {
@@ -161,25 +122,24 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_Land");
                     }
                 }
+                if(player.animator.CurrentState("Player_Damaged"))
+                {
+                    if (player.animator.trueTimeSpentInState > HIT_STUN_MAX)
+                        player.animator.animator.Play("Player_Idle");
+                }
                 bool spriteFlipping =
                     player.animator.CurrentState("Player_Run")
                     || player.animator.CurrentState("Player_Slide");
-                bool torsoAiming = 
-                    player.animator.CurrentState("PlayerTorso_WeaponHeld_Run")
-                    || player.animator.CurrentState("PlayerTorso_WeaponHeld_InAirPose1");
                 if(spriteFlipping)
                 {
-                    if (torsoAiming)
-                    {
-                        if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
-                            player.legs.animator.spriteRenderer.flipX = false;
-                        if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
-                            player.legs.animator.spriteRenderer.flipX = true;
-                        if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x > 0f)
-                            player.torso.animator.spriteRenderer.flipX = false;
-                        if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.R_Input.x < 0f)
-                            player.torso.animator.spriteRenderer.flipX = true;
-                    }
+                    if (player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
+                        player.legs.animator.spriteRenderer.flipX = false;
+                    if (!player.legs.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
+                        player.legs.animator.spriteRenderer.flipX = true;
+                    if (player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x > 0f)
+                        player.torso.animator.spriteRenderer.flipX = false;
+                    if (!player.torso.animator.spriteRenderer.flipX && InputManager.ins.L_Input.x < 0f)
+                        player.torso.animator.spriteRenderer.flipX = true;
                 }
             }
         }
@@ -539,7 +499,8 @@ namespace StateHandlers.Player
                 }
                 if(player.animator.CurrentState("Player_Damaged"))
                 {
-
+                    player.legs.animator.animator.Play("PlayerLegs_Damaged_Pose1");
+                    player.torso.animator.animator.Play("PlayerTorso_Damaged_Pose1");
                 }
             }
         }
@@ -638,22 +599,9 @@ namespace StateHandlers.Player
         }
         public static void OnDamageProcessed(List<PlayerDamageContainer> damageToProcess)
         {
-            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player; 
-            for (int i = 0; i < damageToProcess.Count; i++)
-            {
-                float dotResultUp = Vector2.Dot(damageToProcess[i].up, player.rigidbody.rb.velocity);
-                float dotResultRight = Vector2.Dot(damageToProcess[i].right, player.rigidbody.rb.velocity);
-                if(dotResultUp > dotResultRight)
-                {
-                    player.rigidbody.rb.velocity = 
-                        player.rigidbody.rb.velocity.magnitude * damageToProcess[i].up;
-                }
-                else
-                {
-                    player.rigidbody.rb.velocity = 
-                        player.rigidbody.rb.velocity.magnitude * damageToProcess[i].right;
-                }
-            }
+            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+            player.rigidbody.rb.velocity = Vector2.zero;
+            player.obj.up = Vector2.up;
             if (!player.animator.CurrentState("Player_Damaged"))
                 player.animator.animator.Play("Player_Damaged");
         }

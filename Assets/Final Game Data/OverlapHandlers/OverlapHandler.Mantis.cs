@@ -27,6 +27,16 @@ namespace OverlapHandler.Mantis
                 RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrike_Pose1", 2f, overlapUp, overlapRight, false);
             if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrike_Pose2"))
                 RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrike_Pose2", 3f, overlapUp, overlapRight, false);
+            if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrikeSpin_Pose3"))
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrikeSpin_Pose3", 2f, overlapUp, overlapRight, false);
+            if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrikeSpin_Pose4"))
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrikeSpin_Pose4", 3f, overlapUp, overlapRight, false);
+            if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrikeSpin_Pose5"))
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrikeSpin_Pose5", 4f, overlapUp, overlapRight, false);
+            if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrikeSpin_Pose6"))
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrikeSpin_Pose6", 3f, overlapUp, overlapRight, false);
+            if (leftArm.animator.CurrentState("MantisLeftArm_LinearStrikeSpin_Pose7"))
+                RuntimePlayerDamage.ApplyDamage("MantisLeftArm_LinearStrikeSpin_Pose7", 2f, overlapUp, overlapRight, false);
         }
     }
 }

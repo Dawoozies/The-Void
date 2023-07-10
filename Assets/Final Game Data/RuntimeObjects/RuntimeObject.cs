@@ -452,9 +452,11 @@ namespace RuntimeObjects
     {
         public static int stockLeft;
         public static float playerPercentage;
+        static float previousPercentage;
         static List<PlayerDamageContainer> damageToProcess;
         static float updateTime;
         const float UPDATE_TIME = 0.1f;
+        public static Action<float, float> onPlayerPercentageChanged;
         public static Action<List<PlayerDamageContainer>> onDamageProcessed;
         public static void Update(RuntimeObject obj, float tickDelta)
         {
@@ -465,11 +467,13 @@ namespace RuntimeObjects
             {
                 updateTime = 0;
                 onDamageProcessed?.Invoke(damageToProcess);
+                previousPercentage = playerPercentage;
                 //Debug.LogError($"Processing damage. Count = {damageToProcess.Count}");
                 for (int i = 0; i < damageToProcess.Count; i++)
                 {
                     playerPercentage += damageToProcess[i].percentage;
                 }
+                onPlayerPercentageChanged?.Invoke(previousPercentage, playerPercentage);
                 //Debug.LogError($"Player Percentage = {playerPercentage}");
                 damageToProcess.Clear();
             }
@@ -490,5 +494,9 @@ namespace RuntimeObjects
             damageToProcess.Add(new(stateName, dmg, up, right, killDamage));
             //Debug.LogError($"{stateName} apply damage {dmg}");
         }
+    }
+    public static class RuntimePlayerWeapon
+    {
+        //which one to be thrown
     }
 }

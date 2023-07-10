@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     public Sprite[] sprites;
     public Dictionary<string, Sprite> allSprites;
+    //Player Weapon Pool
+
     private void Awake()
     {
         ins = this;
@@ -168,6 +170,10 @@ public class GameManager : MonoBehaviour
         RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Player"]);
         RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Player"]);
+    }
+    void RuntimeObjectCreate_Weapon()
+    {
+
     }
     void RuntimeObjectCreate_HangedFrame()
     {
