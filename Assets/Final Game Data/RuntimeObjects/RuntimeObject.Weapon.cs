@@ -97,6 +97,12 @@ namespace RuntimeObjects
                 }
             }
         }
+        public void Throw(Vector2 velocity)
+        {
+            RemoveOwner();
+            rigidbody.rb.velocity = velocity;
+            rigidbody.rbObj.up = velocity;
+        }
     }
     public class WeaponHead : RuntimeObject
     {

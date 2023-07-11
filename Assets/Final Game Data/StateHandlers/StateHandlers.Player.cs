@@ -137,6 +137,17 @@ namespace StateHandlers.Player
                     if (player.animator.trueTimeSpentInState > CATCH_TIME + 0.25f)
                         player.animator.animator.Play("Player_Idle");
                 }
+                if(player.animator.CurrentState("Player_ThrowWeapon"))
+                {
+                    if(player.animator.trueTimeSpentInState > 0.12f)
+                    {
+                        player.torso.animator.animator.Play("PlayerTorso_Throw_Pose4");
+                    }
+                    if(player.animator.trueTimeSpentInState > 0.22f)
+                    {
+                        player.animator.animator.Play("Player_Idle");
+                    }
+                }
                 bool spriteFlipping =
                     player.animator.CurrentState("Player_Run")
                     || player.animator.CurrentState("Player_Slide");
@@ -524,6 +535,10 @@ namespace StateHandlers.Player
                     player.torso.animator.animator.Play("PlayerTorso_Throw_Pose3");
                     //Debug.LogError("Catch Weapon Playing");
                 }
+                if(player.animator.CurrentState("Player_ThrowWeapon"))
+                {
+                    player.torso.animator.animator.Play("PlayerTorso_Throw_Pose3");
+                }
             }
         }
         public static void OnFrameUpdate(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -634,6 +649,13 @@ namespace StateHandlers.Player
 
             PlayerTorso torso = GameManager.ins.FindByID("PlayerTorso") as PlayerTorso;
             weapon.SetOwner(torso);
+        }
+        public static void OnThrowWeapon(RuntimeObjects.Weapon weapon)
+        {
+            RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
+            player.animator.animator.Play("Player_ThrowWeapon");
+
+            weapon.Throw(InputManager.ins.R_Input*45f);
         }
     }
 }

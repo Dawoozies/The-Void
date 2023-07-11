@@ -504,7 +504,16 @@ namespace RuntimeObjects
         public static void GetWeapon(Weapon weapon)
         {
             weapons.Add(weapon);
+            rightHeld = weapon;
             onGetWeapon?.Invoke(weapon);
+        }
+        public static void ThrowWeapon()
+        {
+            if (rightHeld == null)
+                return;
+            weapons.Remove(rightHeld);
+            onThrowWeapon?.Invoke(rightHeld);
+            rightHeld = null;
         }
     }
 }

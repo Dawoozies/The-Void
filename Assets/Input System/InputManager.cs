@@ -38,6 +38,7 @@ public class InputManager : MonoBehaviour
             RightBumper_Input = inputActions.ReadValueAsButton();
             if (RightBumper_Input)
                 RightBumperBuffer.Input(0.25f);
+            RuntimePlayerWeapon.ThrowWeapon();
         };
         inputActions.PlayerDefault.LeftBumper.performed += (inputActions) =>
         {
