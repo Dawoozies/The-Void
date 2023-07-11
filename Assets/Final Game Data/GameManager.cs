@@ -11,7 +11,20 @@ public class GameManager : MonoBehaviour
     public RuntimeAnimatorController[] controllers;
     public Dictionary<string, RuntimeAnimatorController> allControllers; //Key = controller.name
     public Dictionary<string, ControllerData> allControllerData; //Key = controller.name
-    public Dictionary<string, RuntimeObject> allRuntimeObjects; //Key = whatever input was on creation / Key = runtimeObject.id
+    //public Dictionary<string, RuntimeObject> allRuntimeObjects; //Key = whatever input was on creation / Key = runtimeObject.id
+    public List<RuntimeObject> allRuntimeObjects;
+    public List<RuntimeObject> allRuntimeWeapons;
+    public RuntimeObject FindByID(string id)
+    {
+        foreach (RuntimeObject obj in allRuntimeObjects) 
+        {
+            if(obj.id == id) 
+            {
+                return obj;
+            }
+        }
+        return null;
+    }
     //DirectedCircleCollider Pool
     public Transform directedCircleCollider2DParent;
     public ObjectPool<DirectedCircleColliderContainer> directedCircleColliderContainerPool;
@@ -35,7 +48,9 @@ public class GameManager : MonoBehaviour
     public Sprite[] sprites;
     public Dictionary<string, Sprite> allSprites;
     //Player Weapon Pool
-
+    public Transform runtimeWeaponParent;
+    public ObjectPool<Weapon> runtimeWeaponPool;
+    public bool command_GetWeapon;
     private void Awake()
     {
         ins = this;
@@ -44,6 +59,7 @@ public class GameManager : MonoBehaviour
         Setup_DirectedCircleCollider2DPool();
         Setup_Sprites();
         Setup_SpriteRendererPool();
+        Setup_RuntimeWeaponPool();
     }
     void Setup_ControllerDictionary()
     {
@@ -162,64 +178,101 @@ public class GameManager : MonoBehaviour
             500
             );
     }
+    void Setup_RuntimeWeaponPool()
+    {
+        runtimeWeaponParent = new GameObject("Runtime Weapon Parent").transform;
+        runtimeWeaponPool = new ObjectPool<Weapon>(
+            () =>
+            {
+                //Creates a generalised weapon
+                //This will not be in allRuntimeObjects
+                Weapon member = new Weapon("Weapon");
+                allRuntimeWeapons.Add(member);
+                //member.rigidbody.rb.transform.SetParent(runtimeWeaponParent);
+                return member;
+            },
+            (Weapon member) =>
+            {
+                member.rigidbody.rb.transform.gameObject.SetActive(true);
+            },
+            (Weapon member) =>
+            {
+                //member.rigidbody.rb.transform.SetParent(runtimeWeaponParent);
+                member.rigidbody.rb.transform.gameObject.SetActive(false);
+            },
+            (Weapon member) =>
+            {
+                allRuntimeWeapons.Remove(member);
+                Destroy(member.rigidbody.rb.transform.gameObject);
+            },
+            false,
+            50,
+            200
+            );
+    }
     void RuntimeObjectCreate_Player()
     {
-        allRuntimeObjects.Add("Player", new Player("Player"));
-        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Player"], allControllers["Player"]);
-        RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Player"]);
-        RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Player"]);
-        RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Player"]);
-        RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Player"]);
-    }
-    void RuntimeObjectCreate_Weapon()
-    {
-        allRuntimeObjects.Add("Weapon", new Weapon("Weapon"));
-        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Weapon"], allControllers["Weapon"]);
-        RuntimeRigidbody.CreateAndAttach(allRuntimeObjects["Weapon"]);
+        Player player = new("Player");
+        allRuntimeObjects.Add(player);
+
     }
     void RuntimeObjectCreate_HangedFrame()
     {
         //Main HangedFrame Object
-        allRuntimeObjects.Add("HangedFrame", new HangedFrame("HangedFrame"));
-        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["HangedFrame"], allControllers["HangedFrame"]);
-        RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
-        RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
-        RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["HangedFrame"]);
+        HangedFrame hangedFrame = new("HangedFrame");
+        allRuntimeObjects.Add(hangedFrame);
+        RuntimeAnimator.CreateAndAttach(hangedFrame, allControllers["HangedFrame"]);
+        RuntimeDirectedCircleColliders.CreateAndAttach(hangedFrame);
+        RuntimeDirectedCircleOverlaps.CreateAndAttach(hangedFrame);
+        RuntimeDirectedPoints.CreateAndAttach(hangedFrame);
     }
     void RuntimeObjectCreate_Mantis()
     {
-        allRuntimeObjects.Add("Mantis", new Mantis("Mantis"));
-        RuntimeAnimator.CreateAndAttach(allRuntimeObjects["Mantis"], allControllers["Mantis"]);
-        RuntimeDirectedCircleColliders.CreateAndAttach(allRuntimeObjects["Mantis"]);
-        RuntimeDirectedCircleOverlaps.CreateAndAttach(allRuntimeObjects["Mantis"]);
-        RuntimeDirectedPoints.CreateAndAttach(allRuntimeObjects["Mantis"]);
+        Mantis mantis = new("Mantis");
+        allRuntimeObjects.Add(mantis);
+        RuntimeAnimator.CreateAndAttach(mantis, allControllers["Mantis"]);
+        RuntimeDirectedCircleColliders.CreateAndAttach(mantis);
+        RuntimeDirectedCircleOverlaps.CreateAndAttach(mantis);
+        RuntimeDirectedPoints.CreateAndAttach(mantis);
     }
     private void Start()
     {
-        allRuntimeObjects = new Dictionary<string, RuntimeObject>();
+        allRuntimeObjects = new();
+        allRuntimeWeapons = new();
         RuntimeObjectCreate_Player();
-        RuntimeObjectCreate_Weapon();
         //RuntimeObjectCreate_HangedFrame();
-        RuntimeObjectCreate_Mantis();
+        //RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))
-        foreach (string key in allRuntimeObjects.Keys)
+        foreach (RuntimeObject item in allRuntimeObjects)
         {
-            allRuntimeObjects[key].managedStart?.Invoke();
+            item.managedStart?.Invoke();
+        }
+        foreach (RuntimeObject item in allRuntimeWeapons)
+        {
+            item.managedStart?.Invoke();
         }
     }
     private void Update()
     {
         InputManager.ins.ManagedUpdate(Time.deltaTime);
-        foreach (string key in allRuntimeObjects.Keys)
+        foreach (RuntimeObject item in allRuntimeObjects)
         {
-            allRuntimeObjects[key].managedUpdate?.Invoke(allRuntimeObjects[key], Time.deltaTime);
+            item.managedUpdate?.Invoke(item, Time.deltaTime);
+        }
+        foreach(RuntimeObject item in allRuntimeWeapons)
+        {
+            item.managedUpdate?.Invoke(item, Time.deltaTime);
         }
     }
     private void FixedUpdate()
     {
-        foreach (string key in allRuntimeObjects.Keys)
+        foreach (RuntimeObject item in allRuntimeObjects)
         {
-            allRuntimeObjects[key].managedFixedUpdate?.Invoke(allRuntimeObjects[key], Time.fixedDeltaTime);
+            item.managedFixedUpdate?.Invoke(item, Time.fixedDeltaTime);
+        }
+        foreach (RuntimeObject item in allRuntimeWeapons)
+        {
+            item.managedFixedUpdate?.Invoke(item, Time.fixedDeltaTime);
         }
     }
 }

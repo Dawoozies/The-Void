@@ -384,7 +384,7 @@ namespace RuntimeObjects
                             directedCircleOverlaps.onRuntimeObjectOverlap?.Invoke(
                                 directedCircleOverlaps.atFrame[dataIndex].nickname, 
                                 obj, 
-                                GameManager.ins.allRuntimeObjects[id],
+                                GameManager.ins.FindByID(id),
                                 overlapUp,
                                 overlapRight
                                 );
@@ -497,6 +497,12 @@ namespace RuntimeObjects
     }
     public static class RuntimePlayerWeapon
     {
-        //which one to be thrown
+        static List<Weapon> weapons = new();
+        public static Action<Weapon> onGetWeapon;
+        public static void GetWeapon(Weapon weapon)
+        {
+            weapons.Add(weapon);
+            onGetWeapon?.Invoke(weapon);
+        }
     }
 }

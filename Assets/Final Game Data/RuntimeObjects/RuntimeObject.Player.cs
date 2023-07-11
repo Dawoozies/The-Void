@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OverlapHandlers.Player;
 using BehaviourRecord.Player;
+using StateHandlers.Player;
 namespace RuntimeObjects
 {
     public class Player : RuntimeObject
@@ -31,35 +32,43 @@ namespace RuntimeObjects
         public float slideMinSpeed = 15f; //should be equal to run speed
         public Player(string id) : base(id)
         {
-            managedStart += ManagedStart;
+            RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["Player"]);
+            RuntimeRigidbody.CreateAndAttach(this);
+            RuntimeDirectedCircleColliders.CreateAndAttach(this);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(this);
+            RuntimeDirectedPoints.CreateAndAttach(this);
+
             legs = new PlayerLegs();
-            GameManager.ins.allRuntimeObjects.Add("PlayerLegs", legs);
+            GameManager.ins.allRuntimeObjects.Add(legs);
             RuntimeAnimator.CreateAndAttach(legs, GameManager.ins.allControllers["PlayerLegs"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(legs);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(legs);
             RuntimeDirectedPoints.CreateAndAttach(legs);
             torso = new PlayerTorso();
-            GameManager.ins.allRuntimeObjects.Add("PlayerTorso", torso);
+            GameManager.ins.allRuntimeObjects.Add(torso);
             RuntimeAnimator.CreateAndAttach(torso, GameManager.ins.allControllers["PlayerTorso"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(torso);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(torso);
             RuntimeDirectedPoints.CreateAndAttach(torso);
-        }
-        public void ManagedStart()
-        {
+
             managedUpdate += RuntimePlayerDamage.Update; //Update damage for player
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
-            managedUpdate += StateHandlers.Player.Handler.Update;
+            managedUpdate += Handler.Update;
             managedUpdate += Record.Update;
-            managedFixedUpdate += StateHandlers.Player.Handler.PhysicsUpdate;
+            managedFixedUpdate += Handler.PhysicsUpdate;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            animator.onStateEnter += StateHandlers.Player.Handler.OnStateEnter;
-            animator.onFrameUpdate += StateHandlers.Player.Handler.OnFrameUpdate;
-            RuntimePlayerDamage.onDamageProcessed += StateHandlers.Player.Handler.OnDamageProcessed;
+            animator.onStateEnter += Handler.OnStateEnter;
+            animator.onFrameUpdate += Handler.OnFrameUpdate;
+            RuntimePlayerDamage.onDamageProcessed += Handler.OnDamageProcessed;
             animator.spriteRenderer.color = Color.clear;
+
+            legs.obj.SetParent(obj);
+            torso.obj.SetParent(obj);
+
+            RuntimePlayerWeapon.onGetWeapon += Handler.OnGetWeapon;
         }
     }
     public class PlayerLegs : RuntimeObject
@@ -75,7 +84,7 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform); 
+            //obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform); 
             animator.spriteRenderer.sortingOrder = 10;
         }
     }
@@ -92,7 +101,7 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform);
+            //obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform);
             animator.spriteRenderer.sortingOrder = 11;
         }
     }

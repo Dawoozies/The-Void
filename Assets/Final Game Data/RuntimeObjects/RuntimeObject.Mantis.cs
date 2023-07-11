@@ -19,19 +19,19 @@ namespace RuntimeObjects
         {
             managedStart += ManagedStart;
             legs = new MantisLegs();
-            GameManager.ins.allRuntimeObjects.Add("MantisLegs", legs);
+            GameManager.ins.allRuntimeObjects.Add(legs);
             RuntimeAnimator.CreateAndAttach(legs, GameManager.ins.allControllers["MantisLegs"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(legs);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(legs);
             RuntimeDirectedPoints.CreateAndAttach(legs);
             torso = new MantisTorso();
-            GameManager.ins.allRuntimeObjects.Add("MantisTorso", torso);
+            GameManager.ins.allRuntimeObjects.Add(torso);
             RuntimeAnimator.CreateAndAttach(torso, GameManager.ins.allControllers["MantisTorso"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(torso);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(torso);
             RuntimeDirectedPoints.CreateAndAttach(torso);
             leftArm = new MantisLeftArm();
-            GameManager.ins.allRuntimeObjects.Add("MantisLeftArm", leftArm);
+            GameManager.ins.allRuntimeObjects.Add(leftArm);
             RuntimeAnimator.CreateAndAttach(leftArm, GameManager.ins.allControllers["MantisLeftArm"]);
             RuntimeDirectedCircleColliders.CreateAndAttach(leftArm);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(leftArm);
@@ -44,6 +44,10 @@ namespace RuntimeObjects
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
             animator.spriteRenderer.color = Color.clear;
+
+            legs.obj.SetParent(obj);
+            torso.obj.SetParent(obj);
+            leftArm.obj.SetParent(torso.obj);
         }
     }
     public class MantisLegs : RuntimeObject
@@ -57,7 +61,7 @@ namespace RuntimeObjects
             managedUpdate += RuntimeAnimator.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
-            obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
+            //obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
             obj.localPosition = new Vector3(0, -11, 0);
             animator.spriteRenderer.sortingOrder = 4;
         }
@@ -72,7 +76,7 @@ namespace RuntimeObjects
         {
             managedUpdate += RuntimeAnimator.Update;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
-            obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
+            //obj.SetParent(GameManager.ins.allRuntimeObjects["Mantis"].animator.animator.transform);
             animator.spriteRenderer.sortingOrder = 5;
         }
     }
@@ -87,7 +91,7 @@ namespace RuntimeObjects
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += RuntimeDirectedCircleOverlaps.Update;
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
-            obj.SetParent(GameManager.ins.allRuntimeObjects["MantisTorso"].animator.animator.transform);
+            //obj.SetParent(GameManager.ins.allRuntimeObjects["MantisTorso"].animator.animator.transform);
             animator.spriteRenderer.sortingOrder = 6;
         }
     }

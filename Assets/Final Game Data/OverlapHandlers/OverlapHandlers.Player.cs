@@ -19,7 +19,7 @@ namespace OverlapHandlers.Player
         {
             if(dataName == "Groundbox")
             {
-                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
                 if(player != null)
                 {
                     if(player.animator.CurrentState("Player_DoubleJumpAscentSlow"))
@@ -34,7 +34,7 @@ namespace OverlapHandlers.Player
             }
             if(dataName == "AirRollLandBox")
             {
-                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
                 if(player != null)
                 {
                     if(player.animator.CurrentState("Player_AirRollDescent"))
@@ -48,7 +48,7 @@ namespace OverlapHandlers.Player
             }
             if(dataName == "WallSlamDetection")
             {
-                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
                 //Debug.LogError($"Slammed into wall with velocity {player.rigidbody.rb.velocity}");
             }
         }
@@ -59,7 +59,7 @@ namespace OverlapHandlers.Player
         {
             if (dataName == "Groundbox")
             {
-                RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
                 if (player != null)
                 {
                     player.grounded = false;

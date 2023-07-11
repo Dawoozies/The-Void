@@ -9,6 +9,7 @@ namespace StateHandlers.Player
     public static class Handler
     {
         const float HIT_STUN_MAX = 0.125f;
+        const float CATCH_TIME = 0.15f;
         //By the time we get here all runtime data has been set and updated
         public static void Update(RuntimeObject obj, float tickDelta)
         {
@@ -27,7 +28,7 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_Fall");
                     //transitions at bottom most important
                 }
-                if (player.animator.CurrentState("Player_Run"))
+                if(player.animator.CurrentState("Player_Run"))
                 {
                     if (player.jumpsLeft > 0 && InputManager.ins.JumpDown_BufferedInput)
                         player.animator.animator.Play("Player_JumpAscent");
@@ -125,6 +126,15 @@ namespace StateHandlers.Player
                 if(player.animator.CurrentState("Player_Damaged"))
                 {
                     if (player.animator.trueTimeSpentInState > HIT_STUN_MAX)
+                        player.animator.animator.Play("Player_Idle");
+                }
+                if(player.animator.CurrentState("Player_CatchWeapon"))
+                {
+                    if (player.animator.trueTimeSpentInState > CATCH_TIME)
+                    {
+                        player.torso.animator.animator.Play("PlayerTorso_Throw_Pose4");
+                    }
+                    if (player.animator.trueTimeSpentInState > CATCH_TIME + 0.25f)
                         player.animator.animator.Play("Player_Idle");
                 }
                 bool spriteFlipping =
@@ -356,6 +366,11 @@ namespace StateHandlers.Player
             RuntimeObjects.Player player = obj as RuntimeObjects.Player;
             if (player != null)
             {
+                if(player.animator.CurrentState("Player_Initialized"))
+                {
+                    //Debug.LogError("Player Animator Initialized");
+                    RuntimePlayerWeapon.GetWeapon(GameManager.ins.runtimeWeaponPool.Get());
+                }
                 if (player.animator.CurrentState("Player_Idle"))
                 {
                     player.legs.animator.animator.Play("PlayerLegs_Idle");
@@ -502,6 +517,11 @@ namespace StateHandlers.Player
                     player.legs.animator.animator.Play("PlayerLegs_Damaged_Pose1");
                     player.torso.animator.animator.Play("PlayerTorso_Damaged_Pose1");
                 }
+                if(player.animator.CurrentState("Player_CatchWeapon"))
+                {
+                    player.torso.animator.animator.Play("PlayerTorso_Throw_Pose3");
+                    //Debug.LogError("Catch Weapon Playing");
+                }
             }
         }
         public static void OnFrameUpdate(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -534,7 +554,7 @@ namespace StateHandlers.Player
         }
         public static void OnJumpPerformed(bool jumpInput)
         {
-            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+            RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
             if (player != null)
             {
 
@@ -599,11 +619,20 @@ namespace StateHandlers.Player
         }
         public static void OnDamageProcessed(List<PlayerDamageContainer> damageToProcess)
         {
-            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+            RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
             player.rigidbody.rb.velocity = Vector2.zero;
             player.obj.up = Vector2.up;
             if (!player.animator.CurrentState("Player_Damaged"))
                 player.animator.animator.Play("Player_Damaged");
+        }
+        public static void OnGetWeapon(RuntimeObjects.Weapon weapon)
+        {
+            RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
+            player.animator.animator.Play("Player_CatchWeapon");
+
+            PlayerTorso torso = GameManager.ins.FindByID("PlayerTorso") as PlayerTorso;
+            weapon.SetOwner(torso);
+            //Debug.LogError("OnGetWeapon");
         }
     }
 }

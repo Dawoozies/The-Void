@@ -136,7 +136,7 @@ namespace StateHandlers.Mantis
                 if(mantis.animator.CurrentState("Mantis_AimAtPlayer"))
                 {
                     //Debug.LogError("FrameByFrame");
-                    RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
+                    RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
                     if (mantis.animator.trueTimeSpentInState > 0.14f && mantis.animator.trueTimeSpentInState < 0.28f + mantis.aimTime)
                     {
                         if (mantis.leftArm.animator.spriteRenderer.flipX)
@@ -154,7 +154,7 @@ namespace StateHandlers.Mantis
                 if(torsoAnchor != null)
                 {
                     
-                    (GameManager.ins.allRuntimeObjects["Mantis"] as RuntimeObjects.Mantis).torso.obj.position = legs.RelativePos(torsoAnchor.centers[0]);
+                    (GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis).torso.obj.position = legs.RelativePos(torsoAnchor.centers[0]);
                 }
             }
             if(torso != null)
@@ -162,14 +162,14 @@ namespace StateHandlers.Mantis
                 DirectedPoint leftArmAnchor = torso.directedPoints.GetDirectedPoint("MantisLeftArm_Anchor");
                 if(leftArmAnchor != null)
                 {
-                    (GameManager.ins.allRuntimeObjects["Mantis"] as RuntimeObjects.Mantis).leftArm.obj.position = torso.RelativePos(leftArmAnchor.centers[0]);
+                    (GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis).leftArm.obj.position = torso.RelativePos(leftArmAnchor.centers[0]);
                 }
             }
         }
         public static void OnJumpPerformed(bool jumpInput)
         {
-            RuntimeObjects.Player player = GameManager.ins.allRuntimeObjects["Player"] as RuntimeObjects.Player;
-            RuntimeObjects.Mantis mantis = GameManager.ins.allRuntimeObjects["Mantis"] as RuntimeObjects.Mantis;
+            RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
+            RuntimeObjects.Mantis mantis = GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis;
             if(mantis.animator.CurrentState("Mantis_Idle"))
             {
                 if(jumpInput)

@@ -29,7 +29,8 @@ public class InputManager : MonoBehaviour
             if(JumpDown_Input)
                 JumpDownBuffer.Input(0.2f);
             StateHandlers.Player.Handler.OnJumpPerformed(JumpDown_Input);
-            StateHandlers.Mantis.Handler.OnJumpPerformed(JumpDown_Input);
+            if(GameManager.ins.FindByID("Mantis") != null)
+                StateHandlers.Mantis.Handler.OnJumpPerformed(JumpDown_Input);
             Record.OnJumpPerformed(JumpDown_Input);
         };
         inputActions.PlayerDefault.RightBumper.performed += (inputActions) =>
