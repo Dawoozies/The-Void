@@ -497,8 +497,10 @@ namespace RuntimeObjects
     }
     public static class RuntimePlayerWeapon
     {
+        static Weapon rightHeld;
         static List<Weapon> weapons = new();
         public static Action<Weapon> onGetWeapon;
+        public static Action<Weapon> onThrowWeapon;
         public static void GetWeapon(Weapon weapon)
         {
             weapons.Add(weapon);

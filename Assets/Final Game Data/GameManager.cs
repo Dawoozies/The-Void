@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
             {
                 //Creates a generalised weapon
                 //This will not be in allRuntimeObjects
-                Weapon member = new Weapon("Weapon");
+                Weapon member = new Weapon("Weapon", WeaponHeadSpriteType.Spear, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default);
                 allRuntimeWeapons.Add(member);
                 //member.rigidbody.rb.transform.SetParent(runtimeWeaponParent);
                 return member;
@@ -235,13 +235,21 @@ public class GameManager : MonoBehaviour
         RuntimeDirectedCircleOverlaps.CreateAndAttach(mantis);
         RuntimeDirectedPoints.CreateAndAttach(mantis);
     }
+    public Weapon SpawnWeapon(WeaponHeadSpriteType headSpriteType, WeaponShaftSpriteType shaftSpriteType, WeaponPommelSpriteType pommelSpriteType)
+    {
+        Weapon newWeapon = runtimeWeaponPool.Get();
+        newWeapon.head.SetSpriteType(headSpriteType);
+        newWeapon.shaft.SetSpriteType(shaftSpriteType);
+        newWeapon.pommel.SetSpriteType(pommelSpriteType);
+        return newWeapon;
+    }
     private void Start()
     {
         allRuntimeObjects = new();
         allRuntimeWeapons = new();
         RuntimeObjectCreate_Player();
         //RuntimeObjectCreate_HangedFrame();
-        //RuntimeObjectCreate_Mantis();
+        RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))
         foreach (RuntimeObject item in allRuntimeObjects)
         {

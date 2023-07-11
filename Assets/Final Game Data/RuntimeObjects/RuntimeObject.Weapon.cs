@@ -4,13 +4,26 @@ using UnityEngine;
 using StateHandlers.Weapon;
 namespace RuntimeObjects
 {
+    public enum WeaponHeadSpriteType
+    {
+        Spear = 0,
+        Halberd = 1,
+    }
+    public enum WeaponShaftSpriteType
+    {
+        Long = 0,
+    }
+    public enum WeaponPommelSpriteType
+    {
+        Default = 0,
+    }
     public class Weapon : RuntimeObject
     {
         public WeaponHead head;
         public WeaponShaft shaft;
         public WeaponPommel pommel;
         public RuntimeObject owner;
-        public Weapon(string id) : base(id)
+        public Weapon(string id, WeaponHeadSpriteType headSpriteType, WeaponShaftSpriteType shaftSpriteType, WeaponPommelSpriteType pommelSpriteType) : base(id)
         {
             RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["Weapon"]);
             RuntimeRigidbody.CreateAndAttach(this);
@@ -55,6 +68,11 @@ namespace RuntimeObjects
             this.owner = owner;
             owner.managedUpdate += AnchorUpdate;
         }
+        public void RemoveOwner()
+        {
+            owner.managedUpdate -= AnchorUpdate;
+            owner = null;
+        }
         void AnchorUpdate(RuntimeObject obj, float tickDelta)
         {
             if (owner == null)
@@ -69,11 +87,20 @@ namespace RuntimeObjects
                 rigidbody.rbObj.up = owner.RelativeDir(anchor.upDirections[0]);
                 //obj.rigidbody.rbObj.position = owner.RelativePos(anchor.centers[0]);
                 //obj.rigidbody.rbObj.up = owner.RelativeDir(anchor.upDirections[0]);
+                if(owner.animator.spriteRenderer.flipX)
+                {
+                    head.animator.spriteRenderer.flipX = true;
+                }
+                else
+                {
+                    head.animator.spriteRenderer.flipX = false;
+                }
             }
         }
     }
     public class WeaponHead : RuntimeObject
     {
+        public WeaponHeadSpriteType spriteType = WeaponHeadSpriteType.Spear;
         public WeaponHead() : base("WeaponHead")
         {
             managedStart += ManagedStart;
@@ -84,9 +111,14 @@ namespace RuntimeObjects
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
         }
+        public void SetSpriteType(WeaponHeadSpriteType type)
+        {
+            spriteType = type;
+        }
     }
     public class WeaponShaft : RuntimeObject
     {
+        public WeaponShaftSpriteType spriteType = WeaponShaftSpriteType.Long;
         public WeaponShaft() : base("WeaponShaft")
         {
             managedStart += ManagedStart;
@@ -97,9 +129,14 @@ namespace RuntimeObjects
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
         }
+        public void SetSpriteType(WeaponShaftSpriteType type)
+        {
+            spriteType = type;
+        }
     }
     public class WeaponPommel : RuntimeObject
     {
+        public WeaponPommelSpriteType spriteType = WeaponPommelSpriteType.Default;
         public WeaponPommel() : base("WeaponPommel")
         {
             managedStart += ManagedStart;
@@ -109,6 +146,10 @@ namespace RuntimeObjects
             managedUpdate += RuntimeAnimator.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
+        }
+        public void SetSpriteType(WeaponPommelSpriteType type)
+        {
+            spriteType = type;
         }
     }
 }

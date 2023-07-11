@@ -369,7 +369,9 @@ namespace StateHandlers.Player
                 if(player.animator.CurrentState("Player_Initialized"))
                 {
                     //Debug.LogError("Player Animator Initialized");
-                    RuntimePlayerWeapon.GetWeapon(GameManager.ins.runtimeWeaponPool.Get());
+                    //RuntimePlayerWeapon.GetWeapon(GameManager.ins.runtimeWeaponPool.Get());
+                    GameManager.ins.SpawnWeapon(WeaponHeadSpriteType.Spear, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default);
+                    RuntimePlayerWeapon.GetWeapon(GameManager.ins.SpawnWeapon(WeaponHeadSpriteType.Halberd, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default));
                 }
                 if (player.animator.CurrentState("Player_Idle"))
                 {
@@ -632,7 +634,6 @@ namespace StateHandlers.Player
 
             PlayerTorso torso = GameManager.ins.FindByID("PlayerTorso") as PlayerTorso;
             weapon.SetOwner(torso);
-            //Debug.LogError("OnGetWeapon");
         }
     }
 }
