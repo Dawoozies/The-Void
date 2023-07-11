@@ -69,7 +69,8 @@ namespace RuntimeObjects
             torso.obj.SetParent(obj);
 
             RuntimePlayerWeapon.onGetWeapon += Handler.OnGetWeapon;
-            RuntimePlayerWeapon.onThrowWeapon += Handler.OnThrowWeapon;
+            RuntimePlayerWeapon.onWeaponThrow += Handler.OnWeaponThrow;
+            RuntimePlayerWeapon.onWeaponMelee += Handler.OnWeaponMelee;
         }
     }
     public class PlayerLegs : RuntimeObject

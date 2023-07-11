@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: e723383733b73ce48b89dd6c83e8826e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 500
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 2397
+        width: 802
+        height: 580
+      alignment: 9
+      pivot: {x: 0.5597364, y: 0.09652689}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86d80339f65ae304c86fea36467dd054
+      internalID: 1269285743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose2
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 2326
+        width: 792
+        height: 651
+      alignment: 9
+      pivot: {x: 0.36738616, y: 0.1886487}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d682b2c1c369a87498dbd307bd26aca6
+      internalID: -2026197117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Pose1
+      rect:
+        serializedVersion: 2
+        x: 1915
+        y: 2397
+        width: 882
+        height: 548
+      alignment: 9
+      pivot: {x: 0.15111114, y: 0.076328695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7902ed63a57fdb42958131afb6ec213
+      internalID: -84322616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1633
+        width: 674
+        height: 604
+      alignment: 9
+      pivot: {x: 0.7433153, y: 0.100355744}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c83421f669e60a645a0e693757aae108
+      internalID: 1441952910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose4
+      rect:
+        serializedVersion: 2
+        x: 1019
+        y: 1633
+        width: 620
+        height: 549
+      alignment: 9
+      pivot: {x: 0.497028, y: 0.13751455}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 964d05569b107964bbf503c66c350955
+      internalID: -1428316579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Pose2
+      rect:
+        serializedVersion: 2
+        x: 1915
+        y: 1650
+        width: 858
+        height: 570
+      alignment: 9
+      pivot: {x: 0.16068038, y: 0.09268092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fa5d61f95f7be44492d896c2e61b27b
+      internalID: 658364875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose1_Blur
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 867
+        width: 887
+        height: 580
+      alignment: 9
+      pivot: {x: 0.5575578, y: 0.10621064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ef93895d366e84a93961751c9b86d5
+      internalID: 1630292150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose2_Blur
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 797
+        width: 876
+        height: 650
+      alignment: 9
+      pivot: {x: 0.3957089, y: 0.21476112}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e02f0f4252cea04ba878f983ba5e996
+      internalID: -627080235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Pose1_Blur
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 867
+        width: 966
+        height: 548
+      alignment: 9
+      pivot: {x: 0.18289647, y: 0.117538676}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53b830c39a1e61478c238b301e077ff
+      internalID: 1731858066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose3_Blur
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 103
+        width: 758
+        height: 603
+      alignment: 9
+      pivot: {x: 0.7197842, y: 0.13459858}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93664176da4551f439517c211b630d1b
+      internalID: -393534386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Ready_Pose4_Blur
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 103
+        width: 737
+        height: 549
+      alignment: 9
+      pivot: {x: 0.53645927, y: 0.15249623}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44ee8e334c03fa44284de1c318113095
+      internalID: -1588929973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerTorso_TwoHanded_Stab_Pose2_Blur
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 120
+        width: 942
+        height: 570
+      alignment: 9
+      pivot: {x: 0.20334218, y: 0.12758616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e35df778891e17428da49e74d524bd5
+      internalID: 1275132412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PlayerTorso_TwoHanded_Stab_Ready_Pose4: -1428316579
+      PlayerTorso_TwoHandedStabPoses_5: -775997075
+      PlayerTorso_TwoHanded_Stab_Ready_Pose2_Blur: -627080235
+      PlayerTorso_TwoHanded_Stab_Pose1_Blur: 1731858066
+      PlayerTorso_TwoHanded_Stab_Pose2_Blur: 1275132412
+      PlayerTorso_TwoHanded_Stab_Ready_Pose1_Blur: 1630292150
+      PlayerTorso_TwoHanded_Stab_Pose1: -84322616
+      PlayerTorso_TwoHanded_Stab_Ready_Pose3_Blur: -393534386
+      PlayerTorso_TwoHandedStabPoses_8: 319895409
+      PlayerTorso_TwoHanded_Stab_Ready_Pose4_Blur: -1588929973
+      PlayerTorso_TwoHandedStabPoses_4: 30374818
+      PlayerTorso_TwoHanded_Stab_Ready_Pose1: 1269285743
+      PlayerTorso_TwoHanded_Stab_Ready_Pose2: -2026197117
+      PlayerTorso_TwoHanded_Stab_Ready_Pose3: 1441952910
+      PlayerTorso_TwoHanded_Stab_Pose2: 658364875
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -23,6 +23,9 @@ namespace RuntimeObjects
         public WeaponShaft shaft;
         public WeaponPommel pommel;
         public RuntimeObject owner;
+        public bool useBlur;
+        const float BLUR_BUFFER_TIME = 0.14f;
+        float blurBufferTime;
         public Weapon(string id, WeaponHeadSpriteType headSpriteType, WeaponShaftSpriteType shaftSpriteType, WeaponPommelSpriteType pommelSpriteType) : base(id)
         {
             RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["Weapon"]);
@@ -53,6 +56,8 @@ namespace RuntimeObjects
             pommel.obj.localPosition = new Vector3(0, -1.35f, 0);
 
             managedUpdate += RuntimeAnimator.Update;
+            managedUpdate += Handler.Update;
+            managedUpdate += BlurBuffer;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
 
@@ -67,11 +72,23 @@ namespace RuntimeObjects
         {
             this.owner = owner;
             owner.managedUpdate += AnchorUpdate;
+
+            PlayerTorso playerTorso = owner as PlayerTorso;
+            if(playerTorso != null)
+            {
+                StateHandlers.Player.Handler.onAttackBlur += OnTorsoBlur;
+            }
         }
         public void RemoveOwner()
         {
             owner.managedUpdate -= AnchorUpdate;
             owner = null;
+
+            PlayerTorso playerTorso = owner as PlayerTorso;
+            if (playerTorso != null)
+            {
+                StateHandlers.Player.Handler.onAttackBlur -= OnTorsoBlur;
+            }
         }
         void AnchorUpdate(RuntimeObject obj, float tickDelta)
         {
@@ -102,6 +119,25 @@ namespace RuntimeObjects
             RemoveOwner();
             rigidbody.rb.velocity = velocity;
             rigidbody.rbObj.up = velocity;
+            if (velocity.x < 0)
+                head.animator.spriteRenderer.flipX = true;
+            else
+                head.animator.spriteRenderer.flipX = false;
+        }
+        void OnTorsoBlur()
+        {
+            useBlur = true;
+            blurBufferTime = BLUR_BUFFER_TIME;
+        }
+        void BlurBuffer(RuntimeObject obj, float tickDelta)
+        {
+            if (useBlur)
+                blurBufferTime -= tickDelta;
+            if(blurBufferTime < 0f)
+            {
+                useBlur = false;
+                blurBufferTime = 0f;
+            }
         }
     }
     public class WeaponHead : RuntimeObject

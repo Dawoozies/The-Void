@@ -4,6 +4,8 @@ using UnityEngine;
 using RuntimeObjects;
 using ExtensionMethods_Bool;
 using RuntimeContainers;
+using System;
+
 namespace StateHandlers.Player
 {
     public static class Handler
@@ -11,6 +13,7 @@ namespace StateHandlers.Player
         const float HIT_STUN_MAX = 0.125f;
         const float CATCH_TIME = 0.15f;
         //By the time we get here all runtime data has been set and updated
+        public static Action onAttackBlur;
         public static void Update(RuntimeObject obj, float tickDelta)
         {
             RuntimeObjects.Player player = obj as RuntimeObjects.Player;
@@ -147,6 +150,22 @@ namespace StateHandlers.Player
                     {
                         player.animator.animator.Play("Player_Idle");
                     }
+                }
+                if(player.animator.CurrentState("Player_TwoHandedStabReady"))
+                {
+                    int pose = 1;
+                    if (player.animator.trueTimeSpentInState > 0.06f)
+                        pose = 2;
+                    player.torso.animator.animator.Play($"PlayerTorso_TwoHanded_Stab_Ready_Pose{pose}");
+                    if (player.animator.trueTimeSpentInState > 0.14f)
+                        player.animator.animator.Play("Player_TwoHandedStab");
+                }
+                if(player.animator.CurrentState("Player_TwoHandedStab"))
+                {
+                    if (player.animator.trueTimeSpentInState > 0.11f)
+                        player.torso.animator.animator.Play("PlayerTorso_TwoHanded_Stab_Ready_Pose3");
+                    if (player.animator.trueTimeSpentInState > 0.24f)
+                        player.animator.animator.Play("Player_Idle");
                 }
                 bool spriteFlipping =
                     player.animator.CurrentState("Player_Run")
@@ -370,6 +389,15 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_Land");
                     }
                 }
+                if(player.animator.CurrentState("Player_TwoHandedStabReady") || player.animator.CurrentState("Player_TwoHandedStab"))
+                {
+                    if(!player.grounded)
+                    {
+                        player.rigidbody.rb.velocity += -player.up * 110f * tickDelta;
+                        if (player.upSpeed < player.fallSpeedMax)
+                            player.rigidbody.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
+                    }
+                }
             }
         }
         public static void OnStateEnter(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -539,6 +567,16 @@ namespace StateHandlers.Player
                 {
                     player.torso.animator.animator.Play("PlayerTorso_Throw_Pose3");
                 }
+                if(player.animator.CurrentState("Player_TwoHandedStabReady"))
+                {
+                    player.obj.up = Vector2.up;
+                    player.torso.animator.animator.Play("PlayerTorso_TwoHanded_Stab_Ready_Pose1");
+                }
+                if(player.animator.CurrentState("Player_TwoHandedStab"))
+                {
+                    player.torso.animator.animator.Play("PlayerTorso_TwoHanded_Stab_Pose1_Blur");
+                    onAttackBlur?.Invoke();
+                }
             }
         }
         public static void OnFrameUpdate(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -650,12 +688,16 @@ namespace StateHandlers.Player
             PlayerTorso torso = GameManager.ins.FindByID("PlayerTorso") as PlayerTorso;
             weapon.SetOwner(torso);
         }
-        public static void OnThrowWeapon(RuntimeObjects.Weapon weapon)
+        public static void OnWeaponThrow(RuntimeObjects.Weapon weapon)
         {
             RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
             player.animator.animator.Play("Player_ThrowWeapon");
-
             weapon.Throw(InputManager.ins.R_Input*45f);
+        }
+        public static void OnWeaponMelee(RuntimeObjects.Weapon weapon)
+        {
+            RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
+            player.animator.animator.Play("Player_TwoHandedStabReady");
         }
     }
 }

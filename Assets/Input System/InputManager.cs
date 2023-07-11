@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
         {
             JumpDown_Input = inputActions.ReadValueAsButton();
             if(JumpDown_Input)
-                JumpDownBuffer.Input(0.2f);
+                JumpDownBuffer.Input(0.25f);
             StateHandlers.Player.Handler.OnJumpPerformed(JumpDown_Input);
             if(GameManager.ins.FindByID("Mantis") != null)
                 StateHandlers.Mantis.Handler.OnJumpPerformed(JumpDown_Input);
@@ -37,8 +37,10 @@ public class InputManager : MonoBehaviour
         {
             RightBumper_Input = inputActions.ReadValueAsButton();
             if (RightBumper_Input)
+            {
                 RightBumperBuffer.Input(0.25f);
-            RuntimePlayerWeapon.ThrowWeapon();
+                RuntimePlayerWeapon.UseWeapon();
+            }
         };
         inputActions.PlayerDefault.LeftBumper.performed += (inputActions) =>
         {

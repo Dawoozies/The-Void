@@ -500,20 +500,28 @@ namespace RuntimeObjects
         static Weapon rightHeld;
         static List<Weapon> weapons = new();
         public static Action<Weapon> onGetWeapon;
-        public static Action<Weapon> onThrowWeapon;
+        public static Action<Weapon> onWeaponThrow;
+        public static Action<Weapon> onWeaponMelee;
         public static void GetWeapon(Weapon weapon)
         {
             weapons.Add(weapon);
             rightHeld = weapon;
             onGetWeapon?.Invoke(weapon);
         }
-        public static void ThrowWeapon()
+        public static void UseWeapon()
         {
             if (rightHeld == null)
                 return;
-            weapons.Remove(rightHeld);
-            onThrowWeapon?.Invoke(rightHeld);
-            rightHeld = null;
+            if (InputManager.ins.R_Input == Vector2.zero)
+            {
+                onWeaponMelee?.Invoke(rightHeld);
+            }
+            else
+            {
+                weapons.Remove(rightHeld);
+                onWeaponThrow?.Invoke(rightHeld);
+                rightHeld = null;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace StateHandlers.Weapon
             RuntimeObjects.Weapon weapon = obj as RuntimeObjects.Weapon;
             if(weapon != null) 
             {
-                if(weapon.upMagnitude >= BLUR_SPEED)
+                if(weapon.useBlur || weapon.upMagnitude >= BLUR_SPEED)
                 {
                     weapon.head.animator.animator.Play($"Weapon_Head_{weapon.head.spriteType}_Blur");
                     weapon.shaft.animator.animator.Play($"Weapon_Shaft_{weapon.shaft.spriteType}_Blur");
