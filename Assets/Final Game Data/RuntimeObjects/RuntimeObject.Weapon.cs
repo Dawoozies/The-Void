@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StateHandlers.Weapon;
+using OverlapHandlers.Weapon;
+
 namespace RuntimeObjects
 {
     public enum WeaponHeadSpriteType
@@ -182,6 +184,10 @@ namespace RuntimeObjects
             managedUpdate += RuntimeAnimator.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
+
+            managedUpdate += RuntimeDirectedCircleOverlaps.Update;
+            directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
+            directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
         }
         public void SetSpriteType(WeaponHeadSpriteType type)
         {

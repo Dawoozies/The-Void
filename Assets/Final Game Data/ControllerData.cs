@@ -170,6 +170,7 @@ public class DirectedCircleOverlap
     public ContactFilter2D GetContactFilter()
     {
         contactFilter2D.SetLayerMask(targetLayers);
+        contactFilter2D.useTriggers = true;
         return contactFilter2D;
     }
     public float GetRadiusAtIndex(int centerIndex)

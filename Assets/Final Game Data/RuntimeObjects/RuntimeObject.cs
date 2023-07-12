@@ -251,6 +251,7 @@ namespace RuntimeObjects
                         GameManager.ins.directedCircleColliderContainerLedger[poolMember] = obj.id;
                         existingContainers.Add(poolMember);
                     }
+                    //if(obj.animator.CurrentState("MantisTorso_WindUp"))
                     existingContainers[collidersRequired].collider.transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
                     existingContainers[collidersRequired].collider.radius = directedCircleColliders[_dataIndex].GetRadiusAtIndex(_centerIndex);
                     existingContainers[collidersRequired].collider.isTrigger = directedCircleColliders[_dataIndex].isTrigger;
