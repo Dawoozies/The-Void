@@ -5,15 +5,105 @@ using RuntimeObjects;
 using ExtensionMethods_Bool;
 using RuntimeContainers;
 using System;
+using System.Linq;
 
 namespace StateHandlers.Player
 {
+    public enum PlayerAction
+    {
+        Jump = 0,
+        JumpInAir = 1,
+        WeaponThrow = 2,
+        WeaponMelee = 3,
+        LeftStickMovement = 4,
+        Fall = 5,
+    }
+
     public static class Handler
     {
+        const float FALL_SPEED_MAX = -30f;
+        const float RUN_SPEED = 15f;
+        const float JUMP_VELOCITY_ADD_TIME = 0.175f;
         const float HIT_STUN_MAX = 0.125f;
         const float CATCH_TIME = 0.15f;
+        static readonly string[] CAN_JUMP = {
+            "Player_Idle",
+            "Player_Run",
+            "Player_AirRollLand",
+            "Player_Slide",
+        };
+        static readonly string[] CAN_JUMP_IN_AIR = {
+            "Player_JumpAscentSlow",
+            "Player_Fall",
+            "Player_DoubleJumpAscent",
+            "Player_DoubleJumpAscentSlow",
+            "Player_AirRollDescent",
+        };
+        static readonly string[] CAN_THROW = { 
+            "Player_Idle", 
+            "Player_Run",
+            "Player_JumpAscent",
+            "Player_JumpAscentSlow",
+            "Player_Fall",
+            "Player_Land",
+            "Player_AirRollDescent",
+            "Player_AirRollLand",
+            "Player_DoubleJumpStart",
+            "Player_DoubleJumpAscent",
+            "Player_DoubleJumpAscentSlow",
+            "Player_Slide",
+        };
+        static readonly string[] CAN_MELEE = {
+            "Player_Idle",
+            "Player_Run",
+            "Player_JumpAscent",
+            "Player_JumpAscentSlow",
+            "Player_Fall",
+            "Player_Land",
+            "Player_AirRollDescent",
+            "Player_AirRollLand",
+            "Player_DoubleJumpStart",
+            "Player_DoubleJumpAscent",
+            "Player_DoubleJumpAscentSlow",
+            "Player_Slide",
+        };
+        static readonly string[] CAN_LEFT_STICK_MOVEMENT = {
+            "Player_Idle",
+            "Player_Run",
+            "Player_JumpAscent",
+            "Player_JumpAscentSlow",
+            "Player_Fall",
+            "Player_AirRollLand",
+            "Player_TwoHandedStabReady",
+            "Player_TwoHandedStab",
+        };
+        static readonly string[] CAN_FALL = {
+            "Player_Idle",
+            "Player_Fall",
+            "Player_TwoHandedStab",
+        };
+        static bool CanDoAction(RuntimeAnimator runtimeAnimator, PlayerAction action)
+        {
+            switch (action)
+            {
+                case PlayerAction.Jump:
+                    return RuntimeAnimator.CheckStates(runtimeAnimator, CAN_JUMP);
+                case PlayerAction.JumpInAir:
+                    return RuntimeAnimator.CheckStates(runtimeAnimator, CAN_JUMP_IN_AIR);
+                case PlayerAction.WeaponThrow:
+                    return RuntimeAnimator.CheckStates(runtimeAnimator, CAN_THROW);
+                case PlayerAction.WeaponMelee:
+                    return RuntimeAnimator.CheckStates(runtimeAnimator, CAN_MELEE);
+                case PlayerAction.LeftStickMovement:
+                    return RuntimeAnimator.CheckStates(runtimeAnimator, CAN_LEFT_STICK_MOVEMENT);
+                case PlayerAction.Fall:
+                    return RuntimeAnimator.CheckStates(runtimeAnimator, CAN_FALL);
+            }
+            return false;
+        }
         //By the time we get here all runtime data has been set and updated
         public static Action onAttackBlur;
+        public static Action<int> onJumpsLeftChanged;
         public static void Update(RuntimeObject obj, float tickDelta)
         {
             RuntimeObjects.Player player = obj as RuntimeObjects.Player;
@@ -22,9 +112,6 @@ namespace StateHandlers.Player
                 
                 if(player.animator.CurrentState("Player_Idle"))
                 {
-                    //transitions at top happen least important
-                    if (player.jumpsLeft > 0 && InputManager.ins.JumpDown_BufferedInput)
-                        player.animator.animator.Play("Player_JumpAscent");
                     if (InputManager.ins.L_Input.x != 0f)
                         player.animator.animator.Play("Player_Run");
                     if (!player.grounded)
@@ -33,8 +120,6 @@ namespace StateHandlers.Player
                 }
                 if(player.animator.CurrentState("Player_Run"))
                 {
-                    if (player.jumpsLeft > 0 && InputManager.ins.JumpDown_BufferedInput)
-                        player.animator.animator.Play("Player_JumpAscent");
                     if (InputManager.ins.L_Input.x == 0f)
                         player.animator.animator.Play("Player_Idle");
                 }
@@ -189,33 +274,45 @@ namespace StateHandlers.Player
             RuntimeObjects.Player player = obj as RuntimeObjects.Player;
             if(player != null)
             {
-                bool noLMove =
-                    player.animator.CurrentState("Player_DoubleJumpStart")
-                    || player.animator.CurrentState("Player_DoubleJumpAscent")
-                    || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
-                    || player.animator.CurrentState("Player_AirRollStart")
-                    || player.animator.CurrentState("Player_AirRollDescent")
-                    || player.animator.CurrentState("Player_AirRollLandInputBuffer")
-                    || player.animator.CurrentState("Player_Slide")
-                    || player.animator.CurrentState("Player_Land");
-                if(!noLMove)
-                    player.rigidbody.rb.velocity = player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
-                if (player.animator.CurrentState("Player_Fall"))
+                //bool noLMove =
+                //    player.animator.CurrentState("Player_DoubleJumpStart")
+                //    || player.animator.CurrentState("Player_DoubleJumpAscent")
+                //    || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
+                //    || player.animator.CurrentState("Player_AirRollStart")
+                //    || player.animator.CurrentState("Player_AirRollDescent")
+                //    || player.animator.CurrentState("Player_Slide")
+                //    || player.animator.CurrentState("Player_Land");
+                //if(!noLMove)
+                //    player.rigidbody.rb.velocity = player.runSpeed * InputManager.ins.L_Input.x * player.right + player.upVelocity;
+                //bool canLeftStickMovement = CanDoAction(StateAction.LeftStickMovement);
+                bool LeftStickMovement = CanDoAction(player.animator, PlayerAction.LeftStickMovement);
+                bool Fall = CanDoAction(player.animator, PlayerAction.Fall);
+                if(LeftStickMovement)
+                {
+                    player.rigidbody.rb.velocity = RUN_SPEED * InputManager.ins.L_Input.x * player.right + player.upVelocity;
+                }
+                if(Fall)
                 {
                     player.rigidbody.rb.velocity += -player.up * 110f * tickDelta;
-                    if (player.upSpeed < player.fallSpeedMax)
-                        player.rigidbody.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
+                    if (player.upSpeed < FALL_SPEED_MAX)
+                        player.rigidbody.rb.velocity = player.rightVelocity + FALL_SPEED_MAX * player.up;
                 }
+                //if (player.animator.CurrentState("Player_Fall"))
+                //{
+                //    player.rigidbody.rb.velocity += -player.up * 110f * tickDelta;
+                //    if (player.upSpeed < player.fallSpeedMax)
+                //        player.rigidbody.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
+                //}
                 if(player.animator.CurrentState("Player_JumpAscent"))
                 {
-                    if(player.animator.trueTimeSpentInState < player.jumpVelocityAddTime)
+                    if(player.animator.trueTimeSpentInState < JUMP_VELOCITY_ADD_TIME)
                     {
                         //jump velocity add to max
                         player.rigidbody.rb.velocity += player.up * 5f;
                         if(player.upSpeed > player.ascentSpeedMax)
                             player.rigidbody.rb.velocity = player.rightVelocity + player.ascentSpeedMax * player.up;
                     }
-                    if(player.animator.trueTimeSpentInState > player.jumpVelocityAddTime)
+                    if(player.animator.trueTimeSpentInState > JUMP_VELOCITY_ADD_TIME)
                         player.animator.animator.Play("Player_JumpAscentSlow");
                 }
                 if(player.animator.CurrentState("Player_JumpAscentSlow"))
@@ -235,7 +332,7 @@ namespace StateHandlers.Player
                         player.rigidbody.rb.velocity = player.rightVelocity;
                     if(player.upSpeed == 0f)
                     {
-                        player.rigidbody.rb.velocity = (player.runSpeed + player.jumpApexRightSpeed) * InputManager.ins.L_Input.x * player.right + player.upVelocity;
+                        player.rigidbody.rb.velocity = (RUN_SPEED + player.jumpApexRightSpeed) * InputManager.ins.L_Input.x * player.right + player.upVelocity;
                     }
                     if (player.animator.trueTimeSpentInState > player.jumpApexTime)
                     {
@@ -278,7 +375,7 @@ namespace StateHandlers.Player
                     switch (player.jumpType)
                     {
 
-                        case "Double Jump":
+                        case AirJumpType.DoubleJump:
                             player.rigidbody.rb.velocity += -player.up * 100f * tickDelta;
                             if(player.upSpeed < 12f)
                             {
@@ -288,7 +385,7 @@ namespace StateHandlers.Player
                             if (player.upSpeed < -4f)
                                 player.animator.animator.Play("Player_Fall");
                             break;
-                        case "Front Flip":
+                        case AirJumpType.FrontFlip:
                             player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
                             if(pose == 6 || pose == 7)
                             {
@@ -303,7 +400,7 @@ namespace StateHandlers.Player
                             if (player.upSpeed < -24)
                                 player.animator.animator.Play("Player_Fall");
                             break;
-                        case "Back Flip":
+                        case AirJumpType.BackFlip:
                             player.rigidbody.rb.velocity += -player.up * 75f * tickDelta;
                             if(pose == 7)
                             {
@@ -318,7 +415,7 @@ namespace StateHandlers.Player
                             if (player.upSpeed < -24)
                                 player.animator.animator.Play("Player_Fall");
                             break;
-                        case "Front Spin":
+                        case AirJumpType.FrontSpin:
                             player.rigidbody.rb.velocity += -player.up * 55f * tickDelta;
                             if(pose == 1 || pose == 2 || pose == 3)
                             {
@@ -338,7 +435,7 @@ namespace StateHandlers.Player
                             if (player.upSpeed < -24)
                                 player.animator.animator.Play("Player_Fall");
                             break;
-                        case "Back Spin":
+                        case AirJumpType.BackSpin:
                             player.rigidbody.rb.velocity += -player.up * 55f * tickDelta;
                             if (pose == 1 || pose == 2 || pose == 3)
                             {
@@ -369,7 +466,7 @@ namespace StateHandlers.Player
                     if (player.rigidbody.rb.velocity.y > player.airRollBraceDescentSpeed)
                     {
                         player.legs.animator.animator.Play("PlayerLegs_RollPose2");
-                        player.torso.animator.animator.Play("PlayerTorso_Default_RollPose2");
+                        player.torso.animator.animator.Play("PlayerTorso_Default_RollPose2"); 
                     }
                     else
                     {
@@ -389,15 +486,15 @@ namespace StateHandlers.Player
                         player.animator.animator.Play("Player_Land");
                     }
                 }
-                if(player.animator.CurrentState("Player_TwoHandedStabReady") || player.animator.CurrentState("Player_TwoHandedStab"))
-                {
-                    if(!player.grounded)
-                    {
-                        player.rigidbody.rb.velocity += -player.up * 110f * tickDelta;
-                        if (player.upSpeed < player.fallSpeedMax)
-                            player.rigidbody.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
-                    }
-                }
+                //if(player.animator.CurrentState("Player_TwoHandedStabReady") || player.animator.CurrentState("Player_TwoHandedStab"))
+                //{
+                //    if(!player.grounded)
+                //    {
+                //        player.rigidbody.rb.velocity += -player.up * 110f * tickDelta;
+                //        if (player.upSpeed < player.fallSpeedMax)
+                //            player.rigidbody.rb.velocity = player.rightVelocity + player.fallSpeedMax * player.up;
+                //    }
+                //}
             }
         }
         public static void OnStateEnter(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -408,9 +505,8 @@ namespace StateHandlers.Player
                 if(player.animator.CurrentState("Player_Initialized"))
                 {
                     //Debug.LogError("Player Animator Initialized");
-                    //RuntimePlayerWeapon.GetWeapon(GameManager.ins.runtimeWeaponPool.Get());
-                    GameManager.ins.SpawnWeapon(WeaponHeadSpriteType.Spear, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default);
-                    RuntimePlayerWeapon.GetWeapon(GameManager.ins.SpawnWeapon(WeaponHeadSpriteType.Halberd, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default));
+                    RuntimePlayerWeapon.GetWeapon(GameManager.ins.SpawnWeapon(WeaponHeadSpriteType.Spear, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default));
+                    RuntimePlayerWeapon.GetWeapon(GameManager.ins.SpawnWeapon(WeaponHeadSpriteType.Spear, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default));
                 }
                 if (player.animator.CurrentState("Player_Idle"))
                 {
@@ -430,9 +526,7 @@ namespace StateHandlers.Player
                 }
                 if(player.animator.CurrentState("Player_Land"))
                 {
-                    //Debug.LogError($"Landing Started! Realtime = {Time.realtimeSinceStartup}");
-                    player.jumpsLeft = player.maxJumps;
-                    if(player.upMagnitude <= 10.5f)
+                    if (player.upMagnitude <= 10.5f)
                     {
                         //Soft landing
                         player.legs.animator.animator.Play("PlayerLegs_LandPose2");
@@ -461,6 +555,7 @@ namespace StateHandlers.Player
                     player.legs.animator.animator.Play("PlayerLegs_JumpAscent");
                     player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscent");
                     player.jumpsLeft--;
+                    onJumpsLeftChanged?.Invoke(player.jumpsLeft);
                 }
                 if(player.animator.CurrentState("Player_JumpAscentSlow"))
                 {
@@ -478,6 +573,7 @@ namespace StateHandlers.Player
                     player.torso.animator.animator.Play("PlayerTorso_Default_DoubleJumpStartPose");
                     player.obj.up = new Vector3(InputManager.ins.L_Input.x, InputManager.ins.L_Input.y, 0f);
                     player.jumpsLeft--;
+                    onJumpsLeftChanged?.Invoke(player.jumpsLeft);
                 }
                 if(player.animator.CurrentState("Player_DoubleJumpAscent"))
                 {
@@ -492,23 +588,23 @@ namespace StateHandlers.Player
                     player.obj.up = Vector2.up;
                     switch (player.jumpType)
                     {
-                        case "Double Jump":
+                        case AirJumpType.DoubleJump:
                             player.legs.animator.animator.Play("PlayerLegs_JumpAscentSlowPose1");
                             player.torso.animator.animator.Play("PlayerTorso_Default_JumpAscentSlowPose1");
                             break;
-                        case "Front Flip":
+                        case AirJumpType.FrontFlip:
                             player.legs.animator.animator.Play("PlayerLegs_FrontflipPose1");
                             player.torso.animator.animator.Play("PlayerTorso_Default_FrontflipPose1");
                             break;
-                        case "Back Flip":
+                        case AirJumpType.BackFlip:
                             player.legs.animator.animator.Play("PlayerLegs_BackflipPose1");
                             player.torso.animator.animator.Play("PlayerTorso_Default_BackflipPose1");
                             break;
-                        case "Front Spin":
+                        case AirJumpType.FrontSpin:
                             player.legs.animator.animator.Play("PlayerLegs_FrontspinPose1");
                             player.torso.animator.animator.Play("PlayerTorso_Default_FrontspinPose1");
                             break;
-                        case "Back Spin":
+                        case AirJumpType.BackSpin:
                             player.legs.animator.animator.Play("PlayerLegs_BackspinPose1");
                             player.torso.animator.animator.Play("PlayerTorso_Default_BackspinPose1");
                             break;
@@ -612,62 +708,26 @@ namespace StateHandlers.Player
             RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
             if (player != null)
             {
-
-                bool canJump =
-                    player.animator.CurrentState("Player_Idle")
-                    || player.animator.CurrentState("Player_Run");
-                if (canJump)
+                bool Jump = CanDoAction(player.animator, PlayerAction.Jump);
+                bool JumpInAir = CanDoAction(player.animator, PlayerAction.JumpInAir);
+                if (!jumpInput)
+                    return;
+                if (Jump)
                 {
-                    if (player.jumpsLeft > 0 && jumpInput)
-                    {
-                        player.animator.animator.Play("Player_JumpAscent");
-                    }
+                    player.animator.animator.Play("Player_JumpAscent");
                 }
-                bool canJumpInAir =
-                player.animator.CurrentState("Player_JumpAscentSlow")
-                || player.animator.CurrentState("Player_Fall")
-                || player.animator.CurrentState("Player_DoubleJumpAscent")
-                || player.animator.CurrentState("Player_DoubleJumpAscentSlow")
-                || player.animator.CurrentState("Player_AirRollDescent");
-                if (canJumpInAir && jumpInput)
+                if(JumpInAir)
                 {
-                    //if input y down at all then air roll
-                    //if no input y then:
-                    // case1 no input x then double jump
-                    // case2 input x non zero then air roll
-                    //if input y up then double jump no matter what
-                    if(!player.animator.CurrentState("Player_AirRollDescent"))
+                    AirJumpType jumpType = player.ComputeAirJumpType();
+                    if (jumpType == AirJumpType.NoJumpsLeft)
+                        return;
+                    if (jumpType == AirJumpType.AirRoll)
                     {
-                        if (InputManager.ins.L_Input.y < 0)
-                            player.animator.animator.Play("Player_AirRollStart");
-                        if (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && !Mathf.Approximately(InputManager.ins.L_Input.x, 0))
-                            player.animator.animator.Play("Player_AirRollStart");
+                        player.animator.animator.Play("Player_AirRollStart");
                     }
-                    if(InputManager.ins.L_Input.y > 0 || (Mathf.Approximately(InputManager.ins.L_Input.y, 0) && Mathf.Approximately(InputManager.ins.L_Input.x, 0)))
+                    else
                     {
-                        if (player.jumpsLeft > 0)
-                        {
-                            if (player.jumpsLeft == 3)
-                            {
-                                player.jumpType = "Double Jump";
-                            }
-                            if (player.jumpsLeft == 2)
-                            {
-                                if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
-                                    player.jumpType = "Front Flip";
-                                else
-                                    player.jumpType = "Back Flip";
-                            }
-                            if (player.jumpsLeft == 1)
-                            {
-                                if (Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(player.legs.animator.spriteRenderer.flipX.DefinedValue(1, -1)))
-                                    player.jumpType = "Front Spin";
-                                else
-                                    player.jumpType = "Back Spin";
-                            }
-                            if (player.jumpsLeft > 0)
-                                player.animator.animator.Play("Player_DoubleJumpStart");
-                        }
+                        player.animator.animator.Play("Player_DoubleJumpStart");
                     }
                 }
             }
@@ -691,13 +751,21 @@ namespace StateHandlers.Player
         public static void OnWeaponThrow(RuntimeObjects.Weapon weapon)
         {
             RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
-            player.animator.animator.Play("Player_ThrowWeapon");
-            weapon.Throw(InputManager.ins.R_Input*45f);
+            bool WeaponThrow = CanDoAction(player.animator, PlayerAction.WeaponThrow);
+            if (WeaponThrow)
+            {
+                player.animator.animator.Play("Player_ThrowWeapon");
+                weapon.Throw(InputManager.ins.R_Input * 45f);
+            }
         }
         public static void OnWeaponMelee(RuntimeObjects.Weapon weapon)
         {
             RuntimeObjects.Player player = GameManager.ins.FindByID("Player") as RuntimeObjects.Player;
-            player.animator.animator.Play("Player_TwoHandedStabReady");
+            bool WeaponMelee = CanDoAction(player.animator, PlayerAction.WeaponMelee);
+            if(WeaponMelee)
+            {
+                player.animator.animator.Play("Player_TwoHandedStabReady");
+            }
         }
     }
 }

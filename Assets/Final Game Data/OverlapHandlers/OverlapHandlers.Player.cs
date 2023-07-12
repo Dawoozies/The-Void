@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
+using StateHandlers.Player;
 namespace OverlapHandlers.Player
 {
     public static class OnRuntimeObjectOverlap
@@ -29,6 +30,8 @@ namespace OverlapHandlers.Player
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
                         player.grounded = true;
+                        player.jumpsLeft = player.maxJumps;
+                        Handler.onJumpsLeftChanged?.Invoke(player.jumpsLeft);
                     }
                 }
             }

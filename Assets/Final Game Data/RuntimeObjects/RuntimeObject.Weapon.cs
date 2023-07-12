@@ -26,28 +26,19 @@ namespace RuntimeObjects
         public bool useBlur;
         const float BLUR_BUFFER_TIME = 0.14f;
         float blurBufferTime;
+        int anchorSlot = 0;
         public Weapon(string id, WeaponHeadSpriteType headSpriteType, WeaponShaftSpriteType shaftSpriteType, WeaponPommelSpriteType pommelSpriteType) : base(id)
         {
             RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["Weapon"]);
             RuntimeRigidbody.CreateAndAttach(this);
             head = new WeaponHead();
             //GameManager.ins.allRuntimeObjects.Add("WeaponHead", head);
-            RuntimeAnimator.CreateAndAttach(head, GameManager.ins.allControllers["WeaponHead"]);
-            RuntimeDirectedCircleColliders.CreateAndAttach(head);
-            RuntimeDirectedCircleOverlaps.CreateAndAttach(head);
-            RuntimeDirectedPoints.CreateAndAttach(head);
+
             shaft = new WeaponShaft();
             //GameManager.ins.allRuntimeObjects.Add("WeaponShaft", shaft);
-            RuntimeAnimator.CreateAndAttach(shaft, GameManager.ins.allControllers["WeaponShaft"]);
-            RuntimeDirectedCircleColliders.CreateAndAttach(shaft);
-            RuntimeDirectedCircleOverlaps.CreateAndAttach(shaft);
-            RuntimeDirectedPoints.CreateAndAttach(shaft);
+
             pommel = new WeaponPommel();
             //GameManager.ins.allRuntimeObjects.Add("WeaponPommel", pommel);
-            RuntimeAnimator.CreateAndAttach(pommel, GameManager.ins.allControllers["WeaponPommel"]);
-            RuntimeDirectedCircleColliders.CreateAndAttach(pommel);
-            RuntimeDirectedCircleOverlaps.CreateAndAttach(pommel);
-            RuntimeDirectedPoints.CreateAndAttach(pommel);
 
             head.obj.SetParent(obj);
             head.obj.localPosition = new Vector3(0, 1.35f, 0);
@@ -58,6 +49,7 @@ namespace RuntimeObjects
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += Handler.Update;
             managedUpdate += BlurBuffer;
+            managedUpdate += Update_SubObjects;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
 
@@ -67,6 +59,8 @@ namespace RuntimeObjects
             pommel.animator.spriteRenderer.sortingOrder = 12;
 
             animator.spriteRenderer.color = Color.clear;
+
+            RuntimePlayerWeapon.onWeaponsListChanged += OnWeaponsListChanged;
         }
         public void SetOwner(RuntimeObject owner)
         {
@@ -104,7 +98,7 @@ namespace RuntimeObjects
                 rigidbody.rbObj.up = owner.RelativeDir(anchor.upDirections[0]);
                 //obj.rigidbody.rbObj.position = owner.RelativePos(anchor.centers[0]);
                 //obj.rigidbody.rbObj.up = owner.RelativeDir(anchor.upDirections[0]);
-                if(owner.animator.spriteRenderer.flipX)
+                if (owner.animator.spriteRenderer.flipX)
                 {
                     head.animator.spriteRenderer.flipX = true;
                 }
@@ -139,16 +133,52 @@ namespace RuntimeObjects
                 blurBufferTime = 0f;
             }
         }
+        void Update_SubObjects(RuntimeObject obj, float tickDelta)
+        {
+            head.managedUpdate?.Invoke(head, tickDelta);
+            shaft.managedUpdate?.Invoke(shaft, tickDelta);
+            pommel.managedUpdate?.Invoke(pommel, tickDelta);
+        }
+        void OnWeaponsListChanged(List<Weapon> playerWeaponsList)
+        {
+            if(playerWeaponsList.Contains(this))
+            {
+                int weaponIndex = playerWeaponsList.IndexOf(this);
+                if(weaponIndex >= 1)
+                {
+                    Hide();
+                }
+                else
+                {
+                    //Then weapon can be held in hand
+                    anchorSlot = weaponIndex;
+                    Show();
+                }
+            }
+        }
+        void Hide()
+        {
+            head.animator.spriteRenderer.color = Color.clear;
+            shaft.animator.spriteRenderer.color = Color.clear;
+            pommel.animator.spriteRenderer.color = Color.clear;
+        }
+        void Show()
+        {
+            head.animator.spriteRenderer.color = Color.white;
+            shaft.animator.spriteRenderer.color = Color.white;
+            pommel.animator.spriteRenderer.color = Color.white;
+        }
     }
     public class WeaponHead : RuntimeObject
     {
         public WeaponHeadSpriteType spriteType = WeaponHeadSpriteType.Spear;
         public WeaponHead() : base("WeaponHead")
         {
-            managedStart += ManagedStart;
-        }
-        public void ManagedStart()
-        {
+            RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["WeaponHead"]);
+            RuntimeDirectedCircleColliders.CreateAndAttach(this);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(this);
+            RuntimeDirectedPoints.CreateAndAttach(this);
+
             managedUpdate += RuntimeAnimator.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
@@ -163,10 +193,11 @@ namespace RuntimeObjects
         public WeaponShaftSpriteType spriteType = WeaponShaftSpriteType.Long;
         public WeaponShaft() : base("WeaponShaft")
         {
-            managedStart += ManagedStart;
-        }
-        public void ManagedStart()
-        {
+            RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["WeaponShaft"]);
+            RuntimeDirectedCircleColliders.CreateAndAttach(this);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(this);
+            RuntimeDirectedPoints.CreateAndAttach(this);
+
             managedUpdate += RuntimeAnimator.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
@@ -181,10 +212,11 @@ namespace RuntimeObjects
         public WeaponPommelSpriteType spriteType = WeaponPommelSpriteType.Default;
         public WeaponPommel() : base("WeaponPommel")
         {
-            managedStart += ManagedStart;
-        }
-        public void ManagedStart()
-        {
+            RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["WeaponPommel"]);
+            RuntimeDirectedCircleColliders.CreateAndAttach(this);
+            RuntimeDirectedCircleOverlaps.CreateAndAttach(this);
+            RuntimeDirectedPoints.CreateAndAttach(this);
+
             managedUpdate += RuntimeAnimator.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;

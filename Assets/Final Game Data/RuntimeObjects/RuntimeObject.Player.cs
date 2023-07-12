@@ -4,18 +4,27 @@ using UnityEngine;
 using OverlapHandlers.Player;
 using BehaviourRecord.Player;
 using StateHandlers.Player;
+using ExtensionMethods_Bool;
+
 namespace RuntimeObjects
 {
+    public enum AirJumpType
+    {
+        NoJumpsLeft = 0,
+        AirRoll = 1,
+        DoubleJump = 2,
+        FrontFlip = 3,
+        BackFlip = 4,
+        FrontSpin = 5,
+        BackSpin = 6,
+    }
     public class Player : RuntimeObject
     {
         public PlayerLegs legs;
         public PlayerTorso torso;
-        public float fallSpeedMax = -30f;
         public float ascentSpeedMax = 30f;
         public float landingLag = 0.125f;
-        public float runSpeed = 15f;
         public bool grounded;
-        public float jumpVelocityAddTime = 0.175f;
         public float jumpApexRightSpeed = 2f;
         public float jumpApexTime = 0.35f;
         public int maxJumps = 4;
@@ -23,7 +32,8 @@ namespace RuntimeObjects
         public float doubleJumpStartTime = 0.15f;
         public float doubleJumpVelocityAddTime = 0.1f;
         public Vector2 doubleJumpShift = new Vector2(0.15f, 1.35f);
-        public string jumpType = "Jump";
+        //public string jumpType = "Jump";
+        public AirJumpType jumpType = AirJumpType.DoubleJump;
         public float airRollStartTime = 0.1f;
         public float airRollBraceDescentSpeed = -20f;
         public float airRollDescentSpeedMax = -30f;
@@ -37,7 +47,6 @@ namespace RuntimeObjects
             RuntimeDirectedCircleColliders.CreateAndAttach(this);
             RuntimeDirectedCircleOverlaps.CreateAndAttach(this);
             RuntimeDirectedPoints.CreateAndAttach(this);
-
             legs = new PlayerLegs();
             GameManager.ins.allRuntimeObjects.Add(legs);
             RuntimeAnimator.CreateAndAttach(legs, GameManager.ins.allControllers["PlayerLegs"]);
@@ -72,6 +81,44 @@ namespace RuntimeObjects
             RuntimePlayerWeapon.onWeaponThrow += Handler.OnWeaponThrow;
             RuntimePlayerWeapon.onWeaponMelee += Handler.OnWeaponMelee;
         }
+        public AirJumpType ComputeAirJumpType()
+        {
+            if(!animator.CurrentState("Player_AirRollDescent"))
+            {
+                if (InputManager.ins.L_Input.y < 0 || (InputManager.ins.L_Input.y == 0 && InputManager.ins.L_Input.x != 0))
+                {
+                    jumpType = AirJumpType.AirRoll;
+                    return jumpType;
+                }
+            }
+            switch (jumpsLeft)
+            {
+                case 3:
+                    jumpType = AirJumpType.DoubleJump;
+                    return jumpType;
+                case 2:
+                    if(Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(legs.animator.spriteRenderer.flipX.DefinedValue(-1,1)))
+                    {
+                        jumpType = AirJumpType.FrontFlip;
+                    }
+                    else
+                    {
+                        jumpType = AirJumpType.BackFlip;
+                    }
+                    return jumpType;
+                case 1:
+                    if(Mathf.Sign(InputManager.ins.L_Input.x) == Mathf.Sign(legs.animator.spriteRenderer.flipX.DefinedValue(-1,1)))
+                    {
+                        jumpType = AirJumpType.FrontSpin;
+                    }
+                    else
+                    {
+                        jumpType = AirJumpType.BackSpin;
+                    }
+                    return jumpType;
+            }
+            return AirJumpType.NoJumpsLeft;
+        }
     }
     public class PlayerLegs : RuntimeObject
     {
@@ -86,7 +133,6 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            //obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform); 
             animator.spriteRenderer.sortingOrder = 10;
         }
     }
@@ -103,7 +149,6 @@ namespace RuntimeObjects
             directedCircleOverlaps.onRuntimeObjectOverlap += OnRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNonRuntimeObjectOverlap += OnNonRuntimeObjectOverlap.Handle;
             directedCircleOverlaps.onNullOverlap += OnNullResult.Handle;
-            //obj.SetParent(GameManager.ins.allRuntimeObjects["Player"].animator.animator.transform);
             animator.spriteRenderer.sortingOrder = 11;
         }
     }

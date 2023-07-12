@@ -48,9 +48,7 @@ public class GameManager : MonoBehaviour
     public Sprite[] sprites;
     public Dictionary<string, Sprite> allSprites;
     //Player Weapon Pool
-    public Transform runtimeWeaponParent;
     public ObjectPool<Weapon> runtimeWeaponPool;
-    public bool command_GetWeapon;
     private void Awake()
     {
         ins = this;
@@ -180,7 +178,6 @@ public class GameManager : MonoBehaviour
     }
     void Setup_RuntimeWeaponPool()
     {
-        runtimeWeaponParent = new GameObject("Runtime Weapon Parent").transform;
         runtimeWeaponPool = new ObjectPool<Weapon>(
             () =>
             {
@@ -188,6 +185,7 @@ public class GameManager : MonoBehaviour
                 //This will not be in allRuntimeObjects
                 Weapon member = new Weapon("Weapon", WeaponHeadSpriteType.Spear, WeaponShaftSpriteType.Long, WeaponPommelSpriteType.Default);
                 allRuntimeWeapons.Add(member);
+
                 //member.rigidbody.rb.transform.SetParent(runtimeWeaponParent);
                 return member;
             },
@@ -252,10 +250,6 @@ public class GameManager : MonoBehaviour
         RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))
         foreach (RuntimeObject item in allRuntimeObjects)
-        {
-            item.managedStart?.Invoke();
-        }
-        foreach (RuntimeObject item in allRuntimeWeapons)
         {
             item.managedStart?.Invoke();
         }

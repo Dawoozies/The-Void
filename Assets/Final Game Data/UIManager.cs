@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager ins;
     public TextMeshProUGUI stockLeft;
     public TextMeshProUGUI percentage;
+    public TextMeshProUGUI jumpsLeft;
     public Color defaultColor;
     public Color damageColor;
     public Color healColor;
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     public void Start()
     {
         RuntimePlayerDamage.onPlayerPercentageChanged += OnPlayerPercentageChanged;
+        StateHandlers.Player.Handler.onJumpsLeftChanged += OnJumpsLeftChanged;
     }
     public void Update()
     {
@@ -39,5 +41,9 @@ public class UIManager : MonoBehaviour
             currentColor = damageColor;
         else 
             currentColor = healColor;
+    }
+    void OnJumpsLeftChanged(int jumpsLeft)
+    {
+        this.jumpsLeft.text = $"Jumps Left = {jumpsLeft}";
     }
 }

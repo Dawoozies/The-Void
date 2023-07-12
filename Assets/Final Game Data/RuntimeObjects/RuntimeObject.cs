@@ -88,7 +88,7 @@ namespace RuntimeObjects
         public static void Update(RuntimeObject obj, float tickDelta)
         {
             RuntimeAnimator runtimeAnimator = obj.animator;
-            
+            //ebug.Log($"Animator Object ID: {obj.id}");
             if (runtimeAnimator.stateHash != runtimeAnimator.StateInfo.shortNameHash)
             {
                 runtimeAnimator.trueTimeSpentInState = 0;
@@ -140,6 +140,15 @@ namespace RuntimeObjects
         public bool CurrentState(string stateName)
         {
             return Animator.StringToHash(stateName) == stateHash;
+        }
+        public static bool CheckStates(RuntimeAnimator runtimeAnimator, string[] states)
+        {
+            for (int i = 0; i < states.Length; i++)
+            {
+                if (runtimeAnimator.CurrentState(states[i]))
+                    return true;
+            }
+            return false;
         }
     }
     public class RuntimeRigidbody
@@ -198,6 +207,7 @@ namespace RuntimeObjects
         private List<DirectedCircleColliderContainer> existingContainers;
         public static void CreateAndAttach(RuntimeObject obj)
         {
+            
             if (!obj.objStructure.HasFlag(RuntimeObjectStructure.Animator))
                 return;
             RuntimeDirectedCircleColliders runtimeDirectedCircleColliders = new();
@@ -266,6 +276,7 @@ namespace RuntimeObjects
         }
         public void OnFrameUpdateData(RuntimeObject obj, ControllerData controllerData, int frame)
         {
+
             int collidersRequired = 0;
             for (int _dataIndex = 0; _dataIndex < directedCircleColliders.Length; _dataIndex++)
             {
@@ -497,30 +508,30 @@ namespace RuntimeObjects
     }
     public static class RuntimePlayerWeapon
     {
-        static Weapon rightHeld;
         static List<Weapon> weapons = new();
         public static Action<Weapon> onGetWeapon;
         public static Action<Weapon> onWeaponThrow;
         public static Action<Weapon> onWeaponMelee;
+        public static Action<List<Weapon>> onWeaponsListChanged;
         public static void GetWeapon(Weapon weapon)
         {
             weapons.Add(weapon);
-            rightHeld = weapon;
             onGetWeapon?.Invoke(weapon);
+            onWeaponsListChanged?.Invoke(weapons);
         }
         public static void UseWeapon()
         {
-            if (rightHeld == null)
+            if (weapons == null || weapons.Count == 0)
                 return;
             if (InputManager.ins.R_Input == Vector2.zero)
             {
-                onWeaponMelee?.Invoke(rightHeld);
+                onWeaponMelee?.Invoke(weapons[0]);
             }
             else
             {
-                weapons.Remove(rightHeld);
-                onWeaponThrow?.Invoke(rightHeld);
-                rightHeld = null;
+                onWeaponThrow?.Invoke(weapons[0]);
+                weapons.RemoveAt(0);
+                onWeaponsListChanged?.Invoke(weapons);
             }
         }
     }
