@@ -4,6 +4,8 @@ using UnityEngine;
 using RuntimeObjects;
 using RuntimeContainers;
 using TMPro;
+using UnityEngine.UI;
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager ins;
@@ -18,10 +20,17 @@ public class UIManager : MonoBehaviour
     float t = 1;
     float s;
     Color currentColor;
+
+    public Slider bossStaggerSlider;
+    public void Awake()
+    {
+        ins = this;
+    }
     public void Start()
     {
         RuntimePlayerDamage.onPlayerPercentageChanged += OnPlayerPercentageChanged;
         StateHandlers.Player.Handler.onJumpsLeftChanged += OnJumpsLeftChanged;
+
     }
     public void Update()
     {
@@ -45,5 +54,9 @@ public class UIManager : MonoBehaviour
     void OnJumpsLeftChanged(int jumpsLeft)
     {
         this.jumpsLeft.text = $"Jumps Left = {jumpsLeft}";
+    }
+    public void OnStaggerValueChanged(int newStaggerValue)
+    {
+        bossStaggerSlider.value = newStaggerValue;
     }
 }

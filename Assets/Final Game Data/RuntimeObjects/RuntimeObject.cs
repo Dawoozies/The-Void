@@ -234,6 +234,8 @@ namespace RuntimeObjects
             //FRAME WILL ALWAYS BE 0 HERE
             //Get existing circle collider 2d in the collider parent
             int collidersRequired = 0;
+            int circleIndex = 0;
+            //read what you need first
             for (int _dataIndex = 0; _dataIndex < directedCircleColliders.Length; _dataIndex++)
             {
                 //We are only concerned with data in this state that applies to the start of a state i.e. the 0th frame
@@ -242,7 +244,7 @@ namespace RuntimeObjects
                 for (int _centerIndex = 0; _centerIndex < directedCircleColliders[_dataIndex].centers.Count; _centerIndex++)
                 {
                     //We dont want to use the size of existingCollider as it will be changed during these loops
-                    if(_centerIndex >= colliderParent.childCount)
+                    if(circleIndex >= colliderParent.childCount)
                     {
                         DirectedCircleColliderContainer poolMember = GameManager.ins.directedCircleColliderContainerPool.Get();
                         poolMember.collider.transform.SetParent(colliderParent);
@@ -252,11 +254,16 @@ namespace RuntimeObjects
                         existingContainers.Add(poolMember);
                     }
                     //if(obj.animator.CurrentState("MantisTorso_WindUp"))
+                    //Debug.Log($"{collidersRequired}/{existingContainers.Count}");
+                    //Debug.Log($"DataIndex = {_dataIndex}/{directedCircleColliders.Length} CenterIndex = {_centerIndex}/{directedCircleColliders[_dataIndex].centers.Count}");
+                    existingContainers[collidersRequired].obj = obj;
+                    existingContainers[collidersRequired].colliderNickname = directedCircleColliders[_dataIndex].nickname;
                     existingContainers[collidersRequired].collider.transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
                     existingContainers[collidersRequired].collider.radius = directedCircleColliders[_dataIndex].GetRadiusAtIndex(_centerIndex);
                     existingContainers[collidersRequired].collider.isTrigger = directedCircleColliders[_dataIndex].isTrigger;
                     existingContainers[collidersRequired].collider.gameObject.layer = directedCircleColliders[_dataIndex].collisionLayer;
                     collidersRequired++;
+                    circleIndex++;
                 }
             }
             //[ ABOVE ] Deals with acquiring new pool objects and setting them up
@@ -277,15 +284,15 @@ namespace RuntimeObjects
         }
         public void OnFrameUpdateData(RuntimeObject obj, ControllerData controllerData, int frame)
         {
-
             int collidersRequired = 0;
+            int circleIndex = 0;
             for (int _dataIndex = 0; _dataIndex < directedCircleColliders.Length; _dataIndex++)
             {
                 if (!directedCircleColliders[_dataIndex].assignedFrames.Contains(frame))
                     continue;
                 for (int _centerIndex = 0; _centerIndex < directedCircleColliders[_dataIndex].centers.Count; _centerIndex++)
                 {
-                    if(_centerIndex >= colliderParent.childCount)
+                    if(circleIndex >= colliderParent.childCount)
                     {
                         DirectedCircleColliderContainer poolMember = GameManager.ins.directedCircleColliderContainerPool.Get();
                         poolMember.collider.transform.SetParent(colliderParent);
@@ -294,11 +301,14 @@ namespace RuntimeObjects
                         GameManager.ins.directedCircleColliderContainerLedger[poolMember] = obj.id;
                         existingContainers.Add(poolMember);
                     }
+                    existingContainers[collidersRequired].obj = obj;
+                    existingContainers[collidersRequired].colliderNickname = directedCircleColliders[_dataIndex].nickname;
                     existingContainers[collidersRequired].collider.transform.position = obj.RelativePos(directedCircleColliders[_dataIndex].centers[_centerIndex]);
                     existingContainers[collidersRequired].collider.radius = directedCircleColliders[_dataIndex].GetRadiusAtIndex(_centerIndex);
                     existingContainers[collidersRequired].collider.isTrigger = directedCircleColliders[_dataIndex].isTrigger;
                     existingContainers[collidersRequired].collider.gameObject.layer = directedCircleColliders[_dataIndex].collisionLayer;
                     collidersRequired++;
+                    circleIndex++;
                 }
             }
             if (colliderParent.childCount - collidersRequired > 0)
@@ -327,7 +337,7 @@ namespace RuntimeObjects
         //Runtime ID if result type is RuntimeObject
         //Obj doing overlap, obj which was overlapped
 
-        public Action<string, RuntimeObject, RuntimeObject, Vector2, Vector2> onRuntimeObjectOverlap;
+        public Action<string, RuntimeObject, DirectedCircleColliderContainer, Vector2, Vector2> onRuntimeObjectOverlap;
         public Action<string, RuntimeObject, Collider2D> onNonRuntimeObjectOverlap;
         public Action<string, RuntimeObject> onNullOverlap;
         public static void CreateAndAttach(RuntimeObject obj)
@@ -382,11 +392,11 @@ namespace RuntimeObjects
                     for (int i = 0; i < directedCircleOverlaps.overlapResultsCount; i++)
                     {
                         CircleCollider2D circleCollider = directedCircleOverlaps.overlapResults[i] as CircleCollider2D;
-                        if(circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == string.Empty) 
+                        if(circleCollider == null || GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider) == null) 
                             directedCircleOverlaps.onNonRuntimeObjectOverlap?.Invoke(directedCircleOverlaps.atFrame[dataIndex].nickname, obj, directedCircleOverlaps.overlapResults[i]);
                         if(circleCollider != null)
                         {
-                            string id = GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider);
+                            DirectedCircleColliderContainer directedCircleColliderContainer = GameManager.ins.TryFindDirectedCircleColliderContainerValue(circleCollider);
                             Vector2 overlapUp = Vector2.zero;
                             Vector2 overlapRight = Vector2.zero;
                             if (directedCircleOverlaps.atFrame[dataIndex].upDirections != null && directedCircleOverlaps.atFrame[dataIndex].upDirections.Count > 0)
@@ -396,7 +406,7 @@ namespace RuntimeObjects
                             directedCircleOverlaps.onRuntimeObjectOverlap?.Invoke(
                                 directedCircleOverlaps.atFrame[dataIndex].nickname, 
                                 obj, 
-                                GameManager.ins.FindByID(id),
+                                directedCircleColliderContainer,
                                 overlapUp,
                                 overlapRight
                                 );

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
+using RuntimeContainers;
 namespace OverlapHandlers.Mantis
 {
     public static class OnRuntimeObjectOverlap
     {
-        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj, Vector2 overlapUp, Vector2 overlapRight)
+        public static void Handle(string dataName, RuntimeObject obj, DirectedCircleColliderContainer hitContainer, Vector2 overlapUp, Vector2 overlapRight)
         {
             if(dataName == "DamageZone")
             {
-                PlayerLegs playerLegs = hitObj as PlayerLegs;
-                PlayerTorso playerTorso = hitObj as PlayerTorso;
+                PlayerLegs playerLegs = hitContainer.obj as PlayerLegs;
+                PlayerTorso playerTorso = hitContainer.obj as PlayerTorso;
                 if(playerLegs != null || playerTorso != null) 
                 {
                     MantisLeftArm leftArm = obj as MantisLeftArm;

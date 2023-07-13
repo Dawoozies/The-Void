@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
+using RuntimeContainers;
+
 namespace OverlapHandlers.HangedFrame
 {
     public static class OnRuntimeObjectOverlap
     {
-        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj, Vector2 overlapUp, Vector2 overlapRight)
+        public static void Handle(string dataName, RuntimeObject obj, DirectedCircleColliderContainer hitContainer, Vector2 overlapUp, Vector2 overlapRight)
         {
 
         }

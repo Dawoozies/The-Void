@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using RuntimeObjects;
 using StateHandlers.Player;
+using RuntimeContainers;
+
 namespace OverlapHandlers.Player
 {
     public static class OnRuntimeObjectOverlap
     {
         //RuntimeOverlap: obj.id --> hitObj.id
-        public static void Handle(string dataName, RuntimeObject obj, RuntimeObject hitObj, Vector2 overlapUp, Vector2 overlapRight)
+        public static void Handle(string dataName, RuntimeObject obj, DirectedCircleColliderContainer hitContainer, Vector2 overlapUp, Vector2 overlapRight)
         {
 
         }

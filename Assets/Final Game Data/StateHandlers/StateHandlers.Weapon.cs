@@ -17,6 +17,7 @@ namespace StateHandlers.Weapon
                     weapon.head.animator.animator.Play($"Weapon_Head_{weapon.head.spriteType}_Blur");
                     weapon.shaft.animator.animator.Play($"Weapon_Shaft_{weapon.shaft.spriteType}_Blur");
                     weapon.pommel.animator.animator.Play($"Weapon_Pommel_{weapon.pommel.spriteType}_Blur");
+                    //Debug.LogError("Blur");
                 }
                 else
                 {

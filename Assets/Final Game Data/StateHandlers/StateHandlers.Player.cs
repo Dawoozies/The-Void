@@ -38,6 +38,7 @@ namespace StateHandlers.Player
             "Player_DoubleJumpAscent",
             "Player_DoubleJumpAscentSlow",
             "Player_AirRollDescent",
+            "Player_TwoHandedStab",
         };
         static readonly string[] CAN_THROW = { 
             "Player_Idle", 

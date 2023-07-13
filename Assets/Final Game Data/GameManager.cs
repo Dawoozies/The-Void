@@ -29,16 +29,18 @@ public class GameManager : MonoBehaviour
     public Transform directedCircleCollider2DParent;
     public ObjectPool<DirectedCircleColliderContainer> directedCircleColliderContainerPool;
     public Dictionary<DirectedCircleColliderContainer, string> directedCircleColliderContainerLedger;
-    public string TryFindDirectedCircleColliderContainerValue(CircleCollider2D collider)
+    public DirectedCircleColliderContainer TryFindDirectedCircleColliderContainerValue(CircleCollider2D collider)
     {
         if(directedCircleColliderContainerLedger == null || directedCircleColliderContainerLedger.Count == 0)
-            return string.Empty;
+            return null;
         foreach (KeyValuePair<DirectedCircleColliderContainer, string> pair in directedCircleColliderContainerLedger)
         {
             if (pair.Key.collider == collider)
-                return pair.Value;
+            {
+                return pair.Key;
+            }
         }
-        return string.Empty;
+        return null;
     }
     //SpriteRenderer Pool
     public Transform spriteRendererParent;
@@ -228,10 +230,6 @@ public class GameManager : MonoBehaviour
     {
         Mantis mantis = new("Mantis");
         allRuntimeObjects.Add(mantis);
-        RuntimeAnimator.CreateAndAttach(mantis, allControllers["Mantis"]);
-        RuntimeDirectedCircleColliders.CreateAndAttach(mantis);
-        RuntimeDirectedCircleOverlaps.CreateAndAttach(mantis);
-        RuntimeDirectedPoints.CreateAndAttach(mantis);
     }
     public Weapon SpawnWeapon(WeaponHeadSpriteType headSpriteType, WeaponShaftSpriteType shaftSpriteType, WeaponPommelSpriteType pommelSpriteType)
     {
