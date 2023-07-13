@@ -72,11 +72,11 @@ namespace RuntimeObjects
                 staggerCooldown -= tickDelta;
             UIManager.ins.OnStaggerValueChanged(stagger);
         }
-        public void Stagger(int stagger)
+        public void Stagger(int staggerAddAmount)
         {
             if(staggerCooldown <= 0)
             {
-                this.stagger += stagger;
+                stagger += staggerAddAmount;
                 staggerCooldown = 0.25f;
 
                 if(stagger >= 100)
