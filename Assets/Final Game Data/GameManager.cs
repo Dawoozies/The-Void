@@ -51,6 +51,21 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, Sprite> allSprites;
     //Player Weapon Pool
     public ObjectPool<Weapon> runtimeWeaponPool;
+    //Effect Pool
+    //Make this for on hit effects specifically requiring animators etc.
+    //this will be good as some effects could have overlaps or even colliders
+    public List<Material> allMaterials;
+    public Material FindMaterialByID(string id)
+    {
+        foreach (Material material in allMaterials)
+        {
+            if(material.name == id)
+            {
+                return material;
+            }
+        }
+        return null;
+    }
     private void Awake()
     {
         ins = this;

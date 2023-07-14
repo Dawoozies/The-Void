@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateHandlers.Mantis;
 using OverlapHandlers.Mantis;
-using Unity.VisualScripting;
-using UnityEngine.WSA;
 
 namespace RuntimeObjects
 {
@@ -20,7 +18,7 @@ namespace RuntimeObjects
         public string strikeDirection = "Side";
         public int stagger = 0;
         int staggerReduction = 1;
-        float staggerReduceMaxTime = 0.5f;
+        float staggerReduceMaxTime = 0.75f;
         float staggerReduceTime = 0;
         float staggerCooldown = 0;
         public Mantis(string id) : base(id)
@@ -31,18 +29,25 @@ namespace RuntimeObjects
             RuntimeDirectedPoints.CreateAndAttach(this);
 
             legs = new MantisLegs();
-            //GameManager.ins.allRuntimeObjects.Add(legs);
-
             torso = new MantisTorso();
-            //GameManager.ins.allRuntimeObjects.Add(torso);
-
             leftArm = new MantisLeftArm();
-            //GameManager.ins.allRuntimeObjects.Add(leftArm);
+            Material noOverrideColorMaterial = GameManager.ins.FindMaterialByID("NoOverrideColor");
+            Material overrideColorMaterial = GameManager.ins.FindMaterialByID("OverrideColor");
+            if(noOverrideColorMaterial != null && overrideColorMaterial != null)
+            {
+                legs.defaultMaterial = noOverrideColorMaterial;
+                legs.overrideMaterial = overrideColorMaterial;
+                torso.defaultMaterial = noOverrideColorMaterial;
+                torso.overrideMaterial = overrideColorMaterial;
+                leftArm.defaultMaterial = noOverrideColorMaterial;
+                leftArm.overrideMaterial = overrideColorMaterial;
+            }
 
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += Handler.Update;
             animator.onStateEnter += Handler.OnStateEnter;
             animator.onFrameUpdate += Handler.OnFrameUpdate;
+            animator.onTrueFrameUpdate += Handler.OnTrueFrameUpdate;
             animator.spriteRenderer.color = Color.clear;
 
             legs.obj.SetParent(obj);
@@ -74,14 +79,20 @@ namespace RuntimeObjects
         }
         public void Stagger(int staggerAddAmount)
         {
-            if(staggerCooldown <= 0)
+            if(animator.CurrentState("Mantis_StunForward"))
+                return;
+            if (staggerCooldown <= 0)
             {
                 stagger += staggerAddAmount;
                 staggerCooldown = 0.25f;
 
                 if(stagger >= 100)
                 {
-                    stagger = 100;
+                    //reset stagger and then do knockdown
+                    stagger = 0;
+                    animator.animator.Play("Mantis_StunForward");
+                    UIManager.ins.OnStaggerValueChanged(stagger);
+                    return;
                 }    
             }
             UIManager.ins.OnStaggerValueChanged(stagger);
@@ -89,6 +100,8 @@ namespace RuntimeObjects
     }
     public class MantisLegs : RuntimeObject
     {
+        public Material defaultMaterial;
+        public Material overrideMaterial;
         public MantisLegs() : base("MantisLegs")
         {
             GameManager.ins.allRuntimeObjects.Add(this);
@@ -106,6 +119,8 @@ namespace RuntimeObjects
     }
     public class MantisTorso : RuntimeObject
     {
+        public Material defaultMaterial;
+        public Material overrideMaterial;
         public MantisTorso() : base("MantisTorso")
         {
             GameManager.ins.allRuntimeObjects.Add(this);
@@ -122,6 +137,8 @@ namespace RuntimeObjects
     }
     public class MantisLeftArm : RuntimeObject
     {
+        public Material defaultMaterial;
+        public Material overrideMaterial;
         public MantisLeftArm() : base("MantisLeftArm")
         {
             GameManager.ins.allRuntimeObjects.Add(this);

@@ -99,6 +99,42 @@ namespace StateHandlers.Mantis
                     if (mantis.animator.trueTimeSpentInState > 0.3f + mantis.retractTime)
                         mantis.animator.animator.Play("Mantis_LinearRetract");
                 }
+                if(mantis.animator.CurrentState("Mantis_StunForward"))
+                {
+                    int pose = 1;
+                    //0.067f after 2f
+                    if (mantis.animator.trueTimeSpentInState > 0.067f)
+                    {
+                        pose = 2;
+                    }
+                    //0.067f+0.134f after 2f+4f
+                    if (mantis.animator.trueTimeSpentInState > 0.201f)
+                    {
+                        pose = 3;
+                    }
+                    //0.067f+0.134f+0.134f after 2f+4f+4f
+                    if (mantis.animator.trueTimeSpentInState > 0.335f)
+                    {
+                        pose = 4;
+                    }
+                    //after 2f+4f+4f+4f
+                    if (mantis.animator.trueTimeSpentInState > 0.469f)
+                    {
+                        pose = 5;
+                    }
+                    //after 2f+4f+4f+4f+4f
+                    if (mantis.animator.trueTimeSpentInState > 0.603f)
+                    {
+                        pose = 6;
+                    }
+                    //Debug.LogError($"Pose = {pose}, True Frame = {mantis.animator.trueFrame}");
+                    mantis.legs.animator.animator.Play($"MantisLegs_StunForward_Pose{pose}");
+                    mantis.torso.animator.animator.Play($"MantisTorso_StunForward_Pose{pose}");
+                    mantis.leftArm.animator.animator.Play($"MantisLeftArm_StunForward_Pose{pose}");
+                    //after 2f+4f+4f+4f+4f+6f
+                    if (mantis.animator.trueTimeSpentInState > 0.803f)
+                        mantis.animator.animator.Play("Mantis_Idle");
+                }
             }
         }
         public static void OnStateEnter(RuntimeObject obj, int frame, int stateHash, int previousStateHash)
@@ -122,6 +158,13 @@ namespace StateHandlers.Mantis
                 if(mantis.animator.CurrentState("Mantis_LinearStrikeSpin"))
                 {
                     mantis.leftArm.animator.animator.Play("MantisLeftArm_LinearStrikeSpin_Pose1");
+                }
+                if(mantis.animator.CurrentState("Mantis_StunForward"))
+                {
+                    //Debug.LogError("Mantis stunned");
+                    mantis.legs.animator.animator.Play($"MantisLegs_StunForward_Pose1");
+                    mantis.torso.animator.animator.Play($"MantisTorso_StunForward_Pose1");
+                    mantis.leftArm.animator.animator.Play($"MantisLeftArm_StunForward_Pose1");
                 }
             }
         }
@@ -175,6 +218,23 @@ namespace StateHandlers.Mantis
                 if(jumpInput)
                     mantis.animator.animator.Play("Mantis_AimAtPlayer");
             }
+        }
+        public static void OnTrueFrameUpdate(RuntimeObject obj, int trueFrame, int previousTrueFrame)
+        {
+            RuntimeObjects.Mantis mantis = obj as RuntimeObjects.Mantis;
+            if(mantis != null)
+            {
+                MantisLegs legs = mantis.legs;
+                if (mantis.animator.CurrentState("Mantis_StunForward"))
+                {
+                    if (mantis.animator.trueFrame == 6)
+                    {
+                        mantis.obj.position += legs.animator.spriteRenderer.flipX.DefinedValue(-1,1) * new Vector3(5,0,0);
+                        //Debug.LogError($"TRUE FRAME = {trueFrame} TrueTime = {mantis.animator.trueTimeSpentInState}");
+                    }
+                }
+            }
+
         }
     }
 }

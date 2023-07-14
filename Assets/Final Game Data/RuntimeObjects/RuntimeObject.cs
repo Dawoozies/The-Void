@@ -72,10 +72,14 @@ namespace RuntimeObjects
         public int frame;
         public float normalizedTime;
         public float trueTimeSpentInState;
+        public int frameRate = 30; //since cam is animating at 30fps then we need this set
+        public int trueFrame;
+        public int previousTrueFrame;
         public Action<RuntimeObject, int, int, int> onStateEnter; //State hash + Previous state hash
         public Action<RuntimeObject, int, int, int> onFrameUpdate; //Frame + State hash + Previous state hash
         public Action<RuntimeObject, ControllerData, int> onStateEnterData;
         public Action<RuntimeObject, ControllerData, int> onFrameUpdateData;
+        public Action<RuntimeObject, int, int> onTrueFrameUpdate;
         public static void CreateAndAttach(RuntimeObject obj, RuntimeAnimatorController controller)
         {
             RuntimeAnimator runtimeAnimator = new RuntimeAnimator();
@@ -88,10 +92,12 @@ namespace RuntimeObjects
         public static void Update(RuntimeObject obj, float tickDelta)
         {
             RuntimeAnimator runtimeAnimator = obj.animator;
-            //ebug.Log($"Animator Object ID: {obj.id}");
+            //Debug.Log($"Animator Object ID: {obj.id}");
             if (runtimeAnimator.stateHash != runtimeAnimator.StateInfo.shortNameHash)
             {
                 runtimeAnimator.trueTimeSpentInState = 0;
+                runtimeAnimator.trueFrame = 0;
+                runtimeAnimator.previousTrueFrame = -1;
                 //If there is some collision issue in the future please check to see
                 //If it is an abuse of state swapping causing it
                 if (runtimeAnimator.ClipInfo.clip.name == "StateSwap")
@@ -106,17 +112,26 @@ namespace RuntimeObjects
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
                 runtimeAnimator.onStateEnter?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
                 runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
+                runtimeAnimator.onTrueFrameUpdate?.Invoke(obj, runtimeAnimator.trueFrame, runtimeAnimator.previousTrueFrame);
             }
             runtimeAnimator.trueTimeSpentInState += Time.deltaTime;
             runtimeAnimator.time += obj.TickRate(tickDelta) * runtimeAnimator.StateInfo.speed;
             runtimeAnimator.normalizedTime = (float)Mathf.FloorToInt(runtimeAnimator.time) / runtimeAnimator.ClipInfo.clip.length;
             runtimeAnimator.animator.SetFloat("NormalizedTime", runtimeAnimator.normalizedTime);
+
+            //runtimeAnimator.trueFrame = Mathf.FloorToInt(runtimeAnimator.trueTimeSpentInState*runtimeAnimator.frameRate);
+            if(runtimeAnimator.trueFrame != Mathf.FloorToInt(runtimeAnimator.trueTimeSpentInState*runtimeAnimator.frameRate))
+            {
+                runtimeAnimator.previousTrueFrame = runtimeAnimator.trueFrame;
+                runtimeAnimator.trueFrame = Mathf.FloorToInt(runtimeAnimator.trueTimeSpentInState * runtimeAnimator.frameRate);
+                runtimeAnimator.onTrueFrameUpdate?.Invoke(obj, runtimeAnimator.trueFrame, runtimeAnimator.previousTrueFrame);
+            }
             if (runtimeAnimator.frame != Mathf.FloorToInt(runtimeAnimator.time))
             {
                 runtimeAnimator.frame = Mathf.FloorToInt(runtimeAnimator.time);
 
                 runtimeAnimator.onFrameUpdateData?.Invoke(obj, GameManager.ins.allControllerData[runtimeAnimator.controllerName], runtimeAnimator.frame);
-                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash); 
+                runtimeAnimator.onFrameUpdate?.Invoke(obj, runtimeAnimator.frame, runtimeAnimator.stateHash, runtimeAnimator.previousStateHash);
             }
             bool looping = runtimeAnimator.ClipInfo.clip.isLooping;
             if(looping)
@@ -125,7 +140,6 @@ namespace RuntimeObjects
                 {
                     runtimeAnimator.time = 0f;
                 }
-                    
             }
             else
             {
@@ -133,9 +147,7 @@ namespace RuntimeObjects
                 {
                     runtimeAnimator.time = runtimeAnimator.animator.TotalFrames();
                 }
-                   
             }
-            
         }
         public bool CurrentState(string stateName)
         {

@@ -2889,6 +2889,9 @@ MonoBehaviour:
   sprites:
   - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   - {fileID: 21300000, guid: 327b0bb5972fb6f46b5e5ab4f77e68bf, type: 3}
+  allMaterials:
+  - {fileID: 2100000, guid: c8fe9f1bac95c0946b197eb6d9231fe8, type: 2}
+  - {fileID: 2100000, guid: 90b6198c505212044bf011e112965477, type: 2}
 --- !u!114 &885214847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6064,7 +6067,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90b6198c505212044bf011e112965477, type: 2}
+  - {fileID: 2100000, guid: c8fe9f1bac95c0946b197eb6d9231fe8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6086,7 +6089,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -189261855, guid: 30c4e515b0723fc4ca3993dcbd55f8cb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.1337347, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7178,7 +7181,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90b6198c505212044bf011e112965477, type: 2}
+  - {fileID: 2100000, guid: c8fe9f1bac95c0946b197eb6d9231fe8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7200,7 +7203,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1193918329, guid: 108ac449e112d774c9246ee01e6db59c, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.10196066, a: 1}
+  m_Color: {r: 0.22352943, g: 0.054901965, b: 0.18039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7765,7 +7768,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c8fe9f1bac95c0946b197eb6d9231fe8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7787,7 +7790,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: -1889178243, guid: 3716d5c8107c5b9479ca755acad16b74, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.28681898, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
