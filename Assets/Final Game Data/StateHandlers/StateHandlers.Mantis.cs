@@ -225,11 +225,39 @@ namespace StateHandlers.Mantis
             if(mantis != null)
             {
                 MantisLegs legs = mantis.legs;
+                MantisTorso torso = mantis.torso;
+                MantisLeftArm leftArm = mantis.leftArm;
                 if (mantis.animator.CurrentState("Mantis_StunForward"))
                 {
+                    if(mantis.animator.trueFrame == 1)
+                    {
+                        legs.animator.spriteRenderer.material = legs.overrideMaterial;
+                        torso.animator.spriteRenderer.material = torso.overrideMaterial;
+                        leftArm.animator.spriteRenderer.material = leftArm.overrideMaterial;
+                        Color purpleDamageColor = new Color(0.75f,0.11f,1f);
+                        legs.animator.spriteRenderer.color = purpleDamageColor;
+                        torso.animator.spriteRenderer.color = purpleDamageColor;
+                        leftArm.animator.spriteRenderer.color = purpleDamageColor;
+                        //Debug.LogError("Freeze");
+                    }
+                    if(mantis.animator.trueFrame == 3)
+                    {
+                        //Debug.LogError("HEHEHEH");
+                        Color redDamageColor = new Color(0.31f, 0f, 0f);
+                        legs.animator.spriteRenderer.color = redDamageColor;
+                        torso.animator.spriteRenderer.color = redDamageColor;
+                        leftArm.animator.spriteRenderer.color = redDamageColor;
+                    }
+                    if(mantis.animator.trueFrame == 5)
+                    {
+                        //Debug.LogError("FUCK");
+                    }
                     if (mantis.animator.trueFrame == 6)
                     {
                         mantis.obj.position += legs.animator.spriteRenderer.flipX.DefinedValue(-1,1) * new Vector3(5,0,0);
+                        legs.animator.spriteRenderer.material = legs.defaultMaterial;
+                        torso.animator.spriteRenderer.material = torso.defaultMaterial;
+                        leftArm.animator.spriteRenderer.material = leftArm.defaultMaterial;
                         //Debug.LogError($"TRUE FRAME = {trueFrame} TrueTime = {mantis.animator.trueTimeSpentInState}");
                     }
                 }
