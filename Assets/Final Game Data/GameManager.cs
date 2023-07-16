@@ -47,8 +47,18 @@ public class GameManager : MonoBehaviour
     public ObjectPool<SpriteRenderer> spriteRendererPool;
     public Dictionary<SpriteRenderer, string> spriteRendererLedger;
 
-    public Sprite[] sprites;
-    public Dictionary<string, Sprite> allSprites;
+    public List<Sprite> sprites;
+    public Sprite FindSpriteByID(string id)
+    {
+        foreach (Sprite sprite in sprites)
+        {
+            if (sprite.name == id)
+            {
+                return sprite;
+            }
+        }
+        return null;
+    }
     //Player Weapon Pool
     public ObjectPool<Weapon> runtimeWeaponPool;
     //Effect Pool
@@ -72,7 +82,6 @@ public class GameManager : MonoBehaviour
         Setup_ControllerData();
         Setup_ControllerDictionary();
         Setup_DirectedCircleCollider2DPool();
-        Setup_Sprites();
         Setup_SpriteRendererPool();
         Setup_RuntimeWeaponPool();
     }
@@ -150,16 +159,6 @@ public class GameManager : MonoBehaviour
             100,
             500
             );
-    }
-    void Setup_Sprites()
-    {
-        if (sprites == null || sprites.Length == 0)
-            return;
-        allSprites = new Dictionary<string, Sprite>();
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            allSprites.Add(sprites[i].name, sprites[i]);
-        }
     }
     void Setup_SpriteRendererPool()
     {

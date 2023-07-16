@@ -2,16 +2,49 @@ using UnityEngine;
 using RuntimeObjects;
 using ExtensionMethods_Bool;
 using BehaviourRecord.Player;
-
+using RuntimeContainers;
 namespace StateHandlers.Mantis
 {
     public static class Handler
     {
         //Boss memory here
+        static BoundedRandomFloat torsoWaveDisplacement = new(5f,-5f, -0.1f);
+        static BoundedRandomFloat armWaveDisplacement = new(3f, -3f, -0.1f);
+        static BoundedRandomFloat legsWaveDisplacement = new(2f, -2f, -0.1f);
+        static BoundedRandomFloat backgroundWaveDisplacement = new(0.001f, -0.001f, 0f);
+        static TimedAction torsoGlitch = new(0.125f, true, () => { torsoWaveDisplacement.ReRollValue(); });
+        static TimedAction armGlitch = new(0.75f, true, () => { torsoWaveDisplacement.ReRollValue(); });
+        static TimedAction legsGlitch = new(0.25f, true, () => { torsoWaveDisplacement.ReRollValue(); });
+        static TimedAction backgroundGlitch = new(0.0125f, true, () => { backgroundWaveDisplacement.ReRollValue(); });
+        static void GlitchTimers(RuntimeObjects.Mantis mantis, float tickDelta)
+        {
+            torsoGlitch.Update(mantis, tickDelta);
+            armGlitch.Update(mantis, tickDelta);
+            legsGlitch.Update(mantis, tickDelta);
+            backgroundGlitch.Update(mantis, tickDelta);
+            if (mantis.torso.animator.spriteRenderer.material.HasFloat("_WaveDisplacementFrequency"))
+            {
+                mantis.torso.animator.spriteRenderer.material.SetFloat("_WaveDisplacementFrequency", torsoWaveDisplacement.value);
+            }
+            if (mantis.leftArm.animator.spriteRenderer.material.HasFloat("_WaveDisplacementFrequency"))
+            {
+                mantis.leftArm.animator.spriteRenderer.material.SetFloat("_WaveDisplacementFrequency", armWaveDisplacement.value);
+            }
+            if (mantis.legs.animator.spriteRenderer.material.HasFloat("_WaveDisplacementFrequency"))
+            {
+                mantis.legs.animator.spriteRenderer.material.SetFloat("_WaveDisplacementFrequency", legsWaveDisplacement.value);
+            }
+            if(mantis.background.material.HasFloat("_WaveDisplacementFrequency"))
+            {
+                mantis.background.material.SetFloat("_WaveDisplacementFrequency", backgroundWaveDisplacement.value);
+            }
+        }
         public static void Update(RuntimeObject obj, float tickDelta)
         {
+            
             RuntimeObjects.Mantis mantis = obj as RuntimeObjects.Mantis;
-            if(mantis != null)
+            GlitchTimers(mantis, tickDelta);
+            if (mantis != null)
             {
                 if(mantis.animator.CurrentState("Mantis_Idle"))
                 {
@@ -229,24 +262,27 @@ namespace StateHandlers.Mantis
                 MantisLeftArm leftArm = mantis.leftArm;
                 if (mantis.animator.CurrentState("Mantis_StunForward"))
                 {
+                    Material glitchMaterial = GameManager.ins.FindMaterialByID("MantisGlitch");
+                    Material defaultMaterial = GameManager.ins.FindMaterialByID("NoOverrideColor");
                     if(mantis.animator.trueFrame == 1)
                     {
-                        legs.animator.spriteRenderer.material = legs.overrideMaterial;
-                        torso.animator.spriteRenderer.material = torso.overrideMaterial;
-                        leftArm.animator.spriteRenderer.material = leftArm.overrideMaterial;
-                        Color purpleDamageColor = new Color(0.75f,0.11f,1f);
-                        legs.animator.spriteRenderer.color = purpleDamageColor;
-                        torso.animator.spriteRenderer.color = purpleDamageColor;
-                        leftArm.animator.spriteRenderer.color = purpleDamageColor;
+                        legs.animator.spriteRenderer.material = glitchMaterial;
+                        torso.animator.spriteRenderer.material = glitchMaterial;
+                        leftArm.animator.spriteRenderer.material = glitchMaterial;
+
+                        //Color purpleDamageColor = new Color(0.75f,0.11f,1f);
+                        //legs.animator.spriteRenderer.color = purpleDamageColor;
+                        //torso.animator.spriteRenderer.color = purpleDamageColor;
+                        //leftArm.animator.spriteRenderer.color = purpleDamageColor;
                         //Debug.LogError("Freeze");
                     }
                     if(mantis.animator.trueFrame == 3)
                     {
                         //Debug.LogError("HEHEHEH");
-                        Color redDamageColor = new Color(0.31f, 0f, 0f);
-                        legs.animator.spriteRenderer.color = redDamageColor;
-                        torso.animator.spriteRenderer.color = redDamageColor;
-                        leftArm.animator.spriteRenderer.color = redDamageColor;
+                        //Color redDamageColor = new Color(0.31f, 0f, 0f);
+                        //legs.animator.spriteRenderer.color = redDamageColor;
+                        //torso.animator.spriteRenderer.color = redDamageColor;
+                        //leftArm.animator.spriteRenderer.color = redDamageColor;
                     }
                     if(mantis.animator.trueFrame == 5)
                     {
@@ -255,14 +291,17 @@ namespace StateHandlers.Mantis
                     if (mantis.animator.trueFrame == 6)
                     {
                         mantis.obj.position += legs.animator.spriteRenderer.flipX.DefinedValue(-1,1) * new Vector3(5,0,0);
-                        legs.animator.spriteRenderer.material = legs.defaultMaterial;
-                        torso.animator.spriteRenderer.material = torso.defaultMaterial;
-                        leftArm.animator.spriteRenderer.material = leftArm.defaultMaterial;
+                        legs.animator.spriteRenderer.material = defaultMaterial;
+                        torso.animator.spriteRenderer.material = defaultMaterial;
+                        leftArm.animator.spriteRenderer.material = defaultMaterial;
                         //Debug.LogError($"TRUE FRAME = {trueFrame} TrueTime = {mantis.animator.trueTimeSpentInState}");
                     }
                 }
             }
-
+        }
+        public static void OnPostureBreak()
+        {
+            //Debug.LogError("Posture broken");
         }
     }
 }

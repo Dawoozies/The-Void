@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     {
         this.jumpsLeft.text = $"Jumps Left = {jumpsLeft}";
     }
-    public void OnStaggerValueChanged(int newStaggerValue)
+    public void OnStaggerValueChanged(int previousStaggerValue, int newStaggerValue)
     {
         bossStaggerSlider.value = newStaggerValue;
     }

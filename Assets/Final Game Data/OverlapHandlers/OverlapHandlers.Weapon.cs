@@ -31,7 +31,7 @@ namespace OverlapHandlers.Weapon
                         RuntimeObjects.Mantis mantis = GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis;
                         if(mantis != null ) 
                         {
-                            mantis.Stagger(50);
+                            mantis.ApplyDamage(50);
                         }
                     }
                     if(hitContainer.colliderNickname == "Hitbox_MantisLegs")
@@ -39,7 +39,7 @@ namespace OverlapHandlers.Weapon
                         RuntimeObjects.Mantis mantis = GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis;
                         if (mantis != null)
                         {
-                            mantis.Stagger(50);
+                            mantis.ApplyDamage(50);
                         }
                     }
                     if (hitContainer.colliderNickname == "Hitbox_MantisTorso")
@@ -47,7 +47,7 @@ namespace OverlapHandlers.Weapon
                         RuntimeObjects.Mantis mantis = GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis;
                         if (mantis != null)
                         {
-                            mantis.Stagger(50);
+                            mantis.ApplyDamage(50);
                         }
                     }
                     if (hitContainer.colliderNickname == "Hitbox_MantisNeck")
@@ -55,7 +55,7 @@ namespace OverlapHandlers.Weapon
                         RuntimeObjects.Mantis mantis = GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis;
                         if (mantis != null)
                         {
-                            mantis.Stagger(50);
+                            mantis.ApplyDamage(50);
                         }
                     }
                     if (hitContainer.colliderNickname == "Hitbox_MantisHead")
@@ -63,7 +63,7 @@ namespace OverlapHandlers.Weapon
                         RuntimeObjects.Mantis mantis = GameManager.ins.FindByID("Mantis") as RuntimeObjects.Mantis;
                         if (mantis != null)
                         {
-                            mantis.Stagger(50);
+                            mantis.ApplyDamage(50);
                         }
                     }
                 }

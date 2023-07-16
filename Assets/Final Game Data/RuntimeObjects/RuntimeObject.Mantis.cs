@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateHandlers.Mantis;
 using OverlapHandlers.Mantis;
-
+using System;
+using RuntimeContainers;
 namespace RuntimeObjects
 {
     public class Mantis : RuntimeObject
@@ -11,16 +12,20 @@ namespace RuntimeObjects
         public MantisLegs legs;
         public MantisTorso torso;
         public MantisLeftArm leftArm;
+        public SpriteRenderer background;
         public float aimTime = 0.26667f;
         public float linearStrikeWaitTime = 0.25f;
         public float retractTime = 0.14f;
         public bool useLinearStrikeSpin = true;
         public string strikeDirection = "Side";
-        public int stagger = 0;
-        int staggerReduction = 1;
-        float staggerReduceMaxTime = 0.75f;
-        float staggerReduceTime = 0;
-        float staggerCooldown = 0;
+        int maxStagger = 100;
+        int stagger = 0;
+        public Action<int, int> onStaggerValueChanged;
+        public Action<int> onDamaged;
+        public Action onPostureBreak;
+        public int postureRecoveryAmount = 1;
+        public TimedAction postureRecovery = new(timeMax: 0.75f, loop: true);
+        public TimedAction damageCooldown = new(timeMax: 0.25f, loop: false);
         public Mantis(string id) : base(id)
         {
             RuntimeAnimator.CreateAndAttach(this, GameManager.ins.allControllers["Mantis"]);
@@ -31,17 +36,12 @@ namespace RuntimeObjects
             legs = new MantisLegs();
             torso = new MantisTorso();
             leftArm = new MantisLeftArm();
-            Material noOverrideColorMaterial = GameManager.ins.FindMaterialByID("NoOverrideColor");
-            Material overrideColorMaterial = GameManager.ins.FindMaterialByID("OverrideColor");
-            if(noOverrideColorMaterial != null && overrideColorMaterial != null)
-            {
-                legs.defaultMaterial = noOverrideColorMaterial;
-                legs.overrideMaterial = overrideColorMaterial;
-                torso.defaultMaterial = noOverrideColorMaterial;
-                torso.overrideMaterial = overrideColorMaterial;
-                leftArm.defaultMaterial = noOverrideColorMaterial;
-                leftArm.overrideMaterial = overrideColorMaterial;
-            }
+
+            background = GameManager.ins.spriteRendererPool.Get();
+            background.sprite = GameManager.ins.FindSpriteByID("MantisBackground1");
+            background.sortingOrder = -1;
+            background.material = GameManager.ins.FindMaterialByID("NoOverrideColor");
+            background.color = new Color(0.04f, 0f, 0.02f, 1f);
 
             managedUpdate += RuntimeAnimator.Update;
             managedUpdate += Handler.Update;
@@ -54,54 +54,55 @@ namespace RuntimeObjects
             torso.obj.SetParent(obj);
             leftArm.obj.SetParent(torso.obj);
 
-            managedUpdate += StaggerUpdate;
-        }
-        void StaggerUpdate(RuntimeObject obj, float tickDelta)
-        {
-            if (stagger > 0)
-                staggerReduceTime -= tickDelta;
-            if(staggerReduceTime < 0)
-            {
-                stagger -= staggerReduction;
-                if(stagger <= 0)
-                {
-                    stagger = 0;
-                    staggerReduceTime = 0;
-                }
-                else
-                {
-                    staggerReduceTime = staggerReduceMaxTime;
-                }
-            }
-            if (staggerCooldown > 0)
-                staggerCooldown -= tickDelta;
-            UIManager.ins.OnStaggerValueChanged(stagger);
-        }
-        public void Stagger(int staggerAddAmount)
-        {
-            if(animator.CurrentState("Mantis_StunForward"))
-                return;
-            if (staggerCooldown <= 0)
-            {
-                stagger += staggerAddAmount;
-                staggerCooldown = 0.25f;
+            //managedUpdate += StaggerUpdate;
+            managedUpdate += postureRecovery.Update;
+            managedUpdate += damageCooldown.Update;
+            onStaggerValueChanged += UIManager.ins.OnStaggerValueChanged;
+            postureRecovery.onTimerEnd += PostureRecovery;
+            damageCooldown.onTimerEnd += OnDamageCooldownEnd;
+            onPostureBreak += Handler.OnPostureBreak;
+            onDamaged += OnDamaged;
 
-                if(stagger >= 100)
-                {
-                    //reset stagger and then do knockdown
-                    stagger = 0;
-                    animator.animator.Play("Mantis_StunForward");
-                    UIManager.ins.OnStaggerValueChanged(stagger);
-                    return;
-                }    
+        }
+        public void ApplyDamage(int damage)
+        {
+            if(!damageCooldown.isActive)
+            {
+                onDamaged?.Invoke(damage);
+                //right now damage just increases stagger
+                //weapons will have varied damage types etc eventually
+                IncreaseStagger(damage);
+                damageCooldown.Activate();
             }
-            UIManager.ins.OnStaggerValueChanged(stagger);
+        }
+        void IncreaseStagger(int valueToAdd)
+        {
+            //(previous value, new value)
+            int newStaggerValue = stagger + valueToAdd;
+            if(newStaggerValue >= maxStagger)
+            {
+                onPostureBreak?.Invoke();
+                newStaggerValue = maxStagger;
+            }
+            onStaggerValueChanged?.Invoke(stagger, newStaggerValue); 
+            stagger = newStaggerValue;
+        }
+        void PostureRecovery()
+        {
+            onStaggerValueChanged?.Invoke(stagger, stagger - postureRecoveryAmount);
+            stagger -= postureRecoveryAmount;
+        }
+        void OnDamaged(int damage)
+        {
+            background.material = GameManager.ins.FindMaterialByID("BackgroundGlitch");
+        }
+        void OnDamageCooldownEnd()
+        {
+            background.material = GameManager.ins.FindMaterialByID("NoOverrideColor");
         }
     }
     public class MantisLegs : RuntimeObject
     {
-        public Material defaultMaterial;
-        public Material overrideMaterial;
         public MantisLegs() : base("MantisLegs")
         {
             GameManager.ins.allRuntimeObjects.Add(this);
@@ -119,8 +120,6 @@ namespace RuntimeObjects
     }
     public class MantisTorso : RuntimeObject
     {
-        public Material defaultMaterial;
-        public Material overrideMaterial;
         public MantisTorso() : base("MantisTorso")
         {
             GameManager.ins.allRuntimeObjects.Add(this);
@@ -137,8 +136,6 @@ namespace RuntimeObjects
     }
     public class MantisLeftArm : RuntimeObject
     {
-        public Material defaultMaterial;
-        public Material overrideMaterial;
         public MantisLeftArm() : base("MantisLeftArm")
         {
             GameManager.ins.allRuntimeObjects.Add(this);
