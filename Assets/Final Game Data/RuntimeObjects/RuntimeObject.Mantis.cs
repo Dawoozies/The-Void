@@ -22,7 +22,7 @@ namespace RuntimeObjects
         int stagger = 0;
         public Action<int, int> onStaggerValueChanged;
         public Action<int> onDamaged;
-        public Action onPostureBreak;
+        public Action<RuntimeAnimator> onPostureBreak;
         public int postureRecoveryAmount = 1;
         public TimedAction postureRecovery = new(timeMax: 0.75f, loop: true);
         public TimedAction damageCooldown = new(timeMax: 0.25f, loop: false);
@@ -81,7 +81,7 @@ namespace RuntimeObjects
             int newStaggerValue = stagger + valueToAdd;
             if(newStaggerValue >= maxStagger)
             {
-                onPostureBreak?.Invoke();
+                onPostureBreak?.Invoke(animator);
                 newStaggerValue = maxStagger;
             }
             onStaggerValueChanged?.Invoke(stagger, newStaggerValue); 

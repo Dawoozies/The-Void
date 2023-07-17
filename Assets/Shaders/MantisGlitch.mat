@@ -42,7 +42,7 @@ Material:
     - _SecondaryGlitchTypeOutput: 3
     - _UseOriginalColor: 0
     m_Floats:
-    - _AberrationAmountX: 0.001
+    - _AberrationAmountX: 0.41
     - _AberrationAmountY: 0.001
     - _AlphaCutoff: 0.1
     - _ArtifactOpacity: 1

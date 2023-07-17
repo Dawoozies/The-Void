@@ -299,9 +299,10 @@ namespace StateHandlers.Mantis
                 }
             }
         }
-        public static void OnPostureBreak()
+        public static void OnPostureBreak(RuntimeAnimator animator)
         {
-            //Debug.LogError("Posture broken");
+            if(!animator.CurrentState("Mantis_StunForward"))
+                animator.animator.Play("Mantis_StunForward");
         }
     }
 }
