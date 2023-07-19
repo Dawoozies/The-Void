@@ -1,0 +1,45 @@
+// SimpleComputeShader.compute
+#pragma kernel DrawWhitePixel
+float ScreenWidth;
+float ScreenHeight;
+Texture2D<float4> StartTexture;
+float StartTextureWidth;
+float StartTextureHeight;
+bool startPass;
+Texture2D<float4> InputTexture;
+RWTexture2D<float4> OutputTexture;
+
+uint pixelWidth;
+uint pixelHeight;
+
+float startTime;
+float currentTime;
+uint previousPixel;
+
+float2 translationSpeed = float2(1,2);
+float random( float2 uv )
+{
+    return frac( cos( dot(uv,float2(23.14069263277926,2.665144142690225))) * 12345.6789 );
+}
+[numthreads(8, 8, 1)]
+void DrawWhitePixel(uint3 id : SV_DispatchThreadID)
+{
+    //float2 position = float2((id.x) / Width, (id.y) / Height);
+	//float2 pixelSize = float2(1.0 / Width, 1.0 / Height);
+    //float4 currentPixel = InputTexture[position];
+    //float4 neighborPixels = float4(0,0,0,0);
+
+    //OutputTexture[id.xy - uint2(1,1)] = float4(0,0,0,0);
+    //OutputTexture[id.xy] += InputTexture[id.xy+uint2(1,1)];
+    //float2 randomUV = float2(random(id.xy*currentTime), random(id.xy*currentTime));
+    //uint2 randomPixel = uint2(randomUV.x*ScreenWidth, randomUV.y*ScreenHeight);
+    //
+    //OutputTexture[id.xy] = 
+    float2 translation = translationSpeed * currentTime;
+    uint2 newPixelTranslation = floor(float2(id.xy)+translation); 
+    float4 pixelColor = StartTexture[id.xy + newPixelTranslation];
+    OutputTexture[id.xy] += pixelColor;
+    OutputTexture[id.xy + newPixelTranslation] *= pixelColor;
+    //OutputTexture[id.xy] = StartTexture[randomPixel];
+    //OutputTexture[randomPixel] = StartTexture[randomPixel];
+}

@@ -1,22 +1,29 @@
-Shader "Unlit/Displacement"
+Shader "Unlit/Stencil"
 {
     Properties
     {
         _AlphaCutoff("Alpha Cutoff", Range(0,1)) = 0.2
         _SquareSize("Square Size", Float) = 5
         _SquareDensity("Square Density", Range(0,1)) = 0.1
-        //Increase size of texure uniformly by
         _MainTex ("Texture", 2D) = "white" {}
+        [IntRange] _StencilID("Stencil ID", Range(0,255)) = 0
     }
     SubShader
     {
-        Tags { "RenderType" = "Transparent" "Queue"="Transparent"}
+        Tags {"RenderType" = "Transparent" "Queue"="Transparent-1"}
         //Blend DstColor One
         //Blend One One
-        //Blend SrcAlpha OneMinusSrcAlpha
-        Blend SrcAlpha OneMinusSrcAlpha
+        //Blend Zero One
+        ColorMask A
         Pass
         {
+            Stencil
+			{
+				Ref [_StencilID]
+				//stencil value we just defining here vs stencil value written to pixel already
+				Comp Always //We always want to do something
+                Pass Replace
+			}
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -44,6 +51,7 @@ Shader "Unlit/Displacement"
             float4 _MainTex_ST;
             float _SquareSize;
             float _SquareDensity;
+            float _AlphaCutoff;
             float random( float2 p )
             {
                 return frac( cos( dot(p,float2(23.14069263277926,2.665144142690225))) * 12345.6789 );
@@ -65,10 +73,6 @@ Shader "Unlit/Displacement"
                 //o.uv = mul(unity_ObjectToWorld, objectPosition); //Squares static
                 o.uv = mul(unity_ObjectToWorld, objectPosition.xyz); //Squares move with obj
 
-                //Figure out how to make what you need using geometry buffer
-                //float squaresStep = step(0.1, random(floor(o.uv*5)));
-                //v.vertex.xyz += float3(0,1,0) * squaresStep * random(objectPosition.xy);
-                //o.squareValue = squaresStep;
                 o.color = v.color;
                 return o;
             }
@@ -78,9 +82,9 @@ Shader "Unlit/Displacement"
                 //fixed4 output = fixed4(1,1,1,1);
                 fixed4 output = tex2D(_MainTex, i.texUV);
                 float squares = step(_SquareDensity, random(floor(i.uv*_SquareSize)));
-                if(i.squareValue == 1 || squares == 1)
+                
+                if(squares == 0)
                 {
-                    //output = fixed4(1,0,0,1);
                     output = tex2D(_MainTex, i.texUV)*0;
                 }
                 //if(i.uv.y < 0)
@@ -90,6 +94,8 @@ Shader "Unlit/Displacement"
                 //fixed4 col = tex2D(_MainTex, i.uv);
 
                 //col = i.color;
+                if(output.a < _AlphaCutoff)
+                    discard;
                 return output;
             }
 
