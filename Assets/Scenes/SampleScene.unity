@@ -3809,7 +3809,7 @@ MonoBehaviour:
   pixelWidth: 5
   pixelHeight: 5
   translationVector: {x: 10, y: 0}
-  maxTime: 0.1
+  maxTime: 0.01
 --- !u!4 &1004260611
 Transform:
   m_ObjectHideFlags: 0

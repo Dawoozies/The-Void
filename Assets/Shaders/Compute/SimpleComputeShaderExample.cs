@@ -7,6 +7,7 @@ public class SimpleComputeShaderExample : MonoBehaviour
     public ComputeShader computeShader;
     public RenderTexture resultTexture;
     public RenderTexture resultTextureAlt;
+
     public Material blitMaterial;
     public Texture startTexture;
     int kernelIndex;
@@ -33,26 +34,27 @@ public class SimpleComputeShaderExample : MonoBehaviour
         //Graphics.Blit(startTexture, resultTexture);
 
         // Set the Compute Shader properties
+        /*
         int startKernel = startShader.FindKernel("StartTextureSetup");
         startShader.SetTexture(startKernel, "StartTexture", startTexture);
         startShader.SetTexture(startKernel, "OutputTexture", resultTextureAlt);
         startShader.SetInt("ScreenWidth", width);
         startShader.SetInt("ScreenHeight", height);
         startShader.Dispatch(startKernel, Screen.width / 8, Screen.height / 8, 1);
-
+        */
         kernelIndex = computeShader.FindKernel("Life");
         //computeShader.SetTexture(kernelIndex, "resultTexture", resultTexture);
         computeShader.SetFloat("ScreenWidth", width);
         computeShader.SetFloat("ScreenHeight", height);
-        computeShader.SetTexture(kernelIndex, "StartTexture", startTexture);
-        computeShader.SetFloat("StartTextureWidth", startTexture.width);
-        computeShader.SetFloat("StartTextureHeight", startTexture.height);
-        computeShader.SetFloat("startTime", Time.time);
+        //computeShader.SetTexture(kernelIndex, "StartTexture", startTexture);
+        //computeShader.SetFloat("StartTextureWidth", startTexture.width);
+        //computeShader.SetFloat("StartTextureHeight", startTexture.height);
+        //computeShader.SetFloat("startTime", Time.time);
         // Create the blit material to display the result texture
         blitMaterial.SetTexture("_NewTexture", resultTexture);
 
         // Register the OnPostRender callback to draw the result texture after rendering
-        alternateTexture = true;
+        alternateTexture = false;
     }
     //Obviously this will be on managed update
     private void Update()
@@ -86,12 +88,14 @@ public class SimpleComputeShaderExample : MonoBehaviour
         //computeShader.SetFloat("translationVectorY", translationVector.y);
         //computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
         //(resultTextureAlt, resultTexture) = (resultTexture, resultTextureAlt);
+        
         computeShader.SetFloat("currentTime", Time.time);
-        if(alternateTexture)
+        if (alternateTexture)
         {
             computeShader.SetTexture(kernelIndex, "InputTexture", resultTextureAlt);
             computeShader.SetTexture(kernelIndex, "OutputTexture", resultTexture);
             computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
+            blitMaterial.SetTexture("_NewTexture", resultTexture);
             alternateTexture = false;
         }
         else
@@ -99,8 +103,10 @@ public class SimpleComputeShaderExample : MonoBehaviour
             computeShader.SetTexture(kernelIndex, "InputTexture", resultTexture);
             computeShader.SetTexture(kernelIndex, "OutputTexture", resultTextureAlt);
             computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
+            blitMaterial.SetTexture("_NewTexture", resultTextureAlt);
             alternateTexture = true;
         }
+        
     }
     private void OldUpdate()
     {

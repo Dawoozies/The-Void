@@ -87,19 +87,38 @@ float4 zero = float4(0, 0, 0, 1);
        //OutputTexture[id.xy] = float4(1, 0.5, 0, 1);
         return;
     }
-   //if (currentTime == 0.0) {
-       //OutputTexture[id.xy] = float4(1, 0.5, 0, 1);
-       /*if ((id.x >= offsetX) &&
-           (id.x <= offsetX+8) && 
+    /*
+   if (currentTime == 0.0) {
+       if ((id.x >= offsetX) &&
+           (id.x <= offsetX+9) && 
            (id.y >= offsetY) && 
-           (id.y <= offsetY+8)
+           (id.y <= offsetY+12)
        ){
-           OutputTexture[id.xy] = float4(0.2, 0.5, 1, 1);
+           OutputTexture[id.xy] = one;
            return;
-       }*/
-    //}
+       }
+    }
+    */
+    if(currentTime == 0.0)
+    {
+        if(id.x == id.y)
+        {
+            OutputTexture[id.xy] = one;
+            return;
+        }
+        if(id.x == 0)
+        {
+            OutputTexture[id.xy] = one;
+            return;
+        }
+        if(id.y == (uint)ScreenHeight/2)
+        {
+            OutputTexture[id.xy] = one;
+            return;
+        }
+    }
     // OutputTexture[id.xy] = float4(0.8, 0.1, 0.61, 1);
-
+    /*
     if (currentTime == 0.0) {
         if (
             (id.x == offsetX+0 && id.y == offsetY) ||
@@ -114,8 +133,9 @@ float4 zero = float4(0, 0, 0, 1);
             }
             OutputTexture[id.xy] = zero;
             return;
-         }
-
+    }
+    */
+    /*
     uint sum = 0;
     for (int i = -1; i <= 1; i++){
         for (int j = -1; j <= 1; j++){
@@ -127,6 +147,18 @@ float4 zero = float4(0, 0, 0, 1);
             }
         }
     }
+    */
+    uint sum = 0;
+    sum += InputTexture[uint2(id.x-1,id.y-1)].r;
+    sum += InputTexture[uint2(id.x-1,id.y)].r;
+    sum += InputTexture[uint2(id.x-1,id.y+1)].r;
+
+    sum += InputTexture[uint2(id.x+1,id.y-1)].r;
+    sum += InputTexture[uint2(id.x+1,id.y)].r;
+    sum += InputTexture[uint2(id.x+1,id.y+1)].r;
+
+    sum += InputTexture[uint2(id.x,id.y-1)].r;
+    sum += InputTexture[uint2(id.x,id.y+1)].r;
     //OutputTexture[id.xy] = float4(sum / 8.0, 0, 1 - (sum / 8.0), 1);
     //return;
     if (InputTexture[id.xy].r > 0) {
