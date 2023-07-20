@@ -3800,6 +3800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0ff0e2db882804aa6b64a2600daadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startShader: {fileID: 7200000, guid: c392956a6ea3b3a429900d32c701c6a3, type: 3}
   computeShader: {fileID: 7200000, guid: fa19d1201c9950f4a9f3faf902d2bd72, type: 3}
   resultTexture: {fileID: 0}
   resultTextureAlt: {fileID: 0}
@@ -3807,6 +3808,8 @@ MonoBehaviour:
   startTexture: {fileID: 2800000, guid: f1ee445ec34f24a4f9ec8c25e41cb5d3, type: 3}
   pixelWidth: 5
   pixelHeight: 5
+  translationVector: {x: 10, y: 0}
+  maxTime: 0.1
 --- !u!4 &1004260611
 Transform:
   m_ObjectHideFlags: 0

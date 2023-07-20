@@ -1,5 +1,5 @@
 // SimpleComputeShader.compute
-#pragma kernel DrawWhitePixel
+#pragma kernel Life
 float ScreenWidth;
 float ScreenHeight;
 Texture2D<float4> StartTexture;
@@ -16,13 +16,15 @@ float startTime;
 float currentTime;
 uint previousPixel;
 
-float2 translationSpeed = float2(1,2);
+
+float translationVectorX;
+float translationVectorY;
 float random( float2 uv )
 {
     return frac( cos( dot(uv,float2(23.14069263277926,2.665144142690225))) * 12345.6789 );
 }
 [numthreads(8, 8, 1)]
-void DrawWhitePixel(uint3 id : SV_DispatchThreadID)
+void Life(uint3 id : SV_DispatchThreadID)
 {
     //float2 position = float2((id.x) / Width, (id.y) / Height);
 	//float2 pixelSize = float2(1.0 / Width, 1.0 / Height);
@@ -35,11 +37,101 @@ void DrawWhitePixel(uint3 id : SV_DispatchThreadID)
     //uint2 randomPixel = uint2(randomUV.x*ScreenWidth, randomUV.y*ScreenHeight);
     //
     //OutputTexture[id.xy] = 
-    float2 translation = translationSpeed * currentTime;
-    uint2 newPixelTranslation = floor(float2(id.xy)+translation); 
-    float4 pixelColor = StartTexture[id.xy + newPixelTranslation];
-    OutputTexture[id.xy] += pixelColor;
-    OutputTexture[id.xy + newPixelTranslation] *= pixelColor;
+    //uint2 newPixelTranslation = floor(float2(id.xy)+translation); 
+    //float4 pixelColor = StartTexture[id.xy + newPixelTranslation];
+    //OutputTexture[id.xy] += pixelColor;
+    //OutputTexture[id.xy + newPixelTranslation] *= pixelColor;
     //OutputTexture[id.xy] = StartTexture[randomPixel];
     //OutputTexture[randomPixel] = StartTexture[randomPixel];
+    //float2 translationVector = float2(translationVectorX, translationVectorY);
+    //uint2 translation = floor(float2(currentTime,currentTime)*translationVector);
+    //OutputTexture[id.xy+translation] = StartTexture[id.xy];
+    //OutputTexture[id.xy-translation] = StartTexture[id.xy+translation];
+
+    //static Texture2D<float4>
+
+    /*float rr = random(float2(
+        0.1234,   
+        ((0.17 * id.x) + (0.667 * id.y) + (0.99 * currentTime)) % 1
+
+    ));
+    float rg = random(float2(
+        0.345,     
+        ((0.875 * id.x) + (0.56 * id.y) + (0.65 * currentTime)) % 1
+
+    ));
+    float rb = random(float2(
+        0.456,
+        ((0.3456 * id.x) + (0.432 * id.y) + (0.345 * currentTime)) % 1
+    ));
+    /*
+	OutputTexture[id.xy] = float4(
+        (id.x/2 + currentTime) % 1,
+        ((id.x/2 + id.y/2)/2 + currentTime)%1,
+        (id.y/2 + currentTime) % 1,
+        1
+    );
+    */
+    //Static with holes
+    //OutputTexture[id.xy + ceil(id.xy*random(id.xy))] = float4(rr,rg,rb,1);
+   // OutputTexture[id.xy + ceil(id.xy*random(id.xy))] = float4(rr,rg,rb,1);
+   // OutputTexture[id.xy - floor(id.xy*random(id.xy))] = float4(rr,rg,rb,1);
+   
+uint offsetX = 550;
+uint offsetY = 300;
+   
+float4 one = float4(1, 1, 1, 1);
+float4 zero = float4(0, 0, 0, 1);
+
+    if ((id.x < 10) || (id.x > ((uint)ScreenWidth - 10)) || (id.y < 10) || (id.y > ((uint)ScreenHeight - 10))) {
+       //OutputTexture[id.xy] = float4(1, 0.5, 0, 1);
+        return;
+    }
+   //if (currentTime == 0.0) {
+       //OutputTexture[id.xy] = float4(1, 0.5, 0, 1);
+       /*if ((id.x >= offsetX) &&
+           (id.x <= offsetX+8) && 
+           (id.y >= offsetY) && 
+           (id.y <= offsetY+8)
+       ){
+           OutputTexture[id.xy] = float4(0.2, 0.5, 1, 1);
+           return;
+       }*/
+    //}
+    // OutputTexture[id.xy] = float4(0.8, 0.1, 0.61, 1);
+
+    if (currentTime == 0.0) {
+        if (
+            (id.x == offsetX+0 && id.y == offsetY) ||
+            (id.x == offsetX+1 && id.y == offsetY) ||
+            (id.x == offsetX+2 && id.y == offsetY) ||
+            (id.x == offsetX+1 && id.y == offsetY+1) ||
+            (id.x == offsetX+2 && id.y == offsetY+1) ||
+            (id.x == offsetX+3 && id.y == offsetY+1)
+            ) {
+                OutputTexture[id.xy] = one;
+                return;
+            }
+            OutputTexture[id.xy] = zero;
+            return;
+         }
+
+    uint sum = 0;
+    for (int i = -1; i <= 1; i++){
+        for (int j = -1; j <= 1; j++){
+            if (i==0 && j==0) {
+                sum += 0;
+            }
+            else {
+                sum += (InputTexture[uint2(id.x+i, id.y+j)].r > 0) ? 1 : 0;
+            }
+        }
+    }
+    //OutputTexture[id.xy] = float4(sum / 8.0, 0, 1 - (sum / 8.0), 1);
+    //return;
+    if (InputTexture[id.xy].r > 0) {
+         OutputTexture[id.xy] = (sum == 2 || sum == 3) ? one : zero;
+    } else {
+         OutputTexture[id.xy] = (sum == 3) ? one : zero;
+    }
 }
