@@ -3,13 +3,12 @@ Shader "Unlit/PixelDisplacement"
     Properties
     {
         _AlphaCutoff("Alpha Cutoff", Range(0,1)) = 0.2
-        _SquareSize("Square Size", Float) = 5
-        _SquareDensity("Square Density", Range(0,1)) = 0.1
+        _EditedTexture ("Edited Texture", 2D) = "white" {}
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent"}
         LOD 100
         Blend SrcAlpha OneMinusSrcAlpha
 
@@ -31,16 +30,16 @@ Shader "Unlit/PixelDisplacement"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float2 texUV : TEXCOORD1;
+                float2 mainUV : TEXCOORD0;
+                float2 editUV : TEXCOORD1;
                 fixed4 overlayColor : COLOR;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            sampler2D _EditedTexture;
+            float4 _EditedTexture_ST;
             float _AlphaCutoff;
-            float _SquareSize;
-            float _SquareDensity;
 
             float random( float2 uv )
             {
@@ -51,9 +50,10 @@ Shader "Unlit/PixelDisplacement"
             {
                 v2f o;
                 float4 objectPos = v.vertex;
-                o.texUV = TRANSFORM_TEX(v.uv, _MainTex);
-                o.vertex = UnityObjectToClipPos(objectPos);
-                o.uv = mul(unity_ObjectToWorld, objectPos.xyz);
+                //float2 editUV = v.uv/8;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.mainUV = TRANSFORM_TEX(v.uv, _MainTex);
+                o.editUV = TRANSFORM_TEX(v.uv, _EditedTexture);
                 o.overlayColor = v.overlayColor;
                 return o;
             }
@@ -62,12 +62,18 @@ Shader "Unlit/PixelDisplacement"
             {
                 // sample the texture
                 fixed4 output = fixed4(1,1,1,1);
-                fixed4 spriteOutput = tex2D(_MainTex, i.texUV);
-                float squareValue = step(_SquareDensity, random(floor(i.uv*_SquareSize)));
-                if(squareValue == 1)
-                {
-                    output = fixed4(0,0,0,0);
-                }
+                //fixed4 spriteOutput = tex2D(_MainTex, i.texUV);
+                //fixed4 spriteOutput = tex2D(_EditedTexture, i.texUV);
+                //fixed4 editedOutput = tex2D(_EditedTexture, i.texUV);
+                fixed4 spriteOutput = tex2D(_MainTex, i.mainUV);
+                fixed4 editedOutput = tex2D(_EditedTexture, i.editUV);
+                output = spriteOutput;
+                if(editedOutput.r == 1)
+                    output = fixed4(1,0,0,1);
+                if(editedOutput.g == 1)
+                    output = fixed4(0,1,0,1);
+                if(spriteOutput.a < _AlphaCutoff)
+                    discard;
                 return output;
             }
             ENDCG

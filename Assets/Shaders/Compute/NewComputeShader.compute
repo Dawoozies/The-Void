@@ -81,7 +81,7 @@ uint offsetX = 550;
 uint offsetY = 300;
    
 float4 one = float4(1, 1, 1, 1);
-float4 zero = float4(0, 0, 0, 1);
+float4 zero = float4(0, 0, 0, 0);
 
     if ((id.x < 10) || (id.x > ((uint)ScreenWidth - 10)) || (id.y < 10) || (id.y > ((uint)ScreenHeight - 10))) {
        //OutputTexture[id.xy] = float4(1, 0.5, 0, 1);

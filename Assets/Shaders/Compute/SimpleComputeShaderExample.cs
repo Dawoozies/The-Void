@@ -16,19 +16,25 @@ public class SimpleComputeShaderExample : MonoBehaviour
     public int pixelHeight;
     public Vector2 translationVector;
     public float maxTime = 1;
-    float time; 
+    float time;
+    int width;
+    int height;
     private void Start()
     {
-        int width = Screen.width;
-        int height = Screen.height;
+        //width = Screen.width;
+        //height = Screen.height;
+        width = 512;
+        height = 512;
 
         // Create the Render Texture to store the result
         resultTexture = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
         resultTexture.enableRandomWrite = true;
+        resultTexture.filterMode = FilterMode.Point;
         resultTexture.Create();
 
         resultTextureAlt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
         resultTextureAlt.enableRandomWrite = true;
+        resultTextureAlt.filterMode = FilterMode.Point;
         resultTextureAlt.Create();
 
         //Graphics.Blit(startTexture, resultTexture);
@@ -94,7 +100,7 @@ public class SimpleComputeShaderExample : MonoBehaviour
         {
             computeShader.SetTexture(kernelIndex, "InputTexture", resultTextureAlt);
             computeShader.SetTexture(kernelIndex, "OutputTexture", resultTexture);
-            computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
+            computeShader.Dispatch(kernelIndex, width / 8, height / 8, 1);
             blitMaterial.SetTexture("_NewTexture", resultTexture);
             alternateTexture = false;
         }
@@ -102,7 +108,7 @@ public class SimpleComputeShaderExample : MonoBehaviour
         {
             computeShader.SetTexture(kernelIndex, "InputTexture", resultTexture);
             computeShader.SetTexture(kernelIndex, "OutputTexture", resultTextureAlt);
-            computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
+            computeShader.Dispatch(kernelIndex, width / 8, height / 8, 1);
             blitMaterial.SetTexture("_NewTexture", resultTextureAlt);
             alternateTexture = true;
         }
@@ -115,7 +121,7 @@ public class SimpleComputeShaderExample : MonoBehaviour
             computeShader.SetTexture(kernelIndex, "InputTexture", resultTexture);
             computeShader.SetTexture(kernelIndex, "OutputTexture", resultTextureAlt);
             computeShader.SetFloat("previousTime", Time.time);
-            computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
+            computeShader.Dispatch(kernelIndex, width / 8, height / 8, 1);
 
             alternateTexture = false;
         }
@@ -124,7 +130,7 @@ public class SimpleComputeShaderExample : MonoBehaviour
             computeShader.SetTexture(kernelIndex, "InputTexture", resultTextureAlt);
             computeShader.SetTexture(kernelIndex, "OutputTexture", resultTexture);
             computeShader.SetFloat("previousTime", Time.time);
-            computeShader.Dispatch(kernelIndex, Screen.width / 8, Screen.height / 8, 1);
+            computeShader.Dispatch(kernelIndex, width / 8, height / 8, 1);
 
             alternateTexture = true;
         }

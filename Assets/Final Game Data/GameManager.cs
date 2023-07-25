@@ -245,6 +245,11 @@ public class GameManager : MonoBehaviour
         Mantis mantis = new("Mantis");
         allRuntimeObjects.Add(mantis);
     }
+    void RuntimeObjectCreate_Hallway()
+    {
+        Hallway hallway = new();
+        allRuntimeObjects.Add(hallway);
+    }
     public Weapon SpawnWeapon(WeaponHeadSpriteType headSpriteType, WeaponShaftSpriteType shaftSpriteType, WeaponPommelSpriteType pommelSpriteType)
     {
         Weapon newWeapon = runtimeWeaponPool.Get();
@@ -258,8 +263,9 @@ public class GameManager : MonoBehaviour
         allRuntimeObjects = new();
         allRuntimeWeapons = new();
         RuntimeObjectCreate_Player();
+        RuntimeObjectCreate_Hallway();
         //RuntimeObjectCreate_HangedFrame();
-        RuntimeObjectCreate_Mantis();
+        //RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))
         foreach (RuntimeObject item in allRuntimeObjects)
         {

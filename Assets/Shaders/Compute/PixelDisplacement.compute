@@ -1,0 +1,39 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel PixelDisplacement
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+float redCutoff;
+RWTexture2D<float4> originalEdited;
+
+Texture2D<float4> particlesPrevious;
+RWTexture2D<float4> particles;
+
+float MaxWidth;
+float MaxHeight;
+float Time;
+float4x4 CameraToWorld;
+[numthreads(8,8,1)]
+void PixelDisplacement (uint3 id : SV_DispatchThreadID)
+{
+	float randomValue = frac(cos(dot(id.xy,float2(23.14069263277926,2.665144142690225)))* 12345.6789);
+	//float redCutoff = 0.2;
+	float pixelValue = step(randomValue, redCutoff);
+	if(originalEdited[id.xy].r != 1 && pixelValue == 1 && originalEdited[id.xy].g != 1)
+	{
+		originalEdited[id.xy] = float4(pixelValue,0,0,pixelValue);
+		return;
+	}
+	if(originalEdited[id.xy].r == 1 && originalEdited[id.xy].g != 1)
+	{
+		originalEdited[id.xy] = float4(0,1,0,1);
+		return;
+	}
+	//Then we count how many green particles we have this frame
+	if(originalEdited[id.xy].g == 1)
+	{
+		//float3 coordinates = mul(id.xyz, CameraToWorld);
+		//uint2 newCoords = uint2(coordinates.x,coordinates.y);
+		particles[id.xy] = float4(0,1,0,1);
+	}
+}

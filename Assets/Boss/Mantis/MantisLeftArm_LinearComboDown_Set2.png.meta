@@ -265,7 +265,7 @@ TextureImporter:
       MantisLeftArm_LinearComboDown_Set2_62: -2080785671
       MantisLeftArm_LinearComboDown_Set2_27: 1216448385
       MantisLeftArm_LinearComboDown_Set2_61: 386602975
-      MantisLeftArm_LinearComboDown_Pose10: 1420170653
+      MantisLeftArm_LinearComboDown_Set2_20: 226161481
       MantisLeftArm_LinearComboDown_Set2_31: 514693066
       MantisLeftArm_LinearComboDown_Set2_37: 453940575
       MantisLeftArm_LinearComboDown_Set2_56: -1409619033
@@ -325,8 +325,8 @@ TextureImporter:
       MantisLeftArm_LinearComboDown_Set2_17: -977359527
       MantisLeftArm_LinearComboDown_Set2_5: 1962435321
       MantisLeftArm_LinearComboDown_Set2_13: 1501028762
-      MantisLeftArm_LinearComboDown_Set2_20: 226161481
       MantisLeftArm_LinearComboDown_Set2_41: 107754597
+      MantisLeftArm_LinearComboDown_Pose10: 1420170653
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

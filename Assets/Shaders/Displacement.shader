@@ -48,7 +48,6 @@ Shader "Unlit/Displacement"
             {
                 return frac( cos( dot(p,float2(23.14069263277926,2.665144142690225))) * 12345.6789 );
             }
-
             v2f vert (appdata v)
             {
                 v2f o;
