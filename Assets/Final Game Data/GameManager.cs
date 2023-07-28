@@ -262,8 +262,8 @@ public class GameManager : MonoBehaviour
     {
         allRuntimeObjects = new();
         allRuntimeWeapons = new();
-        RuntimeObjectCreate_Player();
-        RuntimeObjectCreate_Hallway();
+        //RuntimeObjectCreate_Player();
+        //RuntimeObjectCreate_Hallway();
         //RuntimeObjectCreate_HangedFrame();
         //RuntimeObjectCreate_Mantis();
         //Then call all ManagedStart methods :))

@@ -80,6 +80,10 @@ namespace RuntimeObjects
         public Action<RuntimeObject, ControllerData, int> onStateEnterData;
         public Action<RuntimeObject, ControllerData, int> onFrameUpdateData;
         public Action<RuntimeObject, int, int> onTrueFrameUpdate;
+
+        //Sprite Renderer Actions
+        public Sprite previousSprite;
+        public Action<RuntimeObject, Sprite, Sprite> onSpriteChanged; //Obj that had sprite changed + current sprite + previous sprite
         public static void CreateAndAttach(RuntimeObject obj, RuntimeAnimatorController controller)
         {
             RuntimeAnimator runtimeAnimator = new RuntimeAnimator();
@@ -147,6 +151,13 @@ namespace RuntimeObjects
                 {
                     runtimeAnimator.time = runtimeAnimator.animator.TotalFrames();
                 }
+            }
+
+            if(runtimeAnimator.previousSprite != runtimeAnimator.spriteRenderer.sprite)
+            {
+                //Then sprite has changed
+                runtimeAnimator.onSpriteChanged?.Invoke(obj, runtimeAnimator.spriteRenderer.sprite, runtimeAnimator.previousSprite);
+                runtimeAnimator.previousSprite = runtimeAnimator.spriteRenderer.sprite;
             }
         }
         public bool CurrentState(string stateName)
@@ -557,5 +568,15 @@ namespace RuntimeObjects
                 onWeaponsListChanged?.Invoke(weapons);
             }
         }
+    }
+    public class RuntimeParticleSystem
+    {
+        //Handles everything to do with the particle system
+        //Can handle multiple particle systems with varying modules
+        //This will probably be first class which will care about what sprite we have on the sprite renderer
+        //also will be first class to use custom shader materials and probably eventually even implement compute shaders
+        //Examples of possible Actions:
+        //onParticleEmit
+        //onParticleSystemEndLoop
     }
 }

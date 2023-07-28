@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NoOverrideColor
-  m_Shader: {fileID: 4800000, guid: 29f2a3ea5a7c7714b94ed068c9f22863, type: 3}
+  m_Name: AbsoluteValue
+  m_Shader: {fileID: 4800000, guid: 8ebd9aa39b1355f4ca00362ca4bfcf74, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -24,8 +24,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _LerpExampleSkin01:
+        m_Texture: {fileID: 2800000, guid: c8a69ecdf54ac8e4b873466605de27ff, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LerpExampleSkin02:
+        m_Texture: {fileID: 2800000, guid: cdb88fdb0cf46b244a667edaff21c7df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5b56cb1a6bd97f348b3a3b6f875aafd6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -36,28 +44,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints:
-    - _DoColorOverride: 1
-    - _UseOriginalColor: 1
+    m_Ints: []
     m_Floats:
-    - _AlphaCutoff: 0.1
     - _EnableExternalAlpha: 0
-    - _LineThreshold: 0
-    - _ShearX: 0
-    - _ShearY: 0
-    - _StretchX: 1
-    - _StretchY: 1
-    - _UVMoveX: 1
-    - _UVMoveY: 1
+    - _FloorExampleGamma: 0
+    - _FloorExampleSections: 8
+    - _FracExampleSize: 0.2
+    - _LengthExampleCenter: 0.5
+    - _LengthExampleRadius: 0.25
+    - _LengthExampleSmooth: 0
+    - _LerpExampleLerp: 1
+    - _Rotation: 20
+    - _Sections: 10
+    - _SmoothStepExampleEdge: 0.5
+    - _SmoothStepExampleSmoothingFactor: 0.1
+    - _Speed: 1
+    - _StepExampleEdge: 0.5
+    - _TanExampleSections: 10
+    - _Zoom: 0.277
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _StretchVector: {r: 0, g: 0, b: 0, a: 0}
-    - _UVMoveVector: {r: 1, g: 1, b: 1, a: 1}
-    - _VertexStretchDirection: {r: -1, g: 1, b: 0, a: 0}
+    - _TanExampleColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
